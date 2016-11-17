@@ -1,2 +1,0 @@
-bild:
-http://flatplanet.sourceforge.net/maps/images/earthmap_hires.jpg
