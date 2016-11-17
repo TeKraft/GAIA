@@ -8,7 +8,7 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true})); // to enable processing of the received post content
 
 var config = {
-    httpPort: 8080,
+    httpPort: 9900,
     mongoPort: 27017
 }
 
@@ -25,7 +25,7 @@ var Feature = mongoose.model('Feature', profilSchema);
 
 
 /* database connection */
-mongoose.connect('mongodb://localhost:' + config.mongoPort + '/ex06DB');
+mongoose.connect('mongodb://localhost:' + config.mongoPort + '/gaia');
 var database = mongoose.connection;
 
 database.on('error', console.error.bind(console, 'connection error:'));
