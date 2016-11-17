@@ -14,12 +14,15 @@ var config = {
 
 
 /* database schema */
-var featureSchema = mongoose.Schema({
-    name: String,
-    dateInserted: Date,
-    data: {}
+var profilSchema = mongoose.Schema({
+    vorname: String,
+    nachname: String,
+    email: String,
+    passwort: String,
+    instution: String,
 });
-var Feature = mongoose.model('Feature', featureSchema);
+var Feature = mongoose.model('Feature', profilSchema);
+
 
 /* database connection */
 mongoose.connect('mongodb://localhost:' + config.mongoPort + '/ex06DB');
@@ -42,32 +45,13 @@ app.use(function(req, res, next) {
     next();
 });
 
-// returns json of all stored features
-app.get('/getFeatures', function(req, res) {
-    Feature.find(function(error, features) {
-        if (error) return console.error(error);
-        res.send(features);
-    });
-});
 
-// takes a json document via POST, which will be added to the database
-// name is passed via URL
-// url format: /addFeature?name=
-app.post('/addFeature*', function(req, res) {
-	console.log(JSON.stringify(req.body));
+//get & post
 
-    var feature = new Feature({
-    	name: req.url.substring(17, req.url.length), // extract name from url
-    	dateInserted: new Date(),
-    	data: req.body
-    });
-    feature.save(function(error){
-        var message = error ? 'failed to save feature: ' + error 
-                            : 'feature saved: ' + feature.name;
-        console.log(message + ' from ' + req.connection.remoteAddress);
-        res.send(message);
-    });
-});
+
+
+
+
 
 // launch server
 app.listen(config.httpPort, function(){
