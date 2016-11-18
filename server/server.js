@@ -1,5 +1,6 @@
 "use strict";
 
+//Dependencies, requirements that need to be installed (package.json) so that the server operates how it should
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -7,13 +8,14 @@ var mongoose = require('mongoose');
 var app = express();
 app.use(bodyParser.urlencoded({extended: true})); // to enable processing of the received post content
 
+//Server port configuration
 var config = {
     httpPort: 9900,
     mongoPort: 27017
 }
 
 
-/* database schema */
+// database schema, describes how features are saved in the database
 var profilSchema = mongoose.Schema({
     vorname: String,
     nachname: String,
