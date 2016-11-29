@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
+    <meta name="author" content="Torben Kraft"/>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
+
+    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/work.css"/>
+
+  </head>
+  <body id="myBody">
+
+    <!-- library imports -->
+  		<script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
+  		<script type="text/javascript" src="lib/js/jquery.js"></script>
+
+    <div id="myNavbar"
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Gaia</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbarButtons">
+            <ul class="nav navbar-nav">
+              <li>
+                <a title="show homepage" href="home.html">
+  								<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
+  							</a>
+              </li>
+              <li class="active">
+                <a title="show workplace" href="work.html">
+                  <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
+                </a>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">workplace <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="work.html">Project 1</a></li>
+                  <li><a href="work.html">Project 2</a></li>
+                  <li><a href="work.html">Project 3</a></li>
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">symbol? <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="work.html">Project 1</a></li>
+                  <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
+                  <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="desktop" class="container-fluid">
+
+<!-- start: first row -->
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="myPanel">
+            <div class="panel-group">
+    					<div class="panel panel-default">
+    						<div class="panel panel-heading">
+    							tree view
+    						</div>
+    						<div id="treeView" class="panel panel-body">
+    							here will be the tree view of the choosen project
+    						</div>
+    					</div>
+    				</div>
+          </div>
+
+        </div>
+        <div class="col-md-1">
+
+          <div class="myPanel">
+            <div class="panel-group">
+    					<div class="panel panel-default">
+    						<div class="panel panel-heading">
+    							functionsMap
+    						</div>
+    						<div id="functionsMap" class="panel panel-body">
+    							here will be the buttons for the functions - with dropdown?
+    						</div>
+    					</div>
+    				</div>
+          </div>
+
+        </div>
+        <div class="col-md-8">
+
+          <div class="myPanel">
+            <div class="panel-group">
+    					<div class="panel panel-default">
+    						<div class="panel panel-heading">
+    							map
+    						</div>
+    						<div id="leafletmap" class="panel panel-body">
+
+    						</div>
+    					</div>
+    				</div>
+          </div>
+
+        </div>
+      </div>
+      <!-- end: first row -->
+      <!-- start: second row -->
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="myPanel">
+            <div class="panel-group">
+    					<div class="panel panel-default">
+    						<div class="panel panel-heading">
+    							information
+    						</div>
+    						<div id="information" class="panel panel-body">
+    						</div>
+    					</div>
+    				</div>
+          </div>
+
+        </div>
+        <div class="col-md-1">
+
+          <div class="myPanel">
+            <div class="panel-group">
+    					<div class="panel panel-default">
+    						<div class="panel panel-heading">
+    							functionsR
+    						</div>
+    						<div id="functionsR" class="panel panel-body">
+
+    						</div>
+    					</div>
+    				</div>
+          </div>
+
+        </div>
+        <div class="col-md-8">
+
+          <div class="myPanel">
+            <div class="panel-group">
+    					<div class="panel panel-default">
+    						<div class="panel panel-heading">
+    							Rscript
+    						</div>
+    						<div id="Rscript" class="panel panel-body">
+
+    						</div>
+    					</div>
+    				</div>
+          </div>
+
+        </div>
+      </div>
+      <!-- end: second row -->
+      <!-- start: third row -->
+      <!-- <div class="row">
+      <p>  ... </p>
+      </div> -->
+      <!-- end: third row -->
+
+
+
+    </div>
+
+
+
+
+
+    <!-- library imports -->
+		<script type="text/javascript" src="lib/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="lib/js/leaflet.js"></script>
+		<script type="text/javascript" src="lib/js/leaflet.draw.js"></script>
+		<!-- <script type="text/javascript" src="lib/js/leaflet-routing-machine.js"></script> -->
+		<!-- <script type="text/javascript" src="lib/js/MicrosoftAjax.js"></script> -->
+		<!-- <script type="text/javascript" src="lib/js/Control.Geocoder.js"></script> -->
+		<script type="text/javascript" src="lib/js/lightbox.js"></script>
+
+		<!-- script imports -->
+
+			<!-- script: map -->
+		<script type="text/javascript" src="js/mapBuilder.js"></script>
+		<script type="text/javascript" src="js/mapDraw.js"></script>
+		<script type="text/javascript" src="js/mapShow.js"></script>
+
+		<!-- <script type="text/javascript" src="js/connectSCIDB.js"></script> -->
+
+
+  </body>
+</html>

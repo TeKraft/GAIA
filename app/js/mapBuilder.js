@@ -8,6 +8,8 @@
  * @desc Geosoftware II - WiSe 2016/2017
  * @author Torben Kraft
  *
+ * .js: create leflet map
+ *
  */
 
 var leafmap;
@@ -47,6 +49,6 @@ var leaflet = function (event) {
 	// layer control function
 	myLayerControl = L.control.layers(baseMaps, overlayMaps).setPosition('topright').addTo(leafmap);
 
-}; //leaflet() end
+  drawMap();
 
-leaflet();
+}; //leaflet() end
