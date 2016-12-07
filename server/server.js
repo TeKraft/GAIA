@@ -1,33 +1,44 @@
 "use strict";
 
-//Dependencies, requirements that need to be installed (package.json) so that the server operates how it should
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var app = express();
-app.use(bodyParser.urlencoded({extended: true})); // to enable processing of the received post content
 
-//Server port configuration
+var app = express();
+
+/* get home page */
+app.use(express.static("../server"));
+app.use(express.static("../app"));
+app.use(express.static("../app/html"));
+
+
+// to enable processing of the received post content
+app.use(bodyParser.urlencoded({extended: true})); 
+
 var config = {
-    httpPort: 9900,
+    httpPort: 8080,
     mongoPort: 27017
 }
 
 
-// database schema, describes how features are saved in the database
-var profilSchema = mongoose.Schema({
-    vorname: String,
-    nachname: String,
-    email: String,
-    passwort: String,
-    instution: String,
+/* database schema */
+var featureSchema = mongoose.Schema({
+    //firstname: String,
+    //lastname: String,
+    //emailadress: String,
+    //pasword: String
+    
+    name: String,
+    dateInserted: Date,
+    data: {}
 });
-var Feature = mongoose.model('Feature', profilSchema);
 
+
+var Feature = mongoose.model('Feature', featureSchema);
 
 /* database connection */
-mongoose.connect('mongodb://localhost:' + config.mongoPort + '/gaia');
+mongoose.connect('mongodb://localhost:' + config.mongoPort + '/GAIA');
 var database = mongoose.connection;
 
 database.on('error', console.error.bind(console, 'connection error:'));
@@ -47,12 +58,32 @@ app.use(function(req, res, next) {
     next();
 });
 
+// returns json of all stored features
+app.get('/getFeatures', function(req, res) {
+    Feature.find(function(error, features) {
+        if (error) return console.error(error);
+        res.send(features);
+    });
+});
 
-//get & post
+// takes a json document via POST, which will be added to the database
+// name is passed via URL
+// url format: /addFeature?name=
+app.post('/addFeature*', function(req, res) {
+	console.log(JSON.stringify(req.body));
 
-
-
-
+    var feature = new Feature({
+    	name: req.url.substring(17, req.url.length), // extract name from url
+    	dateInserted: new Date(),
+    	data: req.body
+    });
+    feature.save(function(error){
+        var message = error ? 'failed to save feature: ' + error 
+                            : 'feature saved: ' + feature.name;
+        console.log(message + ' from ' + req.connection.remoteAddress);
+        res.send(message);
+    });
+});
 
 
 // launch server
