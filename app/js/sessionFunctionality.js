@@ -8,24 +8,24 @@ window.onload = function(){
             case "/home.html" :
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
-                document.getElementById("pofilSymb").textContent = userJSON.Firstname;
+                document.getElementById("profilSymb").textContent = userJSON.data.Firstname;
                 break;
                 
             case "/work.html":
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
-                document.getElementById("workProfilSymb").textContent = userJSON.Firstname;
+                document.getElementById("workProfilSymb").textContent = userJSON.data.Firstname;
                 break;
                 
             case "/profiledit.html":
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
-                document.getElementById("editProfilSymb").textContent = userJSON.Firstname;
+                document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
                 break;
             case "/impressum.html":
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
-                document.getElementById("imprProfilSymb").textContent = userJSON.Firstname;
+                document.getElementById("imprProfilSymb").textContent = userJSON.data.Firstname;
                 break;
                 
         }
@@ -34,9 +34,8 @@ window.onload = function(){
 }
 
 function setUserCookie(){
-    
     var userLogin = loginUser;
-    
+    console.log(userLogin);
     document.cookie = "User=" + userLogin;
 }
 

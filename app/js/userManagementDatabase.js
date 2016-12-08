@@ -6,34 +6,22 @@ var jsonObj;
 var allUsers;
 var noUsers;
 
+var loginUser;
 /**
  * saves the Geoobject to the database
  */
 function saveRegister() {
-
-    //var url = $('#db-url').val() + '/getFeatures';
-    //var url = http://localhost:8080 + '/getFeatures';
-
     loadUser();
     newUser = curUser;
-    //var name = prompt('name for savings');
-    //var contentString = $('#drawnItemJSONText').val();
-
-
-    //var jsonString = JSON.stringify(newUser);
-    // var temp = newUser;
 
 
     var content = JSON.parse(newUser); //JSON.parse(temp);
-    //console.log(content + " das ist content");
 
-    //console.log(JSON.parse(content));
     console.log(content + "das ist neu");
     
     if (name != undefined && content != null) {
 
         var url = 'http://localhost:8080' + '/addFeature?name=' + email;
-        //var url = $('#db-url').val() + '/getFeatures'; das waere richtig
 
         // perform post ajax
         $.ajax({
@@ -83,23 +71,23 @@ function loadFromDB() {
             
             loadLoginName();
             loadLoginPW();
-            //console.log(content);
-            //var jsonobj =  content[41].data;
-            //JSON.parse(jsonobj);
-            //console.log(jsonobj.Password);  
+
             
             for(var i=0; i<= content.length;i++){
                 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Email != undefined){
                     
-                    //unnötig wenn nur name des features gecheckt wird
+                //unnötig wenn nur name des features gecheckt wird
                 var checkEmail = content[i].data.Email.replace("/" , ".");
                     
                 if(content[i] != undefined && checkEmail == loginName){
                       if(content[i].data.Password == loginPW){
                           console.log("accsess");
-                          access = true;
-                          return true;
+                          console.log(content[i]);
+                          loginUser = JSON.stringify(content[i]);
+                          console.log(loginUser);
+                          setUserCookie();
+                          window.location.href = "/home.html";
                       }else{
                           console.log("Wrong password!");
                       }             

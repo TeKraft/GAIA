@@ -1,126 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
+    <meta name="author" content="Torben Kraft"/>
 
-	<head>
-		<title>webbasierte Plattform zu bla von Erdbeobachtungsdaten</title>
-		<meta name="author" content="Torben Kraft"/>
+    <meta charset="utf-8">
 
-		<meta charset="UTF-8"/>
-		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
 
-		<!-- scalable for mobile devices -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-
-
-		<!-- import stylesheets library -->
-		<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css"/> <!-- optional -->
-		<link rel="stylesheet" type="text/css" href="lib/css/leaflet.css"/>
-		<link rel="stylesheet" type="text/css" href="lib/css/leaflet.draw.css"/>
-		<link rel="stylesheet" type="text/css" href="lib/css/leaflet-routing-machine.css"/>
-		<link rel="stylesheet" type="text/css" href="lib/css/Control.Geocoder.css"/>
-		<link rel="stylesheet" type="text/css" href="lib/css/lightbox.css" >
-
-    <!-- import stylesheet -->
-    <link rel="stylesheet" type="text/css" href="css/home.css">
 
   </head>
+  <body id="myBody">
 
-  <body id="body">
+    <div id="myNavbar"
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Gaia</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbarButtons">
+            <ul class="nav navbar-nav">
+              <li class="active">
+                <a title="show homepage" href="home.html">
+  								<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
+  							</a>
+              </li>
+              <li>
+                <a title="show workplace" href="work.html">
+                  <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
+                </a>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">workplace <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="work.html">Project 1</a></li>
+                  <li><a href="work.html">Project 2</a></li>
+                  <li><a href="work.html">Project 3</a></li>
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profilSymb">symbol? <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="work.html">Project 1</a></li>
+                  <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
+                  <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+                  <li><a title="logout" onclick='logout()'>Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <h3>Collapsible Navbar</h3>
+      <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
+      <p>Only when the button is clicked, the navigation bar will be displayed.</p>
+    </div>
+
 
     <!-- library imports -->
-		<script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
-		<script type="text/javascript" src="lib/js/jquery.min.js"></script>
-		<script type="text/javascript" src="lib/js/jquery.js"></script>
-		<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
 
-
-
-
-    <div id="navbar">
-      <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="impressum.html">Impressum</a></li>
-      </ul>
-    </div>
-
-
-    <div id="navbar2">
-      <ul>
-        <li><a href="#profile">profile</a></li>
-      </ul>
-    </div>
-
-
-		<div id="treeviewbar">
-      <p>tree view bar</p>
-    </div>
-
-
-		<div id="leafletmap"></div>
-
-
-    <div id="mapfunctions">
-
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-			<button type="button" onclick="function1()">function1</button>
-
-    </div>
-
-
-		<div id="treeview">
-      <h1>tree view</h1>
-    </div>
-
-
-		<div id="scriptbox">
-      <textarea id="scripttextbox">script editor box</textarea>
-    </div>
-
-
-    <div id="informationbox">
-      <p>here is information</p>
-    </div>
-
-
-		<div id="copyrightbar">
-			<p>copyright &copy; spiderprovider</p>
-		</div>
-
-
-
-
-
-
-		<!-- library imports -->
-		<script type="text/javascript" src="lib/js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="lib/js/leaflet.js"></script>
-		<script type="text/javascript" src="lib/js/leaflet.draw.js"></script>
-		<script type="text/javascript" src="lib/js/leaflet-routing-machine.js"></script>
-		<!-- <script type="text/javascript" src="lib/js/MicrosoftAjax.js"></script> -->
-		<script type="text/javascript" src="lib/js/Control.Geocoder.js"></script>
-		<script type="text/javascript" src="lib/js/lightbox.js"></script>
-
-		<!-- script imports -->
-
-			<!-- script: map -->
-		<script type="text/javascript" src="js/mapBuilder.js"></script>
-
+    <script src="js/sessionFunctionality.js"></script>
   </body>
+</html>
