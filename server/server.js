@@ -4,8 +4,17 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+
 var app = express();
-app.use(bodyParser.urlencoded({extended: true})); // to enable processing of the received post content
+
+/* get home page */
+app.use(express.static("../server"));
+app.use(express.static("../app"));
+app.use(express.static("../app/html"));
+
+
+// to enable processing of the received post content
+app.use(bodyParser.urlencoded({extended: true})); 
 
 var config = {
     httpPort: 8080,
@@ -15,14 +24,21 @@ var config = {
 
 /* database schema */
 var featureSchema = mongoose.Schema({
+    //firstname: String,
+    //lastname: String,
+    //emailadress: String,
+    //pasword: String
+    
     name: String,
     dateInserted: Date,
     data: {}
 });
+
+
 var Feature = mongoose.model('Feature', featureSchema);
 
 /* database connection */
-mongoose.connect('mongodb://localhost:' + config.mongoPort + '/ex06DB');
+mongoose.connect('mongodb://localhost:' + config.mongoPort + '/GAIA');
 var database = mongoose.connection;
 
 database.on('error', console.error.bind(console, 'connection error:'));
@@ -68,6 +84,7 @@ app.post('/addFeature*', function(req, res) {
         res.send(message);
     });
 });
+
 
 // launch server
 app.listen(config.httpPort, function(){
