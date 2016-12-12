@@ -69,6 +69,7 @@ function loadUser(){
        +'"Password":' +'"' +userdata[3] + '"' +', '
        +'"Institution":' +'"' +userdata[4] + '"' +', '
        +'"Projects":' +'"'  + '"'
+       +'"Institution":' +'"' +userdata[4] + '"'
        +'}';
 }
 
