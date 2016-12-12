@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<div class="wrapper">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
+    <meta name="author" content="Torben Kraft"/>
 
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css"/> <!-- optional -->
 
-  
 
-    <title>Impressum</title>
-</head>
-  <body>
+
+  </head>
+  <body id="myBody">
 
     <div id="myNavbar"
       <nav class="navbar navbar-inverse">
@@ -36,7 +37,7 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="imprProfilSymb">symbol? <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profilProfilSymb">symbol? <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="profil.html">Profil</a></li>
                   <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
@@ -50,31 +51,33 @@
       </nav>
     </div>
 
-    <div class="container">
-      <div class="row">
-       <div class="span12">
-       <div class="thumbnail center well well-small text-center">
-            <h1>Impressum</h1>
-            <h2>Address</h2>
-            <p> Institute for Geoinformatics</p>
-            <p> Heisenbergstraße 2 </p>
-            <p> 48149 Münster</p>
-            <h2>Contact</h2>
 
 
-            Viktor Gorte: <a href="mailto:v_gort@uni-muenster.de">v_gorte@uni-muenster.de</a><br>
-            Albert Hamzin: <a href="mailto:a_hamz@uni-muenster.de">a_hamz@uni-muenster.de</a><br>
-            Torben Kraft: <a href="mailto:t_kraf@uni-muenster.de">t_kraft@uni-muenster.de</a><br>
-            Raoul Kanschat: <a href="mailto:r_kans@uni-muenster.de">r_kans@uni-muenster.de</a>
-       </div>
-       </div>
-      </div>
-    </div>
+
+
+
+
+
+
 
     <!-- library imports -->
+    <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.js"></script>
     <script type="text/javascript" src="lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
     <script src="js/sessionFunctionality.js"></script>
+    <script src="js/userManagementDatabase.js"></script>
+    <script src="js/projectManagement.js"></script>
+    <script src="js/angular.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+    
+    
+   
+</script>
   </body>
-</div>
 </html>
