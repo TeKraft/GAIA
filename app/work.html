@@ -8,12 +8,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
-
-    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
-    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-
     <!-- import stylesheets library -->
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css"/> <!-- optional -->
 		<link rel="stylesheet" type="text/css" href="lib/css/leaflet.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/css/leaflet.draw.css"/>
@@ -25,10 +21,6 @@
 
   </head>
   <body id="myBody" onload="leaflet()">
-
-    <!-- library imports -->
-  		<script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
-  		<script type="text/javascript" src="lib/js/jquery.js"></script>
 
     <div id="myNavbar"
       <nav class="navbar navbar-inverse">
@@ -60,11 +52,20 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
+
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
+
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">symbol? <span class="caret"></span></a>
+
                 <ul class="dropdown-menu">
                   <li><a href="work.html">Project 1</a></li>
                   <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
                   <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+
+                  <li><a title="logout" onclick='logout()'>Logout</a></li>
+
+                  <li><a title="logout" href="login.html">Logout</a></li>
+
                 </ul>
               </li>
             </ul>
@@ -193,8 +194,13 @@
 
 
     <!-- library imports -->
+		<script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
+		<script type="text/javascript" src="lib/js/jquery.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
 		<script type="text/javascript" src="lib/js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+		<!-- <script type="text/javascript" src="lib/js/bootstrap.min.js"></script> --> <!-- dropdown is working now -->
 		<script type="text/javascript" src="lib/js/leaflet.js"></script>
 		<script type="text/javascript" src="lib/js/leaflet.draw.js"></script>
 		<!-- <script type="text/javascript" src="lib/js/leaflet-routing-machine.js"></script> -->
@@ -210,6 +216,11 @@
 		<script type="text/javascript" src="js/mapShow.js"></script>
 
 		<!-- <script type="text/javascript" src="js/connectSCIDB.js"></script> -->
+
+        
+        <script src="js/sessionFunctionality.js"></script>
+
+
 
 
   </body>

@@ -4,14 +4,17 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-// var R = require('r-script');
 
 var app = express();
+
 /* get home page */
 app.use(express.static("../server"));
 app.use(express.static("../app"));
+app.use(express.static("../app/html"));
+
+
 // to enable processing of the received post content
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true})); 
 
 var config = {
     httpPort: 8080,
@@ -20,22 +23,22 @@ var config = {
 
 
 /* database schema */
-var profilSchema = mongoose.Schema({
-    // vorname: String,
-    // nachname: String,
-    // email: String,
-    // passwort: String,
-    // institution: String,
-
+var featureSchema = mongoose.Schema({
+    //firstname: String,
+    //lastname: String,
+    //emailadress: String,
+    //pasword: String
+    
     name: String,
     dateInserted: Date,
     data: {}
 });
-var Feature = mongoose.model('Feature', profilSchema);
 
+
+var Feature = mongoose.model('Feature', featureSchema);
 
 /* database connection */
-mongoose.connect('mongodb://localhost:' + config.mongoPort + '/gaia');
+mongoose.connect('mongodb://localhost:' + config.mongoPort + '/GAIA');
 var database = mongoose.connection;
 
 database.on('error', console.error.bind(console, 'connection error:'));
@@ -54,21 +57,6 @@ app.use(function(req, res, next) {
 
     next();
 });
-
-
-//get & post
-
-/* GET home page. */
-// app.get('/', function(req, res, next) {
-//     console.log("get home");
-//   res.render('login');
-//   // res.render('../app/html/login&registry');
-// });
-
-// respond with "hello world" when a GET request is made to the homepage
-// app.get('/', function(req, res) {
-//   res.send('hello world');
-// });
 
 // returns json of all stored features
 app.get('/getFeatures', function(req, res) {
@@ -90,14 +78,12 @@ app.post('/addFeature*', function(req, res) {
     	data: req.body
     });
     feature.save(function(error){
-        var message = error ? 'failed to save feature: ' + error
+        var message = error ? 'failed to save feature: ' + error 
                             : 'feature saved: ' + feature.name;
         console.log(message + ' from ' + req.connection.remoteAddress);
         res.send(message);
     });
 });
-
-
 
 
 // launch server
