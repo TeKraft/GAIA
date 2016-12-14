@@ -30,7 +30,7 @@ function saveRegister() {
     var content = JSON.parse(newUser);
     
     //hier statt name email denke ich
-    if (name != undefined && content != null) {
+    if (name != undefined && content != null && !isRegistered(content)) {
 
         var url = 'http://localhost:8080' + '/addFeature?name=' + email;
 
@@ -41,6 +41,7 @@ function saveRegister() {
             url: url,
             timeout: 5000,
             success: function (data, textStatus) {
+                console.log(content);
                 console.log(data);
                 console.log("succsess");
             },
@@ -49,11 +50,45 @@ function saveRegister() {
             }
         });
 
-        loadFromDB();
+       // loadFromDB();
 
     } else {
         console.log("fehler save to sb undefined oder null");
     }
+};
+
+function isRegistered(user){
+     var url = 'http://localhost:8080' + '/getFeatures';
+    var bol=false;
+    $.ajax({
+        type: 'GET',
+        dataType: 'JSON',
+        url: url,
+        timeout: 5000,
+        success: function (content, textStatus) {
+            $('#tableDBContents').empty();
+            
+            
+            for(var i=0; i<= content.length;i++){
+                
+                if(content[i] == user){
+                    return true;
+                }else{
+                    bol = false;
+                }
+            }
+                
+                
+            
+            //zum schluss soll der user auf die home seite geschickt werden.
+            
+            $('#tableDB').removeClass('hidden');
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log("no success");
+        }
+    });
+        return bol;
 };
 
 
