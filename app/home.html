@@ -13,7 +13,7 @@
   </head>
   <body id="myBody">
 
-    <div id="myNavbar"
+    <div id="myNavbar">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -43,12 +43,20 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
+
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profilSymb">symbol? <span class="caret"></span></a>
+
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">symbol? <span class="caret"></span></a>
+
                 <ul class="dropdown-menu">
                   <li><a href="work.html">Project 1</a></li>
                   <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
                   <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+
+                  <li><a title="logout" onclick='logout()'>Logout</a></li>
+
                   <li><a title="logout" href="login.html">Logout</a></li>
+
                 </ul>
               </li>
             </ul>
@@ -69,6 +77,8 @@
     <script type="text/javascript" src="lib/js/jquery.js"></script>
     <script type="text/javascript" src="lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
+    <script src="js/sessionFunctionality.js"></script>
 
 
   </body>
