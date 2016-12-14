@@ -42,12 +42,20 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
+
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="editProfilSymb">symbol? <span class="caret"></span></a>
+
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">symbol? <span class="caret"></span></a>
+
                 <ul class="dropdown-menu">
                   <li><a href="work.html">Project 1</a></li>
                   <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
                   <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+
+                  <li><a title="logout" onclick='logout()'>Logout</a></li>
+
                   <li><a title="logout" href="login.html">Logout</a></li>
+
                 </ul>
               </li>
             </ul>
@@ -401,6 +409,10 @@
               <br>
               <input type="submit" value="submit">
           </form>
+
+            <button type="button" id='deleteBtn' onclick='updateDB()'> Delete Profil</button>
+
+
         </div>
       </div>
     </div>
@@ -411,6 +423,12 @@
     <!-- library imports -->
     <script type="text/javascript" src="lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
+
+    <script src="js/sessionFunctionality.js"></script>
+    <script src="js/userManagementDatabase.js"></script>
+    <script src="js/userManagementfunctionality.js"></script>
+
 
   </body>
 
