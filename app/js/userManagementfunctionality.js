@@ -5,7 +5,10 @@ var lastName;
 var email;
 var password;
 var institution;
+var country;
+
 var curUser;
+
 var loginName;
 var loginPW;
 var usersusers
@@ -20,6 +23,35 @@ var userdata = {
 var objects = 0;
 
 
+/*
+creates a JSON string from the input fields
+*/
+function loadUser(){
+    userdata[0] = firstName;
+    userdata[1] = lastName;
+    
+    var editEmail = email.replace("." , "/");
+    userdata[2] = editEmail;
+    
+    userdata[3] = password;
+    userdata[4] = institution;
+        userdata[5] = country;
+    
+    curUser = '{'
+       +'"Firstname":' +'"' + userdata[0] + '"' +', '
+       +'"LastName":' +'"' +userdata[1] + '"' +', '
+       +'"Email":' +'"' +userdata[2] + '"' +', '
+       +'"Password":' +'"' +userdata[3] + '"' +', '
+       +'"Institution":' +'"' +userdata[4] + '"' +', '
+    +'"Country":' +'"' +userdata[5] + '"' +', '
+       +'"Projects":' +'"'  + '"'
+       +'}';
+}
+
+
+/*
+Initializes the variables with the inut fields
+*/
 function loadFirstName(){
     firstName = document.getElementById('form-first-name').value
     console.log(firstName);
@@ -41,6 +73,10 @@ function loadInstitution(){
     console.log(institution);
 }
 
+function loadCountry() {
+    country = document.getElementById('form-country').value
+    console.log(country);
+}
 
 function loadLoginName(){
     loginName = document.getElementById('form-Login-username').value
@@ -51,27 +87,6 @@ function loadLoginPW(){
     console.log(loginPW);
 }
 
-function loadUser(){
-    userdata[0] = firstName;
-    userdata[1] = lastName;
-    
-    var editEmail = email.replace("." , "/");
-    userdata[2] = editEmail;
-    console.log(editEmail + "email");
-    
-    userdata[3] = password;
-    userdata[4] = institution;
-    
-    curUser = '{'
-       +'"Firstname":' +'"' + userdata[0] + '"' +', '
-       +'"LastName":' +'"' +userdata[1] + '"' +', '
-       +'"Email":' +'"' +userdata[2] + '"' +', '
-       +'"Password":' +'"' +userdata[3] + '"' +', '
-       +'"Institution":' +'"' +userdata[4] + '"' +', '
-       +'"Projects":' +'"'  + '"'
-       +'"Institution":' +'"' +userdata[4] + '"'
-       +'}';
-}
 
 
 

@@ -16,13 +16,14 @@
 		<link rel="stylesheet" type="text/css" href="lib/css/leaflet-routing-machine.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/css/Control.Geocoder.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/css/lightbox.css" >
-
+<!--     <link rel="stylesheet" href="lib/css/themes/default/style.min.css" /> -->
+      
     <link rel="stylesheet" type="text/css" href="css/work.css"/>
 
   </head>
-  <body id="myBody" onload="leaflet()">
+  <body id="myBody" onload="showMap()">
 
-    <div id="myNavbar"
+    <div id="myNavbar">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -40,32 +41,17 @@
                   <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
                 </a>
               </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">workplace <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="work.html">Project 1</a></li>
-                  <li><a href="work.html">Project 2</a></li>
-                  <li><a href="work.html">Project 3</a></li>
-                </ul>
-              </li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
-
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">symbol? <span class="caret"></span></a>
-
                 <ul class="dropdown-menu">
-                  <li><a href="work.html">Project 1</a></li>
+                  <li><a href="profil.html">Profil</a></li>
                   <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
                   <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
-
                   <li><a title="logout" onclick='logout()'>Logout</a></li>
-
-                  <li><a title="logout" href="login.html">Logout</a></li>
-
                 </ul>
               </li>
             </ul>
@@ -83,11 +69,25 @@
           <div class="myPanel">
             <div class="panel-group">
     					<div class="panel panel-default">
-    						<div class="panel panel-heading">
+    						<div id="treeID" class="panel panel-heading">
     							tree view
     						</div>
     						<div id="treeView" class="panel panel-body">
-    							here will be the tree view of the choosen project
+    							Project:
+                  <div id="jstree">
+                       
+                      <!-- in this example the tree is populated from inline HTML -->
+                      <ul id="treeList">
+                          <li id="rootList">Projectname
+                              <ul id="childList">
+                                      <!--<li id="child_node_1">Child node 1</li>
+                                      <li>Child node 2</li>-->
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+                  <button id="buttonTree">demo button</button>
+
     						</div>
     					</div>
     				</div>
@@ -104,6 +104,8 @@
     						</div>
     						<div id="functionsMap" class="panel panel-body">
     							here will be the buttons for the functions - with dropdown?
+                  <button id= 'saveProjectBtn' onclick='' type='button-tree' class='btn btn-savePrj'>save Prj</button>
+                  <button id= 'test' onclick='showMap()' type='button' class='btn btn-test'>test</button>
     						</div>
     					</div>
     				</div>
@@ -115,11 +117,7 @@
           <div class="myPanel">
             <div class="panel-group">
     					<div class="panel panel-default">
-    						<div class="panel panel-heading">
-    							map
-    						</div>
     						<div id="leafletmap" class="panel panel-body">
-
     						</div>
     					</div>
     				</div>
@@ -169,9 +167,9 @@
     						<div class="panel panel-heading">
     							Rscript
     						</div>
-    						<div id="Rscript" class="panel panel-body">
+                <div id="Rscript" class="panel panel-body">
 
-    						</div>
+                </div>
     					</div>
     				</div>
           </div>
@@ -191,8 +189,6 @@
 
 
 
-
-
     <!-- library imports -->
 		<script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
 		<script type="text/javascript" src="lib/js/jquery.js"></script>
@@ -207,21 +203,19 @@
 		<!-- <script type="text/javascript" src="lib/js/MicrosoftAjax.js"></script> -->
 		<!-- <script type="text/javascript" src="lib/js/Control.Geocoder.js"></script> -->
 		<script type="text/javascript" src="lib/js/lightbox.js"></script>
+    
 
 		<!-- script imports -->
 
 			<!-- script: map -->
 		<script type="text/javascript" src="js/mapBuilder.js"></script>
-		<script type="text/javascript" src="js/mapDraw.js"></script>
 		<script type="text/javascript" src="js/mapShow.js"></script>
+      <!-- script: userManagement -->  
+    <script type="text/javascript" src="js/sessionFunctionality.js"></script>
+    <script type="text/javascript" src="js/projectManagement.js"></script>
+    <script type="text/javascript" src="js/projectEditing.js"></script>
 
-		<!-- <script type="text/javascript" src="js/connectSCIDB.js"></script> -->
-
-        
-        <script src="js/sessionFunctionality.js"></script>
-
-
-
+    <script type="text/javascript" src="lib/js/jstree.min.js"></script>
 
   </body>
 </html>
