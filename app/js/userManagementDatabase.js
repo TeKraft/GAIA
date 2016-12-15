@@ -32,7 +32,7 @@ function saveRegister() {
     //hier statt name email denke ich
     if (name != undefined && content != null) {
 
-        var url = 'http://localhost:8080' + '/addFeature?name=' + email;
+        var url = 'http://localhost:3000' + '/addFeature?name=' + email;
 
         // perform post ajax
         $.ajax({
@@ -42,7 +42,7 @@ function saveRegister() {
             timeout: 5000,
             success: function (data, textStatus) {
                 console.log(data);
-                console.log("succsess");
+                console.log("success");
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("failed to save to db");
@@ -64,7 +64,7 @@ function saveRegister() {
  * if the user entered the correct email and password the home.html is loaded.
  */
 function loadFromDB() {
-    var url = 'http://localhost:8080' + '/getFeatures';
+    var url = 'http://localhost:3000' + '/getFeatures';
     
     $.ajax({
         type: 'GET',
@@ -88,7 +88,7 @@ function loadFromDB() {
                     
                 if(content[i] != undefined && checkEmail == loginName){
                       if(content[i].data.Password == loginPW){
-                          console.log("accsess");
+                          console.log("access");
                           
                           loginUser = JSON.stringify(content[i]);
                           console.log(loginUser);
