@@ -17,7 +17,7 @@ app.use(express.static("../app/html"));
 app.use(bodyParser.urlencoded({extended: true})); 
 
 var config = {
-    httpPort: 8080,
+    httpPort: 3000,
     mongoPort: 27017
 }
 
@@ -86,69 +86,7 @@ app.post('/addFeature*', function(req, res) {
 });
 
 
-
-
-
-
-
-
-
-// takes a json document via POST, which will be added to the database
-// and the already existing document will be updated by the new
-// name is passed via URL
-// url format: /updateFeature?name=*
-app.post('/updateFeature*', function(req, res) {
-	var title = req.url.substring(20, req.url.length);
-	Feature.update(
-		{ name: title },
-		{$set: { data: req.body } },
-		function(error){
-		var message = error ? 'failed to update feature: ' + error 
-							: 'feature updated: ' + title;
-		console.log(message + ' from ' + req.connection.remoteAddress);
-		res.send(message);
-	});
-	console.log("update successfull");
-});
-
-
-
-// takes a json document via POST, which will be added to the database
-// and the already existing document will be updated by the new
-// name is passed via URL
-// url format: /updateFeature?name=*
-app.post('/deleteFeature*', function(req, res) {
-	var title = req.url.substring(20, req.url.length);
-	Feature.remove(
-		{ name: title },
-		function(error){
-		var message = error ? 'failed to delete feature: ' + error 
-							: 'feature deleted: ' + title;
-		console.log(message + ' from ' + req.connection.remoteAddress);
-		res.send(message);
-	});
-	console.log("delete successfull");
-});
-
-
-
-
-
-
-
-
-
-
-
-
 // launch server
 app.listen(config.httpPort, function(){
     console.log('serverruns on  ' + config.httpPort);
 });
-
-
-
-
-
-
-

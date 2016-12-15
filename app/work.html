@@ -16,17 +16,14 @@
 		<link rel="stylesheet" type="text/css" href="lib/css/leaflet-routing-machine.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/css/Control.Geocoder.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/css/lightbox.css" >
+<!--     <link rel="stylesheet" href="lib/css/themes/default/style.min.css" /> -->
       
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="css/work.css"/>
 
   </head>
-  <body id="myBody" onload="leaflet()">
+  <body id="myBody" onload="showMap()">
 
-    <div id="myNavbar"
+    <div id="myNavbar">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -77,19 +74,19 @@
     						</div>
     						<div id="treeView" class="panel panel-body">
     							Project:
-                                 <div id="jstree">
-                                     
-                                    <!-- in this example the tree is populated from inline HTML -->
-                                    <ul id="treeList">
-                                        <li id="rootList">Projectname
-                                            <ul id="childList">
-                                                    <!--<li id="child_node_1">Child node 1</li>
-                                                    <li>Child node 2</li>-->
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <button>demo button</button>
+                  <div id="jstree">
+                       
+                      <!-- in this example the tree is populated from inline HTML -->
+                      <ul id="treeList">
+                          <li id="rootList">Projectname
+                              <ul id="childList">
+                                      <!--<li id="child_node_1">Child node 1</li>
+                                      <li>Child node 2</li>-->
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+                  <button id="buttonTree">demo button</button>
 
     						</div>
     					</div>
@@ -107,6 +104,8 @@
     						</div>
     						<div id="functionsMap" class="panel panel-body">
     							here will be the buttons for the functions - with dropdown?
+                  <button id= 'saveProjectBtn' onclick='' type='button-tree' class='btn btn-savePrj'>save Prj</button>
+                  <button id= 'test' onclick='showMap()' type='button' class='btn btn-test'>test</button>
     						</div>
     					</div>
     				</div>
@@ -118,12 +117,7 @@
           <div class="myPanel">
             <div class="panel-group">
     					<div class="panel panel-default">
-    						<div class="panel panel-heading">
-    							Map
-                                <button id= 'saveProjectBtn' onclick='' type='button' class='btn btn-savePrj'>save Project</button>
-    						</div>
     						<div id="leafletmap" class="panel panel-body">
-
     						</div>
     					</div>
     				</div>
@@ -173,6 +167,9 @@
     						<div class="panel panel-heading">
     							Rscript
     						</div>
+                <div id="Rscript" class="panel panel-body">
+
+                </div>
     					</div>
     				</div>
           </div>
@@ -206,23 +203,19 @@
 		<!-- <script type="text/javascript" src="lib/js/MicrosoftAjax.js"></script> -->
 		<!-- <script type="text/javascript" src="lib/js/Control.Geocoder.js"></script> -->
 		<script type="text/javascript" src="lib/js/lightbox.js"></script>
+    
 
 		<!-- script imports -->
 
 			<!-- script: map -->
 		<script type="text/javascript" src="js/mapBuilder.js"></script>
-		<script type="text/javascript" src="js/mapDraw.js"></script>
 		<script type="text/javascript" src="js/mapShow.js"></script>
+      <!-- script: userManagement -->  
+    <script type="text/javascript" src="js/sessionFunctionality.js"></script>
+    <script type="text/javascript" src="js/projectManagement.js"></script>
+    <script type="text/javascript" src="js/projectEditing.js"></script>
 
-		<!-- <script type="text/javascript" src="js/connectSCIDB.js"></script> -->
-        
-        <script src="js/sessionFunctionality.js"></script>
-<script src="js/projectManagement.js"></script>
-<script src="js/projectEditing.js"></script>
-
-        <script src="js/dist/jstree.min.js"></script>
-
-        <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
+    <script type="text/javascript" src="lib/js/jstree.min.js"></script>
 
   </body>
 </html>

@@ -30,7 +30,7 @@ function saveProject() {
     console.log(newProject);
     if (projectName != undefined && content != null) {
 
-        var url = 'http://localhost:8080' + '/addFeature?name=' + projectName;
+        var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
 
         // perform post ajax
         $.ajax({
@@ -40,7 +40,7 @@ function saveProject() {
             timeout: 5000,
             success: function (data, textStatus) {
                 console.log(data);
-                console.log("succsess");
+                console.log("success");
                 window.location.href = "/home.html";
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -72,7 +72,7 @@ function loadProject(){
 }
 
 function loadAllProjects(){
-    var url = 'http://localhost:8080' + '/getFeatures';
+    var url = 'http://localhost:3000' + '/getFeatures';
     
     $.ajax({
         type: 'GET',
@@ -141,13 +141,8 @@ function createProjectTable(){
              
             cell1.innerHTML = userProjects[i].name;
             cell2.innerHTML = "<button id= '" + userProjects[i].name + "Settings" +"' onclick='' type='button' class='btn btn-editPrj'>settings</button>";
-<<<<<<< HEAD
-            cell3.innerHTML = "<button id= '" + userProjects[i].name + "' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
-                              "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-default' onclick='deleteProject(this.id)'>delete</button>";
-=======
             cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
                               "<button type='button' class='btn btn-default'>delete</button>";
->>>>>>> refs/remotes/origin/Beta
             
              
              
@@ -162,11 +157,7 @@ function createProjectTable(){
 }
 
 
-<<<<<<< HEAD
-function editProject(id){
-=======
 function editProject(id ){
->>>>>>> refs/remotes/origin/Beta
     //work cookie
     var aktuellesProject;
     
@@ -203,71 +194,3 @@ function isEditing(){
     }
 }
 
-<<<<<<< HEAD
-
-
-
-function updateProject(jsonString) {
-    
-    
-	var dataTitle;
-	var contentString = JSON.stringify(jsonString);
-	var decodedcontentString = decodeURI(contentString); 
-	var content = JSON.parse(decodedcontentString);
-
-	dataTitle = content.features[0].properties.name;
-
-	// ajax Post
-	$.ajax({
-		url: '/updateFeature?name=' + dataTitle,
-		//async: false,
-		type: "POST",
-		data: content,
-		
-		success: function(xhr, textStatus, data){
-			// do function loadFromDB() to refresh list, when save feature
-			loadToEdit();
-		},
-		error: function(textStatus, errorThrown){
-			JL("error").info("updateFeature ajax");
-			console.log(errorThrown);
-		}
-	});
-}; 
-
-function deleteProject(id) {
-	// ajax Post
-	$.ajax({
-		url: '/deleteFeature?name=' + id,
-		//async: false,
-		type: "POST",
-		//data: content,
-		
-		success: function(xhr, textStatus, data){
-			// do function loadFromDB() to refresh list, when save feature
-            var aktuellesProject;
-
-            aktuellesProject=id;
-            
-            if(!isEditing()){
-                console.log("notediting");
-                }else{
-                    var temp=document.cookie.split("=");
-        
-                    temp[3] = aktuellesProject;
-        
-                    var tempCookie = "" + temp[0]+ "=" + temp[1];
-        
-                        document.cookie = tempCookie;
-                        console.log(document.cookie);
-                    }
-            
-            window.location.href = "/home.html";
-		},
-		error: function(textStatus, errorThrown){
-			console.log(errorThrown);
-		}
-	});
-}; 
-=======
->>>>>>> refs/remotes/origin/Beta
