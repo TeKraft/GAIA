@@ -38,7 +38,7 @@ $("input").focus(function () {
             body.css("backgroundPosition", x + 'px' + ' ' + y + 'px');
             // y--;  
             x--;
-            console.log( x);
+           // console.log( x);
           
             //if you need to scroll image horizontally -  
             // uncomment x and comment y  
