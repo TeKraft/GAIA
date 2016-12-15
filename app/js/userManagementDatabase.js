@@ -6,10 +6,43 @@ var jsonObj;
 var allUsers;
 var noUsers;
 
-
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
 var loginUser;
 
 
+
+
+=======
+=======
+>>>>>>> origin/Beta
+
+>>>>>>> refs/remotes/origin/Beta
+var loginUser;
+
+
+
+
+
+<<<<<<< HEAD
+=======
+    //var url = $('#db-url').val() + '/getFeatures';
+    //var url = http://localhost:8080 + '/getFeatures';
+>>>>>>> origin/Beta
+>>>>>>> refs/remotes/origin/Beta
+
+
+
+
+
+
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+>>>>>>> refs/remotes/origin/Beta
 /**
  * saves a JSON object to the Database. The Object is a new User.
  */
@@ -18,7 +51,7 @@ function saveRegister() {
     loadUser();
     
     newUser = curUser;
-
+<<<<<<< HEAD
 
     var content = JSON.parse(newUser);
     var password = document.getElementById('form-password').value;
@@ -26,18 +59,34 @@ function saveRegister() {
     
     //hier statt name email denke ich
     if (name != undefined && content != null && !isRegistered(content) && password==confirmPassword) {
-
+=======
 
     var content = JSON.parse(newUser);
+=======
+    //console.log(JSON.parse(content));
 
+    console.log(content + "das ist neu");
+>>>>>>> origin/Beta
+    
+    //hier statt name email denke ich
+    if (name != undefined && content != null) {
+>>>>>>> refs/remotes/origin/Beta
 
         var url = 'http://localhost:8080' + '/addFeature?name=' + email;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/Beta
 
+<<<<<<< HEAD
+=======
         //var url = $('#db-url').val() + '/getFeatures'; das waere richtig
+>>>>>>> origin/Beta
 
 
 
-
+>>>>>>> refs/remotes/origin/Beta
         // perform post ajax
         $.ajax({
             type: 'POST',
@@ -45,9 +94,10 @@ function saveRegister() {
             url: url,
             timeout: 5000,
             success: function (data, textStatus) {
-
+<<<<<<< HEAD
                 console.log(content);
-
+=======
+>>>>>>> refs/remotes/origin/Beta
                 console.log(data);
                 console.log("succsess");
             },
@@ -116,38 +166,89 @@ function loadFromDB() {
             $('#tableDBContents').empty();
 
             
-
+<<<<<<< HEAD
             loadLoginName();    // aus userManagementfunctionality
             loadLoginPW();      // aus userManagementfunctionality
+=======
+<<<<<<< HEAD
+            loadLoginName();    // aus userManagementfunctionality
+            loadLoginPW();      // aus userManagementfunctionality
+=======
+            loadLoginName();
+            loadLoginPW();
 
+
+
+            //console.log(content);
+            //var jsonobj =  content[41].data;
+            //JSON.parse(jsonobj);
+            //console.log(jsonobj.Password);  
+<<<<<<< HEAD
+>>>>>>> origin/Beta
+=======
+>>>>>>> origin/Beta
+>>>>>>> refs/remotes/origin/Beta
 
             
             for(var i=0; i<= content.length;i++){
                 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Email != undefined){
                     
+<<<<<<< HEAD
+                //unnötig wenn nur name des features gecheckt wird
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+                //unnötig wenn nur name des features gecheckt wird
+=======
+=======
+>>>>>>> origin/Beta
 
                 //unnötig wenn nur name des features gecheckt wird
 
+                    //unnötig wenn nur name des features gecheckt wird
 
-
+<<<<<<< HEAD
+>>>>>>> origin/Beta
+=======
+>>>>>>> origin/Beta
+>>>>>>> refs/remotes/origin/Beta
                 var checkEmail = content[i].data.Email.replace("/" , ".");
                     
                 if(content[i] != undefined && checkEmail == loginName){
                       if(content[i].data.Password == loginPW){
                           console.log("accsess");
+<<<<<<< HEAD
+                          
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
                           
                           loginUser = JSON.stringify(content[i]);
                           console.log(loginUser);
                           setUserCookie();                          // aus sessionFunctionality
                           window.location.href = "/home.html";
-
+=======
+=======
+>>>>>>> origin/Beta
 
                           console.log(content[i]);
+>>>>>>> refs/remotes/origin/Beta
                           loginUser = JSON.stringify(content[i]);
                           console.log(loginUser);
                           setUserCookie();                          // aus sessionFunctionality
                           window.location.href = "/home.html";
+<<<<<<< HEAD
+=======
+
+                          access = true;
+                          return true;
+
+<<<<<<< HEAD
+>>>>>>> origin/Beta
+=======
+>>>>>>> origin/Beta
+>>>>>>> refs/remotes/origin/Beta
                       }else{
                           console.log("Wrong password!");
                       }             
@@ -172,7 +273,7 @@ function loadFromDB() {
 
 
 
-
+<<<<<<< HEAD
 function deleteUser() {
     
     var userArr = document.cookie.split("=");
@@ -194,7 +295,7 @@ function deleteUser() {
 		}
 	});
 }; 
-
+=======
 
 
 
@@ -206,4 +307,4 @@ function gutenTag(){
     console.log(allUsers);
 }
 */
-
+>>>>>>> refs/remotes/origin/Beta

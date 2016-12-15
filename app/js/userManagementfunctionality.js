@@ -5,8 +5,10 @@ var lastName;
 var email;
 var password;
 var institution;
+<<<<<<< HEAD
+=======
 var country;
-
+>>>>>>> refs/remotes/origin/Beta
 
 var curUser;
 
@@ -36,6 +38,10 @@ function loadUser(){
     
     userdata[3] = password;
     userdata[4] = institution;
+<<<<<<< HEAD
+=======
+        userdata[5] = country;
+>>>>>>> refs/remotes/origin/Beta
     
     curUser = '{'
        +'"Firstname":' +'"' + userdata[0] + '"' +', '
@@ -43,8 +49,10 @@ function loadUser(){
        +'"Email":' +'"' +userdata[2] + '"' +', '
        +'"Password":' +'"' +userdata[3] + '"' +', '
        +'"Institution":' +'"' +userdata[4] + '"' +', '
-
+<<<<<<< HEAD
+=======
     +'"Country":' +'"' +userdata[5] + '"' +', '
+>>>>>>> refs/remotes/origin/Beta
        +'"Projects":' +'"'  + '"'
        +'}';
 }
@@ -74,12 +82,14 @@ function loadInstitution(){
     console.log(institution);
 }
 
-
+<<<<<<< HEAD
+=======
 function loadCountry() {
     country = document.getElementById('form-country').value
     console.log(country);
 }
 
+>>>>>>> refs/remotes/origin/Beta
 function loadLoginName(){
     loginName = document.getElementById('form-Login-username').value
     console.log(loginName);
@@ -89,7 +99,10 @@ function loadLoginPW(){
     console.log(loginPW);
 }
 
-
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
 function loadUser(){
     userdata[0] = firstName;
     userdata[1] = lastName;
@@ -111,5 +124,8 @@ function loadUser(){
        +'"Institution":' +'"' +userdata[4] + '"'
        +'}';
 }
+>>>>>>> origin/Beta
+>>>>>>> refs/remotes/origin/Beta
+
 
 
