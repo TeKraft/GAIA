@@ -141,8 +141,13 @@ function createProjectTable(){
              
             cell1.innerHTML = userProjects[i].name;
             cell2.innerHTML = "<button id= '" + userProjects[i].name + "Settings" +"' onclick='' type='button' class='btn btn-editPrj'>settings</button>";
+<<<<<<< HEAD
             cell3.innerHTML = "<button id= '" + userProjects[i].name + "' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
                               "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-default' onclick='deleteProject(this.id)'>delete</button>";
+=======
+            cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
+                              "<button type='button' class='btn btn-default'>delete</button>";
+>>>>>>> refs/remotes/origin/Beta
             
              
              
@@ -157,7 +162,11 @@ function createProjectTable(){
 }
 
 
+<<<<<<< HEAD
 function editProject(id){
+=======
+function editProject(id ){
+>>>>>>> refs/remotes/origin/Beta
     //work cookie
     var aktuellesProject;
     
@@ -194,6 +203,7 @@ function isEditing(){
     }
 }
 
+<<<<<<< HEAD
 
 
 
@@ -259,3 +269,5 @@ function deleteProject(id) {
 		}
 	});
 }; 
+=======
+>>>>>>> refs/remotes/origin/Beta

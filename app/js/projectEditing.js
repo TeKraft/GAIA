@@ -10,4 +10,8 @@ $('button').on('click', function () {
   $('#jstree').jstree(true).select_node('child_node_1');
   $('#jstree').jstree('select_node', 'child_node_1');
   $.jstree.reference('#jstree').select_node('child_node_1');
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> refs/remotes/origin/Beta
