@@ -1,3 +1,6 @@
 function showMap() {
-  leaflet();
+	console.log("showMap() start");
+	
+  $("leafletmap").fadeIn(3000);
+	leaflet();
 }
