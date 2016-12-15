@@ -30,7 +30,7 @@ function saveProject() {
     console.log(newProject);
     if (projectName != undefined && content != null) {
 
-        var url = 'http://localhost:8080' + '/addFeature?name=' + projectName;
+        var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
 
         // perform post ajax
         $.ajax({
@@ -40,7 +40,7 @@ function saveProject() {
             timeout: 5000,
             success: function (data, textStatus) {
                 console.log(data);
-                console.log("succsess");
+                console.log("success");
                 window.location.href = "/home.html";
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -72,7 +72,7 @@ function loadProject(){
 }
 
 function loadAllProjects(){
-    var url = 'http://localhost:8080' + '/getFeatures';
+    var url = 'http://localhost:3000' + '/getFeatures';
     
     $.ajax({
         type: 'GET',
