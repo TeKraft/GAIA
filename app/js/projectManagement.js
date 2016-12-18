@@ -30,7 +30,7 @@ function saveProject() {
     console.log(newProject);
     if (projectName != undefined && content != null) {
 
-        var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
+        var url = 'http://10.6.4.6' + '/addFeature?name=' + projectName;
 
         // perform post ajax
         $.ajax({
@@ -72,7 +72,7 @@ function loadProject(){
 }
 
 function loadAllProjects(){
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = 'http://10.6.4.6' + '/getFeatures';
     
     $.ajax({
         type: 'GET',
