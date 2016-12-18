@@ -32,7 +32,7 @@ function saveRegister() {
     //hier statt name email denke ich
     if (name != undefined && content != null) {
 
-        var url = 'http://localhost:3000' + '/addFeature?name=' + email;
+        var url = 'http://10.6.4.6' + '/addFeature?name=' + email;
 
         // perform post ajax
         $.ajax({
@@ -64,7 +64,7 @@ function saveRegister() {
  * if the user entered the correct email and password the home.html is loaded.
  */
 function loadFromDB() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = 'http://10.6.4.6' + '/getFeatures';
     
     $.ajax({
         type: 'GET',
