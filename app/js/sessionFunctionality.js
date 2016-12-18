@@ -30,11 +30,12 @@ window.onload = function () {
             createTree();
             break;
 
-        case "/profiledit.html":
-            var userArray = document.cookie.split("=");
-            var userJSON = JSON.parse(userArray[1]);
-            document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
-            break;
+            //        case "/profiledit.html":
+            //            var userArray = document.cookie.split("=");
+            //            var userJSON = JSON.parse(userArray[1]);
+            //            document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
+            //            break;
+
         case "/impressum.html":
             var userArray = document.cookie.split("=");
             var userJSON = JSON.parse(userArray[1]);
@@ -47,10 +48,60 @@ window.onload = function () {
             document.getElementById("profilProfilSymb").textContent = userJSON.data.Firstname;
             break;
 
+
+
+
+
+
         }
     }
 
 }
+
+
+
+
+
+window.onload = function () {
+    var currentProject = document.cookie.split("=");
+    if (document.cookie.length != 0) {
+
+        var path = window.location.pathname;
+        switch (path) {
+
+        case "/profiledit.html":
+            var userArray = document.cookie.split("=");
+            var userJSON = JSON.parse(userArray[1]);
+
+            document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
+            document.getElementById("firstName").value = userJSON.data.Firstname;
+            document.getElementById("lastName").value = userJSON.data.LastName;
+            document.getElementById("form-country").value = userJSON.data.Country;
+            document.getElementById("oldEmail").value = userJSON.data.Email;
+            document.getElementById("oldPassword").value = userJSON.data.password;
+
+
+            /** change '/' into '.' **/
+            var str = document.getElementById("oldEmail").value;
+            var res = str.replace("/", ".");
+            document.getElementById("oldEmail").value = res;
+
+            break;
+
+
+
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
 
 /*
  * sets the cookie to the logged in user
@@ -62,12 +113,16 @@ function setUserCookie() {
 }
 
 /*
- * sets the cookie to "" and loads the login&regitry.html
+ * sets the cookie to "" and loads the index.html
  */
 function logout() {
     document.cookie = "";
     window.location.href = "index.html";
 }
+
+
+
+
 
 
 
