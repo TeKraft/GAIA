@@ -17,7 +17,7 @@ app.use(express.static("../app/html"));
 app.use(bodyParser.urlencoded({extended: true})); 
 
 var config = {
-    httpPort: 8080,
+    httpPort: 3000,
     mongoPort: 27017
 }
 
