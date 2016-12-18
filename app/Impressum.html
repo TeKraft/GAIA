@@ -1,82 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <div class="wrapper">
-<head>
-    <meta charset="UTF-8">
 
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css"/> <!-- optional -->
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css" />
+        <!-- optional -->
 
 
-    <title>Impressum</title>
-</head>
-  <body>
+        <title>Impressum</title>
 
-    <div id="myNavbar">
-      <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Gaia</a>
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbarButtons">
-            <ul class="nav navbar-nav">
-              <li class="active">
-                <a title="show homepage" href="home.html">
-  								<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
-  							</a>
-              </li>
-              <li>
-                <a title="show workplace" href="work.html">
-                  <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
-                </a>
-              </li>
-            </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
+        <!-- add a favicon to a website -->
+        <link rel="icon" href="img/GAIA.png">
 
-              
+    </head>
 
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="imprProfilSymb"><!--symbol?--> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="profil.html">Profil</a></li>
-                  <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
-                  <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
-                  <li><a title="logout" onclick='logout()'>Logout</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+    <body>
+
+        <div id="myNavbar">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Gaia</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbarButtons">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a title="show homepage" href="home.html">
+                                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
+                                </a>
+                            </li>
+                            <li>
+                                <a title="show workplace" href="work.html">
+                                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+
+
+
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="imprProfilSymb">
+                                    <!--symbol?--><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="profil.html">Profil</a></li>
+                                    <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
+                                    <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+                                    <li><a title="logout" onclick='logout()'>Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-      </nav>
-    </div>
 
-    <div class="container">
-      <div class="row">
-       <div class="span12">
-       <div class="thumbnail center well well-small text-center">
-            <h1>Impressum</h1>
-            <h2>Address</h2>
-            <p> Institute for Geoinformatics</p>
-            <p> Heisenbergstraße 2 </p>
-            <p> 48149 Münster</p>
-            <h2>Contact</h2>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="thumbnail center well well-small text-center">
+                        <h1>Impressum</h1>
+                        <h2>Address</h2>
+                        <p> Institute for Geoinformatics</p>
+                        <p> Heisenbergstraße 2 </p>
+                        <p> 48149 Münster</p>
+                        <h2>Contact</h2> Viktor Gorte: <a href="mailto:v_gort@uni-muenster.de">v_gorte@uni-muenster.de</a>
+                        <br> Albert Hamzin: <a href="mailto:a_hamz@uni-muenster.de">a_hamz@uni-muenster.de</a>
+                        <br> Torben Kraft: <a href="mailto:t_kraf@uni-muenster.de">t_kraft@uni-muenster.de</a>
+                        <br> Raoul Kanschat: <a href="mailto:r_kans@uni-muenster.de">r_kans@uni-muenster.de</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- library imports -->
+        <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
 
-            Viktor Gorte: <a href="mailto:v_gort@uni-muenster.de">v_gorte@uni-muenster.de</a><br>
-            Albert Hamzin: <a href="mailto:a_hamz@uni-muenster.de">a_hamz@uni-muenster.de</a><br>
-            Torben Kraft: <a href="mailto:t_kraf@uni-muenster.de">t_kraft@uni-muenster.de</a><br>
-            Raoul Kanschat: <a href="mailto:r_kans@uni-muenster.de">r_kans@uni-muenster.de</a>
-       </div>
-       </div>
-      </div>
-    </div>
-
-    <!-- library imports -->
-    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
-    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-
-    <script src="js/sessionFunctionality.js"></script>
-  </body>
+        <script src="js/sessionFunctionality.js"></script>
+    </body>
 </div>
+
 </html>
