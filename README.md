@@ -1,7 +1,7 @@
 # Gaia
 ##### Webplatform for analyzing large images and data sets with R
 
-[![N|Solid](http://www.eng.ucy.ac.cy/GAIA/images/logo.gif)](https://github.com/vgorte/GAIA)
+[![N|Solid](https://s29.postimg.org/fpj69v1c7/Ohne_Titel.png)](https://github.com/vgorte/GAIA)
 
 GAIA is a free to use service for analyzing phenomenons using big images and/or data sets using R-Script.
 
