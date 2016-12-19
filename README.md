@@ -6,7 +6,7 @@
 GAIA is a free to use service for analyzing phenomenons using big images and/or data sets using R-Script.
 
   - Once registered, create projects and manage them
-  - input raw R-Script code or upload .r files
+  - Input raw R-Script code or upload .r files
   - Share projects and scripts in a collaborative manner
   - This service is and will always be free of charge! :+1:
 
@@ -18,7 +18,7 @@ GAIA was developed and works purely on open source software and projects :
 * [Node.js] - evented I/O for the backend
 * [MongoDB] - Easy to use database
 * [jQuery] - duh!
-* [Atom] - HAckable texteditor
+* [Atom] - Hackable texteditor
 
 
 And of course GAIA itself is open source with a [public repository][Git] on GitHub.
@@ -28,7 +28,7 @@ And of course GAIA itself is open source with a [public repository][Git] on GitH
 > “Software is like sex: it's better when it's free.”
 -Linus Torvalds
 
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
+
 
 
 ### Installation
