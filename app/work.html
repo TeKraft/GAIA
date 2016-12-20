@@ -19,7 +19,7 @@
 <!--     <link rel="stylesheet" href="lib/css/themes/default/style.min.css" /> -->
       
     <link rel="stylesheet" type="text/css" href="css/work.css"/>
-
+    <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
   </head>
   <body id="myBody" onload="showMap()">
 
@@ -80,8 +80,10 @@
                       <ul id="treeList">
                           <li id="rootList">Projectname
                               <ul id="childList">
-                                      <!--<li id="child_node_1">Child node 1</li>
-                                      <li>Child node 2</li>-->
+                                      <li id="scripts_node_1">Scripts</li>
+                                      <li id="images_node_1">Images</li>
+                                      <li id="results_node_1">Results</li>
+
                               </ul>
                           </li>
                       </ul>
@@ -134,9 +136,12 @@
             <div class="panel-group">
     					<div class="panel panel-default">
     						<div class="panel panel-heading">
-    							information
+    							Information
     						</div>
     						<div id="information" class="panel panel-body">
+                                <p id="CreatorInfo"></p>
+                                <p id="CollaboratorInfo"></p>
+                                <button type="button" class="btn btn-toSettings">Settings</button>
     						</div>
     					</div>
     				</div>
@@ -163,15 +168,31 @@
 
           <div class="myPanel">
             <div class="panel-group">
-    					<div class="panel panel-default">
-    						<div class="panel panel-heading">
-    							Rscript
-    						</div>
-                <div id="Rscript" class="panel panel-body">
 
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                    
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="12" id="comment"></textarea>
+                        </div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <h3>Menu 1</h3>
+                        <p>Some content in menu 1.</p>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <h3>Menu 2</h3>
+                        <p>Some content in menu 2.</p>
+                    </div>
+                    <div id="addScript" class="tab-pane fade">
+                    </div>
                 </div>
-    					</div>
-    				</div>
+            </div>
           </div>
 
         </div>

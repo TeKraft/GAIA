@@ -8,15 +8,7 @@ var noUsers;
 
 var loginUser;
 
-
-
-
-
-
-
-
-
-
+var curProject;
 
 /**
  * saves a JSON object to the Database. The Object is a new User.
@@ -27,10 +19,12 @@ function saveRegister() {
     
     newUser = curUser;
 
+    var password = document.getElementById('form-password').value;
+    var confirmPassword = document.getElementById('form-confirmPassword').value;
     var content = JSON.parse(newUser);
-    
+    console.log(newUser);
     //hier statt name email denke ich
-    if (name != undefined && content != null) {
+    if (name != undefined && content != null &&  password==confirmPassword) {
 
         var url = 'http://localhost:3000' + '/addFeature?name=' + email;
 
@@ -43,13 +37,14 @@ function saveRegister() {
             success: function (data, textStatus) {
                 console.log(data);
                 console.log("success");
+                window.location.href = "/index.html";
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("failed to save to db");
             }
         });
 
-        loadFromDB();
+        //loadFromDB();
 
     } else {
         console.log("fehler save to sb undefined oder null");
@@ -77,8 +72,8 @@ function loadFromDB() {
             
             loadLoginName();    // aus userManagementfunctionality
             loadLoginPW();      // aus userManagementfunctionality
-
             
+           
             for(var i=0; i<= content.length;i++){
                 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Email != undefined){
@@ -119,13 +114,27 @@ function loadFromDB() {
 
 
 
+function deleteUser() {
+    
+    var userArr = document.cookie.split("=");
+	// ajax Post
+	$.ajax({
+        
+
+		url: '/deleteFeature?name=' + JSON.parse(userArr[1]).name,
+		//async: false,
+		type: "POST",
+		//data: content,
+		
+		success: function(xhr, textStatus, data){
+			// do function loadFromDB() to refresh list, when save feature
+            logout();
+		},
+		error: function(textStatus, errorThrown){
+			console.log(errorThrown);
+		}
+	});
+}; 
 
 
 
-
-
-/*
-function gutenTag(){
-    console.log(allUsers);
-}
-*/

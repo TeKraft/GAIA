@@ -1,5 +1,11 @@
 "use strict;"
 
+
+// handles the button Settings
+$(document).ready(function(){
+    $('.btn-toSettings').on('click',toSettings);
+});
+
 $(function () { $('#jstree_demo_div').jstree(); });
 
 $('#jstree_demo_div').on("changed.jstree", function (e, data) {
@@ -13,3 +19,8 @@ $('#buttonTree').on('click', function () {
   $('#jstree').jstree('select_node', 'child_node_1');
   $.jstree.reference('#jstree').select_node('child_node_1');
 });
+
+function toSettings(){
+    console.log("hi");
+    window.location.href = "/projectedit.html";
+}

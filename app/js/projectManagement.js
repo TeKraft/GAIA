@@ -15,9 +15,7 @@ $(document).ready(function(){
 });
 
 
-
-
-
+// speichert projekt in der datenbank
 function saveProject() {
     console.log(creator);
     projectName=document.getElementById('PrjName').value;
@@ -67,7 +65,9 @@ function loadProject(){
     newProject = '{'
        +'"Creator":' +'"' + creator + '"' +', '
        +'"Colaborators":' +'"' +collaborators[0] + '"' +', '
-       +'"Scripts":' +'"'  + '"'
+       +'"Scripts":' +'"'  + '"'+', '
+       +'"Dateien":' +'"'  + '"'+', '
+       +'"Ergebnis":' +'"'  + '"'
        +'}';
 }
 
@@ -140,14 +140,10 @@ function createProjectTable(){
              
              
             cell1.innerHTML = userProjects[i].name;
-            cell2.innerHTML = "<button id= '" + userProjects[i].name + "Settings" +"' onclick='' type='button' class='btn btn-editPrj'>settings</button>";
+            cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>";
             cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
-                              "<button type='button' class='btn btn-default'>delete</button>";
+                              "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-default' onclick='deleteProject(this.id)'>delete</button>";
             
-             
-             
-             
-             
              projectsOfUser[j]=userProjects[i].name;
             j++;
              console.log(projectsOfUser);
@@ -156,7 +152,29 @@ function createProjectTable(){
     
 }
 
+function loadProjectEdit(id){
+    var aktuellesProject;
+    aktuellesProject=id;
+    console.log(id);
+    
+    if(!isEditing()){
+        document.cookie = document.cookie + "=CurrentProject=" + aktuellesProject+ "=";
+        window.location.href = "projectedit.html";
+    }else{
+        var temp=document.cookie.split("=");
+        
+        temp[3] = aktuellesProject;
+        
+        var tempCookie = "" + temp[0]+ "=" + temp[1] + "=" + temp[2] + "=" + temp[3];
+        
+        document.cookie = tempCookie;
+        console.log(document.cookie);
+        window.location.href = "projectedit.html";
+    }
+}
 
+
+// leasst den user das projekt in der work.html bearbeiten
 function editProject(id ){
     //work cookie
     var aktuellesProject;
@@ -193,4 +211,43 @@ function isEditing(){
         return false;
     }
 }
+
+
+
+
+function deleteProject(id) {
+	// ajax Post
+	$.ajax({
+		url: '/deleteFeature?name=' + id,
+		//async: false,
+		type: "POST",
+		//data: content,
+		
+		success: function(xhr, textStatus, data){
+			// do function loadFromDB() to refresh list, when save feature
+            var aktuellesProject;
+
+            aktuellesProject=id;
+            
+            if(!isEditing()){
+                console.log("notediting");
+                }else{
+                    var temp=document.cookie.split("=");
+        
+                    temp[3] = aktuellesProject;
+        
+                    var tempCookie = "" + temp[0]+ "=" + temp[1];
+        
+                        document.cookie = tempCookie;
+                        console.log(document.cookie);
+                    }
+            
+            window.location.href = "/home.html";
+		},
+		error: function(textStatus, errorThrown){
+			console.log(errorThrown);
+		}
+	});
+}; 
+
 
