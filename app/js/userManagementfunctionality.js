@@ -43,8 +43,12 @@ function loadUser(){
        +'"Email":' +'"' +userdata[2] + '"' +', '
        +'"Password":' +'"' +userdata[3] + '"' +', '
        +'"Institution":' +'"' +userdata[4] + '"' +', '
+<<<<<<< HEAD
     +'"Country":' +'"' +userdata[5] + '"' +', '
        +'"Projects":' +'"'  + '"'
+=======
+    +'"Country":' +'"' +userdata[5] + '"'
+>>>>>>> RaoulBeta
        +'}';
 }
 

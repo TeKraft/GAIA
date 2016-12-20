@@ -15,9 +15,13 @@ $(document).ready(function(){
 });
 
 
+<<<<<<< HEAD
 
 
 
+=======
+// speichert projekt in der datenbank
+>>>>>>> RaoulBeta
 function saveProject() {
     console.log(creator);
     projectName=document.getElementById('PrjName').value;
@@ -30,7 +34,11 @@ function saveProject() {
     console.log(newProject);
     if (projectName != undefined && content != null) {
 
+<<<<<<< HEAD
         var url = 'http://10.6.4.6' + '/addFeature?name=' + projectName;
+=======
+        var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
+>>>>>>> RaoulBeta
 
         // perform post ajax
         $.ajax({
@@ -67,12 +75,22 @@ function loadProject(){
     newProject = '{'
        +'"Creator":' +'"' + creator + '"' +', '
        +'"Colaborators":' +'"' +collaborators[0] + '"' +', '
+<<<<<<< HEAD
        +'"Scripts":' +'"'  + '"'
+=======
+       +'"Scripts":' +'"'  + '"'+', '
+       +'"Dateien":' +'"'  + '"'+', '
+       +'"Ergebnis":' +'"'  + '"'
+>>>>>>> RaoulBeta
        +'}';
 }
 
 function loadAllProjects(){
+<<<<<<< HEAD
     var url = 'http://10.6.4.6' + '/getFeatures';
+=======
+    var url = 'http://localhost:3000' + '/getFeatures';
+>>>>>>> RaoulBeta
     
     $.ajax({
         type: 'GET',
@@ -140,6 +158,7 @@ function createProjectTable(){
              
              
             cell1.innerHTML = userProjects[i].name;
+<<<<<<< HEAD
             cell2.innerHTML = "<button id= '" + userProjects[i].name + "Settings" +"' onclick='' type='button' class='btn btn-editPrj'>settings</button>";
             cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
                               "<button type='button' class='btn btn-default'>delete</button>";
@@ -148,6 +167,12 @@ function createProjectTable(){
              
              
              
+=======
+            cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>";
+            cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
+                              "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-default' onclick='deleteProject(this.id)'>delete</button>";
+            
+>>>>>>> RaoulBeta
              projectsOfUser[j]=userProjects[i].name;
             j++;
              console.log(projectsOfUser);
@@ -156,7 +181,33 @@ function createProjectTable(){
     
 }
 
+<<<<<<< HEAD
 
+=======
+function loadProjectEdit(id){
+    var aktuellesProject;
+    aktuellesProject=id;
+    console.log(id);
+    
+    if(!isEditing()){
+        document.cookie = document.cookie + "=CurrentProject=" + aktuellesProject+ "=";
+        window.location.href = "projectedit.html";
+    }else{
+        var temp=document.cookie.split("=");
+        
+        temp[3] = aktuellesProject;
+        
+        var tempCookie = "" + temp[0]+ "=" + temp[1] + "=" + temp[2] + "=" + temp[3];
+        
+        document.cookie = tempCookie;
+        console.log(document.cookie);
+        window.location.href = "projectedit.html";
+    }
+}
+
+
+// leasst den user das projekt in der work.html bearbeiten
+>>>>>>> RaoulBeta
 function editProject(id ){
     //work cookie
     var aktuellesProject;
@@ -194,3 +245,45 @@ function isEditing(){
     }
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+function deleteProject(id) {
+	// ajax Post
+	$.ajax({
+		url: '/deleteFeature?name=' + id,
+		//async: false,
+		type: "POST",
+		//data: content,
+		
+		success: function(xhr, textStatus, data){
+			// do function loadFromDB() to refresh list, when save feature
+            var aktuellesProject;
+
+            aktuellesProject=id;
+            
+            if(!isEditing()){
+                console.log("notediting");
+                }else{
+                    var temp=document.cookie.split("=");
+        
+                    temp[3] = aktuellesProject;
+        
+                    var tempCookie = "" + temp[0]+ "=" + temp[1];
+        
+                        document.cookie = tempCookie;
+                        console.log(document.cookie);
+                    }
+            
+            window.location.href = "/home.html";
+		},
+		error: function(textStatus, errorThrown){
+			console.log(errorThrown);
+		}
+	});
+}; 
+
+
+>>>>>>> RaoulBeta

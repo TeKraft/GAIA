@@ -8,6 +8,9 @@ var noUsers;
 
 var loginUser;
 
+var curProject;
+
+<<<<<<< HEAD
 
 
 
@@ -17,13 +20,15 @@ var loginUser;
 
 
 
-
+=======
+>>>>>>> RaoulBeta
 /**
  * saves a JSON object to the Database. The Object is a new User.
  */
 function saveRegister() {
     // creates a new User from the input fields (userManagementfunctionality)
     loadUser();
+<<<<<<< HEAD
     
     newUser = curUser;
 
@@ -33,6 +38,19 @@ function saveRegister() {
     if (name != undefined && content != null) {
 
         var url = 'http://10.6.4.6' + '/addFeature?name=' + email;
+=======
+    
+    newUser = curUser;
+
+    var password = document.getElementById('form-password').value;
+    var confirmPassword = document.getElementById('form-confirmPassword').value;
+    var content = JSON.parse(newUser);
+    console.log(newUser);
+    //hier statt name email denke ich
+    if (name != undefined && content != null &&  password==confirmPassword) {
+
+        var url = 'http://localhost:3000' + '/addFeature?name=' + email;
+>>>>>>> RaoulBeta
 
         // perform post ajax
         $.ajax({
@@ -43,13 +61,17 @@ function saveRegister() {
             success: function (data, textStatus) {
                 console.log(data);
                 console.log("success");
+<<<<<<< HEAD
+=======
+                window.location.href = "/index.html";
+>>>>>>> RaoulBeta
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("failed to save to db");
             }
         });
 
-        loadFromDB();
+        //loadFromDB();
 
     } else {
         console.log("fehler save to sb undefined oder null");
@@ -64,7 +86,11 @@ function saveRegister() {
  * if the user entered the correct email and password the home.html is loaded.
  */
 function loadFromDB() {
+<<<<<<< HEAD
     var url = 'http://10.6.4.6' + '/getFeatures';
+=======
+    var url = 'http://localhost:3000' + '/getFeatures';
+>>>>>>> RaoulBeta
     
     $.ajax({
         type: 'GET',
@@ -77,8 +103,12 @@ function loadFromDB() {
             
             loadLoginName();    // aus userManagementfunctionality
             loadLoginPW();      // aus userManagementfunctionality
+<<<<<<< HEAD
 
+=======
+>>>>>>> RaoulBeta
             
+           
             for(var i=0; i<= content.length;i++){
                 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Email != undefined){
@@ -119,6 +149,7 @@ function loadFromDB() {
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -129,3 +160,29 @@ function gutenTag(){
     console.log(allUsers);
 }
 */
+=======
+function deleteUser() {
+    
+    var userArr = document.cookie.split("=");
+	// ajax Post
+	$.ajax({
+        
+
+		url: '/deleteFeature?name=' + JSON.parse(userArr[1]).name,
+		//async: false,
+		type: "POST",
+		//data: content,
+		
+		success: function(xhr, textStatus, data){
+			// do function loadFromDB() to refresh list, when save feature
+            logout();
+		},
+		error: function(textStatus, errorThrown){
+			console.log(errorThrown);
+		}
+	});
+}; 
+
+
+
+>>>>>>> RaoulBeta
