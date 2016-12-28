@@ -202,4 +202,3 @@ var drawMap = function () {
 
 	leaflet();
 	drawMap();
-

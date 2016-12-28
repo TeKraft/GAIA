@@ -19,7 +19,12 @@
 <!--     <link rel="stylesheet" href="lib/css/themes/default/style.min.css" /> -->
       
     <link rel="stylesheet" type="text/css" href="css/work.css"/>
+
     <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
+    
+         <!-- add a favicon to a website -->
+     <link rel="icon" href="img/GAIA.png">
+
   </head>
   <body id="myBody" onload="showMap()">
 
@@ -46,7 +51,9 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
+
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb"> <span class="caret"></span></a>
+
                 <ul class="dropdown-menu">
                   <li><a href="profil.html">Profil</a></li>
                   <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
@@ -80,6 +87,10 @@
                       <ul id="treeList">
                           <li id="rootList">Projectname
                               <ul id="childList">
+
+                                      <!--<li id="child_node_1">Child node 1</li>
+                                      <li>Child node 2</li>-->
+
                                       <li id="scripts_node_1">Scripts</li>
                                       <li id="images_node_1">Images</li>
                                       <li id="results_node_1">Results</li>
@@ -168,7 +179,15 @@
 
           <div class="myPanel">
             <div class="panel-group">
+    					<div class="panel panel-default">
+    						<div class="panel panel-heading">
+    							Rscript
+    						</div>
+                <div id="Rscript" class="panel panel-body">
 
+                </div>
+    					</div>
+    				</div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
                     <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
@@ -196,7 +215,6 @@
           </div>
 
         </div>
-      </div>
       <!-- end: second row -->
       <!-- start: third row -->
       <!-- <div class="row">

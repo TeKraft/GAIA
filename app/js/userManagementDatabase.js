@@ -16,7 +16,7 @@ var curProject;
 function saveRegister() {
     // creates a new User from the input fields (userManagementfunctionality)
     loadUser();
-    
+
     newUser = curUser;
 
     var password = document.getElementById('form-password').value;
@@ -38,6 +38,7 @@ function saveRegister() {
                 console.log(data);
                 console.log("success");
                 window.location.href = "/index.html";
+
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("failed to save to db");
@@ -60,7 +61,7 @@ function saveRegister() {
  */
 function loadFromDB() {
     var url = 'http://localhost:3000' + '/getFeatures';
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -72,8 +73,7 @@ function loadFromDB() {
             
             loadLoginName();    // aus userManagementfunctionality
             loadLoginPW();      // aus userManagementfunctionality
-            
-           
+                   
             for(var i=0; i<= content.length;i++){
                 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Email != undefined){
@@ -109,11 +109,6 @@ function loadFromDB() {
     });
 };
 
-
-
-
-
-
 function deleteUser() {
     
     var userArr = document.cookie.split("=");
@@ -135,6 +130,5 @@ function deleteUser() {
 		}
 	});
 }; 
-
 
 

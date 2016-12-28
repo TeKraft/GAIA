@@ -1,6 +1,5 @@
 "use strict;"
 
-
 // handles the button Settings
 $(document).ready(function(){
     $('.btn-toSettings').on('click',toSettings);

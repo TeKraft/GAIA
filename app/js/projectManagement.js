@@ -213,8 +213,6 @@ function isEditing(){
 }
 
 
-
-
 function deleteProject(id) {
 	// ajax Post
 	$.ajax({
@@ -249,5 +247,4 @@ function deleteProject(id) {
 		}
 	});
 }; 
-
 
