@@ -15,13 +15,7 @@ $(document).ready(function(){
 });
 
 
-<<<<<<< HEAD
-
-
-
-=======
 // speichert projekt in der datenbank
->>>>>>> RaoulBeta
 function saveProject() {
     console.log(creator);
     projectName=document.getElementById('PrjName').value;
@@ -34,11 +28,7 @@ function saveProject() {
     console.log(newProject);
     if (projectName != undefined && content != null) {
 
-<<<<<<< HEAD
-        var url = 'http://10.6.4.6' + '/addFeature?name=' + projectName;
-=======
         var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
->>>>>>> RaoulBeta
 
         // perform post ajax
         $.ajax({
@@ -75,22 +65,14 @@ function loadProject(){
     newProject = '{'
        +'"Creator":' +'"' + creator + '"' +', '
        +'"Colaborators":' +'"' +collaborators[0] + '"' +', '
-<<<<<<< HEAD
-       +'"Scripts":' +'"'  + '"'
-=======
        +'"Scripts":' +'"'  + '"'+', '
        +'"Dateien":' +'"'  + '"'+', '
        +'"Ergebnis":' +'"'  + '"'
->>>>>>> RaoulBeta
        +'}';
 }
 
 function loadAllProjects(){
-<<<<<<< HEAD
-    var url = 'http://10.6.4.6' + '/getFeatures';
-=======
     var url = 'http://localhost:3000' + '/getFeatures';
->>>>>>> RaoulBeta
     
     $.ajax({
         type: 'GET',
@@ -158,21 +140,10 @@ function createProjectTable(){
              
              
             cell1.innerHTML = userProjects[i].name;
-<<<<<<< HEAD
-            cell2.innerHTML = "<button id= '" + userProjects[i].name + "Settings" +"' onclick='' type='button' class='btn btn-editPrj'>settings</button>";
-            cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
-                              "<button type='button' class='btn btn-default'>delete</button>";
-            
-             
-             
-             
-             
-=======
             cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>";
             cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>edit</button>" + 
                               "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-default' onclick='deleteProject(this.id)'>delete</button>";
             
->>>>>>> RaoulBeta
              projectsOfUser[j]=userProjects[i].name;
             j++;
              console.log(projectsOfUser);
@@ -181,9 +152,6 @@ function createProjectTable(){
     
 }
 
-<<<<<<< HEAD
-
-=======
 function loadProjectEdit(id){
     var aktuellesProject;
     aktuellesProject=id;
@@ -207,7 +175,6 @@ function loadProjectEdit(id){
 
 
 // leasst den user das projekt in der work.html bearbeiten
->>>>>>> RaoulBeta
 function editProject(id ){
     //work cookie
     var aktuellesProject;
@@ -245,10 +212,6 @@ function isEditing(){
     }
 }
 
-<<<<<<< HEAD
-=======
-
-
 
 function deleteProject(id) {
 	// ajax Post
@@ -285,5 +248,3 @@ function deleteProject(id) {
 	});
 }; 
 
-
->>>>>>> RaoulBeta
