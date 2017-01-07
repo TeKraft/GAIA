@@ -91,6 +91,7 @@ window.onload = function () {
     }
 
 }
+}
 
 function makeTreeComponents(name){
     
@@ -365,6 +366,7 @@ window.onclick = function(event) {
       }
     }
   }
+}  
 
 
 function openDropdown(){
@@ -400,7 +402,7 @@ function logout() {
 
 
 
-function createTree() {
+function createTree() { 
     $(function () {
         // 6 create an instance when the DOM is ready
         $('#jstree').jstree();
@@ -417,3 +419,7 @@ function createTree() {
         });
     });
 }
+
+
+
+
