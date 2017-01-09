@@ -29,7 +29,7 @@ window.onload = function () {
             makeTreeComponents(currentProject[3]);
 
             createTree();
-                
+
             displayCollaboratorsForInformation();
             displayCreatorForInformatioin()
             break;
@@ -62,22 +62,59 @@ window.onload = function () {
             break;
 
         }
+    };
+
+
+    var currentProject = document.cookie.split("=");
+    if (document.cookie.length != 0) {
+
+        var path = window.location.pathname;
+        switch (path) {
+
+        case "/profiledit.html":
+            var userArray = document.cookie.split("=");
+            var userJSON = JSON.parse(userArray[1]);
+
+            document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
+            document.getElementById("firstName").value = userJSON.data.Firstname;
+            document.getElementById("lastName").value = userJSON.data.LastName;
+            document.getElementById("form-country").value = userJSON.data.Country;
+            document.getElementById("oldEmail").value = userJSON.data.Email;
+            document.getElementById("oldPassword").value = userJSON.data.password;
+
+
+            /** change '/' into '.' **/
+            var str = document.getElementById("oldEmail").value;
+            var res = str.replace("/", ".");
+            document.getElementById("oldEmail").value = res;
+
+            break;
+
+
+
+
+
+
+
+        }
     }
+
+
 
 }
 
-function makeTreeComponents(name){
-    
+function makeTreeComponents(name) {
+
     document.getElementById("rootList").textContent = name;
     //document.getElementById("childList").textContent = name;
-    
+
 }
 
 
 function displayCreatorForInformatioin() {
     var url = 'http://localhost:3000' + '/getFeatures';
     var creator;
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -85,16 +122,16 @@ function displayCreatorForInformatioin() {
         timeout: 5000,
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
-            for(var i=0; i<= content.length;i++){               
-                if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined){
-                    var tempCookie=document.cookie.split("=");
+            for (var i = 0; i <= content.length; i++) {
+                if (content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined) {
+                    var tempCookie = document.cookie.split("=");
                     var project = tempCookie[3];
-                    
-                    if(content[i] != undefined && project == content[i].name){
+
+                    if (content[i] != undefined && project == content[i].name) {
                         tempProject = content[i];
                         document.getElementById('CreatorInfo').innerHTML = "Creator: " + content[i].data.Creator;
                         break;
-                    }else{
+                    } else {
                         //console.log("not this one");
                     }
                 }
@@ -110,7 +147,7 @@ function displayCreatorForInformatioin() {
 function displayCreator() {
     var url = 'http://localhost:3000' + '/getFeatures';
     var creator;
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -118,16 +155,16 @@ function displayCreator() {
         timeout: 5000,
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
-            for(var i=0; i<= content.length;i++){               
-                if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined){
-                    var tempCookie=document.cookie.split("=");
+            for (var i = 0; i <= content.length; i++) {
+                if (content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined) {
+                    var tempCookie = document.cookie.split("=");
                     var project = tempCookie[3];
-                    
-                    if(content[i] != undefined && project == content[i].name){
+
+                    if (content[i] != undefined && project == content[i].name) {
                         tempProject = content[i];
                         document.getElementById('CreatorEdit').innerHTML = "Creator: " + content[i].data.Creator;
                         break;
-                    }else{
+                    } else {
                         console.log("not this one");
                     }
                 }
@@ -144,7 +181,7 @@ function displayCreator() {
 function displayCollaboratorsForInformation() {
     var url = 'http://localhost:3000' + '/getFeatures';
     var colabs;
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -153,34 +190,34 @@ function displayCollaboratorsForInformation() {
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
 
-            for(var i=0; i<= content.length;i++){
-                
-                if(content[i] != undefined && content[i].data != undefined && content[i].data.Colaborators != undefined){
-                    
+            for (var i = 0; i <= content.length; i++) {
 
-                
-                    var tempCookie=document.cookie.split("=");
+                if (content[i] != undefined && content[i].data != undefined && content[i].data.Colaborators != undefined) {
+
+
+
+                    var tempCookie = document.cookie.split("=");
                     var project = tempCookie[3];
-                    
-                    if(content[i] != undefined && project == content[i].name){
+
+                    if (content[i] != undefined && project == content[i].name) {
                         // alle mitarbeiter werden als knopf dargestellt bei druecken kann man loeschen oder nachricht senden
-                        
-                        
+
+
                         tempProject = content[i].Colaborators;
                         var CollabArray = content[i].data.Colaborators.split(",");
-                        
+
                         var editedCollab = "<br>";
-                        
-                        for(var i=0; i<CollabArray.length;i++){
+
+                        for (var i = 0; i < CollabArray.length; i++) {
                             editedCollab = editedCollab + CollabArray[i] + "<br>";
                         }
-                        
+
                         document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + editedCollab;
                         break;
-                    }else{
+                    } else {
                         //console.log("not this one");
                     }
- 
+
                 }
             }
 
@@ -189,16 +226,16 @@ function displayCollaboratorsForInformation() {
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
-        
+
     });
- 
+
 };
 
 
 function displayCollaborators() {
     var url = 'http://localhost:3000' + '/getFeatures';
     var colabs;
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -207,28 +244,28 @@ function displayCollaborators() {
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
 
-            for(var i=0; i<= content.length;i++){
-                
-                if(content[i] != undefined && content[i].data != undefined && content[i].data.Colaborators != undefined){
-                    
+            for (var i = 0; i <= content.length; i++) {
 
-                
-                    var tempCookie=document.cookie.split("=");
+                if (content[i] != undefined && content[i].data != undefined && content[i].data.Colaborators != undefined) {
+
+
+
+                    var tempCookie = document.cookie.split("=");
                     var project = tempCookie[3];
-                    
-                    if(content[i] != undefined && project == content[i].name){
+
+                    if (content[i] != undefined && project == content[i].name) {
                         // alle mitarbeiter werden als knopf dargestellt bei druecken kann man loeschen oder nachricht senden
-                        
-                        
+
+
                         tempProject = content[i];
                         displayButtons(content[i].data.Colaborators);
                         //document.getElementById('projectCollabEdit').innerHTML = "Collaborators: " + displayButtons()content[i].data.Colaborators;
-                        
+
                         break;
-                    }else{
+                    } else {
                         console.log("not this one");
                     }
- 
+
                 }
             }
 
@@ -237,9 +274,9 @@ function displayCollaborators() {
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
-        
+
     });
- 
+
 };
 
 
@@ -249,50 +286,50 @@ function displayCollaborators() {
 
 WENN AM ANFAN NOCH KEINER ERSTELLT WURDE ERSTELLT ER BEIM NEUEN COLLAB EINEN LEEREN KNOPF
 */
-function displayButtons(input){
+function displayButtons(input) {
     var temp = input.split(",");
-    var tempString="";
+    var tempString = "";
     console.log(temp);
-    
-    if(temp != ""){
-    for(var i=0; i<temp.length;i++){
-        tempString = tempString + 
-            "<div class='dropdown'>" +
-                "<button id= '" + temp[i] + "' type='button' class='dropbtn' onclick='openDropdown()'>"+ temp[i]+"</button>" + 
-            
+
+    if (temp != "") {
+        for (var i = 0; i < temp.length; i++) {
+            tempString = tempString +
+                "<div class='dropdown'>" +
+                "<button id= '" + temp[i] + "' type='button' class='dropbtn' onclick='openDropdown()'>" + temp[i] + "</button>" +
+
                 "<div id='myDropdown' class='dropdown-content'>" +
-                       "<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>"+ "sendMessage "+"</button>" + 
-                    "<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' onclick='deleteCollaborator(this.id)'>"+ "delete "+"</button>" + 
-                "</div>" + 
-            "</div>" +
-            " ";
-        console.log(temp[i]);
-        console.log(tempString);
-        //tempString = null; 
+                "<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>" + "sendMessage " + "</button>" +
+                "<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' onclick='deleteCollaborator(this.id)'>" + "delete " + "</button>" +
+                "</div>" +
+                "</div>" +
+                " ";
+            console.log(temp[i]);
+            console.log(tempString);
+            //tempString = null; 
+        }
     }
+
+    document.getElementById('projectCollabEdit').innerHTML = "Collaborators: " + tempString;
+
+}
+
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
-
-        document.getElementById('projectCollabEdit').innerHTML = "Collaborators: " + tempString;
-
-}
-    
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
 }
 
 
-function openDropdown(){
-        document.getElementById("myDropdown").classList.toggle("show");
+function openDropdown() {
+    document.getElementById("myDropdown").classList.toggle("show");
 }
 
 
@@ -301,12 +338,12 @@ function openDropdown(){
 
 
 
-function deleteCollaborator(){
-        
+function deleteCollaborator() {
+
 }
 
-function sendMessage(){
-        
+function sendMessage() {
+
 }
 
 
