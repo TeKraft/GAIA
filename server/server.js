@@ -14,7 +14,7 @@ app.use(express.static("../app/html"));
 
 
 // to enable processing of the received post content
-app.use(bodyParser.urlencoded({extended: true})); 
+app.use(bodyParser.urlencoded({extended: true}));
 
 var config = {
     httpPort: 3000,
@@ -28,11 +28,20 @@ var featureSchema = mongoose.Schema({
     //lastname: String,
     //emailadress: String,
     //pasword: String
-    
+
     name: String,
     dateInserted: Date,
     data: {}
 });
+
+
+
+
+// uniter
+var php = require('uniter').createEngine('PHP');
+php.getStdout().on('data', function (text) { console.log(text); });
+php.execute('<?php print "Hello from PHP!";');
+
 
 
 var Feature = mongoose.model('Feature', featureSchema);
@@ -58,6 +67,20 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/exPHPget', function(req, res) {
+  php.execute('<?php print "Hello from PHP!";');
+  console.log(req.body);
+});
+
+app.post('/exPHPpost', function(req, res) {
+  console.log("app.POST: /exPHP");
+
+  var data = req.body;
+  console.log(data);
+  // php.execute(data);
+});
+
+
 // returns json of all stored features
 app.get('/getFeatures', function(req, res) {
     Feature.find(function(error, features) {
@@ -78,7 +101,7 @@ app.post('/addFeature*', function(req, res) {
     	data: req.body
     });
     feature.save(function(error){
-        var message = error ? 'failed to save feature: ' + error 
+        var message = error ? 'failed to save feature: ' + error
                             : 'feature saved: ' + feature.name;
         console.log(message + ' from ' + req.connection.remoteAddress);
         res.send(message);
@@ -103,7 +126,7 @@ app.post('/updateFeature*', function(req, res) {
 		{ name: title },
 		{$set: { data: req.body } },
 		function(error){
-		var message = error ? 'failed to update feature: ' + error 
+		var message = error ? 'failed to update feature: ' + error
 							: 'feature updated: ' + title;
 		console.log(message + ' from ' + req.connection.remoteAddress);
 		res.send(message);
@@ -123,7 +146,7 @@ app.post('/renameFeature*', function(req, res) {
 		{ name: title },
 		{$set: { name: req.body }},
 		function(error){
-		var message = error ? 'failed to update feature: ' + error 
+		var message = error ? 'failed to update feature: ' + error
 							: 'feature updated: ' + title;
 		console.log(message + ' from ' + req.connection.remoteAddress);
 		res.send(message);
@@ -144,7 +167,7 @@ app.post('/deleteFeature*', function(req, res) {
 	Feature.remove(
 		{ name: title},
 		function(error){
-		var message = error ? 'failed to delete feature: ' + error 
+		var message = error ? 'failed to delete feature: ' + error
 							: 'feature deleted: ' + title;
 		console.log(message + ' from ' + req.connection.remoteAddress);
 		res.send(message);

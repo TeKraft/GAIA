@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
     <meta name="author" content="Torben Kraft"/>
@@ -17,11 +18,13 @@
 		<link rel="stylesheet" type="text/css" href="lib/css/Control.Geocoder.css"/>
 		<link rel="stylesheet" type="text/css" href="lib/css/lightbox.css" >
 <!--     <link rel="stylesheet" href="lib/css/themes/default/style.min.css" /> -->
-      
+
     <link rel="stylesheet" type="text/css" href="css/work.css"/>
     <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
   </head>
   <body id="myBody" onload="showMap()">
+
+
 
     <div id="myNavbar">
       <nav class="navbar navbar-inverse">
@@ -75,7 +78,7 @@
     						<div id="treeView" class="panel panel-body">
     							Project:
                   <div id="jstree">
-                       
+
                       <!-- in this example the tree is populated from inline HTML -->
                       <ul id="treeList">
                           <li id="rootList">Projectname
@@ -139,9 +142,9 @@
     							Information
     						</div>
     						<div id="information" class="panel panel-body">
-                                <p id="CreatorInfo"></p>
-                                <p id="CollaboratorInfo"></p>
-                                <button type="button" class="btn btn-toSettings">Settings</button>
+                  <p id="CreatorInfo"></p>
+                  <p id="CollaboratorInfo"></p>
+                  <button type="button" class="btn btn-toSettings">Settings</button>
     						</div>
     					</div>
     				</div>
@@ -158,7 +161,27 @@
     						</div>
     						<div id="functionsR" class="panel panel-body">
 
-    						</div>
+                  <a href="#" onclick="execPHPget()">execPHPget</a>
+                  <a href="#" onclick="execPHPpost()">execPHPpost</a>
+                  <a href="#" onclick="execPHPpost2()">execPHPpost2</a>
+                  <a href="#" onclick="execPHPpost3()">execPHPpost3</a>
+
+
+
+
+                  <!-- <a href="#" onclick="getOutput()">getOutput</a>
+
+                  <a href="#" onclick="doSomething()">doSomething</a>
+
+                  <a href="#" onclick="thisfunction()">thisfunction</a>
+
+                  <a href="#" onclick="confirm_delete()">confirm_delete</a>
+ -->
+
+
+                  <!-- <button id='execPHP' onclick='execPHP()' type='button'>execPHP</button> -->
+
+                </div>
     					</div>
     				</div>
           </div>
@@ -171,8 +194,13 @@
 
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
+
+
+
                     <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-                    
+                    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+                    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+
                 </ul>
 
                 <div class="tab-content">
@@ -181,14 +209,21 @@
                             <textarea class="form-control" rows="12" id="comment"></textarea>
                         </div>
                     </div>
+
                     <div id="menu1" class="tab-pane fade">
                         <h3>Menu 1</h3>
                         <p>Some content in menu 1.</p>
+
                     </div>
                     <div id="menu2" class="tab-pane fade">
-                        <h3>Menu 2</h3>
-                        <p>Some content in menu 2.</p>
+                        <div id="output">waiting for action</div>
                     </div>
+
+                    <div id="menu3" class="tab-pane fade">
+                      <iframe name="f1" id="f1"> </iframe>
+                      <a href='exec_script.php' target='f1'>Click </a>
+                    </div>
+
                     <div id="addScript" class="tab-pane fade">
                     </div>
                 </div>
@@ -208,8 +243,6 @@
 
     </div>
 
-
-
     <!-- library imports -->
 		<script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
 		<script type="text/javascript" src="lib/js/jquery.js"></script>
@@ -224,17 +257,18 @@
 		<!-- <script type="text/javascript" src="lib/js/MicrosoftAjax.js"></script> -->
 		<!-- <script type="text/javascript" src="lib/js/Control.Geocoder.js"></script> -->
 		<script type="text/javascript" src="lib/js/lightbox.js"></script>
-    
+
 
 		<!-- script imports -->
 
 			<!-- script: map -->
 		<script type="text/javascript" src="js/mapBuilder.js"></script>
 		<script type="text/javascript" src="js/mapShow.js"></script>
-      <!-- script: userManagement -->  
+      <!-- script: userManagement -->
     <script type="text/javascript" src="js/sessionFunctionality.js"></script>
     <script type="text/javascript" src="js/projectManagement.js"></script>
     <script type="text/javascript" src="js/projectEditing.js"></script>
+    <script type="text/javascript" src="js/execPHP.js"></script>
 
     <script type="text/javascript" src="lib/js/jstree.min.js"></script>
 
