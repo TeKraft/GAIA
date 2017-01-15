@@ -35,6 +35,11 @@ var featureSchema = mongoose.Schema({
 });
 
 
+var scriptSchema = mongoose.Schema({
+  name: String,
+  dateInserted: Date,
+  data: {}
+});
 
 
 // uniter
@@ -45,6 +50,8 @@ php.execute('<?php print "Hello from PHP!";');
 
 
 var Feature = mongoose.model('Feature', featureSchema);
+
+var Script = mongoose.model('Script', scriptSchema)
 
 /* database connection */
 mongoose.connect('mongodb://localhost:' + config.mongoPort + '/GAIA');
@@ -80,6 +87,105 @@ app.post('/exPHPpost', function(req, res) {
   // php.execute(data);
 });
 
+app.get('/getScripts', function(req, res) {
+  Script.find(function(error, script) {
+    if (error) return console.error(error);
+    res.send(script);
+  });
+});
+
+app.post('/addScript*', function(req, res) {
+  console.log(JSON.stringify(req.body));
+  console.log(req.url.substring(16, req.url.length));
+  var script = new Script({
+    name: req.url.substring(16, req.url.length),
+    dateInserted: new Date(),
+    data: req.body
+  });
+
+  var phpToExecute = JSON.stringify(req.body);
+  console.log("phpToExecute");
+  console.log(phpToExecute);
+
+  var php2 = JSON.parse(phpToExecute);
+  console.log("php2");
+  console.log(php2);
+
+  // var php3 = JSON.stringify(req.body);
+  // console.log("php3");
+  // console.log(php3);
+
+  php.execute(phpToExecute);
+
+  script.save(function(error){
+    var message = error ? 'failed to save script: ' + error
+                        : 'script saved: ' + script.name;
+    console.log(message + ' from ' + req.connection.remoteAddress);
+    res.send(message);
+  });
+});
+
+app.post('/execScript', function(req, res) {
+  // Script.find(function(error, script) {
+  //   if (error) return console.error(error);
+  //   res.send(script);
+  // });
+
+  // var name = req.body;
+  var title = req.url.substring(17, req.url.length);
+  // console.log(name);
+  console.log(title);
+
+  // Script.find(
+  //   {name: title}),
+  //   function(error){
+  // 	var message = error ? 'failed to execute script: ' + error
+  // 						: 'script executed: ' + title;
+  // 	console.log(message + ' from ' + req.connection.remoteAddress);
+  //
+  //   res.send(message);
+  // });
+
+
+// var scriptToExec =
+//   Script.find(
+//     {name: title},
+//     function(error){
+// 		var message = error ? 'failed to update feature: ' + error
+// 							: 'feature updated: ' + title;
+// 		console.log(message + ' from ' + req.connection.remoteAddress);
+//     return script;
+// 	});
+
+  Script.find({name: title},
+    function (script) {
+      console.log(script);
+      // php.execute(script.data)
+    }
+  );
+
+
+  //   function(error, script) {
+  //   if (error) return console.error(error);
+  //   res.send("script");
+  // });
+  console.log("scriptToExec");
+  // console.log(scriptToExec);
+
+	// Script.find(
+	// 	{ name: title },
+	// 	{$set: { name: req.body }},
+	// 	function(error){
+	// 	var message = error ? 'failed to update feature: ' + error
+	// 						: 'feature updated: ' + title;
+	// 	console.log(message + ' from ' + req.connection.remoteAddress);
+	// 	res.send(message);
+	// });
+});
+
+
+
+
 
 // returns json of all stored features
 app.get('/getFeatures', function(req, res) {
@@ -107,13 +213,6 @@ app.post('/addFeature*', function(req, res) {
         res.send(message);
     });
 });
-
-
-
-
-
-
-
 
 
 // takes a json document via POST, which will be added to the database

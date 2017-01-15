@@ -44,7 +44,92 @@ function execPHPpost() {
 };
 
 
+var myNameToday = 'test_script';
+var myScriptToday = "<?php print 'Hello from PHP!';";
 
+function testGetScript() {
+  console.log("testGetScript()");
+  getScript();
+};
+
+function testPostScript() {
+  var myArray = new Array();
+  myArray[0] = myNameToday;
+  myArray[1] = myScriptToday;
+  console.log("myArray");
+  console.log(myArray);
+
+  postScript(myArray);
+};
+
+function getScript() {
+  console.log("getScript()");
+
+  var url = 'http://localhost:3000' + '/getScripts';
+  $.ajax({
+      type: 'GET',
+      url: url,
+      timeout: 5000,
+      // data: content,    //without data its working
+      success: function (content, textStatus) {
+        console.log("success: getScript()");
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success: getScript()");
+      }
+  });
+};
+
+function postScript(array) {
+  console.log("postScript()");
+
+  var name = array[0];
+  var script = array[1];
+
+  var identifier = name;
+  var content = script;
+
+  var url = 'http://localhost:3000' + '/addScript?name=' + identifier;
+  $.ajax({
+      type: 'POST',
+      data: content,
+      url: url,
+      timeout: 5000,
+      success: function (data, textStatus) {
+          console.log("success: postScript()");
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success: postScript()");
+      }
+  });
+};
+
+function execScript() {
+  var title = myNameToday;
+  console.log("title= " + title);
+  executeScript(title);
+};
+
+function executeScript(name) {
+  console.log("executeScript()");
+
+  var identifier = name;
+  var content = name;
+
+  var url = 'http://localhost:3000' + '/execScript?name=' + identifier;
+  $.ajax({
+      type: 'POST',
+      data: content,
+      url: url,
+      timeout: 5000,
+      success: function (data, textStatus) {
+          console.log("success: executeScript()");
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success: executeScript()");
+      }
+  });
+};
 
 
 
