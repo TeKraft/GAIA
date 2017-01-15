@@ -172,8 +172,6 @@
 
 
 
-
-
                   <!-- <a href="#" onclick="getOutput()">getOutput</a>
 
                   <a href="#" onclick="doSomething()">doSomething</a>
@@ -204,7 +202,7 @@
 
                     <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
                     <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-                    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+                    <li><a data-toggle="tab" href="#menu3">OpenCPU</a></li>
 
                 </ul>
 
@@ -221,13 +219,23 @@
 
                     </div>
                     <div id="menu2" class="tab-pane fade">
-                        <div id="output">waiting for action</div>
+                        <!-- <div id="output">waiting for action</div> -->
                     </div>
 
                     <div id="menu3" class="tab-pane fade">
-                      <iframe name="f1" id="f1"> </iframe>
-                      <a href='exec_script.php' target='f1'>Click </a>
+
+                      <h1>Posting Code Snippets</h1>
+                        <textarea id="input" rows="4" cols="50">
+                          x = rnorm(1000)
+                          plot(x)
+                          mean(x)
+                        </textarea>
+                        <br /> <button id="submitbutton" type="button">Call R</button>
+                        <pre><code id="output"></code></pre>
+
                     </div>
+
+
 
                     <div id="addScript" class="tab-pane fade">
                     </div>
@@ -264,6 +272,10 @@
 		<script type="text/javascript" src="lib/js/lightbox.js"></script>
 
 
+
+    <script src="lib/js/opencpu-0.4.js"></script>
+    <script type="text/javascript" src="js/myOpenCPU.js"></script>
+
 		<!-- script imports -->
 
 			<!-- script: map -->
@@ -274,6 +286,7 @@
     <script type="text/javascript" src="js/projectManagement.js"></script>
     <script type="text/javascript" src="js/projectEditing.js"></script>
     <script type="text/javascript" src="js/execPHP.js"></script>
+
 
     <script type="text/javascript" src="lib/js/jstree.min.js"></script>
 
