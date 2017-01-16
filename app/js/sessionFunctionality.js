@@ -1,6 +1,9 @@
 "use strict";
 var tempProject;
+var curCreator;
+var curProjectName;
 
+var editProject;
 /*
  * every time a window is loaded this checks what to do.
  */
@@ -11,55 +14,94 @@ window.onload = function () {
         var path = window.location.pathname;
         switch (path) {
         case "/home.html":
-            var userArray = document.cookie.split("=");
-            var userJSON = JSON.parse(userArray[1]);
-            document.getElementById("profilSymb").textContent = userJSON.data.Firstname;
-            creator = userJSON.name;
+            if(document.cookie.includes(";")){
+                alert("nicht angemeldet");
+                window.location.href = "index.html";
+                break;
+            }else{
+                
+                var userArray = document.cookie.split("=");
+                var userJSON = JSON.parse(userArray[1]);
+            
+                document.getElementById("profilSymb").textContent = userJSON.data.Firstname;
+                creator = userJSON.name;
 
-            //loading all Projects where the User collaborates
-            loadAllProjects();
-            break;
+                //loading all Projects where the User collaborates
+                loadAllProjects();
+                break;
+            }
 
         case "/work.html":
-            var userArray = document.cookie.split("=");
-            var userJSON = JSON.parse(userArray[1]);
-            document.getElementById("workProfilSymb").textContent = userJSON.data.Firstname;
-            console.log(userArray);
+            if(document.cookie.includes(";")){
+                alert("nicht angemeldet");
+                window.location.href = "index.html";
+                break;
+            }else{
+                var userArray = document.cookie.split("=");
+                var userJSON = JSON.parse(userArray[1]);
+                document.getElementById("workProfilSymb").textContent = userJSON.data.Firstname;
+                console.log(userArray);
 
-            makeTreeComponents(currentProject[3]);
+                makeTreeComponents(currentProject[3]);
 
-            createTree();
+                createTree();
 
-            displayCollaboratorsForInformation();
-            displayCreatorForInformatioin()
-            break;
+                displayCollaboratorsForInformation();
+                displayCreatorForInformatioin()
+                break;
+            }
 
         case "/profiledit.html":
-            var userArray = document.cookie.split("=");
-            var userJSON = JSON.parse(userArray[1]);
-            document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
-            break;
+            if(document.cookie.includes(";")){
+                alert("nicht angemeldet");
+                window.location.href = "index.html";
+                break;
+            }else{
+                var userArray = document.cookie.split("=");
+                var userJSON = JSON.parse(userArray[1]);
+                document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
+                break;
+            }
         case "/impressum.html":
-            var userArray = document.cookie.split("=");
-            var userJSON = JSON.parse(userArray[1]);
-            document.getElementById("imprProfilSymb").textContent = userJSON.data.Firstname;
-            break;
+            if(document.cookie.includes(";")){
+                alert("nicht angemeldet");
+                window.location.href = "index.html";
+                break;
+            }else{
+                var userArray = document.cookie.split("=");
+                var userJSON = JSON.parse(userArray[1]);
+                document.getElementById("imprProfilSymb").textContent = userJSON.data.Firstname;
+                break;
+            }
 
         case "/profil.html":
-            var userArray = document.cookie.split("=");
-            var userJSON = JSON.parse(userArray[1]);
-            document.getElementById("profilProfilSymb").textContent = userJSON.data.Firstname;
-            break;
+            if(document.cookie.includes(";")){
+                alert("nicht angemeldet");
+                window.location.href = "index.html";
+                break;
+            }else{
+                var userArray = document.cookie.split("=");
+                var userJSON = JSON.parse(userArray[1]);
+                document.getElementById("profilProfilSymb").textContent = userJSON.data.Firstname;
+                break;
+            }
 
         case "/projectedit.html":
-            var userArray = document.cookie.split("=");
-            var userJSON = JSON.parse(userArray[1]);
-            document.getElementById("profilEditProfilSymb").textContent = userJSON.data.Firstname;
-            console.log(userArray);
-            document.getElementById("projectNameEdit").textContent = document.getElementById("projectNameEdit").textContent + " " + userArray[3];
-            displayCollaborators();
-            displayCreator();
-            break;
+            if(document.cookie.includes(";")){
+                alert("nicht angemeldet");
+                window.location.href = "index.html";
+                break;
+            }else{
+                var userArray = document.cookie.split("=");
+                var userJSON = JSON.parse(userArray[1]);
+                document.getElementById("profilEditProfilSymb").textContent = userJSON.data.Firstname;
+                console.log(userArray);
+                document.getElementById("projectNameEdit").textContent = document.getElementById("projectNameEdit").textContent + " " + userArray[3];
+                curProjectName = userArray[3];
+                displayCollaborators();
+                displayCreator();
+                break;
+            }
 
         }
     };
@@ -103,6 +145,8 @@ window.onload = function () {
 
 }
 
+
+// hier muss der baum richtig erstellt werden
 function makeTreeComponents(name) {
 
     document.getElementById("rootList").textContent = name;
@@ -163,6 +207,7 @@ function displayCreator() {
                     if (content[i] != undefined && project == content[i].name) {
                         tempProject = content[i];
                         document.getElementById('CreatorEdit').innerHTML = "Creator: " + content[i].data.Creator;
+                        curCreator = content[i].data.Creator;
                         break;
                     } else {
                         console.log("not this one");
@@ -291,21 +336,28 @@ function displayButtons(input) {
     var tempString = "";
     console.log(temp);
 
-    if (temp != "") {
+    if (temp != ""){
+        //console.log(temp[1] +  " das ist einer");
         for (var i = 0; i < temp.length; i++) {
-            tempString = tempString +
-                "<div class='dropdown'>" +
-                "<button id= '" + temp[i] + "' type='button' class='dropbtn' onclick='openDropdown()'>" + temp[i] + "</button>" +
-
-                "<div id='myDropdown' class='dropdown-content'>" +
-                "<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>" + "sendMessage " + "</button>" +
-                "<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' onclick='deleteCollaborator(this.id)'>" + "delete " + "</button>" +
-                "</div>" +
-                "</div>" +
+            if(temp[i] == ""){
+                console.log("ein falscher");
+            }else{
+                tempString = tempString +
+                //"<div class='dropdown'>" +
+                "<br>" + 
+                "<button id= '" + temp[i] + "' type='button' class='' onclick=''>" + temp[i] + "</button>" +
+                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")'>" + "delete" + "</button>" + 
+                
+                //"<div id='myDropdown' class='dropdown-content'>" +
+                //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>" + "sendMessage " + "</button>" +
+                //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' onclick='deleteCollaborator(this.id)'>" + "delete " + "</button>" +
+                //"</div>" +
+                //"</div>" +
                 " ";
-            console.log(temp[i]);
-            console.log(tempString);
-            //tempString = null; 
+                console.log(temp[i]);
+                console.log(tempString);
+                //tempString = null; 
+            }
         }
     }
 
@@ -313,6 +365,8 @@ function displayButtons(input) {
 
 }
 
+
+//kann glaub ich weg
 window.onclick = function (event) {
     if (!event.target.matches('.dropbtn')) {
 
@@ -327,7 +381,7 @@ window.onclick = function (event) {
     }
 }
 
-
+//kann glaub ich weg
 function openDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -338,13 +392,94 @@ function openDropdown() {
 
 
 
-function deleteCollaborator() {
+function deleteCollaborator(name) {
+    
+    var deleteCollab = name[0].id;
+    
+    console.log(curProjectName + curCreator);
+    
+    
+    
+    
+    
+    
+    
+     var url = 'http://localhost:3000' + '/getFeatures';
+    
+    $.ajax({
+        type: 'GET',
+        dataType: 'JSON',
+        url: url,
+        timeout: 5000,
+        success: function (content, textStatus) {
+            $('#tableDBContents').empty();
+            
+            for(var i=0; i<= content.length;i++){
 
+                if(content[i] != undefined && content[i].data != undefined && content[i].name == curProjectName && content[i].data.Creator == curCreator  ){
+                    
+                    editProject = content[i];
+                    var newCollabs = content[i].data.Colaborators;
+                    if(newCollabs.includes(deleteCollab)){
+                        newCollabs = newCollabs.replace(deleteCollab,'');
+                        var newProject = content[i];
+                        newProject.data.Colaborators = newCollabs.replace(',,',',');
+                        console.log(newProject);
+                        
+                        
+                        
+                        
+                        // ajax Post
+	                   $.ajax({
+		              url: '/updateFeature?name=' + curProjectName,
+		              //async: false,
+		              type: "POST",
+		              data: newProject.data,
+		
+		              success: function(xhr, textStatus, data){
+			             // do function loadFromDB() to refresh list, when save feature
+                            console.log("success");
+            
+		              },
+		              error: function(textStatus, errorThrown){
+			             console.log(errorThrown);
+		              }
+	                   });
+    
+    
+    
+    
+    
+                        window.location.href = "projectedit.html";
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                }else{
+                    console.log("gibts nicht")
+                }
+            }
+            
+            $('#tableDB').removeClass('hidden');
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log("no success");
+        }
+    }); 
+    
+    
+
+    
 }
 
-function sendMessage() {
 
-}
 
 
 
@@ -364,6 +499,7 @@ function setUserCookie() {
 function logout() {
     document.cookie = "";
     window.location.href = "index.html";
+    console.log(document.cookie);
 }
 
 
