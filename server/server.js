@@ -4,7 +4,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-
 var app = express();
 
 /* get home page */
@@ -275,6 +274,17 @@ app.post('/deleteFeature*', function(req, res) {
 });
 
 
+var childProcess = require('child_process');
+childProcess.exec('', function (err, stdout, stderr) {
+        if (err) {
+        console.error(err);
+        console.log("ERROR :(");
+        return;
+    }
+    console.log("hey");
+    console.log(stdout);
+    process.exit(0);// exit process once it is opened
+})
 
 
 // launch server
