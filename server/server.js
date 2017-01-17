@@ -274,17 +274,20 @@ app.post('/deleteFeature*', function(req, res) {
 });
 
 
-var childProcess = require('child_process');
-childProcess.exec('', function (err, stdout, stderr) {
-        if (err) {
-        console.error(err);
-        console.log("ERROR :(");
-        return;
-    }
-    console.log("hey");
-    console.log(stdout);
-    process.exit(0);// exit process once it is opened
-})
+
+app.get('/execScript', function(req, res) {
+  var childProcess = require('child_process');
+  childProcess.exec('Rscript test.R', function (err, stdout, stderr) {
+          if (err) {
+          console.error(err);
+          console.log("ERROR :(");
+          return;
+      }
+      console.log("hey");
+      console.log(stdout);
+  })
+});
+
 
 
 // launch server

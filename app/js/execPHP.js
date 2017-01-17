@@ -105,9 +105,19 @@ function postScript(array) {
 };
 
 function execScript() {
-  var title = myNameToday;
-  console.log("title= " + title);
-  executeScript(title);
+  var url = 'http://localhost:3000' + '/execScript';
+
+  $.ajax({
+      type: 'GET',
+      url: url,
+
+      success: function (content, textStatus) {
+        console.log("success: Script has been processed by server");
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success :( ");
+      }
+  });
 };
 
 function executeScript(name) {
@@ -133,7 +143,15 @@ function executeScript(name) {
 
 
 
+function executeScript(){
+    var url = 'http://localhost:3000' + '/execScript';
 
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (content, textStatus) {}
+    });
+  };
 
 
 
