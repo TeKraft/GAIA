@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
+
     <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
     <meta name="author" content="Torben Kraft" />
 
@@ -10,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- import stylesheets library -->
+
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css" />
     <!-- optional -->
@@ -21,6 +24,7 @@
     <!--     <link rel="stylesheet" href="lib/css/themes/default/style.min.css" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/work.css" />
+
     <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
 
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -30,6 +34,8 @@
 </head>
 
 <body id="myBody" onload="showMap()">
+
+
 
     <div id="myNavbar">
         <nav class="navbar navbar-inverse">
@@ -70,7 +76,7 @@
 
     <div id="desktop" class="container-fluid">
 
-        <!-- start: first row -->
+
         <div class="row">
             <div class="col-md-3">
 
@@ -102,6 +108,7 @@
                         </div>
                     </div>
                 </div>
+
 
             </div>
             <div class="col-md-1">
@@ -135,8 +142,7 @@
 
             </div>
         </div>
-        <!-- end: first row -->
-        <!-- start: second row -->
+
         <div class="row">
             <div class="col-md-3">
 
@@ -155,6 +161,7 @@
                     </div>
                 </div>
 
+
             </div>
             <div class="col-md-1">
 
@@ -166,142 +173,194 @@
                             </div>
                             <div id="functionsR" class="panel panel-body">
 
+
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- <a href="#" onclick="testGetScript()">testGetScript</a>
+                  <a href="#" onclick="testPostScript()">testPostScript</a>
+                  <a href="#" onclick="execScript()">execScript</a>
+
+                  <a href="#" onclick="execPHPget()">execPHPget</a>
+                  <a href="#" onclick="execPHPpost()">execPHPpost</a>
+                  <a href="#" onclick="execPHPpost2()">execPHPpost2</a> -->
+                    <a href="#" onclick="executeScript()">TEST</a>
+
+
+
+                    <!-- <a href="#" onclick="getOutput()">getOutput</a>
+
+                  <a href="#" onclick="doSomething()">doSomething</a>
+
+                  <a href="#" onclick="thisfunction()">thisfunction</a>
+
+                  <a href="#" onclick="confirm_delete()">confirm_delete</a>
+ -->
+
+
+                    <!-- <button id='execPHP' onclick='execPHP()' type='button'>execPHP</button> -->
+
                 </div>
-
-            </div>
-            <div class="col-md-8">
-
-                <div class="myPanel">
-                    <div class="panel-group">
-
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
-                            <li><a data-toggle="tab" href="#menu1">Menu 1</a>
-
-                            </li>
-
-                        </ul>
-
-                        <div class="tab-content">
-                            <div id="home" class="tab-pane fade in active">
-                                <div class="form-group">
-                                    <script type="text/javascript">
-                                        var div = document.createElement('div'); // div Element wird erstellt
-
-
-                                        var userArray = document.cookie.split("=");
-                                        var userJSON = JSON.parse(userArray[1]);
-                                        var ID = userJSON.data.LastName; // hier wird ID definiert
-                                        div.id = ID;
-
-
-
-
-                                        var body = document.querySelector('body');
-                                        document.getElementsByTagName('div')[37].appendChild(div); // div wird im Body an der stelle 37 hinten dran gehängt
-
-
-                                        console.log(div.id);
-
-                                        /////////////////////////////////////
-                                        //das Problem ist nur in der 82 Zeile
-
-
-
-                                        $(this.div).pad({ // anstatt Hamzin soll hier ein Platzhalter für die id stehen
-                                            'padId': userJSON.data.LastName + userJSON.data.Firstname, // wie das ep heißen soll @Raoul wie besprochen musst das hier sich aus der Email Adresse und des Projektes zusammensetzen
-                                            'userName': userJSON.data.Firstname, //der Name der eingeloggten person im ep
-
-                                            'plugins': {
-                                                'pageview': 'false',
-
-                                            }
-
-
-                                        }); // sets the pad id, some plugin parameters, and puts the pad in the div
-
-
-
-
-
-
-                                        ////////////////////////////////////
-                                        //Baustelle
-
-
-                                        document.getElementById('epframe' + div.id).getContext;
-
-                                        console.log(document.getElementById('epframe' + div.id));
-
-
-
-
-
-                                        function getElementByIdInFrames(id, base) {  
-                                            var el;  
-                                            if (el = base.document.getElementById(id)) {    
-                                                return el;  
-
-                                            }   
-                                            for (var i = 0, len = base.frames.length; i < len; i++) {    
-                                                if (el = getElementByIdInFrames(id, base.frames[i])) {      
-                                                    return el;  
-
-                                                }  
-                                            }
-                                        }
-
-                                        console.log($('iframe[name="ace_inner"]').contents().find('iframe').contents().find("#innerdocbody"));
-
-
-
-
-                                        ////////////////////////////////////
-                                        //Ende der Baustelle
-                                    </script>
-
-
-
-
-                                </div>
-                            </div>
-                            <div id="menu1" class="tab-pane fade">
-                                <h3>Menu 1</h3>
-                                <p>Some content in menu 1.</p>
-                            </div>
-                            <div id="menu2" class="tab-pane fade">
-                                <h3>Menu 2</h3>
-                                <p>Some content in menu 2.</p>
-                            </div>
-                            <div id="addScript" class="tab-pane fade">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-        <!-- end: second row -->
-        <!-- start: third row -->
-        <!-- <div class="row">
-      <p>  ... </p>
-      </div> -->
-        <!-- end: third row -->
-
-
-
     </div>
 
 
+
+    <div class="col-md-8">
+
+        <div class="myPanel">
+            <div class="panel-group">
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Menu 1</a>
+
+                    </li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="form-group">
+                            <script type="text/javascript">
+                                var div = document.createElement('div'); // div Element wird erstellt
+
+
+                                var userArray = document.cookie.split("=");
+                                var userJSON = JSON.parse(userArray[1]);
+                                var ID = userJSON.data.LastName; // hier wird ID definiert
+                                div.id = ID;
+
+
+
+
+                                var body = document.querySelector('body');
+                                document.getElementsByTagName('div')[37].appendChild(div); // div wird im Body an der stelle 37 hinten dran gehängt
+
+
+                                << << << < HEAD
+                                console.log(div.id); === === = < ul class = "nav nav-tabs" >
+                                    < li class = "active" > < a data - toggle = "tab"
+                                href = "#home" > Script < /a></li >
+
+
+
+                                    < li > < a data - toggle = "tab"
+                                href = "#menu1" > Menu 1 < /a></li >
+                                    < li > < a data - toggle = "tab"
+                                href = "#menu2" > Menu 2 < /a></li >
+                                    < li > < a data - toggle = "tab"
+                                href = "#menu3" > OpenCPU < /a></li >
+
+                                    < /ul> >>> >>> > origin /
+                                master
+
+                                /////////////////////////////////////
+                                //das Problem ist nur in der 82 Zeile
+
+
+
+                                $(this.div).pad({ // anstatt Hamzin soll hier ein Platzhalter für die id stehen
+                                    'padId': userJSON.data.LastName + userJSON.data.Firstname, // wie das ep heißen soll @Raoul wie besprochen musst das hier sich aus der Email Adresse und des Projektes zusammensetzen
+                                    'userName': userJSON.data.Firstname, //der Name der eingeloggten person im ep
+
+                                    'plugins': {
+                                        'pageview': 'false',
+
+                                    }
+
+
+                                }); // sets the pad id, some plugin parameters, and puts the pad in the div
+
+
+
+
+
+
+                                ////////////////////////////////////
+                                //Baustelle
+
+
+                                document.getElementById('epframe' + div.id).getContext;
+
+                                console.log(document.getElementById('epframe' + div.id));
+
+
+
+
+
+                                function getElementByIdInFrames(id, base) {  
+                                    var el;  
+                                    if (el = base.document.getElementById(id)) {    
+                                        return el;  
+
+                                    }   
+                                    for (var i = 0, len = base.frames.length; i < len; i++) {    
+                                        if (el = getElementByIdInFrames(id, base.frames[i])) {      
+                                            return el;  
+
+                                        }  
+                                    }
+                                }
+
+                                console.log($('iframe[name="ace_inner"]').contents().find('iframe').contents().find("#innerdocbody"));
+
+
+
+
+                                ////////////////////////////////////
+                                //Ende der Baustelle
+                            </script>
+
+
+
+
+
+                            <h3>Menu 1</h3>
+                            <p>Some content in menu 1.</p>
+
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <!-- <div id="output">waiting for action</div> -->
+                        </div>
+
+                        <div id="menu3" class="tab-pane fade">
+
+                            <h1>Posting Code Snippets</h1>
+                            <textarea id="input" rows="4" cols="50">
+                                x = rnorm(1000) plot(x) mean(x)
+                            </textarea>
+                            <br />
+                            <button id="submitbutton" type="button">Call R</button>
+                            <pre><code id="output"></code></pre>
+
+                        </div>
+
+
+
+                        <div id="addScript" class="tab-pane fade">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
 
     <!-- library imports -->
     <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
     <script type="text/javascript" src="lib/js/jquery.js"></script>
     <script type="text/javascript" src="lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+
 
     <script type="text/javascript" src="lib/js/jquery-1.11.3.min.js"></script>
     <!-- <script type="text/javascript" src="lib/js/bootstrap.min.js"></script> -->
@@ -314,15 +373,22 @@
     <script type="text/javascript" src="lib/js/lightbox.js"></script>
 
 
+
+    <script src="lib/js/opencpu-0.4.js"></script>
+    <script type="text/javascript" src="js/myOpenCPU.js"></script>
+
     <!-- script imports -->
 
     <!-- script: map -->
     <script type="text/javascript" src="js/mapBuilder.js"></script>
     <script type="text/javascript" src="js/mapShow.js"></script>
     <!-- script: userManagement -->
+
     <script type="text/javascript" src="js/sessionFunctionality.js"></script>
     <script type="text/javascript" src="js/projectManagement.js"></script>
     <script type="text/javascript" src="js/projectEditing.js"></script>
+    <script type="text/javascript" src="js/execPHP.js"></script>
+
 
     <script type="text/javascript" src="lib/js/jstree.min.js"></script>
 

@@ -12,43 +12,12 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // im internet steht nur wie man zb "creator" umbenennt.
 function changeProjectName() {
     var content = '"' + document.getElementById('NewPrjName').value + '"';
     var toChangeProject = "sdff";
     console.log(content);
-    
+
     if (content != undefined) {
 
         var url = 'http://localhost:3000' + '/renameFeature?name=' + toChangeProject;
@@ -77,47 +46,22 @@ function changeProjectName() {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // noch gucken ob schon wer mitarbeitet und wenn ja das komma weglassen
 
 var contentadd;
 
 function addCollaborator() {
-    
+
     contentadd=null;
     var temp=document.cookie.split("=");
-        
+
     var aktuellesProject = temp[3];
-    
-    
-    
-    
+
+
+
+
      var url = 'http://localhost:3000' + '/getFeatures';
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -126,12 +70,12 @@ function addCollaborator() {
         timeout: 5000,
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
-            
+
             for(var i=0; i<= content.length;i++){
-                
+
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined && content[i].data.Creator != "null" && content[i].name == aktuellesProject){
                     contentadd = content[i];
-                    
+
                     break;
             }
             }
@@ -140,15 +84,15 @@ function addCollaborator() {
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
-    }); 
+    });
             // hier den neuen einfuegen
     console.log(contentadd);
     var newCollab = document.getElementById('NewCollabName').value;
-    
+
     var neuesProjekt ="{" + '"Creator"' + ":" + JSON.stringify(contentadd.data.Creator) + ",";
 
     var str = JSON.stringify(contentadd.data.Colaborators).substring(0, JSON.stringify(contentadd.data.Colaborators).length - 1);
-    
+
     var alleCollabs = '"Colaborators"' +  ":" + str + "," + newCollab + '"' + ",";
     neuesProjekt = neuesProjekt + alleCollabs + '"Scripts"' + ":" +  '"' + contentadd.data.Scripts + '"' + "}"; //hier noch alles andere was gespeichert wird anhaengen
 
@@ -156,8 +100,8 @@ function addCollaborator() {
 
 	updateFeatureData(aktuellesProject, JSON.parse(neuesProjekt));
     window.location.href = "/projectedit.html";
-    
-}; 
+
+};
 
 function updateFeatureData(featureName, newData){
     console.log(newData);
@@ -167,11 +111,11 @@ function updateFeatureData(featureName, newData){
 		//async: false,
 		type: "POST",
 		data: newData,
-		
+
 		success: function(xhr, textStatus, data){
             console.log("success");
 			// do function loadFromDB() to refresh list, when save feature
-	
+
 		},
 		error: function(textStatus, errorThrown){
 			JL("error").info("updateFeature ajax");
@@ -197,7 +141,7 @@ var url = 'http://localhost:3000' + '/getFeatures';
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
             for(var i=0; i<= content.length;i++){
-                
+
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined && content[i].name == name){
                     var temp = content[i];
                     return temp;
@@ -209,16 +153,16 @@ var url = 'http://localhost:3000' + '/getFeatures';
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
-    }); 
+    });
 
 }
 
 
 function updateProject(jsonString) {
-    
+
 	var dataTitle;
 	var contentString = JSON.stringify(jsonString);
-	var decodedcontentString = decodeURI(contentString); 
+	var decodedcontentString = decodeURI(contentString);
 	var content = JSON.parse(decodedcontentString);
 
 	dataTitle = content.features[0].properties.name;
@@ -229,7 +173,7 @@ function updateProject(jsonString) {
 		//async: false,
 		type: "POST",
 		data: content,
-		
+
 		success: function(xhr, textStatus, data){
 			// do function loadFromDB() to refresh list, when save feature
 			loadToEdit();
@@ -239,6 +183,4 @@ function updateProject(jsonString) {
 			console.log(errorThrown);
 		}
 	});
-}; 
-
-
+};
