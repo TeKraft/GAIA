@@ -51,6 +51,7 @@ window.onload = function () {
             document.getElementById("profilProfilSymb").textContent = userJSON.data.Firstname;
             break;
 
+
         case "/projectedit.html":
             var userArray = document.cookie.split("=");
             var userJSON = JSON.parse(userArray[1]);
