@@ -4,6 +4,8 @@ var curCreator;
 var curProjectName;
 
 var editProject;
+
+var creatorOfProject;
 /*
  * every time a window is loaded this checks what to do.
  */
@@ -13,6 +15,7 @@ window.onload = function () {
 
         var path = window.location.pathname;
         switch (path) {
+                
         case "/home.html":
             if(document.cookie.includes(";")){
                 alert("nicht angemeldet");
@@ -40,14 +43,12 @@ window.onload = function () {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("workProfilSymb").textContent = userJSON.data.Firstname;
-                console.log(userArray);
-
-                makeTreeComponents(currentProject[3]);
-
-                createTree();
 
                 displayCollaboratorsForInformation();
                 displayCreatorForInformatioin()
+                
+                makeTreeComponents(currentProject[3]);
+                createTree();
                 break;
             }
 
@@ -147,13 +148,7 @@ window.onload = function () {
 }
 
 
-// hier muss der baum richtig erstellt werden
-function makeTreeComponents(name) {
 
-    document.getElementById("rootList").textContent = name;
-    //document.getElementById("childList").textContent = name;
-
-}
 
 
 function displayCreatorForInformatioin() {
@@ -175,6 +170,7 @@ function displayCreatorForInformatioin() {
                     if (content[i] != undefined && project == content[i].name) {
                         tempProject = content[i];
                         document.getElementById('CreatorInfo').innerHTML = "Creator: " + content[i].data.Creator;
+                        creatorOfProject=content[i].data.Creator;
                         break;
                     } else {
                         //console.log("not this one");
@@ -189,6 +185,8 @@ function displayCreatorForInformatioin() {
     });
 };
 
+
+// ich glaube er wuerde wenn zwei projekte gleich heissen aber verschiedene creators haben immer nur das erste auswaehlen
 function displayCreator() {
     var url = 'http://localhost:3000' + '/getFeatures';
     var creator;
@@ -392,18 +390,14 @@ function openDropdown() {
 
 
 
-
+// funktioniert nicht bei emailadressen sondern nur bei buchstaben
 function deleteCollaborator(name) {
     
     var deleteCollab = name[0].id;
     
     console.log(curProjectName + curCreator);
     
-    
-    
-    
-    
-    
+
     
      var url = 'http://localhost:3000' + '/getFeatures';
     
@@ -507,19 +501,3 @@ function logout() {
 
 
 
-function createTree() {
-    $(function () {
-        // 6 create an instance when the DOM is ready
-        $('#jstree').jstree();
-        // 7 bind to events triggered on the tree
-        $('#jstree').on("changed.jstree", function (e, data) {
-            console.log(data.selected);
-        });
-        // 8 interact with the tree - either way is OK
-        $('button').on('click', function () {
-            $('#jstree').jstree(true).select_node('scripts_node_1');
-            $('#jstree').jstree('select_node', 'images_node_1');
-            $.jstree.reference('#jstree').select_node('results_node_1');
-        });
-    });
-}
