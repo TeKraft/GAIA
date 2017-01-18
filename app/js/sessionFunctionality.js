@@ -104,6 +104,18 @@ window.onload = function () {
                 displayCreator();
                 break;
             }
+                
+        case "/gaia.html":
+            if(document.cookie.includes(";")){
+                alert("nicht angemeldet");
+                window.location.href = "index.html";
+                break;
+            }else{
+                var userArray = document.cookie.split("=");
+                var userJSON = JSON.parse(userArray[1]);
+                document.getElementById("gaiaProfilSymb").textContent = userJSON.data.Firstname;
+                break;
+            }
 
         }
     };
