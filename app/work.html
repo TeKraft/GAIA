@@ -40,6 +40,8 @@
   menu, nav, section { display: block; }
 </style>
 
+    <script src="js/work.js"></script>
+
 
 </head>
 
@@ -191,25 +193,149 @@
                                 functionsR
                             </div>
                             <div id="functionsR" class="panel panel-body">
+                                <!--     download button     .txt data                          -->
+                                <a href="/p/MustermannMax/export/txt"  id='download'>download
+
+
+<!--download symbol animation-->
+                                <svg  viewBox="0 0 64 64"> 
+                                    <path id="circle-bg" d="
+    M 32,  8
+    C 45,  8  56, 19  56, 32
+    C 56, 45  45, 56  32, 56
+    C 19, 56   8, 45   8, 32
+    C  8, 19  19,  8  32,  8
+    Z
+  "></path>
+                                    <path id="circle-hover" d="
+    M 32,  8
+    C 45,  8  56, 19  56, 32
+    C 56, 45  45, 56  32, 56
+    C 19, 56   8, 45   8, 32
+    C  8, 19  19,  8  32,  8
+    Z
+  "></path>
+                                    <path id="line" d="
+    M 28, 41
+    L 22, 34
+    C 11, 21  19,  8  32,  8
+    C 45,  8  56, 19  56, 32
+    C 56, 45  45, 56  32, 56
+    C 19, 56  28, 44  31, 47
+    C 32, 48  32, 48  33, 47
+    L 41, 38
+    C 42, 37  42, 36  41, 36
+    L 35, 36
+    L 35, 16
+    L 29, 16
+    L 29, 36
+    L 23, 36
+    C 22, 36  22, 37  23, 38
+    L 31, 47
+    C 32, 48  32, 48  33, 47
+
+    C 35, 45  45, 56  32, 56
+    C 19, 56   8, 45   8, 32
+    C  8, 19  19,  8  32,  8
+    C 45,  8  51, 17  44, 24
+    Z
+  "></path>
+                                </svg>
+
+<!--download symbol animation javaScript-->
+                                <script>
+                                    
+                                    (function () {
+                                        var $svg, check, circleEmpty, circleFull, i, reset, shrink, t, to;
+
+                                        $svg = $('svg');
+
+                                        to = null;
+
+                                        t = function (ms, cb, fn) {
+                                            return to = setTimeout(function () {
+                                                fn();
+                                                return cb();
+                                            }, ms);
+                                        };
+
+                                        shrink = function (cb) {
+                                            return t(0, cb, function () {
+                                                return $svg.attr("class", "shrink");
+                                            });
+                                        };
+
+                                        circleEmpty = function (cb) {
+                                            return t(300, cb, function () {
+                                                return $svg.attr("class", "circle-empty");
+                                            });
+                                        };
+
+                                        circleFull = function (cb) {
+                                            return t(700, cb, function () {
+                                                return $svg.attr("class", "circle-full");
+                                            });
+                                        };
+
+                                        check = function (cb) {
+                                            return t(2000, cb, function () {
+                                                return $svg.attr("class", "check");
+                                            });
+                                        };
+
+                                        reset = function (cb) {
+                                            return t(3000, cb, function () {
+                                                return $svg.attr("class", null);
+                                            });
+                                        };
+
+                                        $svg.click(function () {
+                                            clearInterval(i);
+                                            if ($svg.attr("class") != null) {
+                                                $svg.attr('class', null).clearQueue();
+                                                return clearTimeout(to);
+                                            } else {
+                                                return $svg.queue(shrink).queue(circleEmpty).queue(circleFull).queue(check).queue(reset);
+                                            }
+                                        });
+
+                                        $svg.on('mouseenter mouseover', function () {
+                                            return clearInterval(i);
+                                        });
+
+                                        i = setInterval(function () {
+                                            return $svg.click();
+                                        }, 15000);
+
+                                    }).call(this);
+                                </script>
+</a>
 
                             </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
 
 
-                <!-- <a href="#" onclick="testGetScript()">testGetScript</a>
+            <!-- <a href="#" onclick="testGetScript()">testGetScript</a>
                   <a href="#" onclick="testPostScript()">testPostScript</a>
                   <a href="#" onclick="execScript()">execScript</a>
 
                   <a href="#" onclick="execPHPget()">execPHPget</a>
                   <a href="#" onclick="execPHPpost()">execPHPpost</a>
                   <a href="#" onclick="execPHPpost2()">execPHPpost2</a> -->
-                <a href="#" onclick="executeScript()">TEST</a>
 
 
 
-                <!-- <a href="#" onclick="getOutput()">getOutput</a>
+
+
+
+
+
+
+            <!-- <a href="#" onclick="getOutput()">getOutput</a>
 
                   <a href="#" onclick="doSomething()">doSomething</a>
 
@@ -219,9 +345,8 @@
  -->
 
 
-                <!-- <button id='execPHP' onclick='execPHP()' type='button'>execPHP</button> -->
+            <!-- <button id='execPHP' onclick='execPHP()' type='button'>execPHP</button> -->
 
-            </div>
 
 
             <div class="col-md-8">
@@ -247,12 +372,16 @@
                                         var userArray = document.cookie.split("=");
                                         var userJSON = JSON.parse(userArray[1]);
                                         var ID = userJSON.data.LastName; // hier wird ID definiert
+                                        var epadId = userJSON.data.LastName + userJSON.data.Firstname; // z.B. http://epad.ifgi.de/p/epadID
+                                        var pfad = 'http://epad.ifgi.de/p/';
+
                                         div.id = ID;
 
+                                        $("#download").attr("href", pfad + epadId + "/export/txt"); //download
 
 
 
-                                        var body = document.querySelector('body');
+                                        console.log(document.querySelector('.innerdocbody'));
                                         document.getElementsByTagName('div')[37].appendChild(div); // div wird im Body an der stelle 37 hinten dran gehängt
 
 
@@ -282,35 +411,15 @@
                                         //Baustelle
 
 
-                                        document.getElementById('epframe' + div.id).getContext;
-
-                                        console.log(document.getElementById('epframe' + div.id));
 
 
 
-
-
-                                        function getElementByIdInFrames(id, base) {  
-                                            var el;  
-                                            if (el = base.document.getElementById(id)) {    
-                                                return el;  
-
-                                            }   
-                                            for (var i = 0, len = base.frames.length; i < len; i++) {    
-                                                if (el = getElementByIdInFrames(id, base.frames[i])) {      
-                                                    return el;  
-
-                                                }  
-                                            }
-                                        }
-
-                                        console.log($('iframe[name="ace_inner"]').contents().find('iframe').contents().find("#innerdocbody"));
 
 
 
 
                                         ////////////////////////////////////
-                                        //Ende der Baustelle
+                                        //Ende der Baustelle//
                                     </script>
 
 
