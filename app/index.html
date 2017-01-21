@@ -7,59 +7,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to GAIA</title>
-
     <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-     <link rel="stylesheet" href="lib/assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="lib/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="lib/assets/css/form-elements.css">
-        <link rel="stylesheet" href="lib/assets/css/style.css">
-
-
+    <link rel="stylesheet" href="lib/assets/css/style.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="assets/ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
     <!-- test background-->
     <link rel="stylesheet" href="css/login.css">
-     <link rel="stylesheet" href="css/loginStyle.css">
-     
-     
+    <link rel="stylesheet" href="css/loginStyle.css">
      <!-- add a favicon to a website -->
-     <link rel="icon" href="img/GAIA.png">
-
-
-
+    <link rel="icon" href="img/GAIA.png">
 </head>
 
 <body>
-
-
-   
     <!-- Top content -->
     <div class="top-content">
-
         <div class="inner-bg">
             <div class="container">
-
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2 text">
                         <h1>GAIA </h1>
@@ -70,10 +52,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-sm-5">
-
                         <div class="form-box">
                             <div class="form-top">
                                 <div class="form-top-left">
@@ -91,7 +71,7 @@
                                         <label class="sr-only" for="form-username">Email</label>
                                         <input type="text" name="form-username" placeholder="Email..." class="form-username form-control" id="form-Login-username">
                                     </div>
-                            
+
                                     <div class="form-group">
                                         <label class="sr-only" for="form-password">Password</label>
 
@@ -101,16 +81,10 @@
                                 </form>
                             </div>
                         </div>
-
-
-
                     </div>
-
                     <div class="col-sm-1 middle-border"></div>
                     <div class="col-sm-1"></div>
-
                     <div class="col-sm-5">
-
                         <div class="form-box">
                             <div class="form-top">
                                 <div class="form-top-left">
@@ -126,43 +100,27 @@
                                     <div class="form-group">
                                         <label class="sr-only" for="form-first-name"> <span>First name</span> </label>
                                             <input title=FirstName type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name" onchange="loadFirstName();" required />
-                                            
-                                       
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-last-name"><span> Last name</span></label>
                                             <input title=LastName type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name" onchange="loadLastName();" required/>
-                                
-                                        
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-email"><span>Email</span> </label>
                                             <input title=email type="email" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" onchange="loadEmail();" required/>
-                                           
-                                       
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-password"><span>Password</span></label>
                                             <input title=password type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" onchange="loadPassword();" required/>
-                                  
-                                        
                                     </div>
-
                                     <div class="form-group">
                                         <label class="sr-only" for="form-confirmPassword"> <span>Confirm Password</span></label>
                                             <input title=ConfirmPassword type="password" name="form-ConfirmPassword" placeholder=" Confirm Password..." class="form-ConfirmPassword form-control" id="form-confirmPassword" required/>
-                                           
-                                        
                                     </div>
-
-                                   
                                    <div class="form-group">
                                     <label class="sr-only" for="form-country">
                                         <span>country:</span> </label>
                                          <select title=country type="text" name="form-country" class="form-country form-control" id="form-country" onchange="loadCountry();" required>
-                                
-                                            
-                                           
                                             <optgroup label="A">
                                                 <option value="AF">Afghanistan</option>
                                                 <option value="AX">Åland Islands</option>
@@ -461,92 +419,46 @@
                                             <optgroup label="Z">
                                                 <option value="ZM">Zambia</option>
                                                 <option value="ZW">Zimbabwe</option>
-                                        </select >
-                                       
-                                       
-                                   
-                                    </div>
-
-                                    <div class="form-group">
+                                        </select>
+                                        </div>
+                                        <div class="form-group">
                                         <label class="sr-only" for="form-about-yourself"> <span>Institution </span>
                                             <textarea name="institution" placeholder="Institution..." class="institution form-control" id="form-institution" onchange="loadInstitution();"></textarea>
-                                            
                                         </label>
-
-
-                                    </div>
-
+                                      </div>
                                     <button type="button" id="sign" onclick='saveRegister()'> Registrieren </button>
                                 </form>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
-
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
-
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="footer-border"></div>
                     <p>Made by Albert, Raoul, Torben and Viktor at <a href="http://www.uni-muenster.de/Geoinformatics/" target="_blank"><strong>IFGI</strong></a>
                         <br> Have fun! <i class="fa fa-smile-o"></i></p>
                 </div>
-
             </div>
         </div>
     </footer>
 
-  
-   
-       
     <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
-        
-        
-        
-
- <!--   passwort überprüfen
-   
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-    </script>
-    <script type="text/javascript">
-        $(function () {
-            $("#sign").click(function () {
-                var password = $("#form-password").val();
-                var confirmPassword = $("#form-confirmPassword").val();
-                if (password != confirmPassword) {
-                    alert("Passwords do not match.");
-                    return false;
-                }
-                return saveRegister();
-            });
-        });
-    </script>
--->
-
+    <![endif]-->
      <!-- Javascript  -->
-   
     <script src="js/userManagementDatabase.js"></script>
     <script src="js/userManagementfunctionality.js"></script>
-
-
     <script src="js/userManagementDatabase.js"></script>
     <script src="js/userManagementfunctionality.js"></script>
     <script src="js/sessionFunctionality.js"></script>
-
     <!-- test löschen hintergrundbild -->
     <script src="js/login.js"></script>
-  
 
 </body>
-
 </html>
