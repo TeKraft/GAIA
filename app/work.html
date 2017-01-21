@@ -27,16 +27,16 @@
 
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="js/etherpad.js"></script>
-
-
+    
+    
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-
-
-
-
+    
+    
+    
+    
     <style>
-  article, aside, figure, footer, header, hgroup,
+  article, aside, figure, footer, header, hgroup, 
   menu, nav, section { display: block; }
 </style>
 
@@ -115,12 +115,12 @@
                                     </ul>
                                 </div>
                                 <button id="buttonTree">demo button</button>
-
+                                
                                 <h5>Upload Image</h5>
 
 
                                 <br>
-
+                                
                                 <input type='file' onchange="readURL(this);" />
                                 <!--<img id="blah" src="#" alt="your image" />c-->
 
@@ -140,13 +140,9 @@
                                 functionsMap
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                              <!-- here will be the buttons for the functions - with dropdown? -->
-                              <button id='saveProjectBtn' onclick='' type='button-tree' class='btn btn-savePrj'>save Prj</button>
-                              <button id='test' onclick='showMap()' type='button' class='btn btn-test'>test</button>
-                              <button id='test_script' onclick='executeScript()' type='button' class='btn btn-test-scritp'>test_script</button>
-                              <button id='import_from_html' onclick='importHTML()' type='button' class='btn btn-import_html'>import Img from html</button>
-                              <button id='create_iframe' onclick='createiframe()' type='button' class='btn btn-create_iframe'>create iframe</button>
-                              <button id='get_map' onclick='getMap()' type='button' class='btn btn-get_map'>get Map</button>
+                                here will be the buttons for the functions - with dropdown?
+                                <button id='saveProjectBtn' onclick='' type='button-tree' class='btn btn-savePrj'>save Prj</button>
+                                <button id='test' onclick='showMap()' type='button' class='btn btn-test'>test</button>
                             </div>
                         </div>
                     </div>
@@ -158,7 +154,7 @@
                 <div class="myPanel">
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div id="leafletmap" height="100%" width="100%">
+                            <div id="leafletmap" class="panel panel-body">
                             </div>
                         </div>
                     </div>
@@ -202,7 +198,7 @@
 
 
 <!--download symbol animation-->
-                                <svg  viewBox="0 0 64 64">
+                                <svg  viewBox="0 0 64 64"> 
                                     <path id="circle-bg" d="
     M 32,  8
     C 45,  8  56, 19  56, 32
@@ -248,7 +244,7 @@
 
 <!--download symbol animation javaScript-->
                                 <script>
-
+                                    
                                     (function () {
                                         var $svg, check, circleEmpty, circleFull, i, reset, shrink, t, to;
 
@@ -315,8 +311,6 @@
                                 </script>
 </a>
 
-    <a href='#' onclick='loadIframe()'>loadIframe()</a>
-
                             </div>
 
                         </div>
@@ -325,9 +319,8 @@
             </div>
 
 
-
-
-            <!--      <a href="#" onclick="testPostScript()">testPostScript</a>
+            <!-- <a href="#" onclick="testGetScript()">testGetScript</a>
+                  <a href="#" onclick="testPostScript()">testPostScript</a>
                   <a href="#" onclick="execScript()">execScript</a>
 
                   <a href="#" onclick="execPHPget()">execPHPget</a>
@@ -504,8 +497,6 @@
     <script type="text/javascript" src="js/sessionFunctionality.js"></script>
     <script type="text/javascript" src="js/projectManagement.js"></script>
     <script type="text/javascript" src="js/projectEditing.js"></script>
-
-    <script type="text/javascript" src="js/loadRdata.js"></script>
     <script type="text/javascript" src="js/execPHP.js"></script>
 
 
