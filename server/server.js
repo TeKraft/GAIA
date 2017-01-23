@@ -144,32 +144,83 @@ app.get('/execScript', function(req, res) {
   })
 });
 
-
-// create project and add folder
-var mkdirp = require('mkdirp');
-
+var fs = require('fs');
+// add Folder for project to node db
 app.post('/addFolder*', function(req, res) {
   var projecttitle = req.url.substring(16, req.url.length);
-  console.log("projecttitle: " + projecttitle);
+  var dir = '../projects/'+ projecttitle;
 
-  mkdirp('../projects/'+ projecttitle, function (err) {
-    // path exists unless there was an error
-    console.log("added folder: " + projecttitle);
-  });
-  folderStructure(projecttitle);
+  if (!fs.existsSync(dir)) {
+
+    fs.mkdir(dir, function(error) {
+      if (error) {
+        console.error(error);
+        res.send(error);
+      } else {
+        folderStructure(projecttitle);
+        console.log("Directory created successfully!");
+        res.send('folder added: ' + projecttitle);
+      }
+    })
+  }
+  // else {                         //TODO: error not defined ?! how to fix?
+  //   // console.log(error);
+  //   res.send(error);
+  // }
 });
 
+// when add project folder also create deeper structure
 function folderStructure(foldertitle) {
   var folderStructure = new Array();
   folderStructure = ["Scripts", "Images", "Results"];
   console.log(folderStructure);
 
   for (var i = 0; i < folderStructure.length; i++) {
-    mkdirp('../projects/'+ foldertitle + '/' + folderStructure[i], function(err) {
+    fs.mkdir('../projects/'+ foldertitle + '/' + folderStructure[i], function(err) {
       // path exists unless there was an error
       console.log("added folder: " + foldertitle +  '/' + folderStructure[i]);
     })
   }
+};
+
+// gives back array of folder names
+var folderFiles = new Array();
+app.get('/readFolder*', function(req, res) {
+  var projecttitle = req.url.substring(17, req.url.length);
+  var dir = '../projects/'+ projecttitle;
+
+  fs.readdir(dir, function (error, files) {
+    files.forEach(file => {
+      console.log(file);
+      folderFiles.push(file);
+    });
+    if (error) return console.error(error);
+    res.send(folderFiles);
+  })
+});
+
+// delete project folder
+app.post('/deleteProjectFolder*', function(req, res) {
+  var projecttitle = req.url.substring(26, req.url.length);
+  var dir = '../projects/'+ projecttitle;
+
+  deleteFolderRecursive(dir);
+
+});
+
+// delete file recursive
+var deleteFolderRecursive = function(path) {
+if( fs.existsSync(path) ) {
+  fs.readdirSync(path).forEach(function(file, index){
+    var curPath = path + "/" + file;
+    if(fs.lstatSync(curPath).isDirectory()) { // recurse
+      deleteFolderRecursive(curPath);
+    } else { // delete file
+      fs.unlinkSync(curPath);
+    }
+  });
+  fs.rmdirSync(path);
+}
 };
 
 // launch server

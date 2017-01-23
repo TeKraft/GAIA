@@ -5,6 +5,7 @@
   "dependencies": {
     "body-parser": "~1.13.1",
     "express": "~4.13.0",
+    "fs": "0.0.1-security",
     "mkdirp": "^0.5.1",
     "mongoose": "~4.0.6",
     "uniter": "^2.10.0"
