@@ -20,6 +20,10 @@
   <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
   <style> article, aside, figure, footer, header, hgroup, menu, nav, section { display: block; }</style>
   <script src="js/work.js"></script>
+    
+    
+    <script type="text/javascript" src="js/scriptHandle.js"></script>
+    <script type="text/javascript" src="js/projectEditing.js"></script>
 </head>
 
 <body id="myBody" onload="showMap()">
@@ -61,36 +65,52 @@
         <!-- start: first row -->
         <div class="row">
             <div class="col-md-3">
+
                 <div class="myPanel">
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div id="treeID" class="panel panel-heading">
-                                tree view
+                                Tree view
                             </div>
                             <div id="treeView" class="panel panel-body">
                                 Project:
                                 <div id="jstree">
-                                    <!-- in this example the tree is populated from inline HTML -->
-                                    <ul id="treeList">
-                                        <li id="rootList">Projectname
-                                            <ul id="childList">
-                                                <li id="scripts_node_1">Scripts</li>
-                                                <li id="images_node_1">Images</li>
-                                                <li id="results_node_1">Results</li>
-                                            </ul>
-                                        </li>
+
+                                  <ul>
+                                      <li>Root node 1
+                                        <ul>
+                                          <li id="child_node_1">Child node 1
+                                            <ul>
+                                          <li>asdas</li>
+                                          <li>Childasdde 2</li>
+                                        </ul>
+                                            </li>
+                                          <li>Child node 2</li>
+                                        </ul>
+                                      </li>
+                                      <li>Root node 2</li>
                                     </ul>
+                                    
                                 </div>
                                 <button id="buttonTree">demo button</button>
+                                
                                 <h5>Upload Image</h5>
+
+
                                 <br>
+                                
                                 <input type='file' onchange="readURL(this);" />
+                                <!--<img id="blah" src="#" alt="your image" />c-->
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
             <div class="col-md-1">
+
                 <div class="myPanel">
                     <div class="panel-group">
                         <div class="panel panel-default">
@@ -98,27 +118,26 @@
                                 functionsMap
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                              <!-- here will be the buttons for the functions - with dropdown? -->
-                              <button id='saveProjectBtn' onclick='' type='button-tree' class='btn btn-savePrj'>save Prj</button>
-                              <button id='test' onclick='showMap()' type='button' class='btn btn-test'>test</button>
-                              <button id='test_script' onclick='executeScript()' type='button' class='btn btn-test-scritp'>test_script</button>
-                              <button id='import_from_html' onclick='importHTML()' type='button' class='btn btn-import_html'>import img</button>
-                              <button id='create_iframe' onclick='createiframe()' type='button' class='btn btn-create_iframe'>create iframe</button>
-                              <button id='get_map' onclick='getMap()' type='button' class='btn btn-get_map'>get Map</button>
+                                here will be the buttons for the functions - with dropdown?
+                                
+                                <button id='test' onclick='showMap()' type='button' class='btn btn-test'>test</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="col-md-8">
+
                 <div class="myPanel">
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div id="leafletmap" height="100%" width="100%">
+                            <div id="leafletmap" class="panel panel-body">
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- end: first row -->
@@ -351,9 +370,11 @@
 
     <script type="text/javascript" src="js/sessionFunctionality.js"></script>
     <script type="text/javascript" src="js/projectManagement.js"></script>
-    <script type="text/javascript" src="js/projectEditing.js"></script>
+
     <script type="text/javascript" src="js/loadRdata.js"></script>
     <script type="text/javascript" src="js/executeScript.js"></script>
     <script type="text/javascript" src="lib/js/jstree.min.js"></script>
+        
+    <script type="text/javascript" src="js/databaseHandle.js"></script>
 </body>
 </html>
