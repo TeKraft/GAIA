@@ -400,7 +400,7 @@ function deleteCollaborator(name) {
             
             for(var i=0; i<= content.length;i++){
 
-                if(content[i] != undefined && content[i].data != undefined && content[i].name == curProjectName && content[i].data.Creator == curCreator  ){
+                if(content[i] != undefined && content[i].data != undefined && content[i].name == curProjectName && content[i].data.Creator == curCreator){
                     
                     editProject = content[i];
                     var newCollabs = content[i].data.Colaborators;
@@ -410,10 +410,7 @@ function deleteCollaborator(name) {
                         var newProject = content[i];
                         newProject.data.Colaborators = newCollabs.replace(',,',',');
                         console.log(newProject);
-                        
-                        
-                        
-                        
+
                         // ajax Post
 	                   $.ajax({
 		              url: '/updateFeature?name=' + curProjectName,

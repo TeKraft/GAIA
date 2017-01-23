@@ -19,7 +19,6 @@ var getProjectbyName = function(name, creator) {
                     
                     project = content[i];
                     getProject(project);
-                    console.log(JSON.stringify(project));
                     return project;
                 }
             }
