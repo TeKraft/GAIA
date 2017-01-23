@@ -54,20 +54,29 @@
                 <div class="col-sm-4">
                     <h2>Projects:</h2>
                 </div>
-                    <div class="col-sm-4">
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+ Create new</button>
-                    </div>
-                    <table class="table" id="myTable">
-                        <thead>
-                            <tr>
-                                <!--<th>Projectname</th>-->
-                            </tr>
-                        </thead>
-                            <tbody>
-                            </tbody>
-                    </table>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+ Create new</button>
                 </div>
+                <table class="table" id="myTable">
+                    <thead>
+                        <tr>
+                            <!--<th>Projectname</th>-->
+                        </tr>
+                    </thead>
+                        <tbody>
+                        </tbody>
+                </table>
+
+                <div class="col-sm-4">
+                  <button type="button" onclick="createFolder()" class="btn btn-default">add Folder</button>
+                  <label for="pName">Project Name:
+                    <input type="text" id="projectName" name="pName">
+                  </label>
+                </div>
+
+
             </div>
+        </div>
       </div>
 <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
@@ -103,6 +112,8 @@
     <script src="js/sessionFunctionality.js"></script>
     <script src="js/userManagementDatabase.js"></script>
     <script src="js/projectManagement.js"></script>
+
+    <script type="text/javascript" src="js/createProject.js"></script>
 
     <script>
         $(document).ready(function(){

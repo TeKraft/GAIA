@@ -144,6 +144,20 @@ app.get('/execScript', function(req, res) {
   })
 });
 
+
+// create project and add folder
+var mkdirp = require('mkdirp');
+
+app.post('/addFolder*', function(req, res) {
+  var projecttitle = req.url.substring(16, req.url.length);
+  console.log("projecttitle: " + projecttitle);
+
+  mkdirp('../projects/'+ projecttitle, function(err) {
+    // path exists unless there was an error
+    console.log("added folder: " + projecttitle);
+  });
+});
+
 // launch server
 app.listen(config.httpPort, function(){
     console.log('serverruns on  ' + config.httpPort);
