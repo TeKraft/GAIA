@@ -152,11 +152,25 @@ app.post('/addFolder*', function(req, res) {
   var projecttitle = req.url.substring(16, req.url.length);
   console.log("projecttitle: " + projecttitle);
 
-  mkdirp('../projects/'+ projecttitle, function(err) {
+  mkdirp('../projects/'+ projecttitle, function (err) {
     // path exists unless there was an error
     console.log("added folder: " + projecttitle);
   });
+  folderStructure(projecttitle);
 });
+
+function folderStructure(foldertitle) {
+  var folderStructure = new Array();
+  folderStructure = ["Scripts", "Images", "Results"];
+  console.log(folderStructure);
+
+  for (var i = 0; i < folderStructure.length; i++) {
+    mkdirp('../projects/'+ foldertitle + '/' + folderStructure[i], function(err) {
+      // path exists unless there was an error
+      console.log("added folder: " + foldertitle +  '/' + folderStructure[i]);
+    })
+  }
+};
 
 // launch server
 app.listen(config.httpPort, function(){

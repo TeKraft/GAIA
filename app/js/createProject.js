@@ -10,6 +10,7 @@ function createFolder() {
   // addFolder(projectTitle);
 
   var url = 'http://localhost:3000' + '/addFolder?name=' + projectTitle;
+  // var content = "hi";
   // perform post ajax
   $.ajax({
       type: 'POST',
@@ -19,7 +20,7 @@ function createFolder() {
       success: function (data, textStatus) {
           // console.log(data);
           console.log("success");
-          window.location.href = "/home.html";
+          // window.location.href = "/home.html";
       },
       error: function (xhr, textStatus, errorThrown) {
           console.log("error by creating folder");

@@ -20,8 +20,8 @@
   <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
   <style> article, aside, figure, footer, header, hgroup, menu, nav, section { display: block; }</style>
   <script src="js/work.js"></script>
-    
-    
+
+
     <script type="text/javascript" src="js/scriptHandle.js"></script>
     <script type="text/javascript" src="js/projectEditing.js"></script>
 </head>
@@ -90,15 +90,15 @@
                                       </li>
                                       <li>Root node 2</li>
                                     </ul>
-                                    
+
                                 </div>
                                 <button id="buttonTree">demo button</button>
-                                
+
                                 <h5>Upload Image</h5>
 
 
                                 <br>
-                                
+
                                 <input type='file' onchange="readURL(this);" />
                                 <!--<img id="blah" src="#" alt="your image" />c-->
 
@@ -118,9 +118,12 @@
                                 functionsMap
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                                here will be the buttons for the functions - with dropdown?
-                                
-                                <button id='test' onclick='showMap()' type='button' class='btn btn-test'>test</button>
+                                <button id='test02' onclick='executeScript()' type='button' class='btn btn-test'>execute Script</button>
+                                <br>
+                                <button id='test04' onclick='importHTML()' type='button' class='btn btn-test'>import HTML</button>
+                                <button id='test05' onclick='createiframe()' type='button' class='btn btn-test'>create iframe</button>
+                                <button id='test03' onclick='getMap()' type='button' class='btn btn-test'>getMap</button>
+
                             </div>
                         </div>
                     </div>
@@ -132,7 +135,7 @@
                 <div class="myPanel">
                     <div class="panel-group">
                         <div class="panel panel-default">
-                            <div id="leafletmap" class="panel panel-body">
+                            <div id="leafletmap" height="100%" width="100%" class="panel panel-body">
                             </div>
                         </div>
                     </div>
@@ -287,11 +290,11 @@
                             <li><button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-savePrj'>+ new</button></li>
 
                         </ul>
-                        
+
                         <div class="input-script">
                             <textarea class="form-control" rows="10" id="scriptIn"></textarea>
                         </div>
-                        
+
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
                                 <div class="form-group">
@@ -381,7 +384,7 @@
     <script type="text/javascript" src="js/loadRdata.js"></script>
     <script type="text/javascript" src="js/executeScript.js"></script>
     <script type="text/javascript" src="lib/js/jstree.min.js"></script>
-        
+
     <script type="text/javascript" src="js/databaseHandle.js"></script>
 </body>
 </html>
