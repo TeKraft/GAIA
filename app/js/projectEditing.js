@@ -93,6 +93,7 @@ function makeTreeComponents(name) {
     
     var curProject;
     curProject = getProjectbyName(name, "rkanschat@gmx.de");
+    console.log(curProject);
     var scripts = createScriptNames();
     
     console.log(document.getElementById("jstree"));
@@ -124,7 +125,6 @@ var createScriptNames = function(){
     return div;
 }
 
-      
       
       
 

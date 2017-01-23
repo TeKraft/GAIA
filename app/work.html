@@ -282,9 +282,16 @@
                     <div class="panel-group">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
-                            <li><a data-toggle="tab" href="#menu1">Menu 1</a>
-                            </li>
+                            <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                            <li><button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-savePrj'>save Script</button></li>
+                            <li><button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-savePrj'>+ new</button></li>
+
                         </ul>
+                        
+                        <div class="input-script">
+                            <textarea class="form-control" rows="10" id="scriptIn"></textarea>
+                        </div>
+                        
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
                                 <div class="form-group">

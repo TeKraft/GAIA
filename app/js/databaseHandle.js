@@ -8,6 +8,7 @@ var getProjectbyName = function(name, creator) {
         type: 'GET',
         dataType: 'JSON',
         url: url,
+        async:false,
         timeout: 5000,
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
@@ -18,7 +19,8 @@ var getProjectbyName = function(name, creator) {
                     
                     project = content[i];
                     getProject(project);
-                    return JSON.stringify(project);
+                    console.log(JSON.stringify(project));
+                    return project;
                 }
             }
             $('#tableDB').removeClass('hidden');
