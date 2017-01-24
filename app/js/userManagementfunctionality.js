@@ -27,7 +27,7 @@ function loadUser(){
     var editEmail = email.replace("." , "/");
     userdata[2] = editEmail;
 
-    userdata[3] = password;
+    userdata[3] = password.hashCode();
     userdata[4] = institution;
         userdata[5] = country;
 
@@ -61,7 +61,7 @@ function loadEmail(){
 
 function loadPassword(){
     password = document.getElementById('form-password').value
-    console.log(password);
+    console.log(password.hashCode());
 }
 
 function loadInstitution(){
@@ -80,5 +80,21 @@ function loadLoginName(){
 }
 function loadLoginPW(){
     loginPW = document.getElementById('form-login-pw').value
-    console.log(loginPW);
+    console.log(loginPW.hashCode());
 }
+
+
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr, len;
+  if (this.length === 0) return hash;
+  for (i = 0, len = this.length; i < len; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+
+    
+    
+    
+     };

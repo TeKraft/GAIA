@@ -15,9 +15,26 @@ function saveRegister() {
     // creates a new User from the input fields (userManagementfunctionality)
     loadUser();
     newUser = curUser;
+    
     var password = document.getElementById('form-password').value;
     var confirmPassword = document.getElementById('form-confirmPassword').value;
     var content = JSON.parse(newUser);
+    
+        
+     String.passwort = function () {
+        var hash = 0,
+            i, chr, len;
+        if (this.length === 0) return hash;
+        for (i = 0, len = this.length; i < len; i++) {
+            chr = this.charCodeAt(i);
+            hash = ((hash << 5) - hash) + chr;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    };
+    
+    
+    
     console.log(newUser);
     //hier statt name email denke ich
     if (name != undefined && content != null &&  password==confirmPassword) {
@@ -63,7 +80,7 @@ function loadFromDB() {
                 //unnötig wenn nur name des features gecheckt wird
                 var checkEmail = content[i].data.Email.replace("/" , ".");
                 if(content[i] != undefined && checkEmail == loginName){
-                      if(content[i].data.Password == loginPW){
+                      if(content[i].data.Password == loginPW.hashCode()){
                           console.log("access");
                           loginUser = JSON.stringify(content[i]);
                           console.log(loginUser);
