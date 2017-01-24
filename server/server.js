@@ -190,12 +190,19 @@ app.get('/readFolder*', function(req, res) {
   var dir = '../projects/'+ projecttitle;
 
   fs.readdir(dir, function (error, files) {
-    files.forEach(file => {
-      console.log(file);
-      folderFiles.push(file);
-    });
-    if (error) return console.error(error);
-    res.send(folderFiles);
+    console.log(files);
+    if (files == undefined) {
+      console.log("undefined error");
+      return console.error(error); }
+    else {
+      console.log("no error");
+      files.forEach(file => {
+        console.log(file);
+        folderFiles.push(file);
+      });
+      if (error) return console.error(error);
+      res.send(folderFiles);
+    }
   })
 });
 
