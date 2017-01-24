@@ -195,18 +195,27 @@ function folderStructure(foldertitle) {
 
 // gives back array of folder names
 var folderFiles = new Array();
-app.get('/readFolder*', function (req, res) {
-    var projecttitle = req.url.substring(17, req.url.length);
-    var dir = '../projects/' + projecttitle;
 
-    fs.readdir(dir, function (error, files) {
-        files.forEach(file => {
-            console.log(file);
-            folderFiles.push(file);
-        });
-        if (error) return console.error(error);
-        res.send(folderFiles);
-    })
+app.get('/readFolder*', function(req, res) {
+  var projecttitle = req.url.substring(17, req.url.length);
+  var dir = '../projects/'+ projecttitle;
+
+  fs.readdir(dir, function (error, files) {
+    console.log(files);
+    if (files == undefined) {
+      console.log("undefined error");
+      return console.error(error); }
+    else {
+      console.log("no error");
+      files.forEach(file => {
+        console.log(file);
+        folderFiles.push(file);
+      });
+      if (error) return console.error(error);
+      res.send(folderFiles);
+    }
+  })
+
 });
 
 // delete project folder
