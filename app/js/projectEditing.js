@@ -33,6 +33,8 @@ function makeTreeComponents(name) {
     getProjectbyName(name, "rkanschat@gmx.de");
     console.log(getProjectbyName(currentProject[3],"rkanschat@gmx.de"));
     
+    readProjectFolderbyName(name);
+    
     var curProject;
     curProject = getProjectbyName(name, "rkanschat@gmx.de");
     console.log(curProject);
