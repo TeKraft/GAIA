@@ -31,16 +31,20 @@ function makeTreeComponents(name) {
     var project = tempCookie[5];
     
     getProjectbyName(name, "rkanschat@gmx.de");
-    console.log(getProjectbyName(currentProject[3],"rkanschat@gmx.de"));
+    //console.log(getProjectbyName(currentProject[3],"rkanschat@gmx.de"));
     
-    readProjectFolderbyName(name);
+    var images = readProjectFolderbyName("/wurstbrot/images");//name
+    console.log(images);
+    
+    var imagename = "" + images[0];
+    
     
     var curProject;
     curProject = getProjectbyName(name, "rkanschat@gmx.de");
-    console.log(curProject);
+    //console.log(curProject);
     var scripts = createScriptNames();
     
-    console.log(document.getElementById("jstree"));
+    //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" + 
     "<ul id='treeList'>" + 
         "<li id='rootList'>" + name + 
@@ -50,8 +54,14 @@ function makeTreeComponents(name) {
                     "<ul id='childList'>" + 
                         scripts + 
                     "</ul>" + 
-                    "</li>" +
-                "<li id='images_node_1'>Images</li>" +
+                "</li>" +
+        
+                "<li id='images_node_1'>Images" +
+                    "<ul id='childList'>" + 
+                        imagename+ //images + 
+                    "</ul>" +
+                "</li>" +
+        
                 "<li id='results_node_1'>Results</li>" +
             "</ul>" +
          "</li>" + 
@@ -61,7 +71,7 @@ function makeTreeComponents(name) {
 
 var createScriptNames = function(){
     var array = loadedProject.data.Scripts;
-    console.log(loadedProject);
+    //console.log(loadedProject);
     
     
     

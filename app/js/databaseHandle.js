@@ -34,7 +34,7 @@ var getProjectbyName = function(name, creator) {
 
 var loadedProject;
 var getProject = function(string){
-    console.log(string);
+    //console.log(string);
     loadedProject = string;
 }
 

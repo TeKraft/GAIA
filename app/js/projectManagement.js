@@ -274,13 +274,13 @@ function readProjectFolderbyName(name) {
     var url = 'http://localhost:3000' + '/readFolder?name=' + folderRead;
     // perform post ajax
     $.ajax({
-        async:false,
         type: 'GET',
         url: url,
+        async:false,
         timeout: 5000,
         success: function (content, textStatus) {
             console.log(content);
-            console.log("content");
+            cb(content);
             return content;
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -289,3 +289,7 @@ function readProjectFolderbyName(name) {
     });
   }
 };
+
+function cb(p){
+    return p;
+}
