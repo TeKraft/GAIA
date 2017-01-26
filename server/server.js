@@ -143,14 +143,13 @@ app.post('/deleteFeature*', function (req, res) {
 
 app.get('/execScript', function (req, res) {
     var childProcess = require('child_process');
+    //TODO: //childProcess.exec('Rscript ../projects/PROJECTNAME/Scripts/CHOOSEN_SCRIPT.R', function (err, stdout, stderr) {
     childProcess.exec('Rscript test.R', function (err, stdout, stderr) {
         if (err) {
             console.error(err);
             console.log("ERROR :(");
             return;
         }
-        console.log("hey");
-        console.log(stdout);
     })
 });
 
@@ -159,9 +158,10 @@ var fs = require('fs');
 app.post('/addFolder*', function (req, res) {
     var projecttitle = req.url.substring(16, req.url.length);
     var dir = '../projects/' + projecttitle;
-
-    if (!fs.existsSync(dir)) {
-
+    console.log(fs.existsSync(dir));
+    if (fs.existsSync(dir)) {
+      console.log("Directory exists already. Please choose a different name!")
+    }else{
         fs.mkdir(dir, function (error) {
             if (error) {
                 console.error(error);
@@ -276,7 +276,7 @@ app.post('/upload', function(req, res){
     fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
-  // log any errors that occur 
+  // log any errors that occur
   form.on('error', function(err) {
     console.log('An error has occured: \n' + err);
   });
@@ -290,5 +290,3 @@ app.post('/upload', function(req, res){
   form.parse(req);
 
 });
-
-
