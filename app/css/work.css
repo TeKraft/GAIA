@@ -40,7 +40,7 @@
     border-radius:10px;
     padding: 3px;
 }*/
-svg {
+/*svg {
   cursor: pointer;
   position: absolute;
   width: 36px;
@@ -54,7 +54,7 @@ svg path {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
+}*/
 svg #line {
   stroke: #999;
   stroke-dasharray: 45, 0, 45, 999;
@@ -111,4 +111,3 @@ svg.shrink #circle-bg {
   stroke: #aaa;
   opacity: 0;
 }
-
