@@ -1,17 +1,52 @@
 "use strict;"
 
 var input;
+var currentScript;
 var currentProject = document.cookie.split("=");
 
-var saveScript = function(name){
+
+
+
+
+
+
+var createScript = function(name){
     input = document.getElementById('scriptIn').value;
     
-    ///////////////////////////////////////////////////////////////////////////////der creator muss in dem cokie drin stehen
     getProjectbyName(currentProject[3],"rkanschat@gmx.de");
     
-    
     addScript(loadedProject,name);
+    currentScript = name;
 }
+
+var loadScript = function(scriptname){
+    console.log(scriptname);
+    var tempCookie = document.cookie.split("=");
+    var projectname = tempCookie[3];
+    var path = projectname + "/Scripts/" + scriptname;
+    var content;
+    console.log(path);
+    // hier muss jetzt der inhalt der R datei geladen werden und dann in content eingesetzt werden
+    
+    
+    
+    document.getElementById("scriptIn").value = "Hier den Inhalt der R Datei einleseen " +  content;
+    currentScript = scriptname;
+}
+
+
+
+
+var saveScript = function(){
+    console.log(currentScript);
+}
+
+
+
+
+
+
+
 
 var addScript = function(project,name){
     console.log(project);
@@ -22,7 +57,7 @@ var addScript = function(project,name){
     
     var tempScripts = project.data.Scripts;
     
-console.log(tempScripts);
+    console.log(tempScripts);
     tempScripts.concat("," + name);
     console.log(tempScripts);
     
@@ -61,5 +96,46 @@ var newScript = function(){
         }
         });
     
-    saveScript(scriptName);
+    createScript(scriptName);
+}
+
+
+
+
+
+
+
+
+var temp;
+function readProjectFolderbyName(name) {    //name
+  if (name == "") {
+    console.log("value empty");
+  }  else {
+      
+      var path = "" + name;
+    //var folderRead = name;
+    //console.log("readProjectFolder("+folderRead+")");
+
+    var url = 'http://localhost:3000' + '/readFolder?name=' + path;
+    // perform post ajax
+    $.ajax({
+        type: 'GET',
+        url: url,
+        async:false,
+        timeout: 5000,
+        success: function (content, textStatus) {
+            //console.log(content);
+            temp = content;
+            //cb(content);
+            return content;
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log("no success");
+        }
+    });
+  }
+};
+
+function cb(p){
+    return p;
 }

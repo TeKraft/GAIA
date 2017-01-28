@@ -263,33 +263,4 @@ function deleteProject(id) {
 }; 
 
 
-function readProjectFolderbyName(name) {
-  if (name == "") {
-    console.log("value empty");
-  }  else {
 
-    var folderRead = name;
-    console.log("readProjectFolder("+folderRead+")");
-
-    var url = 'http://localhost:3000' + '/readFolder?name=' + folderRead;
-    // perform post ajax
-    $.ajax({
-        type: 'GET',
-        url: url,
-        async:false,
-        timeout: 5000,
-        success: function (content, textStatus) {
-            console.log(content);
-            cb(content);
-            return content;
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log("no success");
-        }
-    });
-  }
-};
-
-function cb(p){
-    return p;
-}

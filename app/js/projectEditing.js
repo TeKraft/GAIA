@@ -1,8 +1,3 @@
-
-
-
-
-
 // handles the button Settings
 $(document).ready(function(){
     $('.btn-toSettings').on('click',toSettings);
@@ -31,18 +26,20 @@ function makeTreeComponents(name) {
     var project = tempCookie[5];
     
     getProjectbyName(name, "rkanschat@gmx.de");
-    //console.log(getProjectbyName(currentProject[3],"rkanschat@gmx.de"));
     
-    var images = readProjectFolderbyName("/wurstbrot/images");//name
-    console.log(images);
+    var images = createImageNames(name);
     
-    var imagename = "" + images[0];
+    //readProjectFolderbyName(project + "/Scripts");  "wurstbrot/Scripts"
     
+    
+    
+
     
     var curProject;
     curProject = getProjectbyName(name, "rkanschat@gmx.de");
     //console.log(curProject);
-    var scripts = createScriptNames();
+    
+    var scripts = createScriptNames(name);
     
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" + 
@@ -58,7 +55,7 @@ function makeTreeComponents(name) {
         
                 "<li id='images_node_1'>Images" +
                     "<ul id='childList'>" + 
-                        imagename+ //images + 
+                        images+ //images + 
                     "</ul>" +
                 "</li>" +
         
@@ -68,16 +65,27 @@ function makeTreeComponents(name) {
      "</ul>;"
 }
 
-
-var createScriptNames = function(){
-    var array = loadedProject.data.Scripts;
-    //console.log(loadedProject);
-    
-    
-    
-    var div = "<li id='scriptone'> "+ "scriptsasdasd" + "</li>";
+var createImageNames = function(projectname){
+    readProjectFolderbyName(projectname + "/Images");
+    var ImageArray = temp;
+    var div = "";
+    //for (var i in ScriptArray){
+        div = div + ("<li id='" + ImageArray[ImageArray.length-1] + "'> "+ ImageArray[ImageArray.length-1] + "</li>");
+    //}
     return div;
 }
+
+
+var createScriptNames = function(projectname){
+    readProjectFolderbyName(projectname + "/Scripts");  //projectname + "Scripts"
+    var ScriptArray = temp;
+    var div = "";
+    //for (var i in ScriptArray){
+        div = div + ("<li id='" + ScriptArray[ScriptArray.length-1] + "'> "+ ScriptArray[ScriptArray.length-1] + "</li>");
+    //}
+    return div;
+}
+
 
       
       
@@ -88,7 +96,7 @@ function createTree() {
         $('#jstree').jstree();
         // 7 bind to events triggered on the tree
         $('#jstree').on("changed.jstree", function (e, data) {
-            console.log(data.selected);
+            loadScript(data.selected[0]);
         });
         // 8 interact with the tree - either way is OK
         //$('button').on('click', function () {
@@ -98,39 +106,8 @@ function createTree() {
         //});
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function toSettings(){
-    console.log("hi");
     window.location.href = "/projectedit.html";
 }
 
-// 
+

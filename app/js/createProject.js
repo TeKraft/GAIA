@@ -61,7 +61,7 @@ function readProjectFolder() {
     console.log("value empty");
   }  else {
 
-    var folderRead = document.getElementById("readProjectFolder").value;
+    var folderRead = "wurstbrot";
     console.log("readProjectFolder("+folderRead+")");
 
     var url = 'http://localhost:3000' + '/readFolder?name=' + folderRead;
@@ -79,4 +79,27 @@ function readProjectFolder() {
         }
     });
   }
+};
+
+
+//kann vlt weg
+function readProject(name) {
+
+    var folderRead = name;
+    console.log("readProjectFolder("+folderRead+")");
+
+    var url = 'http://localhost:3000' + '/readFolder?name=' + folderRead;
+    // perform post ajax
+    $.ajax({
+        type: 'GET',
+        url: url,
+        timeout: 5000,
+        success: function (content, textStatus) {
+            console.log(content);
+            console.log("content");
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log("no success");
+        }
+    });
 };
