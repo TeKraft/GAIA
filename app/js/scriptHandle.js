@@ -23,22 +23,34 @@ var loadScript = function(scriptname){
     console.log(scriptname);
     var tempCookie = document.cookie.split("=");
     var projectname = tempCookie[3];
-    var path = projectname + "/Scripts/" + scriptname;
+    var path = "./projects/" + projectname + "/Scripts/" + scriptname;
     var content;
     console.log(path);
     // hier muss jetzt der inhalt der R datei geladen werden und dann in content eingesetzt werden
     
     
     
-    document.getElementById("scriptIn").value = "Hier den Inhalt der R Datei einleseen " +  content;
+    //document.getElementById("scriptIn").value = "Hier den Inhalt der R Datei einleseen " +  content;
+     $.ajax({
+      url: path,
+      success: function (data){
+            console.log(data);
+            $("#scriptIn").load(data);
+      }
+     })
+     
+
     currentScript = scriptname;
+    
 }
 
 
 
 
+
 var saveScript = function(){
-    console.log(currentScript);
+    var content = document.getElementById("scriptIn");
+    console.log(document.getElementById("scriptIn").value);
 }
 
 
