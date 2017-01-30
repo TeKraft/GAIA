@@ -12,7 +12,6 @@ var fs = require('fs');
 /* get home page */
 app.use(express.static("../server"));
 app.use(express.static("../app"));
-app.use(express.static("../app/html"));
 
 // to enable processing of the received post content
 app.use(bodyParser.urlencoded({
@@ -157,7 +156,7 @@ var fs = require('fs');
 // add Folder for project to node db
 app.post('/addFolder*', function (req, res) {
     var projecttitle = req.url.substring(16, req.url.length);
-    var dir = '../projects/' + projecttitle;
+    var dir = '../app/projects/' + projecttitle;
     console.log(fs.existsSync(dir));
     if (fs.existsSync(dir)) {
       console.log("Directory exists already. Please choose a different name!")
@@ -198,7 +197,7 @@ var folderFiles = new Array();
 
 app.get('/readFolder*', function(req, res) {
   var projecttitle = req.url.substring(17, req.url.length);
-  var dir = '../projects/'+ projecttitle;
+  var dir = '../app/projects/'+ projecttitle;
 
   fs.readdir(dir, function (error, files) {
     console.log(files);
@@ -221,7 +220,7 @@ app.get('/readFolder*', function(req, res) {
 // delete project folder
 app.post('/deleteProjectFolder*', function (req, res) {
     var projecttitle = req.url.substring(26, req.url.length);
-    var dir = '../projects/' + projecttitle;
+    var dir = '../app/projects/' + projecttitle;
 
     deleteFolderRecursive(dir);
 
@@ -268,7 +267,7 @@ app.post('/upload', function(req, res){
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '../projects');
+  form.uploadDir = path.join(__dirname, '../app/projects');
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name

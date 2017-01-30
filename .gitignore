@@ -103,3 +103,9 @@ server/db/diagnostic.data/metrics.2017-01-21T12-29-26Z-00000
 *.0000000006
 
 server/db/diagnostic.data/metrics.2017-01-26T18-19-20Z-00000
+
+server/db/journal/WiredTigerLog.0000000003
+
+*.2017-01-30T12-52-20Z-00000
+
+*.2017-01-28T21-27-19Z-00000

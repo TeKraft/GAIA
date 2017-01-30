@@ -24,44 +24,44 @@ $('#buttonTree').on('click', function () {
 function makeTreeComponents(name) {
     var tempCookie = document.cookie.split("=");
     var project = tempCookie[5];
-    
-    getProjectbyName(name, "rkanschat@gmx.de");
-    
-    var images = createImageNames(name);
-    
-    //readProjectFolderbyName(project + "/Scripts");  "wurstbrot/Scripts"
-    
-    
-    
 
-    
+    getProjectbyName(name, "rkanschat@gmx.de");
+
+    var images = createImageNames(name);
+
+    //readProjectFolderbyName(project + "/Scripts");  "wurstbrot/Scripts"
+
+
+
+
+
     var curProject;
     curProject = getProjectbyName(name, "rkanschat@gmx.de");
     //console.log(curProject);
-    
+
     var scripts = createScriptNames(name);
-    
+
     //console.log(document.getElementById("jstree"));
-    document.getElementById("jstree").innerHTML = "" + 
-    "<ul id='treeList'>" + 
-        "<li id='rootList'>" + name + 
+    document.getElementById("jstree").innerHTML = "" +
+    "<ul id='treeList'>" +
+        "<li id='rootList'>" + name +
             "<ul id='childList'>" +
                 "<li id='scripts_node_1'>Scripts" +
-        
-                    "<ul id='childList'>" + 
-                        scripts + 
-                    "</ul>" + 
-                "</li>" +
-        
-                "<li id='images_node_1'>Images" +
-                    "<ul id='childList'>" + 
-                        images+ //images + 
+
+                    "<ul id='childList'>" +
+                        scripts +
                     "</ul>" +
                 "</li>" +
-        
+
+                "<li id='images_node_1'>Images" +
+                    "<ul id='childList'>" +
+                        images+ //images +
+                    "</ul>" +
+                "</li>" +
+
                 "<li id='results_node_1'>Results</li>" +
             "</ul>" +
-         "</li>" + 
+         "</li>" +
      "</ul>;"
 }
 
@@ -87,8 +87,8 @@ var createScriptNames = function(projectname){
 }
 
 
-      
-      
+
+
 
 function createTree() {
     $(function () {
@@ -106,8 +106,9 @@ function createTree() {
         //});
     });
 }
+
+
+
 function toSettings(){
     window.location.href = "/projectedit.html";
 }
-
-

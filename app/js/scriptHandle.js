@@ -4,45 +4,41 @@ var input;
 var currentScript;
 var currentProject = document.cookie.split("=");
 
-
-
-
-
-
-
 var createScript = function(name){
     input = document.getElementById('scriptIn').value;
-    
+
     getProjectbyName(currentProject[3],"rkanschat@gmx.de");
-    
+
     addScript(loadedProject,name);
     currentScript = name;
 }
 
-var loadScript = function(scriptname){
-    console.log(scriptname);
-    var tempCookie = document.cookie.split("=");
-    var projectname = tempCookie[3];
-    var path = "./projects/" + projectname + "/Scripts/" + scriptname;
-    var content;
-    console.log(path);
-    // hier muss jetzt der inhalt der R datei geladen werden und dann in content eingesetzt werden
-    
-    
-    
-    //document.getElementById("scriptIn").value = "Hier den Inhalt der R Datei einleseen " +  content;
-     $.ajax({
-      url: path,
-      success: function (data){
-            console.log(data);
-            $("#scriptIn").load(data);
-      }
-     })
-     
+// var loadScript1 = function(scriptname){
+//     console.log(scriptname);
+//     var tempCookie = document.cookie.split("=");
+//     var projectname = tempCookie[3];
+//     var path = "./projects/" + projectname + "/Scripts/" + scriptname;
+//     var content;
+//     console.log(path);
+//     // hier muss jetzt der inhalt der R datei geladen werden und dann in content eingesetzt werden
+//
+//
+//
+//     //document.getElementById("scriptIn").value = "Hier den Inhalt der R Datei einleseen " +  content;
+//      $.ajax({
+//       url: path,
+//       success: function (data){
+//             console.log(data);
+//             $("#scriptIn").load(data);
+//       }
+//      })
 
-    currentScript = scriptname;
-    
-}
+
+
+
+//     currentScript = scriptname;
+//
+// }
 
 
 
@@ -66,13 +62,13 @@ var addScript = function(project,name){
     var tempCollaborators = project.data.Colaborators;
     var tempDateien = project.data.Dateien;
     var tempErgebnisse = project.data.Ergebnis;
-    
+
     var tempScripts = project.data.Scripts;
-    
+
     console.log(tempScripts);
     tempScripts.concat("," + name);
     console.log(tempScripts);
-    
+
     // jetze neues projekt aus den temp dingern
     var neuesProject = {
         Creator: "" + tempCreator,
@@ -93,7 +89,7 @@ var newScript = function(){
         var formData = new FormData();
 
         formData.append('uploads[]', file, scriptName+".R");
-          
+
         $.ajax({
           url: '/upload',
           type: 'POST',
@@ -107,7 +103,7 @@ var newScript = function(){
             console.log("no success");
         }
         });
-    
+
     createScript(scriptName);
 }
 
@@ -123,7 +119,7 @@ function readProjectFolderbyName(name) {    //name
   if (name == "") {
     console.log("value empty");
   }  else {
-      
+
       var path = "" + name;
     //var folderRead = name;
     //console.log("readProjectFolder("+folderRead+")");
