@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="lib/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/assets/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="lib/assets/css/form-elements.css">
+    <link rel="stylesheet" href="lib/assets/css/form-elements.css">
     <link rel="stylesheet" href="lib/assets/css/style.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +33,7 @@
     <!-- test background-->
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/loginStyle.css">
-     <!-- add a favicon to a website -->
+    <!-- add a favicon to a website -->
     <link rel="icon" href="img/GAIA.png">
 </head>
 
@@ -99,28 +99,48 @@
                                 <form role="form" action="" method="post" class="registration-form">
                                     <div class="form-group">
                                         <label class="sr-only" for="form-first-name"> <span>First name</span> </label>
-                                            <input title=FirstName type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name" onchange="loadFirstName();" required />
+                                        <input title=FirstName type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name" onchange="loadFirstName();" required />
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-last-name"><span> Last name</span></label>
-                                            <input title=LastName type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name" onchange="loadLastName();" required/>
+                                        <input title=LastName type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name" onchange="loadLastName();" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-street-name"><span> Street</span></label>
+                                        <input title=StreetName type="text" name="form-street-name" placeholder="Street name..." class="form-street-name form-control" id="form-street-name" onchange="loadStreetName();" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-house-number"><span> House number</span></label>
+                                        <input title=HouseNumber type="text" name="form-house-number" placeholder="House number..." class="form-house-number form-control" id="form-house-number" onchange="loadHouseNumber();" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-postcode"><span> Postcode</span></label>
+                                        <input title=Postcode type="text" name="form-postcode" placeholder="Postcode..." class="form-postcode form-control" id="form-postcode" onchange="loadPostcode();" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-city"><span> City</span></label>
+                                        <input title=city type="text" name="form-city" placeholder="City..." class="form-city form-control" id="form-city" onchange="loadCity();" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-institution"><span> Instution</span></label>
+                                        <input title=city type="text" name="form-institution" placeholder="Instution..." class="form-institution form-control" id="form-institution" onchange="loadInstitution();" required/>
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-email"><span>Email</span> </label>
-                                            <input title=email type="email" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" onchange="loadEmail();" required/>
+                                        <input title=email type="email" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" onchange="loadEmail();" required/>
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-password"><span>Password</span></label>
-                                            <input title=password type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" onchange="loadPassword();" required/>
+                                        <input title=password type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" onchange="loadPassword();" required/>
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-confirmPassword"> <span>Confirm Password</span></label>
-                                            <input title=ConfirmPassword type="password" name="form-ConfirmPassword" placeholder=" Confirm Password..." class="form-ConfirmPassword form-control" id="form-confirmPassword" required/>
+                                        <input title=ConfirmPassword type="password" name="form-ConfirmPassword" placeholder=" Confirm Password..." class="form-ConfirmPassword form-control" id="form-confirmPassword" required/>
                                     </div>
-                                   <div class="form-group">
-                                    <label class="sr-only" for="form-country">
-                                        <span>country:</span> </label>
-                                         <select title=country type="text" name="form-country" class="form-country form-control" id="form-country" onchange="loadCountry();" required>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-country">
+                                            <span>country:</span> </label>
+                                        <select title=country type="text" name="form-country" class="form-country form-control" id="form-country" onchange="loadCountry();" required>
                                             <optgroup label="A">
                                                 <option value="AF">Afghanistan</option>
                                                 <option value="AX">Åland Islands</option>
@@ -420,12 +440,12 @@
                                                 <option value="ZM">Zambia</option>
                                                 <option value="ZW">Zimbabwe</option>
                                         </select>
-                                        </div>
-                                        <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
                                         <label class="sr-only" for="form-about-yourself"> <span>Institution </span>
                                             <textarea name="institution" placeholder="Institution..." class="institution form-control" id="form-institution" onchange="loadInstitution();"></textarea>
                                         </label>
-                                      </div>
+                                    </div>
                                     <button type="button" id="sign" onclick='saveRegister()'> Registrieren </button>
                                 </form>
                             </div>
@@ -451,7 +471,7 @@
     <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
     <![endif]-->
-     <!-- Javascript  -->
+    <!-- Javascript  -->
     <script src="js/userManagementDatabase.js"></script>
     <script src="js/userManagementfunctionality.js"></script>
     <script src="js/userManagementDatabase.js"></script>
@@ -461,4 +481,5 @@
     <script src="js/login.js"></script>
 
 </body>
+
 </html>

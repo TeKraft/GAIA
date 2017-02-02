@@ -4,7 +4,7 @@ body {
     font-size: 16px;
     font-weight: 300;
     color: #888;
-    line-height: 30px;
+    line-height: 20px;
     text-align: center;
 }
 
@@ -86,7 +86,7 @@ img { max-width: 100%; }
 /***** Top content *****/
 
 .inner-bg {
-    padding: 60px 0px 25px 0px;
+    padding: 30px 0px 25px 0px;
 }
 
 .top-content .text {
@@ -113,7 +113,7 @@ img { max-width: 100%; }
 
 .form-top {
 	overflow: hidden;
-	padding: 0 25px 15px 25px;
+	padding: 0 25px 0px 25px;
 	background: #444;
 	background: rgba(0, 0, 0, 0.35);
 	-moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;

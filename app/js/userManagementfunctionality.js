@@ -2,6 +2,10 @@
 
 var firstName;
 var lastName;
+var streetName;
+var houseNumber;
+var postcode;
+var city;
 var email;
 var password;
 var institution;
@@ -9,7 +13,7 @@ var country;
 var curUser;
 var loginName;
 var loginPW;
-var usersusers
+var usersusers;
 var access = false;
 
 var userdata = {
@@ -23,22 +27,30 @@ creates a JSON string from the input fields
 function loadUser(){
     userdata[0] = firstName;
     userdata[1] = lastName;
+    userdata[2] = streetName;
+    userdata[3] = houseNumber;
+    userdata[4] = postcode;
+    userdata[5] =city;
+    userdata[6] = institution;
 
     var editEmail = email.replace("." , "/");
-    userdata[2] = editEmail;
+    userdata[7] = editEmail;
 
-    userdata[3] = password.hashCode();
-    userdata[4] = institution;
-        userdata[5] = country;
+    userdata[8] = password.hashCode();
+    userdata[9] = country;
 
     curUser = '{'
-       +'"Firstname":' +'"' + userdata[0] + '"' +', '
-       +'"LastName":' +'"' +userdata[1] + '"' +', '
-       +'"Email":' +'"' +userdata[2] + '"' +', '
-       +'"Password":' +'"' +userdata[3] + '"' +', '
-       +'"Institution":' +'"' +userdata[4] + '"' +', '
-    +'"Country":' +'"' +userdata[5] + '"'
-       +'}';
+        +'"Firstname":' +'"' + userdata[0] + '"' +', '
+        +'"LastName":' +'"' +userdata[1] + '"' +', '
+        +'"StreetName":' +'"' +userdata[2] + '"' +', '
+        +'"HouseNumber":' +'"' +userdata[3] + '"' +', '
+        +'"Postcode":' +'"' +userdata[4] + '"' +', '
+        +'"City":' +'"' +userdata[5] + '"' +', '
+        +'"Institution":' +'"' +userdata[6] + '"' +', '
+        +'"Email":' +'"' +userdata[7] + '"' +', '
+        +'"Password":' +'"' +userdata[8] + '"' +', '
+        +'"Country":' +'"' +userdata[9] + '"'
+    +'}';
 }
 
 /*
@@ -52,6 +64,26 @@ function loadFirstName(){
 function loadLastName(){
     lastName = document.getElementById('form-last-name').value
     console.log(lastName);
+}
+
+function loadStreetName(){
+    streetName = document.getElementById('form-street-name').value
+    console.log(streetName);
+}
+
+function loadHouseNumber(){
+    houseNumber = document.getElementById('form-house-number').value
+    console.log(houseNumber);
+}
+
+function loadPostcode(){
+    postcode = document.getElementById('form-postcode').value
+    console.log(postcode);
+}
+
+function loadCity(){
+    city = document.getElementById('form-city').value
+    console.log(city);
 }
 
 function loadEmail(){
