@@ -54,11 +54,10 @@ function makeTreeComponents(name) {
 
     var curProject;
     curProject = getProjectbyName(name);
-    //console.log(curProject);
 
     var scripts = createScriptNames(name);
 
-    var images = createScriptNames(name);
+    var images = createImageNames(name);
 
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" +
@@ -88,24 +87,51 @@ function makeTreeComponents(name) {
      "</ul>;"
 }
 
+function array_unique(arrayName) {
+	var newArray = new Array();
+	label:for(var i=0; i<arrayName.length;i++ ) {  
+		for(var j=0; j<newArray.length;j++ ) {
+		        if(newArray[j] == arrayName[i]) 
+				continue label;
+			}
+		        newArray[newArray.length] = arrayName[i];
+	}
+	return newArray;
+}
+
+
 var createImageNames = function(projectname){
     readProjectFolderbyName(projectname + "/Images");
-    var ImageArray = temp;
+    var ImageArray = array_unique(temp);
+    
+    console.log(ImageArray);
     var div = "";
-    //for (var i in ScriptArray){
-        div = div + ("<li id='" + ImageArray[ImageArray.length-1] + "'> "+ ImageArray[ImageArray.length-1] + "</li>");
-    //}
+    for (var i in ImageArray){
+        var ending = ImageArray[i];
+        if(ending.includes('.png') || ending.includes('.jpg')){
+            div = div + ("<li id='" + ImageArray[i] + "'> "+ ImageArray[i] + "</li>");
+        }else{
+            
+        }
+    }
     return div;
 }
 
 
 var createScriptNames = function(projectname){
     readProjectFolderbyName(projectname + "/Scripts");  //projectname + "Scripts"
-    var ScriptArray = temp;
+    var ScriptArray = array_unique(temp);
+
     var div = "";
-    //for (var i in ScriptArray){
-        div = div + ("<li id='" + ScriptArray[ScriptArray.length-1] + "'> "+ ScriptArray[ScriptArray.length-1] + "</li>");
-    //}
+    for (var i in ScriptArray){
+        var ending = ScriptArray[i].substr(ScriptArray[i].length-2, ScriptArray[i].length);
+        if(ending === '.R'){
+            div = div + ("<li id='" + ScriptArray[i] + "'> "+ ScriptArray[i] + "</li>");
+        }else{
+            
+        }
+        
+    }
     return div;
 }
 
