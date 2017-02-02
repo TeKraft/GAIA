@@ -15,17 +15,17 @@ window.onload = function () {
 
         var path = window.location.pathname;
         switch (path) {
-                
+
         case "/home.html":
             if(document.cookie.includes(";")){
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
             }else{
-                
+
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
-            
+
                 document.getElementById("profilSymb").textContent = userJSON.data.Firstname;
                 creator = userJSON.name;
 
@@ -45,7 +45,7 @@ window.onload = function () {
                 document.getElementById("workProfilSymb").textContent = userJSON.data.Firstname;
 
                 displayCollaboratorsForInformation();
-                displayCreatorForInformatioin()
+                displayCreatorForInformation();
 
                 makeTreeComponents(currentProject[3]);
                 createTree();
@@ -104,7 +104,7 @@ window.onload = function () {
                 displayCreator();
                 break;
             }
-                
+
         case "/gaia.html":
             if(document.cookie.includes(";")){
                 alert("nicht angemeldet");
@@ -116,10 +116,8 @@ window.onload = function () {
                 document.getElementById("gaiaProfilSymb").textContent = userJSON.data.Firstname;
                 break;
             }
-
         }
     };
-
 
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
@@ -150,20 +148,15 @@ window.onload = function () {
             document.getElementById("email").value = res;
 
             break;
-
-
         }
     }
-
-
-
 }
 
 
 
 
 
-function displayCreatorForInformatioin() {
+function displayCreatorForInformation() {
     var url = 'http://localhost:3000' + '/getFeatures';
     var creator;
 
@@ -173,7 +166,6 @@ function displayCreatorForInformatioin() {
         url: url,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
             for (var i = 0; i <= content.length; i++) {
                 if (content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined) {
                     var tempCookie = document.cookie.split("=");
@@ -189,7 +181,6 @@ function displayCreatorForInformatioin() {
                     }
                 }
             }
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
@@ -209,7 +200,6 @@ function displayCreator() {
         url: url,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
             for (var i = 0; i <= content.length; i++) {
                 if (content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined) {
                     var tempCookie = document.cookie.split("=");
@@ -225,7 +215,6 @@ function displayCreator() {
                     }
                 }
             }
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
@@ -244,47 +233,33 @@ function displayCollaboratorsForInformation() {
         url: url,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
-
             for (var i = 0; i <= content.length; i++) {
 
                 if (content[i] != undefined && content[i].data != undefined && content[i].data.Colaborators != undefined) {
-
-
-
                     var tempCookie = document.cookie.split("=");
                     var project = tempCookie[3];
 
                     if (content[i] != undefined && project == content[i].name) {
                         // alle mitarbeiter werden als knopf dargestellt bei druecken kann man loeschen oder nachricht senden
 
-
                         tempProject = content[i].Colaborators;
                         var CollabArray = content[i].data.Colaborators.split(",");
-
                         var editedCollab = "<br>";
-
                         for (var i = 0; i < CollabArray.length; i++) {
                             editedCollab = editedCollab + CollabArray[i] + "<br>";
                         }
-
                         document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + editedCollab;
                         break;
                     } else {
                         //console.log("not this one");
                     }
-
                 }
             }
-
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
-
     });
-
 };
 
 
@@ -337,7 +312,7 @@ function displayCollaborators() {
 
 
 /*
-*   erstellt die Buttons fuer die Collaborators 
+*   erstellt die Buttons fuer die Collaborators
 
 
 WENN AM ANFAN NOCH KEINER ERSTELLT WURDE ERSTELLT ER BEIM NEUEN COLLAB EINEN LEEREN KNOPF
@@ -357,10 +332,10 @@ function displayButtons(input) {
                 var neuneu = neu.replace('diesisteinpunktzeichen','.');
                 tempString = tempString +
                 //"<div class='dropdown'>" +
-                "<br>" + 
+                "<br>" +
                 "<button id= '" + temp[i] + "' type='button' class='' onclick=''>" + temp[i] + "</button>" +
-                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")'>" + "delete" + "</button>" + 
-                
+                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")'>" + "delete" + "</button>" +
+
                 //"<div id='myDropdown' class='dropdown-content'>" +
                 //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>" + "sendMessage " + "</button>" +
                 //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' onclick='deleteCollaborator(this.id)'>" + "delete " + "</button>" +
@@ -369,7 +344,7 @@ function displayButtons(input) {
                 " ";
                 console.log(temp[i]);
                 console.log(tempString);
-                //tempString = null; 
+                //tempString = null;
             }
         }
     }
@@ -386,15 +361,15 @@ function displayButtons(input) {
 
 // funktioniert nicht bei emailadressen sondern nur bei buchstaben
 function deleteCollaborator(name) {
-    
-    var deleteCollab = name[0].id;
-    
-    console.log(curProjectName + curCreator);
-    
 
-    
+    var deleteCollab = name[0].id;
+
+    console.log(curProjectName + curCreator);
+
+
+
      var url = 'http://localhost:3000' + '/getFeatures';
-    
+
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -402,11 +377,11 @@ function deleteCollaborator(name) {
         timeout: 5000,
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
-            
+
             for(var i=0; i<= content.length;i++){
 
                 if(content[i] != undefined && content[i].data != undefined && content[i].name == curProjectName && content[i].data.Creator == curCreator){
-                    
+
                     editProject = content[i];
                     var newCollabs = content[i].data.Colaborators;
                     if(newCollabs.includes(deleteCollab)){
@@ -422,36 +397,36 @@ function deleteCollaborator(name) {
 		              //async: false,
 		              type: "POST",
 		              data: newProject.data,
-		
+
 		              success: function(xhr, textStatus, data){
 			             // do function loadFromDB() to refresh list, when save feature
                             console.log("success");
-            
+
 		              },
 		              error: function(textStatus, errorThrown){
 			             console.log(errorThrown);
 		              }
 	                   });
-    
+
                         window.location.href = "projectedit.html";
 
                     }
-                    
+
                 }else{
                     console.log("gibts nicht")
                 }
             }
-            
+
             $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
-    }); 
-    
-    
+    });
 
-    
+
+
+
 }
 
 
@@ -520,7 +495,3 @@ window.onclick = function (event) {
 function openDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
-
-
-
-

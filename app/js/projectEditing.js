@@ -45,12 +45,7 @@ function makeTreeComponents(name) {
     getProjectbyName(name);
 
     var images = createImageNames(name);
-
     //readProjectFolderbyName(project + "/Scripts");  "wurstbrot/Scripts"
-
-
-
-
 
     var curProject;
     curProject = getProjectbyName(name);
@@ -89,9 +84,9 @@ function makeTreeComponents(name) {
 
 function array_unique(arrayName) {
 	var newArray = new Array();
-	label:for(var i=0; i<arrayName.length;i++ ) {  
+	label:for(var i=0; i<arrayName.length;i++ ) {
 		for(var j=0; j<newArray.length;j++ ) {
-		        if(newArray[j] == arrayName[i]) 
+		        if(newArray[j] == arrayName[i])
 				continue label;
 			}
 		        newArray[newArray.length] = arrayName[i];
@@ -109,7 +104,7 @@ var createImageNames = function(projectname){
         if(ending.includes('.png') || ending.includes('.jpg')){
             div = div + ("<li id='" + ImageArray[i] + "'> "+ ImageArray[i] + "</li>");
         }else{
-            
+
         }
     }
     return div;
@@ -126,9 +121,9 @@ var createScriptNames = function(projectname){
         if(ending === '.R'){
             div = div + ("<li" + " id='" + ScriptArray[i] + "' " + " data-jstree='" + "{'icon':" + "//jstree.com/tree.png" + "}'" + ">"  + ScriptArray[i] + "</li>");
         }else{
-            
+
         }
-        
+
     }
     return div;
 }

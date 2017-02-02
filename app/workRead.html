@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
+    <meta name="author" content="GAIA" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import stylesheets library -->
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css" />
+    <!-- optional -->
+    <link rel="stylesheet" type="text/css" href="lib/css/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="lib/css/leaflet.draw.css" />
+    <link rel="stylesheet" type="text/css" href="lib/css/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="css/work.css" />
+    <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <style>
+        article,
+        aside,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+    </style>
+    <script src="js/work.js"></script>
+    <script type="text/javascript" src="js/scriptHandle.js"></script>
+    <script type="text/javascript" src="js/projectEditing.js"></script>
+      <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href="css/upload.css" rel="stylesheet">
+</head>
+<body id="myBody" onload="showMap()">
+    <div id="myNavbar">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <!-- <a class="navbar-brand" href="gaia.html">Gaia</a> -->
+                    <a class="navbar-brand">Gaia</a>
+                </div>
+                <!-- <div class="collapse navbar-collapse" id="myNavbarButtons">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a title="show homepage" href="home.html">
+                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a title="show workplace" href="work.html">
+                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="profil.html">Profil</a></li>
+                                <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
+                                <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+                                <li><a title="logout" onclick='logout()'>Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+        </nav>
+    </div>
+    <div id="desktop" class="container-fluid">
+        <!-- start: first row -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="myPanel">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div id="treeID" class="panel panel-heading">
+                                Tree view
+                            </div>
+                            <div id="treeView" class="panel panel-body">
+                                Project:
+                                <div id="jstree">
+                                    <ul>
+                                        <li>Root node 1
+                                            <ul>
+                                                <li id="child_node_1">Child node 1
+                                                    <ul>
+                                                        <li>asdas</li>
+                                                        <li>Childasdde 2</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Child node 2</li>
+                                            </ul>
+                                        </li>
+                                        <li>Root node 2</li>
+                                    </ul>
+                                </div>
+                                <!-- <div class="progress">
+                                    <div class="progress-bar" role="progressbar"></div>
+                                </div> -->
+                                <!-- <br>
+                                <input type="text" size="40" id=htmlPath value="your_project/path/to/TMS/html" onfocus="if(this.value=='your_project/path/to/TMS/html'){this.value='';}" onblur="if(this.value==''){this.value='your_project/path/to/TMS/html';}">
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <button class="btn btn-lg upload-btn" type="button">Upload File</button>
+                                <button id="downloadBtn" onclick="download()" type="button">download</button>
+                                <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
+                                <br> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="myPanel">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel panel-heading">
+                                functionsMap
+                            </div>
+                            <div id="functionsMap" class="panel panel-body">
+                                <button id='test02' onclick='executeScript()' type='button' class='btn btn-test'>execute Script</button>
+                                <br>
+                                <button id='test04' onclick='importHTML()' type='button' class='btn btn-test'>import HTML</button>
+                                <button id='test05' onclick='createiframe()' type='button' class='btn btn-test'>create iframe</button>
+                                <button id='test03' onclick='getMap()' type='button' class='btn btn-test'>getMap</button>
+                                <br>
+                                <br>
+                                <button id='testLoading' onclick='loadToTextarea()' type='button' class='btn btn-test'>LOAD_SCRIPT</button>
+                                <!-- <button id='getUniqueLink' onclick='getUniqueLink()' type='button' class='btn btn-test'>getUniqueLink()</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

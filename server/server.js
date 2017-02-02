@@ -212,14 +212,14 @@ app.get('/readFolder*', function(req, res) {
   var dir = '../app/projects/'+ projecttitle;
 
   fs.readdir(dir, function (error, files) {
-    console.log(files);
+    // console.log(files);
     if (files == undefined) {
-      console.log("undefined error");
+      // console.log("undefined error");
       return console.error(error); }
     else {
-      console.log("no error");
+      // console.log("no error");
       files.forEach(file => {
-        console.log(file);
+        // console.log(file);
         folderFiles.push(file);
       });
       if (error) return console.error(error);
@@ -305,10 +305,24 @@ app.post('/upload*', function(req, res){
   form.parse(req);
 });
 
-//share unique link
-app.get('/uniqueLink', function(req, res) {
-  Feature.find(function (error, features) {
+
+
+//get unique link of special feature
+app.get('/getFeatureID*', function(req, res) {
+  var title = req.url.substring(20, req.url.length);
+  console.log("title=> " + title);
+  Feature.find({name: title}, function (error, features) {
       if (error) return console.error(error);
+      res.send(features);
+  });
+});
+
+//if unique link - get Feature
+app.get('/uniqueLink*', function(req, res) {
+  var uniqueID = req.url.substring(15, req.url.length);
+  Feature.find({_id: uniqueID}, function (error, features) {
+      if (error) return console.error(error);
+      console.log(features[0]._id);
       res.send(features);
   });
 });
