@@ -148,7 +148,7 @@ app.get('/execScript', function (req, res) {
   var currentProject = document.cookie.split("=")[3];
   var selectedScript;
   $('#jstree').on("changed.jstree", function (e, data) {
-      sectedScript = data.selected[0]);
+      sectedScript = data.selected[0];
   });
   var childProcess = require('child_process');
   // childProcess.exec('Rscript test.R', function (err, stdout, stderr) {
