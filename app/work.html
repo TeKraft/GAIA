@@ -318,40 +318,25 @@
                     <div class="panel-group">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
-                            <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-                            <li>
-                                <button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-savePrj'>save Script</button>
-                            </li>
-                            <li>
-                                <button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-savePrj'>+ new</button>
-                            </li>
-
+                            <li><a data-toggle="tab" href="#menu1">BBox</a></li>
+                            <li><button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-savePrj'>save Script</button></li>
+                            <li><button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-savePrj'>+ new</button></li>
                         </ul>
-
-                        <div class="input-script">
-                            <textarea id="scriptIn" class="form-control" rows="10" ></textarea>
-                        </div>
 
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
-                                <div class="form-group">
-
-                                </div>
+                              <div class="input-script">
+                                <textarea id="scriptIn" class="form-control" rows="10" ></textarea>
+                            </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">
-                                <h3>Menu 1</h3>
-                                <p>Some content in menu 1.</p>
-                            </div>
-                            <div id="menu3" class="tab-pane fade">
-                                <h1>Posting Code Snippets</h1>
-                                <textarea id="input" rows="4" cols="50">
-                                    x = rnorm(1000) plot(x) mean(x)
-                                </textarea>
-                                <br />
-                                <button id="submitbutton" type="button">Call R</button>
-                                <pre><code id="output"></code></pre>
+                              <h3>Bounding Box</h3>
+                              <p id="bbox">Bbox</p>
                             </div>
                         </div>
+                        </div>
+                        
+                        
                     </div>
                 </div>
             </div>
