@@ -45,7 +45,7 @@ var einzweitest = "blabli";
 
 
 var saveScript = function(){
-    
+    saved = true;
     var content = document.getElementById("scriptIn");
     console.log(document.getElementById("scriptIn").value);
 }

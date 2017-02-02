@@ -157,7 +157,15 @@ function createTree() {
         //});
     });
 }
+
 var saved = false;
+
+var changedScript = function(){
+    saved = false;
+    console.log("saved set to false");
+}
+
+
 
 
 var toSettings = function(){
@@ -167,6 +175,8 @@ var toSettings = function(){
             } else {
                 return;
             }
+        window.location.href = "/projectedit.html";
+    }else{
         window.location.href = "/projectedit.html";
     }
 }
@@ -181,6 +191,8 @@ var toHome = function(){
                 return;
             }
         document.location.href = "home.html"
+    }else{
+        window.location.href = "home.html";
     }
 }
 
@@ -192,6 +204,8 @@ var toGaia = function(){
                 return;
             }
         document.location.href = "gaia.html"
+    }else{
+        window.location.href = "/projectedit.html";
     }
 }
 
@@ -203,6 +217,8 @@ var toProfilEdit = function(){
                 return;
             }
         document.location.href = "profiledit.html"
+    }else{
+        window.location.href = "profiledit.html";
     }
 }
 var toImpressum = function(){
@@ -213,6 +229,8 @@ var toImpressum = function(){
                 return;
             }
         document.location.href = "impressum.html"
+    }else{
+        window.location.href = "impressum.html";
     }
 }
 var toProfil = function(){
@@ -223,6 +241,8 @@ var toProfil = function(){
                 return;
             }
         document.location.href = "profil.html";
+    }else{
+        window.location.href = "profil.html";
     }
 }
 
@@ -233,6 +253,8 @@ var toLogout = function(){
             } else {
                 return;
             }
+        logout();
+    }else{
         logout();
     }
 }
