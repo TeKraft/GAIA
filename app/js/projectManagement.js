@@ -14,20 +14,33 @@ $(document).ready(function(){
     $('.btn-create').on('click',saveProject);
 });
 
+
+
+
+
 // speichert projekt in der datenbank
 function saveProject() {
-    console.log(creator);
     projectName=document.getElementById('PrjName').value;
-    console.log(projectName);
     loadProject();
     
     if (document.getElementById("PrjName").value == "") {
         console.log("value empty");
     }else{
+        
     var projectTitle = document.getElementById("PrjName").value;
-    console.log("createFolder("+projectTitle+")")
+    // hier Fragen ob es das Projekt schon gibt    
+    getProjectByName(projectTitle);  
+    var existingProject = tempProject;
+        
+    if(existingProject != undefined){
+        alert("Projekt already exists");
+        console.log(existingProject);
+        return;
+    }  else  {
+    
+   
+    
     // addFolder(projectTitle);
-    console.log("start");
     var url = 'http://localhost:3000' + '/addFolder?name=' + projectTitle;
     // perform post ajax
     $.ajax({
@@ -44,7 +57,7 @@ function saveProject() {
             console.log("error by creating folder");
         }
     });
-  }
+  
     
     var content = JSON.parse(newProject);
     console.log(newProject);
@@ -69,8 +82,9 @@ function saveProject() {
         console.log("fehler save to sb undefined oder null");
     }
     
+    }
+    }
     
-
 };
 
 function loadProject(){

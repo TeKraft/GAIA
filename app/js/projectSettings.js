@@ -140,12 +140,15 @@ var url = 'http://localhost:3000' + '/getFeatures';
         dataType: 'JSON',
         url: url,
         timeout: 5000,
+        async:false,
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
             for(var i=0; i<= content.length;i++){
 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined && content[i].name == name){
                     var temp = content[i];
+                    console.log(temp);
+                    tempProject = temp;
                     return temp;
                 }
             }
@@ -156,8 +159,7 @@ var url = 'http://localhost:3000' + '/getFeatures';
             console.log("no success");
         }
     });
-
-}
+};
 
 
 function updateProject(jsonString) {
