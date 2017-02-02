@@ -103,8 +103,6 @@ function array_unique(arrayName) {
 var createImageNames = function(projectname){
     readProjectFolderbyName(projectname + "/Images");
     var ImageArray = array_unique(temp);
-    
-    console.log(ImageArray);
     var div = "";
     for (var i in ImageArray){
         var ending = ImageArray[i];
