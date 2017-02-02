@@ -18,18 +18,22 @@ $('#buttonTree').on('click', function () {
 });
 
 
-var download = function(){
-    var options = {
-	excludeParentFolder: true, //Default : false. if true, the content will be zipped excluding parent folder.
-	parentFolderName: 'v1.0' //if specified, the content will be zipped, within the 'v1.0' folder
-    };
 
-    //zip a folder and change folder destination name
-    var zip = new FolderZip();
-    zip.zipFolder('../folder-zip', options, function(){
-        zip.writeToFile('folderall.zip');
-    });
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -108,14 +112,16 @@ var createScriptNames = function(projectname){
 
 
 
-
+var aktScript;
 function createTree() {
     $(function () {
         // 6 create an instance when the DOM is ready
         $('#jstree').jstree();
         // 7 bind to events triggered on the tree
         $('#jstree').on("changed.jstree", function (e, data) {
-            loadScript(data.selected[0]);
+            console.log(data.selected[0]);
+            aktScript = data.selected[0];
+            //loadScript(data.selected[0]);
         });
         // 8 interact with the tree - either way is OK
         //$('button').on('click', function () {
@@ -130,4 +136,9 @@ function createTree() {
 
 function toSettings(){
     window.location.href = "/projectedit.html";
+}
+
+
+var download = function(){
+
 }

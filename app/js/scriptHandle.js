@@ -41,7 +41,7 @@ var createScript = function(name){
 // }
 
 
-
+var einzweitest = "blabli";
 
 
 var saveScript = function(){
