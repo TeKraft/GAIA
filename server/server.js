@@ -140,16 +140,29 @@ app.post('/deleteFeature*', function (req, res) {
     console.log("delete successfull");
 });
 
+/*
+/Function for executing a Rscript on server via childProzess
+/
+*/
 app.get('/execScript', function (req, res) {
-    var childProcess = require('child_process');
-    //TODO: //childProcess.exec('Rscript ../app/projects/PROJECTNAME/Scripts/CHOOSEN_SCRIPT.R', function (err, stdout, stderr) {
-    childProcess.exec('Rscript test.R', function (err, stdout, stderr) {
-        if (err) {
-            console.error(err);
-            console.log("ERROR :(");
-            return;
-        }
-    })
+  var currentProject = document.cookie.split("=")[3];
+  var selectedScript;
+  $('#jstree').on("changed.jstree", function (e, data) {
+      sectedScript = data.selected[0]);
+  });
+  var childProcess = require('child_process');
+  // childProcess.exec('Rscript test.R', function (err, stdout, stderr) {
+  //   if (err) {
+  //     console.error(err);
+  //     return;
+  //   }
+  // })
+  childProcess.exec('Rscript ../projects/'+currentProject+'/Scripts/'+selectedScript, function (err, stdout, stderr) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  })
 });
 
 var fs = require('fs');

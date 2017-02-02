@@ -16,8 +16,8 @@ function getMap() {
 
 function importHTML() {
   leafmap.remove();
-  var objectURL = "../TMS/S2_NIR_T0/leaflet.html";
-  //TODO:   var objectURL ="../../projects/"+PROJECTNAME+CLICKED_HTML_NAME+"/"
+  var html = document.getElementById("htmlPath");
+  var objectURL = "../projects/"+html;
   document.getElementById("leafletmap").innerHTML ='<object type="text/html" height="100%" width="100%" data="' + objectURL + '" ></object>';
   console.log("object");
   console.log(document.getElementById("leafletmap"));
@@ -26,8 +26,8 @@ function importHTML() {
 // entweder importHTML oder createiframe --- nicht beide nötig!
 function createiframe() {
   leafmap.remove();
-  var objectURL = "../TMS/S2_NIR_T0/leaflet.html";
-  //TODO:   var objectURL ="../../projects/"+PROJECTNAME+CLICKED_HTML_NAME+"/"
+  var html = document.getElementById("htmlPath");
+  var objectURL = "../projects/"+html;
   document.getElementById("leafletmap").innerHTML = '<iframe id="iframeMap" src="' + objectURL + '" height="100%" width="100%" name"myIframe"></iframe>';
   console.log("iframe data");
   console.log($('#leafletmap').contents());
