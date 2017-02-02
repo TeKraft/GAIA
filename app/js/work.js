@@ -10,7 +10,7 @@
       fn();
       return cb();
     }, ms);
-  };
+  }; 
 
   shrink = function(cb) {
     return t(0, cb, function() {
