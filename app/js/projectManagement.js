@@ -244,7 +244,7 @@ function deleteProject(id) {
             success: function (data, textStatus) {
                 // console.log(data);
                 console.log("delete Folder success");
-                // window.location.href = "/home.html";
+
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("error by deleting folder");

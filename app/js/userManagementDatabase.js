@@ -112,6 +112,13 @@ function loadFromDB() {
 
 function deleteUser() {
     var userArr = document.cookie.split("=");
+    
+    if (confirm("Are you sure?") == true) {
+
+        } else {
+            return;
+        }
+    
   	// ajax Post
 	  $.ajax({
 		url: '/deleteFeature?name=' + JSON.parse(userArr[1]).name,

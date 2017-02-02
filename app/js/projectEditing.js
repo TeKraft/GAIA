@@ -131,11 +131,84 @@ function createTree() {
         //});
     });
 }
+var saved = false;
+
+
+var toSettings = function(){
+    if(saved == false){
+        if (confirm("did you save your Project?") == true) {
+
+            } else {
+                return;
+            }
+        window.location.href = "/projectedit.html";
+    }
+}
 
 
 
-function toSettings(){
-    window.location.href = "/projectedit.html";
+var toHome = function(){
+    if(saved == false){
+        if (confirm("Did you save your Project") == true) {
+
+            } else {
+                return;
+            }
+        document.location.href = "home.html"
+    }
+}
+
+var toGaia = function(){
+    if(saved == false){
+        if (confirm("Did you save your Project") == true) {
+
+            } else {
+                return;
+            }
+        document.location.href = "gaia.html"
+    }
+}
+
+var toProfilEdit = function(){
+    if(saved == false){
+        if (confirm("Did you save your Project") == true) {
+
+            } else {
+                return;
+            }
+        document.location.href = "profiledit.html"
+    }
+}
+var toImpressum = function(){
+    if(saved == false){
+        if (confirm("Did you save your Project") == true) {
+
+            } else {
+                return;
+            }
+        document.location.href = "impressum.html"
+    }
+}
+var toProfil = function(){
+    if(saved == false){
+        if (confirm("Did you save your Project") == true) {
+
+            } else {
+                return;
+            }
+        document.location.href = "profil.html";
+    }
+}
+
+var toLogout = function(){
+    if(saved == false){
+        if (confirm("Did you save your Project") == true) {
+
+            } else {
+                return;
+            }
+        logout();
+    }
 }
 
 

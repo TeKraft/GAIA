@@ -31,7 +31,6 @@ function changeProjectName() {
             success: function (data, textStatus) {
                 console.log(data);
                 console.log("success");
-                //window.location.href = "/projectedit.html";
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("failed to save to db");

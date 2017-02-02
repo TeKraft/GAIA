@@ -82,7 +82,11 @@ var updateProject = function(name,creator,data){
 var updateDB = function(){
     var temp = document.cookie.split("=");
     var user = JSON.parse(temp[1]);
-    
+    if (confirm("Are you sure?") == true) {
+
+        } else {
+            return;
+        }
     
     $.ajax({
         url: '/deleteFeature?name=' + user.name,
