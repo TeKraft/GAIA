@@ -89,9 +89,11 @@ var newScript = function(){
             return;
         }
         formData.append('uploads[]', file, scriptName+".R");
+        var currProjName = document.cookie.split("=")[3];
+        var currProjFolder = "Scripts"; // oder Images1 oder Results
 
         $.ajax({
-          url: '/upload',
+          url: '/upload?folder=' + currProjFolder + '?project=' + currProjName,
           type: 'POST',
           data: formData,
           processData: false,
