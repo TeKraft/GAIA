@@ -233,8 +233,13 @@ function deleteProject(id) {
         alert("you must be the creator");
         return;
     }else{
-    console.log(user.name);
-    console.log(tempProject.data.Creator);    
+        
+
+    if (confirm("Are you sure?") == true) {
+        
+    } else {
+        return;
+    }
 
 
     var folderTitle = id;
