@@ -142,7 +142,7 @@ app.post('/deleteFeature*', function (req, res) {
 
 app.get('/execScript', function (req, res) {
     var childProcess = require('child_process');
-    //TODO: //childProcess.exec('Rscript ../projects/PROJECTNAME/Scripts/CHOOSEN_SCRIPT.R', function (err, stdout, stderr) {
+    //TODO: //childProcess.exec('Rscript ../app/projects/PROJECTNAME/Scripts/CHOOSEN_SCRIPT.R', function (err, stdout, stderr) {
     childProcess.exec('Rscript test.R', function (err, stdout, stderr) {
         if (err) {
             console.error(err);
@@ -185,7 +185,7 @@ function folderStructure(foldertitle) {
     console.log(folderStructure);
 
     for (var i = 0; i < folderStructure.length; i++) {
-        fs.mkdir('../projects/' + foldertitle + '/' + folderStructure[i], function (err) {
+        fs.mkdir('../app/projects/' + foldertitle + '/' + folderStructure[i], function (err) {
             // path exists unless there was an error
             console.log("added folder: " + foldertitle + '/' + folderStructure[i]);
         })
