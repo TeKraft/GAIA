@@ -5,6 +5,7 @@ var projectName;
 var collaborators = {
 
 };
+
 var newProject;
 var userProjects= new Array;
 var projectTable ="";
@@ -27,64 +28,58 @@ function saveProject() {
         console.log("value empty");
     }else{
         
-    var projectTitle = document.getElementById("PrjName").value;
-    // hier Fragen ob es das Projekt schon gibt    
-    getProjectByName(projectTitle);  
-    var existingProject = tempProject;
-        
+        var projectTitle = document.getElementById("PrjName").value;
+        // hier Fragen ob es das Projekt schon gibt    
+        getProjectByName(projectTitle);  
+        var existingProject = tempProject;
 
-            if(existingProject != undefined &&existingProject.name === projectTitle){
-                alert("Projekt already exists");
-                console.log(existingProject);
-                return;
-            }  
-            else  {
-    
-   
-    
-    // addFolder(projectTitle);
-    var url = 'http://localhost:3000' + '/addFolder?name=' + projectTitle;
-    // perform post ajax
-    $.ajax({
-        type: 'POST',
-        // data: content,
-        url: url,
-        timeout: 5000,
-        success: function (data, textStatus) {
-            // console.log(data);
-            console.log("success");
-            // window.location.href = "/home.html";
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log("error by creating folder");
-        }
-    });
-  
-    
-    var content = JSON.parse(newProject);
-    console.log(newProject);
-    if (projectName != undefined && content != null) {
-        var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
-        // perform post ajax
-        $.ajax({
-            type: 'POST',
-            data: content,
-            url: url,
-            timeout: 5000,
-            success: function (data, textStatus) {
-                console.log(data);
-                console.log("success");
-                window.location.href = "/home.html";
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.log("failed to save to db");
+
+        if(existingProject != undefined &&existingProject.name === projectTitle){
+            alert("Projekt already exists");
+            console.log(existingProject);
+            return;
+        }else{
+            // addFolder(projectTitle);
+            var url = 'http://localhost:3000' + '/addFolder?name=' + projectTitle;
+            // perform post ajax
+            $.ajax({
+                type: 'POST',
+                // data: content,
+                url: url,
+                timeout: 5000,
+                success: function (data, textStatus) {
+                    // console.log(data);
+                    console.log("success");
+                    // window.location.href = "/home.html";
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("error by creating folder");
+                }
+            });
+            var content = JSON.parse(newProject);
+            console.log(newProject);
+            if (projectName != undefined && content != null) {
+                var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
+                // perform post ajax
+                $.ajax({
+                    type: 'POST',
+                    data: content,
+                    url: url,
+                    timeout: 5000,
+                    success: function (data, textStatus) {
+                        console.log(data);
+                        console.log("success");
+                        window.location.href = "/home.html";
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("failed to save to db");
+                    }
+                });
+            } else {
+                console.log("fehler save to sb undefined oder null");
             }
-        });
-    } else {
-        console.log("fehler save to sb undefined oder null");
-    }
-    
-    }
+
+        }
     }
     
 };
@@ -138,12 +133,6 @@ function loadAllProjects(){
             console.log("no success");
         }
     });
-}
-
-// soll eigentlich ein projectfeld erstellen das name informationen und edit/delete btn enthaellt aber vlt unnoetig
-function createProject(projectJSON){
-
-
 }
 
 function createProjectTable(){
@@ -225,78 +214,69 @@ function deleteProject(id) {
     }else {
         
         
-    getProjectByName(id);  
-    var existingProject = tempProject;
-    var user = JSON.parse(tempCookie[1]);
-        
-    if(user.name != tempProject.data.Creator){
-        alert("you must be the creator");
-        return;
-    }else{
-        
+        getProjectByName(id);  
+        var existingProject = tempProject;
+        var user = JSON.parse(tempCookie[1]);
 
-    if (confirm("Are you sure?") == true) {
-        
-    } else {
-        return;
-    }
+        if(user.name != tempProject.data.Creator){
+            alert("you must be the creator");
+            return;
+        }else{
 
+        // asks the user if he is sure he wants to delete the project
+        if (confirm("Are you sure?") == true) {
 
-    var folderTitle = id;
-    console.log("deleteProjectFolder("+id+")");
-
-    var url = 'http://localhost:3000' + '/deleteProjectFolder?name=' + id;
-    // perform post ajax
-    $.ajax({
-        type: 'POST',
-        // data: content,
-        url: url,
-        timeout: 5000,
-        success: function (data, textStatus) {
-            // console.log(data);
-            console.log("delete Folder success");
-            // window.location.href = "/home.html";
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log("error by deleting folder");
+        } else {
+            return;
         }
-    });
-  
-    
-   
-    
 
-    
-    
-    
 
-	// ajax Post
-	$.ajax({
-		url: '/deleteFeature?name=' + id,
-		//async: false,
-		type: "POST",
-		//data: content,
-		success: function(xhr, textStatus, data){
-			// do function loadFromDB() to refresh list, when save feature
-            var aktuellesProject;
-            aktuellesProject=id;
-            if(!isEditing()){
-                console.log("notediting");
-                }else{
-                    var temp=document.cookie.split("=");
-                    temp[3] = aktuellesProject;
-                    var tempCookie = "" + temp[0]+ "=" + temp[1];
-                        document.cookie = tempCookie;
-                        console.log(document.cookie);
-                    }
-            window.location.href = "/home.html";
-		},
-		error: function(textStatus, errorThrown){
-			console.log(errorThrown);
-		}
-	});
-    
-    }
+        var folderTitle = id;
+        console.log("deleteProjectFolder("+id+")");
+
+        var url = 'http://localhost:3000' + '/deleteProjectFolder?name=' + id;
+        // perform post ajax
+        $.ajax({
+            type: 'POST',
+            // data: content,
+            url: url,
+            timeout: 5000,
+            success: function (data, textStatus) {
+                // console.log(data);
+                console.log("delete Folder success");
+                // window.location.href = "/home.html";
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("error by deleting folder");
+            }
+        });
+        // ajax Post
+        $.ajax({
+            url: '/deleteFeature?name=' + id,
+            //async: false,
+            type: "POST",
+            //data: content,
+            success: function(xhr, textStatus, data){
+                // do function loadFromDB() to refresh list, when save feature
+                var aktuellesProject;
+                aktuellesProject=id;
+                if(!isEditing()){
+                    console.log("notediting");
+                    }else{
+                        var temp=document.cookie.split("=");
+                        temp[3] = aktuellesProject;
+                        var tempCookie = "" + temp[0]+ "=" + temp[1];
+                            document.cookie = tempCookie;
+                            console.log(document.cookie);
+                        }
+                window.location.href = "/home.html";
+            },
+            error: function(textStatus, errorThrown){
+                console.log(errorThrown);
+            }
+        });
+
+        }
     }
 
 }; 

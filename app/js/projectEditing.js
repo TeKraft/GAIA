@@ -18,6 +18,19 @@ $('#buttonTree').on('click', function () {
 });
 
 
+var download = function(){
+    var options = {
+	excludeParentFolder: true, //Default : false. if true, the content will be zipped excluding parent folder.
+	parentFolderName: 'v1.0' //if specified, the content will be zipped, within the 'v1.0' folder
+    };
+
+    //zip a folder and change folder destination name
+    var zip = new FolderZip();
+    zip.zipFolder('../folder-zip', options, function(){
+        zip.writeToFile('folderall.zip');
+    });
+}
+
 
 
 // hier muss der baum richtig erstellt werden
@@ -25,7 +38,7 @@ function makeTreeComponents(name) {
     var tempCookie = document.cookie.split("=");
     var project = tempCookie[5];
 
-    getProjectbyName(name, "rkanschat@gmx.de");
+    getProjectbyName(name);
 
     var images = createImageNames(name);
 
@@ -36,10 +49,12 @@ function makeTreeComponents(name) {
 
 
     var curProject;
-    curProject = getProjectbyName(name, "rkanschat@gmx.de");
+    curProject = getProjectbyName(name);
     //console.log(curProject);
 
     var scripts = createScriptNames(name);
+    
+    var images = createScriptNames(name);
 
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" +
@@ -59,7 +74,11 @@ function makeTreeComponents(name) {
                     "</ul>" +
                 "</li>" +
 
-                "<li id='results_node_1'>Results</li>" +
+                "<li id='results'>Results" +
+                    "<ul id='childList'>" +
+                        images+ //images +
+                    "</ul>" +
+                "</li>" +
             "</ul>" +
          "</li>" +
      "</ul>;"

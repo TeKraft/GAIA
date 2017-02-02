@@ -77,8 +77,6 @@ var addScript = function(project,name){
         Dateien:"" + tempDateien,
         Ergebnis:"" + tempErgebnisse,
     }
-    //console.log(neuesProject.Scripts);
-    //updateProject(loadedProject.name,tempCreator,neuesProject);
 }
 
 
