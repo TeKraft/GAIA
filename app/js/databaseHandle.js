@@ -77,3 +77,25 @@ var updateProject = function(name,creator,data){
         }
     });
 }
+
+
+var updateDB = function(){
+    var temp = document.cookie.split("=");
+    var user = JSON.parse(temp[1]);
+    
+    
+    $.ajax({
+        url: '/deleteFeature?name=' + user.name,
+        //async: false,
+        type: "POST",
+        data: user,
+        success: function(xhr, textStatus, data){
+               console.log("success");
+        },
+        error: function(textStatus, errorThrown){
+        console.log(errorThrown);
+        }
+    });
+    
+    document.location.href = "index.html";
+}

@@ -134,15 +134,20 @@ window.onload = function () {
             document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
             document.getElementById("firstName").value = userJSON.data.Firstname;
             document.getElementById("lastName").value = userJSON.data.LastName;
-            document.getElementById("form-country").value = userJSON.data.Country;
-            document.getElementById("oldEmail").value = userJSON.data.Email;
-            document.getElementById("oldPassword").value = userJSON.data.password;
+            document.getElementById("streetName").value = userJSON.data.StreetName;
+            document.getElementById("houseNumber").value = userJSON.data.HouseNumber;
+            document.getElementById("postcode").value = userJSON.data.Postcode;
+            document.getElementById("city").value = userJSON.data.City;
+            document.getElementById("institution").value = userJSON.data.Institution;
+            document.getElementById("email").value = userJSON.data.Email;
+            document.getElementById("newPassword").value = userJSON.data.Password;
+            document.getElementById("country").value = userJSON.data.Country;
 
 
             /** change '/' into '.' **/
-            var str = document.getElementById("oldEmail").value;
+            var str = document.getElementById("email").value;
             var res = str.replace("/", ".");
-            document.getElementById("oldEmail").value = res;
+            document.getElementById("email").value = res;
 
             break;
 

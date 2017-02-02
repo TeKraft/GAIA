@@ -57,7 +57,7 @@ function makeTreeComponents(name) {
     //console.log(curProject);
 
     var scripts = createScriptNames(name);
-    
+
     var images = createScriptNames(name);
 
     //console.log(document.getElementById("jstree"));

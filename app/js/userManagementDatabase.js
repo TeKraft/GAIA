@@ -127,3 +127,51 @@ function deleteUser() {
 		}
 	});
 };
+
+
+
+function editUser(){
+    var firstname = document.getElementById("firstName").value;
+    var lastname = document.getElementById("lastName").value;
+    var streetname = document.getElementById("streetName").value;
+    var housenumber = document.getElementById("houseNumber").value;
+    var postcode = document.getElementById("postcode").value;
+    var city = document.getElementById("city").value;
+    var institution = document.getElementById("institution").value;
+    var email = document.getElementById("email").value;
+    var newPassword = document.getElementById("newPassword").value;
+    var country = document.getElementById("country").value;
+    
+    
+    
+    
+
+    
+    var hashPassword = newPassword.hashCode();
+    
+     curUser = '{'
+        +'"Firstname":' +'"' + firstname + '"' +', '
+        +'"LastName":' +'"' + lastname + '"' +', '
+        +'"StreetName":' +'"' + streetname + '"' +', '
+        +'"HouseNumber":' +'"' + housenumber + '"' +', '
+        +'"Postcode":' +'"' + postcode + '"' +', '
+        +'"City":' +'"' + city + '"' +', '
+        +'"Institution":' +'"' + institution + '"' +', '
+        +'"Email":' +'"' + email + '"' +', '
+        +'"Password":' +'"' + hashPassword + '"' +', '
+        +'"Country":' +'"' + country + '"'
+    +'}';
+    console.log(JSON.parse(curUser));
+    
+    var temp = document.cookie.split ("=");
+    var oldUser = JSON.parse(temp[1]);
+    console.log(oldUser.name);
+    
+    updateFeatureData(oldUser.name,JSON.parse(curUser));
+    
+    document.cookie = "";
+    document.location.href  = "index.html";
+
+    
+}
+
