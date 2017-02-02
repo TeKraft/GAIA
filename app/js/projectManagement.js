@@ -32,11 +32,13 @@ function saveProject() {
     getProjectByName(projectTitle);  
     var existingProject = tempProject;
         
-    if(existingProject != undefined){
-        alert("Projekt already exists");
-        console.log(existingProject);
-        return;
-    }  else  {
+
+            if(existingProject != undefined &&existingProject.name === projectTitle){
+                alert("Projekt already exists");
+                console.log(existingProject);
+                return;
+            }  
+            else  {
     
    
     
@@ -217,10 +219,23 @@ function isEditing(){
 }
 
 function deleteProject(id) {
-    
+    var tempCookie=document.cookie.split("=");
     if (id == "") {
-    console.log("value empty");
-  }  else {
+        console.log("value empty");
+    }else {
+        
+        
+    getProjectByName(id);  
+    var existingProject = tempProject;
+    var user = JSON.parse(tempCookie[1]);
+        
+    if(user.name != tempProject.data.Creator){
+        alert("you must be the creator");
+        return;
+    }else{
+    console.log(user.name);
+    console.log(tempProject.data.Creator);    
+
 
     var folderTitle = id;
     console.log("deleteProjectFolder("+id+")");
@@ -241,14 +256,15 @@ function deleteProject(id) {
             console.log("error by deleting folder");
         }
     });
-  }
+  
+    
+   
+    
+
     
     
     
-    
-    
-    
-    
+
 	// ajax Post
 	$.ajax({
 		url: '/deleteFeature?name=' + id,
@@ -274,6 +290,10 @@ function deleteProject(id) {
 			console.log(errorThrown);
 		}
 	});
+    
+    }
+    }
+
 }; 
 
 
