@@ -165,6 +165,17 @@ app.get('/execScript', function (req, res) {
   })
 });
 
+// get sciDB data as csv
+app.get('/getsciDBdata', function (req, res) {
+    var childProcess = require('child_process');
+    childProcess.exec('Rscript ../scriptsR/writeCSV.R', function (err, stdout, stderr) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+    })
+});
+
 var fs = require('fs');
 // add Folder for project to node db
 app.post('/addFolder*', function (req, res) {

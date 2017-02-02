@@ -1,3 +1,5 @@
+var localhost = 'http://localhost:3000';
+
 function executeScript(){
     var url = 'http://localhost:3000' + '/execScript';
     $.ajax({
@@ -32,3 +34,17 @@ function createiframe() {
   console.log("iframe data");
   console.log($('#leafletmap').contents());
 }
+
+// get csv data - datasets.csv has data about sciDB datasets
+function getCSV() {
+  console.log("getCSV()");
+
+  var url = localhost + '/getsciDBdata';
+  $.ajax({
+    type: 'GET',
+    url: url,
+    success: function (content, textStatus) {
+      console.log("success getCSV()");
+    }
+  });
+};
