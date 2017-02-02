@@ -1,13 +1,17 @@
 var localhost = 'http://localhost:3000';
 
 function executeScript(){
+    var script = aktScript;
     var url = 'http://localhost:3000' + '/execScript';
+    var currentProject = document.cookie.split("=")[3];
     $.ajax({
         type: 'GET',
+        data: {project: ""+currentProject+"", script: ""+script+""},
         url: url,
         success: function (content, textStatus) {}
     });
   };
+
 
 function getMap() {
   document.getElementById("leafletmap").innerHTML = "";

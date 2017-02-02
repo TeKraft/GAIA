@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css" />
     <!-- add a favicon to a website -->
     <link rel="icon" href="img/GAIA.png">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -52,16 +53,74 @@
         <div class="row">
             <div class="span12">
                 <div class="thumbnail center well well-small text-left">
-                    <form>
-                        <label for="first name">first name: </label>
-                        <input type="text" class="inputtext" id="firstName" name="first name" required="required" pattern="[A-Za-z]{1,20}" autofocus="1">
-                        <br>
-                        <label for="last name">last name: </label>
-                        <input type="text" id="lastName" name="last name" required="required" pattern="[A-Za-z]{1,20}">
-                        <br>
-                        <br>
-                        <label for="Stadt">country:
-                            <select name="country" id="form-country">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="fistName" class="col-sm-2 control-label">First name: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="firstName" name="first name" placeholder="First name..." autofocus="1">
+                                </div>
+                         </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName" class="col-sm-2 control-label">Last name: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="lastName" name="last name" placeholder="Last name..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="streetName" class="col-sm-2 control-label">Street name: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="streetName" name="street name"  placeholder="Street name..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="houseNumber" class="col-sm-2 control-label">House number: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="houseNumber" name="house number" placeholder="House number..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="postcode" class="col-sm-2 control-label">Postcode: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="postcode" name="postcode"  placeholder="Postcode..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="city" class="col-sm-2 control-label">City: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="city" name="city"  placeholder="City..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="institution" class="col-sm-2 control-label">Institution: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="institution" name="institution"  placeholder="Institution..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">E-Mail: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="email" name="E-Mail"  placeholder="E-Mail..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="NewPassword" class="col-sm-2 control-label">New password: </label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-constrol" id="newPassword" name="new password"  placeholder="New password..." >
+                                </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="ConfirmNewPassword" class="col-sm-2 control-label">Confirm new password: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-constrol" id="confirmNewPassword" name="confirmNewPassword"  placeholder="Confirm new password..." >
+                                </div>
+                         </div>
+                       
+                       
+                       
+                       <div class="form-group">
+                            <label for="city" class="col-sm-2 control-label">Country:
+                              <select name="country" id="country">
                                 <optgroup label="A">
                                     <option value="AF">Afghanistan</option>
                                     <option value="AX">Åland Islands</option>
@@ -360,27 +419,20 @@
                                 <optgroup label="Z">
                                     <option value="ZM">Zambia</option>
                                     <option value="ZW">Zimbabwe</option>
-                            </select>
-                        </label>
-                        <br>
-                        <br>
-                        <br>
-                        <label for="Email">old Email: </label>
-                        <input type="text" id="oldEmail" name="Email">
-                        <br>
-                        <label for="newEmail">new Email: </label>
-                        <input type="text" id="newEmail" name="Email">
-                        <br>
-                        <br>
-                        <label for="old password">old password: </label>
-                        <input type="password" id="oldPassword" name="old passwort">
-                        <br>
-                        <label for="new password">new password: </label>
-                        <input type="password" id="newPassword" name="new passwort">
-                        <br>
-                        <br>
-                        <br>
+                            </select> 
+                               </label>
+                        </div>
+                   
+                       
+                       
+                       
+                     
+                        
+                        
+                        
+                        
                         <input type="button" value="submit" onclick='editUser()'>
+                        
                     </form>
                     <button type="button" id='deleteBtn' onclick='updateDB()'> Delete Profil</button>
                 </div>
@@ -388,12 +440,13 @@
         </div>
     </div>
     <!-- library imports -->
+    <script src="js/projectSettings.js"></script>
     <script type="text/javascript" src="lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
     <script src="js/sessionFunctionality.js"></script>
     <script src="js/userManagementDatabase.js"></script>
     <script src="js/userManagementfunctionality.js"></script>
-    <script src="js/profiledit.js"></script>
     <script src="js/databaseHandle.js"></script>
+
 </body>
 </html>
