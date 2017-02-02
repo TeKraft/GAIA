@@ -1,4 +1,5 @@
 "use strict";
+var checkInputField;
 
 var firstName;
 var lastName;
@@ -19,19 +20,43 @@ var access = false;
 var userdata = {
 
 };
-
 var objects = 0;
+
+// function to check input fields onLoad
+function loadID(id) {
+  var inputVal = document.getElementById(id).value;
+	var input = document.getElementById(id);
+
+	if (id == undefined || inputVal === "") {
+		input.style.backgroundColor = 'IndianRed';
+		checkInputField = false;
+	} else {
+		input.style.backgroundColor = 'white';
+	}
+}
 /*
 creates a JSON string from the input fields
 */
 function loadUser(){
+  checkInputField = true;
+  var data = ["form-first-name", "form-last-name", "form-street-name", "form-house-number", "form-postcode", "form-city", "form-institution", "form-email", "form-password", "form-confirmPassword", "form-country"];
+
+  for (var i=0; i<data.length; i++) {
+    loadID(data[i]);
+  };
+
+  if (checkInputField == false) {
+    console.log("no input in field");
+  } else {
     userdata[0] = firstName;
     userdata[1] = lastName;
     userdata[2] = streetName;
     userdata[3] = houseNumber;
     userdata[4] = postcode;
-    userdata[5] =city;
+    userdata[5] = city;
     userdata[6] = institution;
+
+console.log(userdata);
 
     var editEmail = email.replace("." , "/");
     userdata[7] = editEmail;
@@ -51,6 +76,7 @@ function loadUser(){
         +'"Password":' +'"' +userdata[8] + '"' +', '
         +'"Country":' +'"' +userdata[9] + '"'
     +'}';
+  }
 }
 
 /*
@@ -107,12 +133,16 @@ function loadCountry() {
 }
 
 function loadLoginName(){
-    loginName = document.getElementById('form-Login-username').value
-    console.log(loginName);
+
+  loadID('form-Login-username');
+  loginName = document.getElementById('form-Login-username').value
+  console.log(loginName);
 }
+
 function loadLoginPW(){
-    loginPW = document.getElementById('form-login-pw').value
-    console.log(loginPW.hashCode());
+  loadID('form-login-pw');
+  loginPW = document.getElementById('form-login-pw').value
+  console.log(loginPW.hashCode());
 }
 
 
@@ -126,7 +156,7 @@ String.prototype.hashCode = function() {
   }
   return hash;
 
-    
-    
-    
+
+
+
      };

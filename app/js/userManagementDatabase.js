@@ -12,15 +12,19 @@ var curProject;
  * saves a JSON object to the Database. The Object is a new User.
  */
 function saveRegister() {
-    // creates a new User from the input fields (userManagementfunctionality)
-    loadUser();
+  // creates a new User from the input fields (userManagementfunctionality)
+  loadUser();
+
+  // check input field when try to register
+  if (checkInputField == false) {
+    window.alert("register not possible \n please fill out every field");
+  } else {
     newUser = curUser;
-    
+
     var password = document.getElementById('form-password').value;
     var confirmPassword = document.getElementById('form-confirmPassword').value;
     var content = JSON.parse(newUser);
-    
-        
+
      String.passwort = function () {
         var hash = 0,
             i, chr, len;
@@ -32,9 +36,7 @@ function saveRegister() {
         }
         return hash;
     };
-    
-    
-    
+
     console.log(newUser);
     //hier statt name email denke ich
     if (name != undefined && content != null &&  password==confirmPassword) {
@@ -58,6 +60,7 @@ function saveRegister() {
     } else {
         console.log("fehler save to sb undefined oder null");
     }
+  }
 };
 
 /**
@@ -72,9 +75,13 @@ function loadFromDB() {
         url: url,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
             loadLoginName();    // aus userManagementfunctionality
             loadLoginPW();      // aus userManagementfunctionality
+
+            // check input field when try to login
+            if (checkInputField == false) {
+              window.alert("please insert email and password");
+            } else {
             for(var i=0; i<= content.length;i++){
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Email != undefined){
                 //unnötig wenn nur name des features gecheckt wird
@@ -95,7 +102,7 @@ function loadFromDB() {
             }
             }
             //zum schluss soll der user auf die home seite geschickt werden.
-            $('#tableDB').removeClass('hidden');
+          }
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
