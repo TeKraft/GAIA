@@ -124,7 +124,7 @@ var createScriptNames = function(projectname){
     for (var i in ScriptArray){
         var ending = ScriptArray[i].substr(ScriptArray[i].length-2, ScriptArray[i].length);
         if(ending === '.R'){
-            div = div + ("<li id='" + ScriptArray[i] + "'> "+ ScriptArray[i] + "</li>");
+            div = div + ("<li" + " id='" + ScriptArray[i] + "' " + " data-jstree='" + "{'icon':" + "//jstree.com/tree.png" + "}'" + ">"  + ScriptArray[i] + "</li>");
         }else{
             
         }
