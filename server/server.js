@@ -270,6 +270,7 @@ app.get('/', function(req, res){
 
 });
 
+// upload of script, image, result
 app.post('/upload*', function(req, res){
 
   var currentFolder = req.url.substring(15, 22);
@@ -302,5 +303,12 @@ app.post('/upload*', function(req, res){
 
   // parse the incoming request containing the form data
   form.parse(req);
+});
 
+//share unique link
+app.get('/uniqueLink', function(req, res) {
+  Feature.find(function (error, features) {
+      if (error) return console.error(error);
+      res.send(features);
+  });
 });
