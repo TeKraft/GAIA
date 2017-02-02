@@ -87,7 +87,9 @@ var newScript = function(){
         var scriptName = prompt("Please enter a name");
         var file = new File([""], "");
         var formData = new FormData();
-
+        if(scriptName == "" || scriptName == undefined){
+            return;
+        }
         formData.append('uploads[]', file, scriptName+".R");
 
         $.ajax({
