@@ -5,7 +5,7 @@ function executeScript(){
     var url = 'http://localhost:3000' + '/execScript';
     var currentProject = document.cookie.split("=")[3];
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         data: {project: ""+currentProject+"", script: ""+script+""},
         url: url,
         success: function (content, textStatus) {}

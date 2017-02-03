@@ -7,7 +7,7 @@ var path = require('path');
 var app = express();
 var formidable = require('formidable');
 var fs = require('fs');
-var EasyZip = require('easy-zip').EasyZip; 
+var EasyZip = require('easy-zip').EasyZip;
 var zip = new EasyZip();
 
 /* get home page */
@@ -145,14 +145,16 @@ app.post('/deleteFeature*', function (req, res) {
 /Function for executing a Rscript on server via childProzess
 /
 */
-app.get('/execScript', function (req, res) {
-    var childProcess = require('child_process');
-    childProcess.exec('Rscript ../app/projects/' + req.query.project + '/Scripts/' + req.query.script, function (err, stdout, stderr) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    })
+app.post('/execScript', function (req, res) {
+  var childProcess = require('child_process');
+  var project = req.body.project;
+  var script = req.body.script;
+  console.log("PROJECT :"+project + "   SCRIPT: " + script);
+  childProcess.exec('Rscript ../Scripts/'+script+'',{cwd: '../app/projects/' + project + '/Results/'}, (err) => {
+    if (err) {
+      console.error(err);
+    }
+  })
 });
 
 // get sciDB data as csv
@@ -347,44 +349,37 @@ app.get('/uniqueLink', function (req, res) {
 
 
 
-//add text  
+//add text
 // zip.file('hello.txt','Hello World！');
-// zip.writeToFile('text.zip');//write zip data to disk 
- 
-//add folder 
+// zip.writeToFile('text.zip');//write zip data to disk
+
+//add folder
 //var zip2 = new EasyZip();
 //var jsFolder = zip2.folder('js');
 //jsFolder.file('hello.js','alert("hello world")');
 //zip2.writeToFile('folder.zip');
- 
-//add file 
+
+//add file
 //var zip3 = new EasyZip();
 //zip3.addFile('main.js','easyzip.js',function(){
 //    zip3.writeToFile('file.zip');
 //});
- 
-//batch add files 
+
+//batch add files
 //var files = [
 //    {source : 'easyzip.js',target:'easyzip.js'},
-//    {target : 'img'},//if source is null,means make a folder 
+//    {target : 'img'},//if source is null,means make a folder
 //    {source : 'jszip.js',target:'lib/tmp.js'}
 //];
 //var zip4 = new EasyZip();
 //zip4.batchAdd(files,function(){
 //    zip4.writeToFile('batchadd.zip');
 //});
- 
-
- 
-//write data to http.Response 
-//zip.writeToResponse(response,'attachment.zip'); 
- 
-//write to file sync  
-//zip.writeToFileSycn(filePath); 
 
 
 
+//write data to http.Response
+//zip.writeToResponse(response,'attachment.zip');
 
-
-
-
+//write to file sync
+//zip.writeToFileSycn(filePath);
