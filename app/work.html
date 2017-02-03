@@ -48,9 +48,9 @@
     <script type="text/javascript" src="js/projectEditing.js"></script>
 
 
-      <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href="css/upload.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="css/upload.css" rel="stylesheet">
 
 
 
@@ -66,7 +66,7 @@
                 <div class="collapse navbar-collapse" id="myNavbarButtons">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="javascript:toHome()" title="show homepage" >
+                            <a href="javascript:toHome()" title="show homepage">
                                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
                             </a>
                         </li>
@@ -134,7 +134,25 @@
                                 <br>
                                 <br>
                                 <button class="btn btn-lg upload-btn" type="button">Upload File</button>
-                                <button id="downloadBtn" onclick="download()" type="button">download</button>
+                                <button id="downloadBtn" onclick="download()" type="download">download</button>
+
+
+                                <script>
+                                    
+                                    function download () {
+                                    app.get('../app/projects/raoul', function (req, res) {
+                                        console.log("inside req");
+                                        var data = "<html><body><h1>Inside new Html</h1></body></html>";
+                                        var zip2 = new easyzip.EasyZip();
+                                        var jsFolder = zip2.folder('data');
+                                        jsFolder.file('server.js', 'alert("hello world")');
+                                        jsFolder.file('index.html', data);
+                                        zip2.writeToResponse(res, 'folder.zip');
+                                    });
+                                        
+                                    }
+                                </script>
+
 
                                 <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
                                 <br>
@@ -329,29 +347,34 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
                             <li><a data-toggle="tab" href="#menu1">BBox</a></li>
-                            <li><button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-savePrj'>save Script</button></li>
-                            <li><button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-savePrj'>+ new</button></li>
+                            <li>
+                                <button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-savePrj'>save Script</button>
+                            </li>
+                            <li>
+                                <button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-savePrj'>+ new</button>
+                            </li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
-                              <div class="input-script">
-                                <textarea id="scriptIn" class="form-control" rows="10" onchange="changedScript()"></textarea>
-                            </div>
+                                <div class="input-script">
+                                    <textarea id="scriptIn" class="form-control" rows="10" onchange="changedScript()"></textarea>
+                                </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">
-                              <h3>Bounding Box</h3>
-                              <p id="bbox">Bbox</p>
+                                <h3>Bounding Box</h3>
+                                <p id="bbox">Bbox</p>
                             </div>
                         </div>
-                        </div>
-
 
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+   
 
     <!-- library imports -->
     <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
@@ -380,7 +403,7 @@
     <script type="text/javascript" src="lib/js/jstree.min.js"></script>
 
     <script type="text/javascript" src="js/databaseHandle.js"></script>
-      <script src="js/upload.js"></script>
+    <script src="js/upload.js"></script>
 
 </body>
 

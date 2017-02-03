@@ -7,6 +7,8 @@ var path = require('path');
 var app = express();
 var formidable = require('formidable');
 var fs = require('fs');
+var EasyZip = require('easy-zip').EasyZip; 
+var zip = new EasyZip();
 
 /* get home page */
 app.use(express.static("../server"));
@@ -144,13 +146,13 @@ app.post('/deleteFeature*', function (req, res) {
 /
 */
 app.get('/execScript', function (req, res) {
-  var childProcess = require('child_process');
-  childProcess.exec('Rscript ../app/projects/'+req.query.project+'/Scripts/'+req.query.script, function (err, stdout, stderr) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-  })
+    var childProcess = require('child_process');
+    childProcess.exec('Rscript ../app/projects/' + req.query.project + '/Scripts/' + req.query.script, function (err, stdout, stderr) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+    })
 });
 
 // get sciDB data as csv
@@ -158,8 +160,8 @@ app.get('/getsciDBdata', function (req, res) {
     var childProcess = require('child_process');
     childProcess.exec('Rscript ../scriptsR/writeCSV.R', function (err, stdout, stderr) {
         if (err) {
-          console.log(err);
-          return;
+            console.log(err);
+            return;
         }
     })
 });
@@ -171,8 +173,8 @@ app.post('/addFolder*', function (req, res) {
     var dir = '../app/projects/' + projecttitle;
     console.log(fs.existsSync(dir));
     if (fs.existsSync(dir)) {
-      console.log("Directory exists already. Please choose a different name!")
-    }else{
+        console.log("Directory exists already. Please choose a different name!")
+    } else {
         fs.mkdir(dir, function (error) {
             if (error) {
                 console.error(error);
@@ -207,6 +209,7 @@ function folderStructure(foldertitle) {
 // gives back array of folder names
 var folderFiles = new Array();
 
+
 app.get('/readFolder*', function(req, res) {
   var projecttitle = req.url.substring(17, req.url.length);
   var dir = '../app/projects/'+ projecttitle;
@@ -226,6 +229,8 @@ app.get('/readFolder*', function(req, res) {
       res.send(folderFiles);
     }
   })
+
+
 
 });
 
@@ -265,45 +270,46 @@ app.listen(config.httpPort, function () {
 
 app.use(express.static(path.join(__dirname, 'app')));
 
-app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, 'app/work.html'));
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'app/work.html'));
 
 });
 
 // upload of script, image, result
-app.post('/upload*', function(req, res){
+app.post('/upload*', function (req, res) {
 
-  var currentFolder = req.url.substring(15, 22);
-  var currentProject = req.url.substring(31, req.url.length);
+    var currentFolder = req.url.substring(15, 22);
+    var currentProject = req.url.substring(31, req.url.length);
 
-  // create an incoming form object
-  var form = new formidable.IncomingForm();
+    // create an incoming form object
+    var form = new formidable.IncomingForm();
 
-  // specify that we want to allow the user to upload multiple files in a single request
-  form.multiples = true;
+    // specify that we want to allow the user to upload multiple files in a single request
+    form.multiples = true;
 
-  // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '../app/projects/' + currentProject + '/' + currentFolder);
+    // store all uploads in the /uploads directory
+    form.uploadDir = path.join(__dirname, '../app/projects/' + currentProject + '/' + currentFolder);
 
-  // every time a file has been uploaded successfully,
-  // rename it to it's orignal name
-  form.on('file', function(field, file) {
-    fs.rename(file.path, path.join(form.uploadDir, file.name));
-  });
+    // every time a file has been uploaded successfully,
+    // rename it to it's orignal name
+    form.on('file', function (field, file) {
+        fs.rename(file.path, path.join(form.uploadDir, file.name));
+    });
 
-  // log any errors that occur
-  form.on('error', function(err) {
-    console.log('An error has occured: \n' + err);
-  });
+    // log any errors that occur
+    form.on('error', function (err) {
+        console.log('An error has occured: \n' + err);
+    });
 
-  // once all the files have been uploaded, send a response to the client
-  form.on('end', function() {
-    res.end('success');
-  });
+    // once all the files have been uploaded, send a response to the client
+    form.on('end', function () {
+        res.end('success');
+    });
 
-  // parse the incoming request containing the form data
-  form.parse(req);
+    // parse the incoming request containing the form data
+    form.parse(req);
 });
+
 
 
 
@@ -325,4 +331,59 @@ app.get('/uniqueLink*', function(req, res) {
       console.log(features[0]._id);
       res.send(features);
   });
+
+//share unique link
+app.get('/uniqueLink', function (req, res) {
+    Feature.find(function (error, features) {
+        if (error) return console.error(error);
+        res.send(features);
+    });
 });
+
+
+
+///////////////////////////////// download
+
+
+
+//add text  
+// zip.file('hello.txt','Hello World！');
+// zip.writeToFile('text.zip');//write zip data to disk 
+ 
+//add folder 
+//var zip2 = new EasyZip();
+//var jsFolder = zip2.folder('js');
+//jsFolder.file('hello.js','alert("hello world")');
+//zip2.writeToFile('folder.zip');
+ 
+//add file 
+//var zip3 = new EasyZip();
+//zip3.addFile('main.js','easyzip.js',function(){
+//    zip3.writeToFile('file.zip');
+//});
+ 
+//batch add files 
+//var files = [
+//    {source : 'easyzip.js',target:'easyzip.js'},
+//    {target : 'img'},//if source is null,means make a folder 
+//    {source : 'jszip.js',target:'lib/tmp.js'}
+//];
+//var zip4 = new EasyZip();
+//zip4.batchAdd(files,function(){
+//    zip4.writeToFile('batchadd.zip');
+//});
+ 
+
+ 
+//write data to http.Response 
+//zip.writeToResponse(response,'attachment.zip'); 
+ 
+//write to file sync  
+//zip.writeToFileSycn(filePath); 
+
+
+
+
+
+
+
