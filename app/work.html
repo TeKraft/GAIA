@@ -138,7 +138,7 @@
 
 
                                 <script>
-                                    
+
                                     function download () {
                                     app.get('../app/projects/raoul', function (req, res) {
                                         console.log("inside req");
@@ -149,7 +149,7 @@
                                         jsFolder.file('index.html', data);
                                         zip2.writeToResponse(res, 'folder.zip');
                                     });
-                                        
+
                                     }
                                 </script>
 
@@ -175,8 +175,7 @@
                             <div id="functionsMap" class="panel panel-body">
                                 <button id='test02' onclick='executeScript()' type='button' class='btn btn-test'>execute Script</button>
                                 <br>
-                                <button id='test04' onclick='importHTML()' type='button' class='btn btn-test'>import HTML</button>
-                                <button id='test05' onclick='createiframe()' type='button' class='btn btn-test'>create iframe</button>
+                                <button id='test05' onclick='createiframe()' type='button' class='btn btn-test'>Load_From_Result</button>
                                 <button id='test03' onclick='getMap()' type='button' class='btn btn-test'>getMap</button>
                                 <br>
                                 <br>
@@ -374,7 +373,7 @@
             </div>
         </div>
     </div>
-   
+
 
     <!-- library imports -->
     <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
