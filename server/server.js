@@ -215,7 +215,96 @@ var folderFiles = new Array();
 app.get('/readFolder*', function(req, res) {
   var projecttitle = req.url.substring(17, req.url.length);
   var dir = '../app/projects/'+ projecttitle;
+  console.log(dir);
+  fs.readdir(dir, function (error, files) {
+    // console.log(files);
+    if (files == undefined) {
+      // console.log("undefined error");
+      return console.error(error); }
+    else {
+        folderFiles = [];
+      // console.log("no error");
+      files.forEach(file => {
+        // console.log(file);
+        folderFiles.push(file);
+      });
+      if (error) return console.error(error);
+        res.send(folderFiles);
+    }
+  })
+});
 
+
+
+
+app.get('/readFile*', function(req, res) {
+  var projecttitle = req.url.substring(15, req.url.length);
+    console.log(projecttitle);
+  var dir = '../app/projects/'+ projecttitle;
+    
+fs.readFile(dir, 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+    res.send(data);
+  console.log(data);
+});
+});
+    
+
+// add Folder for project to node db
+app.post('/updateFile*', function (req, res) {
+    var projecttitle = req.url.substring(16, req.url.length);
+    
+    var scriptName = req.body.scriptName;
+    var projectName = req.body.projectName;
+    var data = req.body.script;
+    
+    //var filedesc = req.desc;
+    var dir = '../app/projects/' + projecttitle;
+    console.log(fs.existsSync(dir));
+    
+    //console.log("../app/projects/" + projectName + "/Scripts/" + scriptName);
+
+
+    
+    var filePath = "../app/projects/" + projectName + "/Scripts/" + scriptName;
+    console.log("go" + filePath);
+    
+    fs.writeFile(filePath , data, function (err) {           // "einProjekt/Scripts/"+ "dritteRDatei.R"
+    if (err) throw err;
+    console.log('It\'s saved!');
+    });
+});
+    
+
+app.post('/deleteFile*', function (req, res) {
+    console.log("start");
+    var projecttitle = req.url.substring(16, req.url.length);
+    
+    var scriptName = req.body.scriptName;
+    var projectName = req.body.projectName;
+    //var data = req.body.script;
+    
+    //var filedesc = req.desc;
+    //var dir = '../app/projects/' + projecttitle;
+    //console.log(fs.existsSync(dir));
+    
+    //console.log("../app/projects/" + projectName + "/Scripts/" + scriptName);
+
+
+    
+    //var filePath = "../app/projects/" + projectName + "/Scripts/" + scriptName;
+    //console.log("go" + filePath);
+    
+    fs.unlink("../app/projects/" + projectName + "/Scripts/" + scriptName , function (err) {           // "einProjekt/Scripts/"+ "dritteRDatei.R"
+    if (err) throw err;
+    console.log('It\'s deleted!');
+    });
+});
+    
+    
+   /*
   fs.readdir(dir, function (error, files) {
     // console.log(files);
     if (files == undefined) {
@@ -231,10 +320,12 @@ app.get('/readFolder*', function(req, res) {
       res.send(folderFiles);
     }
   })
-
-
-
 });
+*/
+
+
+
+
 
 // delete project folder
 app.post('/deleteProjectFolder*', function (req, res) {
@@ -272,10 +363,10 @@ app.listen(config.httpPort, function () {
 
 app.use(express.static(path.join(__dirname, 'app')));
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'app/work.html'));
+//app.get('/', function (req, res) {
+//    res.sendFile(path.join(__dirname, 'app/work.html'));
 
-});
+//});
 
 // upload of script, image, result
 app.post('/upload*', function (req, res) {

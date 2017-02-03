@@ -112,6 +112,7 @@ var createImageNames = function(projectname){
 
 
 var createScriptNames = function(projectname){
+    
     readProjectFolderbyName(projectname + "/Scripts");  //projectname + "Scripts"
     var ScriptArray = array_unique(temp);
 
@@ -128,8 +129,57 @@ var createScriptNames = function(projectname){
     return div;
 }
 
+var rToInput = function(scriptname){
+    var tempCookie = document.cookie.split("=");
+    var projectname = tempCookie[3];
+    console.log(projectname);
+    var path = projectname + "/Scripts/" + scriptname;
+    
+    //hier erst gucken ob .R Datei ist.
+    if(scriptname.includes('.R')){
+        readScriptbyName(path);
+        console.log(tempScript);
+        document.getElementById("scriptIn").value = tempScript;
+    }else{
+        return;
+    }
+    
+}
 
 
+
+
+
+var tempScript;
+var readScriptbyName = function(path){
+  if (path == "") {
+    console.log("value empty");
+  }  else {
+
+      var path = "" + path;
+      
+    //var folderRead = name;
+    //console.log("readProjectFolder("+folderRead+")");
+
+    var url = 'http://localhost:3000' + '/readFile?name=' + path;
+    // perform post ajax
+    $.ajax({
+        type: 'GET',
+        url: url,
+        async:false,
+        timeout: 5000,
+        success: function (content, textStatus) {
+            console.log(content);
+            tempScript = content;
+            //cb(content);
+            return content;
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log("no success");
+        }
+    });
+  }
+};
 
 var aktScript;
 function createTree() {
@@ -138,8 +188,21 @@ function createTree() {
         $('#jstree').jstree();
         // 7 bind to events triggered on the tree
         $('#jstree').on("changed.jstree", function (e, data) {
-            console.log(data.selected[0]);
+        if(saved == false){
+            if (confirm("did you save your Project?") == true) {
+                console.log(data.selected[0]);
+                aktScript = data.selected[0];
+                rToInput(aktScript);
+            } else {
+                return;
+            }
+            }else{
+                console.log(data.selected[0]);
             aktScript = data.selected[0];
+            rToInput(aktScript);
+    }
+            
+
             //loadScript(data.selected[0]);
         });
         // 8 interact with the tree - either way is OK
@@ -151,7 +214,7 @@ function createTree() {
     });
 }
 
-var saved = false;
+var saved = true;
 
 var changedScript = function(){
     saved = false;

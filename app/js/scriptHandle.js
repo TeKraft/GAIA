@@ -7,10 +7,11 @@ var currentProject = document.cookie.split("=");
 var createScript = function(name){
     input = document.getElementById('scriptIn').value;
 
-    getProjectbyName(currentProject[3],"rkanschat@gmx.de");
+    getProjectbyName(currentProject[3]);
 
     addScript(loadedProject,name);
     currentScript = name;
+    document.location.href = "work.html";
 }
 
 // var loadScript1 = function(scriptname){
@@ -41,13 +42,53 @@ var createScript = function(name){
 // }
 
 
-var einzweitest = "blabli";
-
-
 var saveScript = function(){
     saved = true;
-    var content = document.getElementById("scriptIn");
-    console.log(document.getElementById("scriptIn").value);
+    var content = document.getElementById("scriptIn").value;
+    
+
+    //var scriptName = "dritteRDatei.R";
+ 
+    //if(scriptName == "" || scriptName == undefined){
+        //return;
+    //}
+    editFile(content);
+}
+
+
+
+var editFile = function(newContent){
+
+    
+    
+    var namevomScript = aktScript;
+    var projectName = document.cookie.split("=")[3];
+    var data = {
+        "script" : "" + newContent  + "" ,
+        "scriptName"  : "" + namevomScript + "",
+        "projectName"  : "" + projectName + "",
+    }
+    console.log(document.cookie.split("=")[3]);
+    console.log(projectName + "   "  + namevomScript);
+    
+    
+    
+    var url = '/updateFile?name' + projectName +"/Scripts/" + namevomScript;  //'http://localhost:3000' 
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data:data,
+        //inhalt:data,
+        timeout: 5000,
+        success: function (data, textStatus) {
+            console.log(data);
+            console.log("success");
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log("error by creating folder");
+        }
+    });
 }
 
 
@@ -55,9 +96,11 @@ var saveScript = function(){
 
 
 
-
-
 var addScript = function(project,name){
+    if(project === undefined){
+        return;
+    }
+    
     console.log(project);
     var tempCreator = project.data.Creator;
     var tempCollaborators = project.data.Colaborators;
@@ -150,3 +193,41 @@ function readProjectFolderbyName(name) {    //name
 function cb(p){
     return p;
 }
+
+
+
+
+var deleteScript = function(){
+    var url = '/deleteFile?name' + "einProjekt" +"/Scripts/" + "dritteRDatei.R";  //'http://localhost:3000' 
+
+    
+    var namevomScript = aktScript;
+    var projectName = document.cookie.split("=")[3];
+    var data = {
+        "scriptName"  : "" + namevomScript + "",
+        "projectName"  : "" + projectName + "",
+    }
+    
+    
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data:data,
+        //inhalt:data,
+        timeout: 5000,
+        success: function (data, textStatus) {
+            console.log(data);
+            console.log("success");
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log("error by creating folder");
+        }
+    });
+    
+    document.location.href = "work.html";
+}
+
+
+
+
+
