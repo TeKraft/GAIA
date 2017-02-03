@@ -1,69 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
-  <meta name="author" content="GAIA"/>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
+    <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
+    <meta name="author" content="GAIA" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="js/dist/themes/default/style.min.css" />
+    <link rel="icon" href="img/GAIA.png">
 </head>
+
 <body id="myBody">
     <div id="myNavbar">
-      <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbarButtons">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                <a title="show homepage" href="#">Gaia</a>
-              </li>
-              <li>
-                <a title="show homepage" href="home.html">
-  								<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
-  							</a>
-              </li>
-              <li>
-                <a title="show workplace" href="work.html">
-                  <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
-                </a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="gaiaProfilSymb">symbol? <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="profil.html">Profil</a></li>
-                  <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
-                  <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
-                  <li><a title="logout" onclick='logout()'>Logout</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbarButtons">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a title="show homepage" href="#">Gaia</a>
+                        </li>
+                        <li>
+                            <a title="show homepage" href="home.html">
+                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
+                            </a>
+                        </li>
+                        
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="gaiaProfilSymb">symbol? <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="profil.html">Profil</a></li>
+                                <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
+                                <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
+                                <li><a title="logout" onclick='logout()'>Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
-    <div>
-        <div class="container-fluid">
-            <h2>Gaia</h2>
-            <p>Webplatform for analyzing large images and data sets with R</p>
-            <img src="img/Logo.png" alt="Logo" style="width:304px;height:228px;">
-            <p>GAIA is a free to use service for analyzing phenomenons using big images and/or data sets using R-Script.</p>
-            <ul>Once registered, create projects and manage them</ul>
-            <ul>Input raw R-Script code or upload .r files</ul>
-            <ul>Share projects and scripts in a collaborative manner</ul>
-            <ul>This service is and will always be free of charge!</ul>
-            <h3>Tech</h3>
-            <h4>GAIA was developed and works purely on open source software and projects :</h4>
-          <ul>Bootstrap - Responsive HTML, CSS and Javascript framework</ul>
-          <ul>Node.js - evented I/O for the backend</ul>
-          <ul>MongoDB - Easy to use database</ul>
-          <ul>jQuery - duh!</ul>
-          <ul>Atom - Hackable texteditor</ul>
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div>
+                    <form class="form-horizontal">
+
+                        <h1>Gaia</h1>
+                        <br>
+
+                        <p>Webplatform for analyzing large images and data sets with R</p>
+                        <br>
+                        <br>
+                        <img src="img/Logo.png" alt="Logo" style="width:50%;height:50%;">
+                        <br>
+
+                        <p>GAIA is a free to use service for analyzing phenomenons using big images and/or data sets using R-Script.</p>
+                        <ul>Once registered, create projects and manage them</ul>
+                        <ul>Input raw R-Script code or upload .r files</ul>
+                        <ul>Share projects and scripts in a collaborative manner</ul>
+                        <ul>This service is and will always be free of charge!</ul>
+                        <br>
+
+
+                        <h3>Tech</h3>
+                        <br>
+                        <h4>GAIA was developed and works purely on open source software and projects :</h4>
+                        <ul>Bootstrap - Responsive HTML, CSS and Javascript framework</ul>
+                        <ul>Node.js - evented I/O for the backend</ul>
+                        <ul>MongoDB - Easy to use database</ul>
+                        <ul>jQuery - duh!</ul>
+                        <ul>Atom - Hackable texteditor</ul>
+
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
     <!-- library imports -->
     <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
     <script type="text/javascript" src="lib/js/jquery.js"></script>
@@ -72,4 +96,5 @@
     <script src="js/sessionFunctionality.js"></script>
 
 </body>
+
 </html>

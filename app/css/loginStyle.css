@@ -4,7 +4,7 @@ body {
     font-size: 16px;
     font-weight: 300;
     color: #888;
-    line-height: 20px;
+    line-height: 25px;
     text-align: center;
 }
 
@@ -108,7 +108,7 @@ img { max-width: 100%; }
 .top-content .description a:focus { border-bottom: 1px dotted #fff; }
 
 .form-box {
-	margin-top: 70px;
+	margin-top: 50px;
 }
 
 .form-top {
@@ -123,7 +123,7 @@ img { max-width: 100%; }
 .form-top-left {
 	float: left;
 	width: 75%;
-	padding-top: 25px;
+	padding-top: 10px;
 }
 
 .form-top-left h3 { margin-top: 0; color: #fff; }
@@ -135,7 +135,7 @@ img { max-width: 100%; }
 	padding-top: 5px;
 	font-size: 66px;
 	color: #fff;
-	line-height: 100px;
+	line-height: 0px;
 	text-align: right;
 	opacity: 0.3;
 }
@@ -190,7 +190,7 @@ footer {
 footer .footer-border {
 	width: 200px;
 	margin: 0 auto;
-	padding-bottom: 30px;
+	padding-bottom: 3px;
 	border-top: 1px solid #fff;
 	border-top: 1px solid rgba(255, 255, 255, 0.6);
 }

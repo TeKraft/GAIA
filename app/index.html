@@ -105,21 +105,29 @@
                                         <label class="sr-only" for="form-last-name"><span> Last name</span></label>
                                         <input title=LastName type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name" onchange="loadLastName();" required/>
                                     </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
                                         <label class="sr-only" for="form-street-name"><span> Street</span></label>
                                         <input title=StreetName type="text" name="form-street-name" placeholder="Street name..." class="form-street-name form-control" id="form-street-name" onchange="loadStreetName();" required/>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-house-number"><span> House number</span></label>
-                                        <input title=HouseNumber type="text" name="form-house-number" placeholder="House number..." class="form-house-number form-control" id="form-house-number" onchange="loadHouseNumber();" required/>
                                     </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-house-number"><span> House N°</span></label>
+                                        <input title=HouseNumber type="text" name="form-house-number" placeholder="House N°..." class="form-house-number form-control" id="form-house-number" onchange="loadHouseNumber();" required/>
+                                    </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
                                         <label class="sr-only" for="form-postcode"><span> Postcode</span></label>
                                         <input title=Postcode type="text" name="form-postcode" placeholder="Postcode..." class="form-postcode form-control" id="form-postcode" onchange="loadPostcode();" required/>
                                     </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
                                         <label class="sr-only" for="form-city"><span> City</span></label>
                                         <input title=city type="text" name="form-city" placeholder="City..." class="form-city form-control" id="form-city" onchange="loadCity();" required/>
+                                    </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-institution"><span> Institution</span></label>
@@ -446,7 +454,7 @@
                                             <textarea name="institution" placeholder="Institution..." class="institution form-control" id="form-institution" onchange="loadInstitution();"></textarea>
                                         </label>
                                     </div>
-                                    <button type="button" id="sign" onclick='saveRegister()'> Registrieren </button>
+                                    <button type="button"class="btn" id="sign" onclick='saveRegister()'> Registrieren </button>
                                 </form>
                             </div>
                         </div>
