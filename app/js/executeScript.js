@@ -12,14 +12,13 @@ function executeScript(){
     });
   };
 
-
 function getMap() {
   document.getElementById("leafletmap").innerHTML = "";
   $("#leafletmap").fadeIn(1000);
   leaflet();
 }
 
-// entweder importHTML oder createiframe --- nicht beide nötig!
+//import result-html from TMS via iFrame
 function createiframe() {
   leafmap.remove();
   var html = document.getElementById("htmlPath");

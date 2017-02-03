@@ -1,16 +1,4 @@
-/**
- * created starting 14-11-2016.
- */
-
 "use strict";
-
-/**
- * @desc Geosoftware II - WiSe 2016/2017
- * @author Torben Kraft
- *
- * .js: create leflet map
- *
- */
 
 var leafmap;
 var customPopup;
@@ -112,12 +100,11 @@ function drawMap() {
     var ymax = layer._latlngs[2].lng;
 
     var bounds = L.latLngBounds(layer._latlngs[2], layer._latlngs[0]);
-    
+
     console.log(bounds);
-        
+
     var bbox = "bbox1 = extent("+xmin+","+xmax+","+ymin+","+ymax+")\ndata.subarea = crop(x = ..., bbox1) # please add the dataset here";
     document.getElementById("bbox").innerHTML = bbox;;
-    //window.alert(bbox);
   	layer.addTo(drawnItems);
 
 	});
