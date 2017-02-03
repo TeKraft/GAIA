@@ -1,4 +1,4 @@
-
+/*
 window.onload = function() {
   showMapToRead();
 
@@ -15,7 +15,7 @@ window.onload = function() {
 // TODO: giv-project1.uni-muenster.de  --> 28 Zeichen
 
 }
-
+*/
 // if unique link --> get Feature
 // function getUniqueFeature(id) {
 function getUniqueFeature(id) {

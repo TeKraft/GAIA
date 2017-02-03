@@ -183,6 +183,7 @@ var readScriptbyName = function(path){
 
 var aktScript;
 function createTree() {
+    
     $(function () {
         // 6 create an instance when the DOM is ready
         $('#jstree').jstree();
@@ -201,9 +202,7 @@ function createTree() {
             aktScript = data.selected[0];
             rToInput(aktScript);
     }
-            
 
-            //loadScript(data.selected[0]);
         });
         // 8 interact with the tree - either way is OK
         //$('button').on('click', function () {
