@@ -56,7 +56,7 @@
 
 </head>
 
-<body id="myBody" onload="showMap()">
+<body id="myBody">
     <div id="myNavbar">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -77,15 +77,21 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:toProfil()">Profil</a></li>
-                                <li><a title="click to edit profile" href="javascript:toProfilEdit()">profile-edit</a></li>
-                                <li><a title="click to get information about Gaia" href="javascript:toImpressum()">About</a></li>
-                                <li><a title="logout" onclick='toLogout()'>Logout</a></li>
-                            </ul>
-                        </li>
+                      <li>
+                        <button id='getUniqueLink' onclick='getUniqueLink()' type='button' class='btn btn-test'>share link</button>
+                      </li>
+                      <li>
+                        <textarea readonly id="uniqueLink"></textarea>
+                      </li>
+                      <li class="dropdown">
+                          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                              <li><a href="javascript:toProfil()">Profil</a></li>
+                              <li><a title="click to edit profile" href="javascript:toProfilEdit()">profile-edit</a></li>
+                              <li><a title="click to get information about Gaia" href="javascript:toImpressum()">About</a></li>
+                              <li><a title="logout" onclick='toLogout()'>Logout</a></li>
+                          </ul>
+                      </li>
                     </ul>
                 </div>
             </div>
@@ -180,10 +186,6 @@
                                 <br>
                                 <br>
                                 <button id='testLoading' onclick='loadToTextarea()' type='button' class='btn btn-test'>LOAD_SCRIPT</button>
-
-                                <button id='getUniqueLink' onclick='getUniqueLink()' type='button' class='btn btn-test'>getUniqueLink()</button>
-
-
                             </div>
                         </div>
                     </div>
@@ -398,7 +400,7 @@
     <script type="text/javascript" src="js/executeScript.js"></script>
     <script type="text/javascript" src="js/scriptHandle.js"></script>
     <script type="text/javascript" src="js/uniqueLink.js"></script>
-
+    <script type="text/javascript" src="js/mapOnLoad.js"></script>
     <script type="text/javascript" src="lib/js/jstree.min.js"></script>
 
     <script type="text/javascript" src="js/databaseHandle.js"></script>

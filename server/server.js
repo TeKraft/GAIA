@@ -316,10 +316,19 @@ app.post('/upload*', function (req, res) {
 
 
 //get unique link of special feature
-app.get('/getFeatureID*', function(req, res) {
-  var title = req.url.substring(20, req.url.length);
+app.get('/getFeatureByTitle*', function(req, res) {
+  var title = req.url.substring(25, req.url.length);
   console.log("title=> " + title);
   Feature.find({name: title}, function (error, features) {
+      if (error) return console.error(error);
+      res.send(features);
+  });
+});
+
+app.get('/getFeatureById*', function(req, res) {
+  var id = req.url.substring(19, req.url.length);
+  console.log("id=> " + id);
+  Feature.find({_id: id}, function (error, features) {
       if (error) return console.error(error);
       res.send(features);
   });
@@ -331,17 +340,15 @@ app.get('/uniqueLink*', function(req, res) {
   Feature.find({_id: uniqueID}, function (error, features) {
       if (error) return console.error(error);
       console.log(features[0]._id);
-      res.send(features);
+
+      // res.send(features);
+      res.sendFile(path.join(__dirname, '../app/workRead.html'));
+      // res.send('<p>some html<p>');
+
+      // res.sendfile(../app/workRead.html', {root: __dirname })
   });
 });
 
-//share unique link
-app.get('/uniqueLink', function (req, res) {
-    Feature.find(function (error, features) {
-        if (error) return console.error(error);
-        res.send(features);
-    });
-});
 
 
 

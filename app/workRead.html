@@ -33,11 +33,11 @@
     <script src="js/work.js"></script>
     <script type="text/javascript" src="js/scriptHandle.js"></script>
     <script type="text/javascript" src="js/projectEditing.js"></script>
-      <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href="css/upload.css" rel="stylesheet">
 </head>
-<body id="myBody" onload="showMap()">
+<body id="myBody">
     <div id="myNavbar">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -141,3 +141,115 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-8">
+
+                <div class="myPanel">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div id="leafletmap" height="100%" width="100%" class="panel panel-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            <!-- end: first row -->
+            <!-- start: second row -->
+            <div class="row">
+            <div class="col-md-3">
+                <div class="myPanel">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel panel-heading">
+                                Information
+                            </div>
+                            <div id="information" class="panel panel-body">
+                                <p id="CreatorInfo"></p>
+                                <p id="CollaboratorInfo"></p>
+                                <button type="button" class="btn btn-writeCSV" onclick="getCSV()">sciDB data</button>
+                                <button type="button" class="btn btn-readCSV" onclick="readCSV()">read CSV</button>
+                                <div id="wrap" width="100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="myPanel">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel panel-heading">
+                                functionsR
+                            </div>
+                            <div id="functionsR" class="panel panel-body">
+                                <a href="/p/MustermannMax/export/txt" id='download'>download</a>
+                                <!--download symbol animation-->
+
+                                <a href='#' onclick='loadIframe()'>loadIframe()</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="myPanel">
+                    <div class="panel-group">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in active">
+                                <div class="input-script">
+                                    <textarea id="scriptIn" class="form-control" rows="10" onchange="changedScript()"></textarea>
+                                </div>
+                            </div>
+                            <div id="menu1" class="tab-pane fade">
+                                <h3>Bounding Box</h3>
+                                <p id="bbox">Bbox</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            </div>
+            </div>
+
+
+            <!-- library imports -->
+            <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
+            <script type="text/javascript" src="lib/js/jquery.js"></script>
+            <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+            <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="lib/js/leaflet.js"></script>
+            <script type="text/javascript" src="lib/js/leaflet.draw.js"></script>
+            <script type="text/javascript" src="lib/js/lightbox.js"></script>
+            <script src="lib/js/opencpu-0.4.js"></script>
+            <script type="text/javascript" src="js/myOpenCPU.js"></script>
+
+            <!-- script: map -->
+            <script type="text/javascript" src="js/mapBuilder.js"></script>
+            <script type="text/javascript" src="js/mapShow.js"></script>
+            <!-- script: userManagement -->
+
+            <script type="text/javascript" src="js/sessionFunctionality.js"></script>
+            <script type="text/javascript" src="js/projectManagement.js"></script>
+
+            <script type="text/javascript" src="js/loadRdata.js"></script>
+            <script type="text/javascript" src="js/executeScript.js"></script>
+            <script type="text/javascript" src="js/scriptHandle.js"></script>
+            <script type="text/javascript" src="js/uniqueLink.js"></script>
+            <script type="text/javascript" src="js/windowOnload.js"></script>
+
+            <script type="text/javascript" src="lib/js/jstree.min.js"></script>
+
+            <script type="text/javascript" src="js/databaseHandle.js"></script>
+            <script src="js/upload.js"></script>
+
+            </body>
+
+            </html>

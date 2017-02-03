@@ -109,7 +109,3 @@ function drawMap() {
 
 	});
 }; //drawMap() end
-
-
-	leaflet();
-	drawMap();
