@@ -4,7 +4,7 @@ var leafmap;
 var customPopup;
 var drawnItems;
 var drawControlFull;
-
+var myLayerControl;
 /**
  * Function creates map containing base layer.
  * Includes layer control function, which enables user to switch between layers.
@@ -37,7 +37,7 @@ var leaflet = function () {
 	var overlayMaps = {};
 
 	// layer control function
-	var myLayerControl = L.control.layers(baseMaps, overlayMaps).setPosition('topright').addTo(leafmap);
+	myLayerControl = L.control.layers(baseMaps, overlayMaps).setPosition('topright').addTo(leafmap);
 }; //leaflet() end
 
 /**
