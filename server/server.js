@@ -331,6 +331,7 @@ app.get('/uniqueLink*', function(req, res) {
       console.log(features[0]._id);
       res.send(features);
   });
+});
 
 //share unique link
 app.get('/uniqueLink', function (req, res) {
