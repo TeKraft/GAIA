@@ -1,4 +1,4 @@
-/*
+
 window.onload = function() {
   showMapToRead();
 
@@ -15,7 +15,7 @@ window.onload = function() {
 // TODO: giv-project1.uni-muenster.de  --> 28 Zeichen
 
 }
-*/
+
 // if unique link --> get Feature
 // function getUniqueFeature(id) {
 function getUniqueFeature(id) {
@@ -33,36 +33,15 @@ function getUniqueFeature(id) {
         console.log(content);
         console.log(content[0]._id);
         console.log(content[0].name);
-        // readUniqueProject(content[0].name);
-        var temp = content[0];
-        console.log(temp);
-        // tempProject = temp;
-        // console.log("temp2");
-        // console.log(temp);
 
         var thisProject = content[0].name;
-        console.log('thisProject== ' + thisProject);
-
         var thisCreator = content[0].data.Creator;
-        console.log('thisCreator== ' + thisCreator);
-
         var thisCollaborators = content[0].data.Collaborators;
-        console.log('thisCollaborators== ' + thisCollaborators);
-
-        // var userArray = document.cookie.split("=");
-        // var userJSON = JSON.parse(userArray[1]);
-        //
-        // displayCreatorForInformation()
         document.getElementById('CreatorInfo').innerHTML = "Creator: " + thisCreator;
-        // displayCollaboratorsForInformation();
         document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + thisCollaborators;
-        //
-//projectEditing.js
-        // makeTreeComponents(currentProject[3]);
-        makeTreeComponents(thisProject);
-        // createTree();
-        createTree();
 
+        makeTreeComponents(thisProject);
+        createTree();
       },
       error: function (xhr, textStatus, errorThrown) {
           console.log("no success");
@@ -71,10 +50,47 @@ function getUniqueFeature(id) {
   });
 };
 
-// function loader() {
-//   window.alert("loader");
-// }
-//
-// $(document).ready(function() {
-//   console.log("ready");
-// });
+// download current project as .zip file
+function downloadZipAsReader() {
+  var thisURL = window.location.href;
+  var thisID = thisURL.substring(36, thisURL.length);
+  var thisProject;
+
+  var url = localhost + '/getFeatureById?id=' + thisID;
+  $.ajax({
+      type: 'GET',
+      url: url,
+      async: false,
+      timeout: 5000,
+      success: function (content, textStatus) {
+        thisProject = content[0].name;
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success");
+          return;
+      }
+  });
+
+  var r = confirm("Do you really want to download this project?");
+  if (r == true) {
+    var myZipProjectName;
+    var currentProject = thisProject;
+
+    var url = localhost + '/zipMyShit'; //'/zipMyShit?name=' + currentProject;
+    $.ajax({
+      type: 'POST',
+      url: url,
+      async: false,
+      data: {projectName: currentProject},
+      success: function (content, textStatus) {
+        myZipProjectName = content;
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success");
+      }
+    });
+    window.location = '../projects/' + myZipProjectName + '.zip';
+  } else {
+    return;
+  }
+}

@@ -241,7 +241,7 @@ app.get('/readFile*', function(req, res) {
   var projecttitle = req.url.substring(15, req.url.length);
     console.log(projecttitle);
   var dir = '../app/projects/'+ projecttitle;
-    
+
 fs.readFile(dir, 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
@@ -250,60 +250,60 @@ fs.readFile(dir, 'utf8', function (err,data) {
   console.log(data);
 });
 });
-    
+
 
 // add Folder for project to node db
 app.post('/updateFile*', function (req, res) {
     var projecttitle = req.url.substring(16, req.url.length);
-    
+
     var scriptName = req.body.scriptName;
     var projectName = req.body.projectName;
     var data = req.body.script;
-    
+
     //var filedesc = req.desc;
     var dir = '../app/projects/' + projecttitle;
     console.log(fs.existsSync(dir));
-    
+
     //console.log("../app/projects/" + projectName + "/Scripts/" + scriptName);
 
 
-    
+
     var filePath = "../app/projects/" + projectName + "/Scripts/" + scriptName;
     console.log("go" + filePath);
-    
+
     fs.writeFile(filePath , data, function (err) {           // "einProjekt/Scripts/"+ "dritteRDatei.R"
     if (err) throw err;
     console.log('It\'s saved!');
     });
 });
-    
+
 
 app.post('/deleteFile*', function (req, res) {
     console.log("start");
     var projecttitle = req.url.substring(16, req.url.length);
-    
+
     var scriptName = req.body.scriptName;
     var projectName = req.body.projectName;
     //var data = req.body.script;
-    
+
     //var filedesc = req.desc;
     //var dir = '../app/projects/' + projecttitle;
     //console.log(fs.existsSync(dir));
-    
+
     //console.log("../app/projects/" + projectName + "/Scripts/" + scriptName);
 
 
-    
+
     //var filePath = "../app/projects/" + projectName + "/Scripts/" + scriptName;
     //console.log("go" + filePath);
-    
+
     fs.unlink("../app/projects/" + projectName + "/Scripts/" + scriptName , function (err) {           // "einProjekt/Scripts/"+ "dritteRDatei.R"
     if (err) throw err;
     console.log('It\'s deleted!');
     });
 });
-    
-    
+
+
    /*
   fs.readdir(dir, function (error, files) {
     // console.log(files);
@@ -441,7 +441,30 @@ app.get('/uniqueLink*', function(req, res) {
 });
 
 
+// #####################
+// zip files ###########
+// #####################
+var archiver = require('archiver');
 
+app.post('/zipMyShit', function(req, res) {
+  var data = req.body;
+  var output = fs.createWriteStream('../app/projects/' + data.projectName + '.zip');
+  var archive = archiver('zip');
+
+  output.on('close', function() {
+      console.log(archive.pointer() + ' total bytes');
+      console.log('archiver has been finalized and the output file descriptor has closed.');
+  });
+  archive.on('error', function(err) {
+      throw err;
+  });
+  archive.pipe(output);
+  archive.directory('../app/projects/' + data.projectName, false, { date: new Date() });
+  archive.finalize();
+
+  res.send(data.projectName);
+
+});
 
 ///////////////////////////////// download
 
