@@ -1,5 +1,6 @@
 "use strict";
 
+//Loading the requirements.
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -24,7 +25,7 @@ var config = {
     mongoPort: 27017
 }
 
-/* database schema */
+// database schema
 var featureSchema = mongoose.Schema({
     name: String,
     dateInserted: Date,
@@ -141,15 +142,19 @@ app.post('/deleteFeature*', function (req, res) {
     console.log("delete successfull");
 });
 
-/*
-/Function for executing a Rscript on server via childProzess
-/
+/**
+  * @desc AJAX.POST on server for executing Scripts.
+  *       Execution of R-Scripts is achieved by using nodes "childProcess".
+  *       It is possible to execute almost all commands a normal cmd/terminal could.
 */
 app.post('/execScript', function (req, res) {
+  //instantiate a childProcess
   var childProcess = require('child_process');
   var project = req.body.project;
   var script = req.body.script;
-  console.log("PROJECT :"+project + "   SCRIPT: " + script);
+  //EXEC-function: Basically the same as executing a local Rscript via commandlines.
+  //cwd changes the current working directory so the results dont spawn where the serverjs is
+  //but rather where the results should be stored.
   childProcess.exec('Rscript ../Scripts/'+script+'',{cwd: '../app/projects/' + project + '/Results/'}, (err) => {
     if (err) {
       console.error(err);
@@ -234,9 +239,6 @@ app.get('/readFolder*', function(req, res) {
   })
 });
 
-
-
-
 app.get('/readFile*', function(req, res) {
   var projecttitle = req.url.substring(15, req.url.length);
     console.log(projecttitle);
@@ -302,30 +304,6 @@ app.post('/deleteFile*', function (req, res) {
     console.log('It\'s deleted!');
     });
 });
-
-
-   /*
-  fs.readdir(dir, function (error, files) {
-    // console.log(files);
-    if (files == undefined) {
-      // console.log("undefined error");
-      return console.error(error); }
-    else {
-      // console.log("no error");
-      files.forEach(file => {
-        // console.log(file);
-        folderFiles.push(file);
-      });
-      if (error) return console.error(error);
-      res.send(folderFiles);
-    }
-  })
-});
-*/
-
-
-
-
 
 // delete project folder
 app.post('/deleteProjectFolder*', function (req, res) {

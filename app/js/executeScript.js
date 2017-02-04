@@ -1,9 +1,15 @@
 var localhost = 'http://localhost:3000';
 
+/**
+  * @desc Function for sending the current projectname & choosen scriptname
+  *       via AJAX.POST request and initiate the execution of the script.
+*/
 function executeScript(){
     var script = aktScript;
     var url = 'http://localhost:3000' + '/execScript';
+    //name of the project, that is the current Project. Information cut out from cookie.
     var currentProject = document.cookie.split("=")[3];
+    //AJAX:POST request with the current project and selected script.
     $.ajax({
         type: 'POST',
         data: {project: ""+currentProject+"", script: ""+script+""},
@@ -17,25 +23,13 @@ function executeScript(){
     });
   };
 
-function getMap() {
-  document.getElementById("leafletmap").innerHTML = "";
-  $("#leafletmap").fadeIn(1000);
-  leaflet();
-}
-
-//import result-html from TMS via iFrame
-function createiframe() {
-  leafmap.remove();
-  var html = document.getElementById("htmlPath");
-  var objectURL = "../projects/" + html.value;
-  document.getElementById("leafletmap").innerHTML = '<iframe id="iframeMap" src="' + objectURL + '" height="100%" width="100%" name"myIframe"></iframe>';
-}
-
-// get csv data - datasets.csv has data about sciDB datasets
+  /**
+    * @desc Function for initiating the creation of a CSV for all data in th SciDB.
+  */
 function getCSV() {
   console.log("getCSV()");
-
   var url = localhost + '/getsciDBdata';
+  //AJAX.GET request to server.
   $.ajax({
     type: 'GET',
     url: url,
@@ -48,21 +42,22 @@ function getCSV() {
   });
 };
 
-
 // ###########################
 // zip files #################
 // ###########################
-
-// download current project as .zip file
+/**
+  * @desc Function for sending the current projectname via an AJAX.POST request
+  *       to initiate the download of the whole project as a ZIP-folder.
+*/
 function downloadZip() {
+    //Confirmation of the download intent
     var r = confirm("Do you really want to download this project?");
     if (r == true) {
-
       console.log("zipProject()");
       var myZipProjectName;
       var currentProject = document.cookie.split("=")[3];
-
-      var url = localhost + '/zipMyShit'; //'/zipMyShit?name=' + currentProject;
+      var url = localhost + '/zipMyShit';    //'/zipMyShit?name=' + currentProject;      //TODO : KANN DAS WEG?  :
+      //AJAX:POST Request with the name of the current project.
       $.ajax({
         type: 'POST',
         url: url,

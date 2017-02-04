@@ -1,6 +1,3 @@
-
-
-
 function createFolder() {
   // var projectTitle = "halloNochEinBier";
   if (document.getElementById("projectName").value == "") {
