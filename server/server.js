@@ -1,17 +1,19 @@
 "use strict";
 
-//Loading the requirements.
-var express = require('express');
+// Loading all required packages.
+var archiver = require('archiver');
 var bodyParser = require('body-parser');
+var express = require('express');
+var formidable = require('formidable');
+var fs = require('fs');
 var mongoose = require('mongoose');
 var path = require('path');
 var app = express();
-var formidable = require('formidable');
-var fs = require('fs');
-var EasyZip = require('easy-zip').EasyZip;
-var zip = new EasyZip();
 
-/* get home page */
+// gives back array of folder names.
+var folderFiles = new Array();
+
+/* give access to following folders */
 app.use(express.static("../server"));
 app.use(express.static("../app"));
 
@@ -20,10 +22,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+// configuration
 var config = {
     httpPort: 3000,
     mongoPort: 27017
-}
+};
 
 // database schema
 var featureSchema = mongoose.Schema({
@@ -32,17 +35,21 @@ var featureSchema = mongoose.Schema({
     data: {}
 });
 
-var scriptSchema = mongoose.Schema({
-    name: String,
-    dateInserted: Date,
-    data: {}
-});
+// // script schema
+// var scriptSchema = mongoose.Schema({
+//     name: String,
+//     dateInserted: Date,
+//     data: {}
+// });
 
 var Feature = mongoose.model('Feature', featureSchema);
+// var Script = mongoose.model('Script', scriptSchema)
 
-var Script = mongoose.model('Script', scriptSchema)
-
-/* database connection */
+/*
+ * #############################################################################
+ * database connection #########################################################
+ * #############################################################################
+ */
 mongoose.connect('mongodb://localhost:' + config.mongoPort + '/GAIA');
 var database = mongoose.connection;
 
@@ -51,16 +58,34 @@ database.once('open', function (callback) {
     console.log('connection to database established on port ' + config.mongoPort);
 });
 
-/* http routing */
-// code which is executed on every request
+app.use(express.static(path.join(__dirname, 'app')));
+
+// launch server
+app.listen(config.httpPort, function () {
+    console.log('serverruns on port ' + config.httpPort);
+});
+
+
+/* http routing. */
+// log code which is executed on every request
 app.use(function (req, res, next) {
     console.log(req.method + ' ' + req.url + ' was requested by ' + req.connection.remoteAddress);
     res.header('Access-Control-Allow-Origin', '*'); // allow CORS
-    //res.header('Access-Control-Allow-Methods', 'GET,POST');
     next();
 });
 
-// returns json of all stored features
+/*
+ * #############################################################################
+ * feature options #############################################################
+ * #############################################################################
+ */
+
+/**
+  * @desc AJAX.GET on server for requesting all Features.
+  *       find all Features and send to client
+  *       url format: /getFeatures
+  * @return featuredata or error
+  */
 app.get('/getFeatures', function (req, res) {
     Feature.find(function (error, features) {
         if (error) return console.error(error);
@@ -68,85 +93,76 @@ app.get('/getFeatures', function (req, res) {
     });
 });
 
-// takes a json document via POST, which will be added to the database
-// name is passed via URL
-// url format: /addFeature?name=
+/**
+  * @desc AJAX.POST on server for adding a Feature
+  *       takes a json document via POST, which will be added to the database
+  *       name is passed via URL
+  *       url format: /addFeature?name=
+  * @return featuredata or error
+  */
 app.post('/addFeature*', function (req, res) {
-    console.log(JSON.stringify(req.body));
+  var feature = new Feature({
+      name: req.url.substring(17, req.url.length), // extract name from url
+      dateInserted: new Date(),
+      data: req.body
+  });
+  feature.save(function (error) {
+      var message = error ? 'failed to save feature: ' + error : 'feature saved: ' + feature.name;
+      res.send(message);
+  });
+});
 
-    var feature = new Feature({
-        name: req.url.substring(17, req.url.length), // extract name from url
-        dateInserted: new Date(),
-        data: req.body
+/**
+  * @desc AJAX.POST on server for updating a Feature
+  *       takes a json document via POST, which will be added to the database
+  *       and the already existing document will be updated by the new
+  *       name is passed via URL
+  *       url format: /updateFeature?name=*
+  * @return message with success or error
+  */
+app.post('/updateFeature*', function (req, res) {
+  var title = req.url.substring(20, req.url.length);  // extract name from url
+  Feature.update(
+    {name: title},
+    {$set:
+      {data: req.body}
+    },
+    function (error) {
+      var message = error ? 'failed to update feature: ' + error : 'feature updated: ' + title;
+      res.send(message);
     });
-    feature.save(function (error) {
-        var message = error ? 'failed to save feature: ' + error : 'feature saved: ' + feature.name;
-        console.log(message + ' from ' + req.connection.remoteAddress);
+});
+
+/**
+  * @desc AJAX.POST on server for deleting a Feature
+  *       takes a json document via POST, which will be added to the database
+  *       and the already existing document will be updated by the new
+  *       name is passed via URL
+  *       url format: /deleteFeature?name=*
+  * @return message with success or error
+  */
+app.post('/deleteFeature*', function (req, res) {
+    var title = req.url.substring(20, req.url.length);
+    Feature.remove({
+        name: title
+    },
+    function (error) {
+        var message = error ? 'failed to delete feature: ' + error : 'feature deleted: ' + title;
         res.send(message);
     });
 });
 
-// takes a json document via POST, which will be added to the database
-// and the already existing document will be updated by the new
-// name is passed via URL
-// url format: /updateFeature?name=*
-app.post('/updateFeature*', function (req, res) {
-    var title = req.url.substring(20, req.url.length);
-    Feature.update({
-            name: title
-        }, {
-            $set: {
-                data: req.body
-            }
-        },
-        function (error) {
-            var message = error ? 'failed to update feature: ' + error : 'feature updated: ' + title;
-            console.log(message + ' from ' + req.connection.remoteAddress);
-            res.send(message);
-        });
-    console.log("update successfull");
-});
-
-app.post('/renameFeature*', function (req, res) {
-    var title = req.url.substring(20, req.url.length);
-    Feature.update({
-            name: title
-        }, {
-            $set: {
-                name: req.body
-            }
-        },
-        function (error) {
-            var message = error ? 'failed to update feature: ' + error : 'feature updated: ' + title;
-            console.log(message + ' from ' + req.connection.remoteAddress);
-            res.send(message);
-        });
-    console.log("update successfull");
-});
-
-//db.students.update( { _id: 1 }, { $rename: { 'nickname': 'alias', 'cell': 'mobile' } } )
-// takes a json document via POST, which will be added to the database
-// and the already existing document will be updated by the new
-// name is passed via URL
-// url format: /updateFeature?name=*
-app.post('/deleteFeature*', function (req, res) {
-    var title = req.url.substring(20, req.url.length);
-    Feature.remove({
-            name: title
-        },
-        function (error) {
-            var message = error ? 'failed to delete feature: ' + error : 'feature deleted: ' + title;
-            console.log(message + ' from ' + req.connection.remoteAddress);
-            res.send(message);
-        });
-    console.log("delete successfull");
-});
+/*
+ * #############################################################################
+ * execute Rscripts ############################################################
+ * #############################################################################
+ */
 
 /**
   * @desc AJAX.POST on server for executing Scripts.
   *       Execution of R-Scripts is achieved by using nodes "childProcess".
-  *       It is possible to execute almost all commands a normal cmd/terminal could.
-*/
+  * @return the result of the executed R-Script will be added to the project/Results folder
+  */
 app.post('/execScript', function (req, res) {
   //instantiate a childProcess
   var childProcess = require('child_process');
@@ -157,81 +173,101 @@ app.post('/execScript', function (req, res) {
   //but rather where the results should be stored.
   childProcess.exec('Rscript ../Scripts/'+script+'',{cwd: '../app/projects/' + project + '/Results/'}, (err) => {
     if (err) {
-      console.error(err);
+      return console.error(err);
     }
-  })
+  });
 });
 
+/*
+ * #############################################################################
+ * create sciDBdata ############################################################
+ * #############################################################################
+ */
+
+/**
+  * @desc AJAX.GET on server for executing writeCSV.R
+  *       Execution of writeCSV.R is achieved by using nodes "childProcess"
+  *       url format: /getsciDBdata
+  * @return result will be the datasets.csv with information about in sciDB saved datasets
+  */
 // get sciDB data as csv
 app.get('/getsciDBdata', function (req, res) {
     var childProcess = require('child_process');
     childProcess.exec('Rscript ../scriptsR/writeCSV.R', function (err, stdout, stderr) {
-        if (err) {
-            console.log(err);
-            return;
-        }
+      if (err) {
+        return console.error(err);
+      }
     })
 });
 
-var fs = require('fs');
-// add Folder for project to node db
+/*
+ * #############################################################################
+ * folder options ##############################################################
+ * #############################################################################
+ */
+
+/**
+  * @desc AJAX.POST on server for creating a folder in filesystem.
+  *       create folder in a projects folder
+  *       url format: /addFolder?name=
+  * @return message with succes or error
+  */
 app.post('/addFolder*', function (req, res) {
-    var projecttitle = req.url.substring(16, req.url.length);
+    var projecttitle = req.url.substring(16, req.url.length); // extract projecttitle from url
     var dir = '../app/projects/' + projecttitle;
-    console.log(fs.existsSync(dir));
+
     if (fs.existsSync(dir)) {
-        console.log("Directory exists already. Please choose a different name!")
+        console.log("Directory exists already. Please choose a different name!");
+        // TODO: what if error?
     } else {
         fs.mkdir(dir, function (error) {
             if (error) {
-                console.error(error);
-                res.send(error);
+                return console.error(error);
+                // res.send(error);
             } else {
-                folderStructure(projecttitle);
-                console.log("Directory created successfully!");
+                folderStructure(projecttitle);  // create also deeper folder structure for new created project
                 res.send('folder added: ' + projecttitle);
             }
         })
     }
-    // else {                         //TODO: error not defined ?! how to fix?
-    //   // console.log(error);
-    //   res.send(error);
-    // }
 });
 
-// when add project folder also create deeper structure
+/**
+  * @desc Function to add folderstructure to folder
+  *       when add project folder also create deeper structure
+  * @param foldertitle {String} title of project
+  * @return create folder structure or message error
+  */
 function folderStructure(foldertitle) {
     var folderStructure = new Array();
     folderStructure = ["Scripts", "Images", "Results"];
-    console.log(folderStructure);
 
     for (var i = 0; i < folderStructure.length; i++) {
         fs.mkdir('../app/projects/' + foldertitle + '/' + folderStructure[i], function (err) {
             // path exists unless there was an error
             console.log("added folder: " + foldertitle + '/' + folderStructure[i]);
+            // TODO: if (err) {console.error(err)}
         })
     }
 };
 
-// gives back array of folder names
-var folderFiles = new Array();
-
-
+/**
+  * @desc AJAX.GET on server for reading a folder in filesystem.
+  *       read folder
+  *       url format: /readFolder?name=
+  * @return send filenames as array or message error
+  */
 app.get('/readFolder*', function(req, res) {
-  var projecttitle = req.url.substring(17, req.url.length);
+  var projecttitle = req.url.substring(17, req.url.length); // extract projecttitle from url
   var dir = '../app/projects/'+ projecttitle;
-  console.log(dir);
+
   fs.readdir(dir, function (error, files) {
-    // console.log(files);
     if (files == undefined) {
-      // console.log("undefined error");
-      return console.error(error); }
-    else {
+      return console.error(error);
+    }else {
         folderFiles = [];
-      // console.log("no error");
       files.forEach(file => {
-        // console.log(file);
-        folderFiles.push(file);
+        folderFiles.push(file); // create array of filenames in folder
       });
       if (error) return console.error(error);
         res.send(folderFiles);
@@ -239,173 +275,184 @@ app.get('/readFolder*', function(req, res) {
   })
 });
 
+/**
+  * @desc AJAX.POST on server for deleting a projectfolder.
+  *       delete projectfolder
+  *       url format: /deleteProjectFolder?name=
+  * @return // TODO: return
+  */
+app.post('/deleteProjectFolder*', function (req, res) {
+    var projecttitle = req.url.substring(26, req.url.length); // extract projecttitle from url
+    var dir = '../app/projects/' + projecttitle;
+    deleteFolderRecursive(dir); //delete folder
+    res.send("folder deleted: " + projecttitle);
+    // TODO: error??
+});
+
+/**
+  * @desc Function to delete a folder of given path
+  *       delete projectfolder
+  * @param path {String} folderpath
+  * @return
+  */
+// delete file recursive
+var deleteFolderRecursive = function (path) {
+  if (fs.existsSync(path)) {
+    fs.readdirSync(path).forEach(function (file, index) {
+      var curPath = path + "/" + file;
+      if (fs.lstatSync(curPath).isDirectory()) { // recurse
+          deleteFolderRecursive(curPath);
+      } else { // delete file
+          fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(path);
+  }
+};
+
+/*
+ * #############################################################################
+ * file options ################################################################
+ * #############################################################################
+ */
+
+/**
+  * @desc AJAX.GET on server for reading a file.
+  *       read file
+  *       url format: /readFile?name=
+  * @return send filedata or message error
+  */
 app.get('/readFile*', function(req, res) {
-  var projecttitle = req.url.substring(15, req.url.length);
-    console.log(projecttitle);
+  var projecttitle = req.url.substring(15, req.url.length); // extract projecttitle from url
   var dir = '../app/projects/'+ projecttitle;
 
-fs.readFile(dir, 'utf8', function (err,data) {
-  if (err) {
-    return console.log(err);
-  }
-    res.send(data);
-  console.log(data);
-});
+  fs.readFile(dir, 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+      res.send(data);
+  });
 });
 
-
-// add Folder for project to node db
+/**
+  * @desc AJAX.POST on server for updating a file.
+  *       update file
+  *       url format: /updateFile?name=
+  * @return send filedata or message error
+  */
 app.post('/updateFile*', function (req, res) {
-    var projecttitle = req.url.substring(16, req.url.length);
-
+    var projecttitle = req.url.substring(16, req.url.length); // extract projecttitle from url
     var scriptName = req.body.scriptName;
     var projectName = req.body.projectName;
     var data = req.body.script;
 
-    //var filedesc = req.desc;
     var dir = '../app/projects/' + projecttitle;
-    console.log(fs.existsSync(dir));
-
-    //console.log("../app/projects/" + projectName + "/Scripts/" + scriptName);
-
-
-
     var filePath = "../app/projects/" + projectName + "/Scripts/" + scriptName;
-    console.log("go" + filePath);
-
-    fs.writeFile(filePath , data, function (err) {           // "einProjekt/Scripts/"+ "dritteRDatei.R"
+    fs.writeFile(filePath , data, function (err) {
     if (err) throw err;
-    console.log('It\'s saved!');
+    res.send("file updated: " + scriptName);
     });
 });
 
-
+/**
+  * @desc AJAX.POST on server for deleting a file.
+  *       delete file
+  *       url format: /deleteFile?name=
+  * @return send filedata or message error
+  */
 app.post('/deleteFile*', function (req, res) {
-    console.log("start");
-    var projecttitle = req.url.substring(16, req.url.length);
-
+    var projecttitle = req.url.substring(16, req.url.length); // extract projecttitle from url
     var scriptName = req.body.scriptName;
     var projectName = req.body.projectName;
-    //var data = req.body.script;
 
-    //var filedesc = req.desc;
-    //var dir = '../app/projects/' + projecttitle;
-    //console.log(fs.existsSync(dir));
-
-    //console.log("../app/projects/" + projectName + "/Scripts/" + scriptName);
-
-
-
-    //var filePath = "../app/projects/" + projectName + "/Scripts/" + scriptName;
-    //console.log("go" + filePath);
-
-    fs.unlink("../app/projects/" + projectName + "/Scripts/" + scriptName , function (err) {           // "einProjekt/Scripts/"+ "dritteRDatei.R"
+    fs.unlink("../app/projects/" + projectName + "/Scripts/" + scriptName , function (err) {
     if (err) throw err;
-    console.log('It\'s deleted!');
+    res.send("file deleted: " + scriptName);
     });
 });
 
-// delete project folder
-app.post('/deleteProjectFolder*', function (req, res) {
-    var projecttitle = req.url.substring(26, req.url.length);
-    var dir = '../app/projects/' + projecttitle;
+/*
+ * #############################################################################
+ *  upload folder ###############################################################
+ * #############################################################################
+ */
 
-    deleteFolderRecursive(dir);
-
-});
-
-// delete file recursive
-var deleteFolderRecursive = function (path) {
-    if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach(function (file, index) {
-            var curPath = path + "/" + file;
-            if (fs.lstatSync(curPath).isDirectory()) { // recurse
-                deleteFolderRecursive(curPath);
-            } else { // delete file
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(path);
-    }
-};
-
-// launch server
-app.listen(config.httpPort, function () {
-    console.log('serverruns on  ' + config.httpPort);
-});
-
-
-
-
-///////////////////////////////// upload
-
-app.use(express.static(path.join(__dirname, 'app')));
-
-//app.get('/', function (req, res) {
-//    res.sendFile(path.join(__dirname, 'app/work.html'));
-
-//});
-
-// upload of script, image, result
+/**
+  * @desc AJAX.POST on server for uploading data into projectfolder.
+  *       upload of script, image, result
+  *       url format: /upload?folder=
+  * @return message with success or error
+  */
 app.post('/upload*', function (req, res) {
-
-    var currentFolder = req.url.substring(15, 22);
-    var currentProject = req.url.substring(31, req.url.length);
-
+    var currentFolder = req.url.substring(15, 22); // extract foldertitle from url
+    var currentProject = req.url.substring(31, req.url.length); // extract projecttitle from url
     // create an incoming form object
     var form = new formidable.IncomingForm();
 
     // specify that we want to allow the user to upload multiple files in a single request
     form.multiples = true;
-
     // store all uploads in the /uploads directory
     form.uploadDir = path.join(__dirname, '../app/projects/' + currentProject + '/' + currentFolder);
-
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
     form.on('file', function (field, file) {
         fs.rename(file.path, path.join(form.uploadDir, file.name));
     });
-
     // log any errors that occur
     form.on('error', function (err) {
-        console.log('An error has occured: \n' + err);
+        return console.error(err);
     });
-
     // once all the files have been uploaded, send a response to the client
     form.on('end', function () {
         res.end('success');
     });
-
     // parse the incoming request containing the form data
     form.parse(req);
 });
 
+/*
+ * #############################################################################
+ * unique link #################################################################
+ * #############################################################################
+ */
 
-
-
+/**
+  * @desc AJAX.GET on server for getting a special feature by name
+  *       get data of special feature
+  *       url format: /getFeatureByTitle?name=
+  * @return requested feature or message error
+  */
 //get unique link of special feature
 app.get('/getFeatureByTitle*', function(req, res) {
-  var title = req.url.substring(25, req.url.length);
-  console.log("title=> " + title);
+  var title = req.url.substring(25, req.url.length); // extract projecttitle from url
   Feature.find({name: title}, function (error, features) {
       if (error) return console.error(error);
       res.send(features);
   });
 });
 
+/**
+  * @desc AJAX.GET on server for getting a special feature by id
+  *       get data of special feature
+  *       url format: /getFeatureById?id=
+  * @return special feature or message error
+  */
 app.get('/getFeatureById*', function(req, res) {
-  var id = req.url.substring(19, req.url.length);
-  console.log("id=> " + id);
+  var id = req.url.substring(19, req.url.length); // extract projecttitle from url
   Feature.find({_id: id}, function (error, features) {
       if (error) return console.error(error);
       res.send(features);
   });
 });
 
-//if unique link - get Feature
+/**
+  * @desc AJAX.GET on server for getting a special feature by unique link for reading purpose
+  *       if unique link is inserted - get Feature
+  *       url format: /uniqueLink?id=
+  * @return requested feature or message error
+  */
 app.get('/uniqueLink*', function(req, res) {
-  var uniqueID = req.url.substring(15, req.url.length);
+  var uniqueID = req.url.substring(15, req.url.length); // extract projecttitle from url
   Feature.find({_id: uniqueID}, function (error, features) {
       if (error) return console.error(error);
       if (features[0] == undefined) {
@@ -416,20 +463,25 @@ app.get('/uniqueLink*', function(req, res) {
   });
 });
 
+/*
+ * #############################################################################
+ * zip folder ##################################################################
+ * #############################################################################
+ */
 
-// #####################
-// zip files ###########
-// #####################
-var archiver = require('archiver');
-
+/**
+  * @desc AJAX.POST on server for creating zip
+  *       zip projectfolder for download
+  *       url format: /zipMyShit
+  * @return projecttitle of zipped projectfolder or message error
+  */
 app.post('/zipMyShit', function(req, res) {
   var data = req.body;
   var output = fs.createWriteStream('../app/projects/' + data.projectName + '.zip');
   var archive = archiver('zip');
 
   output.on('close', function() {
-      console.log(archive.pointer() + ' total bytes');
-      console.log('archiver has been finalized and the output file descriptor has closed.');
+      console.log(archive.pointer() + ' total bytes' + '\n archiver has been finalized and the output file descriptor has closed.');
   });
   archive.on('error', function(err) {
       throw err;
@@ -437,46 +489,5 @@ app.post('/zipMyShit', function(req, res) {
   archive.pipe(output);
   archive.directory('../app/projects/' + data.projectName, false, { date: new Date() });
   archive.finalize();
-
   res.send(data.projectName);
-
 });
-
-///////////////////////////////// download
-
-
-
-//add text
-// zip.file('hello.txt','Hello World！');
-// zip.writeToFile('text.zip');//write zip data to disk
-
-//add folder
-//var zip2 = new EasyZip();
-//var jsFolder = zip2.folder('js');
-//jsFolder.file('hello.js','alert("hello world")');
-//zip2.writeToFile('folder.zip');
-
-//add file
-//var zip3 = new EasyZip();
-//zip3.addFile('main.js','easyzip.js',function(){
-//    zip3.writeToFile('file.zip');
-//});
-
-//batch add files
-//var files = [
-//    {source : 'easyzip.js',target:'easyzip.js'},
-//    {target : 'img'},//if source is null,means make a folder
-//    {source : 'jszip.js',target:'lib/tmp.js'}
-//];
-//var zip4 = new EasyZip();
-//zip4.batchAdd(files,function(){
-//    zip4.writeToFile('batchadd.zip');
-//});
-
-
-
-//write data to http.Response
-//zip.writeToResponse(response,'attachment.zip');
-
-//write to file sync
-//zip.writeToFileSycn(filePath);
