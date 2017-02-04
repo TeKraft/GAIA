@@ -18,25 +18,6 @@ $('#buttonTree').on('click', function () {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // hier muss der baum richtig erstellt werden
 function makeTreeComponents(name) {
     var tempCookie = document.cookie.split("=");
@@ -254,13 +235,12 @@ var toHome = function(){
 var toGaia = function(){
     if(saved == false){
         if (confirm("Did you save your Project") == true) {
-
-            } else {
-                return;
-            }
-        document.location.href = "gaia.html"
+          document.location.href = "gaia.html"
+        } else {
+            return;
+        }
     }else{
-        window.location.href = "/projectedit.html";
+        document.location.href = "gaia.html"
     }
 }
 
