@@ -20,7 +20,7 @@ function changeProjectName() {
 
     if (content != undefined) {
 
-        var url = 'http://localhost:3000' + '/renameFeature?name=' + toChangeProject;
+        var url = 'http://localhost:3000' + '/updateFeature?name=' + toChangeProject;
 
         // perform post ajax
         $.ajax({

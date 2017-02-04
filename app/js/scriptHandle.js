@@ -91,7 +91,6 @@ var addScript = function(project,name){
 
 
 var newScript = function(){
-
         var scriptName = prompt("Please enter a name");
         var file = new File([""], "");
         var formData = new FormData();
