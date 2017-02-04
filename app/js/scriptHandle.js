@@ -1,126 +1,92 @@
 "use strict;"
-
+//Globals
 var input;
 var currentScript;
 var currentProject = document.cookie.split("=");
 
+/**
+  * @desc Function for creating a new .R file.
+  *       Empty or with the content of the textarea from work.html
+  * @param name : name of the script
+*/
 var createScript = function(name){
-    input = document.getElementById('scriptIn').value;
-
-    getProjectbyName(currentProject[3]);
-
-    addScript(loadedProject,name);
-    currentScript = name;
-    document.location.href = "work.html";
+  //Content of textarea
+  input = document.getElementById('scriptIn').value;
+  getProjectbyName(currentProject[3]);
+  addScript(loadedProject,name);
+  currentScript = name;
+  document.location.href = "work.html";
 }
 
-// var loadScript1 = function(scriptname){
-//     console.log(scriptname);
-//     var tempCookie = document.cookie.split("=");
-//     var projectname = tempCookie[3];
-//     var path = "./projects/" + projectname + "/Scripts/" + scriptname;
-//     var content;
-//     console.log(path);
-//     // hier muss jetzt der inhalt der R datei geladen werden und dann in content eingesetzt werden
-//
-//
-//
-//     //document.getElementById("scriptIn").value = "Hier den Inhalt der R Datei einleseen " +  content;
-//      $.ajax({
-//       url: path,
-//       success: function (data){
-//             console.log(data);
-//             $("#scriptIn").load(data);
-//       }
-//      })
-
-
-
-
-//     currentScript = scriptname;
-//
-// }
-
-
+/**
+  * @desc Function for saving the contents of the textarea .R file
+*/
 var saveScript = function(){
-    saved = true;
-    var content = document.getElementById("scriptIn").value;
-    
-
-    //var scriptName = "dritteRDatei.R";
- 
-    //if(scriptName == "" || scriptName == undefined){
-        //return;
-    //}
-    editFile(content);
+  saved = true;
+  //Content of textarea
+  var content = document.getElementById("scriptIn").value;
+  editFile(content);
 }
 
-
-
+/**
+  * @desc Function for editing an existing .R file via AJAX.POST request
+  * @param newContent: content of the textarea
+  * @return AJAX success or error
+*/
 var editFile = function(newContent){
-
-    
-    
-    var namevomScript = aktScript;
-    var projectName = document.cookie.split("=")[3];
-    var data = {
-        "script" : "" + newContent  + "" ,
-        "scriptName"  : "" + namevomScript + "",
-        "projectName"  : "" + projectName + "",
+  var namevomScript = aktScript;
+  var projectName = document.cookie.split("=")[3];
+  var data = {
+    "script" : "" + newContent  + "" ,
+    "scriptName"  : "" + namevomScript + "",
+    "projectName"  : "" + projectName + "",
+  }
+  console.log(document.cookie.split("=")[3]);
+  console.log(projectName + "   "  + namevomScript);
+  var url = '/updateFile?name' + projectName +"/Scripts/" + namevomScript;
+  //AJAX.POST request with new file content
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data:data,
+    timeout: 5000,
+    success: function (data, textStatus) {
+      console.log(data);
+      console.log("success");
+    },
+    error: function (xhr, textStatus, errorThrown) {
+      console.log("error by creating folder");
     }
-    console.log(document.cookie.split("=")[3]);
-    console.log(projectName + "   "  + namevomScript);
-    
-    
-    
-    var url = '/updateFile?name' + projectName +"/Scripts/" + namevomScript;  //'http://localhost:3000' 
-
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data:data,
-        //inhalt:data,
-        timeout: 5000,
-        success: function (data, textStatus) {
-            console.log(data);
-            console.log("success");
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log("error by creating folder");
-        }
-    });
+  });
 }
 
-
-
-
-
-
+/**
+  * @desc Function for adding scripts to the project
+  * @param project: current projectname , name : name of the added script
+*/
 var addScript = function(project,name){
-    if(project === undefined){
-        return;
-    }
-    
-    console.log(project);
-    var tempCreator = project.data.Creator;
-    var tempCollaborators = project.data.Colaborators;
-    var tempDateien = project.data.Dateien;
-    var tempErgebnisse = project.data.Ergebnis;
-
-    var tempScripts = project.data.Scripts;
-
-    console.log(tempScripts);
-    tempScripts.concat("," + name);
-    console.log(tempScripts);
-
-    // jetze neues projekt aus den temp dingern
-    var neuesProject = {
-        Creator: "" + tempCreator,
-        Colaborators:"" + tempCollaborators,
-        Scripts:"" + tempScripts,
-        Dateien:"" + tempDateien,
-        Ergebnis:"" + tempErgebnisse,
-    }
+  //Check if the user is in a project
+  if(project === undefined){
+    return;
+  }
+  console.log(project);
+  //temp variables for storing information
+  var tempCreator = project.data.Creator;
+  var tempCollaborators = project.data.Colaborators;
+  var tempDateien = project.data.Dateien;
+  var tempErgebnisse = project.data.Ergebnis;
+  var tempScripts = project.data.Scripts;
+  console.log(tempScripts);
+  tempScripts.concat("," + name);
+  console.log(tempScripts);
+  //generating new Project from temp variables
+  var neuesProject = {
+    Creator: "" + tempCreator,
+    Colaborators:"" + tempCollaborators,
+    Scripts:"" + tempScripts,
+    Dateien:"" + tempDateien,
+    Ergebnis:"" + tempErgebnisse,
+  }
 }
 
 
@@ -198,17 +164,17 @@ function cb(p){
 
 
 var deleteScript = function(){
-    var url = '/deleteFile?name' + "einProjekt" +"/Scripts/" + "dritteRDatei.R";  //'http://localhost:3000' 
+    var url = '/deleteFile?name' + "einProjekt" +"/Scripts/" + "dritteRDatei.R";  //'http://localhost:3000'
 
-    
+
     var namevomScript = aktScript;
     var projectName = document.cookie.split("=")[3];
     var data = {
         "scriptName"  : "" + namevomScript + "",
         "projectName"  : "" + projectName + "",
     }
-    
-    
+
+
     $.ajax({
         type: 'POST',
         url: url,
@@ -223,11 +189,6 @@ var deleteScript = function(){
             console.log("error by creating folder");
         }
     });
-    
+
     document.location.href = "work.html";
 }
-
-
-
-
-

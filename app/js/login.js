@@ -1,4 +1,7 @@
-/* moving background + login.css */
+/**
+  * @desc Function for making the backgroundimage in the index.html move to the side
+  *
+*/
 (function ($) {
     var x = 0;
     var y = 0;
