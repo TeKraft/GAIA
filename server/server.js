@@ -408,13 +408,11 @@ app.get('/uniqueLink*', function(req, res) {
   var uniqueID = req.url.substring(15, req.url.length);
   Feature.find({_id: uniqueID}, function (error, features) {
       if (error) return console.error(error);
-      console.log(features[0]._id);
-
-      // res.send(features);
-      res.sendFile(path.join(__dirname, '../app/workRead.html'));
-      // res.send('<p>some html<p>');
-
-      // res.sendfile(../app/workRead.html', {root: __dirname })
+      if (features[0] == undefined) {
+        res.status(404).send("Something went wrong.<br>The project you have requested might be deleted.");
+      } else {
+        res.sendFile(path.join(__dirname, '../app/workRead.html'));
+      }
   });
 });
 
