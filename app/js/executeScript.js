@@ -3,6 +3,7 @@ var localhost = 'http://localhost:3000';
 /**
   * @desc Function for sending the current projectname & choosen scriptname
   *       via AJAX.POST request and initiate the execution of the script.
+  * @return AJAX success or error
 */
 function executeScript(){
     var script = aktScript;
@@ -25,6 +26,7 @@ function executeScript(){
 
   /**
     * @desc Function for initiating the creation of a CSV for all data in th SciDB.
+    * @return AJAX success or error
   */
 function getCSV() {
   console.log("getCSV()");
@@ -48,6 +50,7 @@ function getCSV() {
 /**
   * @desc Function for sending the current projectname via an AJAX.POST request
   *       to initiate the download of the whole project as a ZIP-folder.
+  * @return AJAX success or error
 */
 function downloadZip() {
     //Confirmation of the download intent

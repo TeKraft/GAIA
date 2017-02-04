@@ -2,8 +2,6 @@
 
 var getProjectbyName = function(name, creator) {
     var url = 'http://localhost:3000' + '/getFeatures';
-    
-
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -14,9 +12,9 @@ var getProjectbyName = function(name, creator) {
             $('#tableDBContents').empty();
             var project;
             for (var i = 0; i <= content.length; i++) {
-                
+
                 if (content[i] != undefined && content[i].data != undefined && content[i].data.Creator == creator && content[i].name == name) {
-                    
+
                     project = content[i];
                     getProject(project);
                     return project;
@@ -28,7 +26,6 @@ var getProjectbyName = function(name, creator) {
             console.log("no success");
         }
     });
-    
     return loadedProject;
 };
 
@@ -41,20 +38,20 @@ var getProject = function(string){
 
 
 var saveData = function(name,data){
-    
-    
+
+
     var url = 'http://localhost:3000' + '/getFeatures';
-    
+
   // ajax Post
     $.ajax({
 	   url: '/updateFeature?name=' + name,
        //async: false,
        type: "POST",
 	   data: data,
-		
+
        success: function(xhr, textStatus, data){
                             console.log("success");
-            
+
        },
        error: function(textStatus, errorThrown){
             console.log(errorThrown);
@@ -87,7 +84,7 @@ var updateDB = function(){
         } else {
             return;
         }
-    
+
     $.ajax({
         url: '/deleteFeature?name=' + user.name,
         //async: false,
@@ -100,6 +97,6 @@ var updateDB = function(){
         console.log(errorThrown);
         }
     });
-    
+
     document.location.href = "index.html";
 }
