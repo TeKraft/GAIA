@@ -150,7 +150,42 @@ window.onload = function () {
             var res = str.replace("/", ".");
             document.getElementById("email").value = res;
 
-            break;
+              break;
+           
+        }
+    }
+    
+    
+    var currentProject = document.cookie.split("=");
+    if (document.cookie.length != 0) {
+
+        var path = window.location.pathname;
+        switch (path) {
+
+        case "/profil.html":
+            var userArray = document.cookie.split("=");
+            var userJSON = JSON.parse(userArray[1]);
+
+            document.getElementById("profilProfilSymb").textContent = userJSON.data.Firstname;
+            document.getElementById("firstName").value = userJSON.data.Firstname;
+            document.getElementById("lastName").value = userJSON.data.LastName;
+            document.getElementById("streetName").value = userJSON.data.StreetName;
+            document.getElementById("houseNumber").value = userJSON.data.HouseNumber;
+            document.getElementById("postcode").value = userJSON.data.Postcode;
+            document.getElementById("city").value = userJSON.data.City;
+            document.getElementById("institution").value = userJSON.data.Institution;
+            document.getElementById("email").value = userJSON.data.Email;
+            
+            document.getElementById("country").value = userJSON.data.Country;
+
+
+            /** change '/' into '.' **/
+            var str = document.getElementById("email").value;
+            var res = str.replace("/", ".");
+            document.getElementById("email").value = res;
+
+              break;
+           
         }
     }
 }

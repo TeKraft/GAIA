@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
+   <title>webbasierte Plattform zur kollaborativen Analyse von Erdbeobachtungsdaten</title>
+    <meta name="author" content="GAIA" />
     <meta charset="UTF-8">
     <title>Geosoftware II</title>
-
+ <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css" />
     <!-- add a favicon to a website -->
@@ -12,16 +14,16 @@
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 </head>
 
-<body>
+<body id="myBody">
     <div id="myNavbar">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Gaia</a>
+                    <a class="navbar-brand" href="gaia.html">Gaia</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbarButtons">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a title="show homepage" href="home.html">
                                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>home
                             </a>
@@ -30,30 +32,36 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
+                           <li class="active">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="editProfilSymb">
                                 <!--symbol?--><span class="caret"></span></a>
+                                
                             <ul class="dropdown-menu">
                                 <li><a href="profil.html">Profil</a></li>
-                                <li><a title="click to edit profile" href="profiledit.html">profile-edit</a></li>
-                                <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
-                                <li><a title="logout" onclick='logout()'>Logout</a></li>
+                                <li class="active"><a title="click to edit profile" href="profiledit.html">Profile-edit</a></li>
+                                <li><a title="click to get information about Gaia" href="impressum.html">Impressum</a></li>
+                                <li><a title="logout" class="btn btn-warning" onclick='logout()'>Logout</a></li>
                             </ul>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-    <h1> Profil </h1>
+    
     <div class="container">
         <div class="row">
             <div class="span12">
-                <div class="thumbnail center well well-small text-left">
-                    <form class="form-horizontal">
-                        <div class="form-group">
+                <h1> Profil edit ... </h1> <br>
+                <div class="thumbnail center well well-small text-left">   
+                      
+                       <form class="form-horizontal ">
+                        <div class="form-group  ">
                             <label for="fistName" class="col-sm-2 control-label">First name: </label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-10" >
                                     <input type="text" class="form-constrol" id="firstName" name="first name" placeholder="First name..." autofocus="1">
+                                    
                                 </div>
                          </div>
                         
@@ -427,10 +435,11 @@
                         
                         
                         
-                        <input type="button" value="submit" onclick='editUser()'>
+                        
                         
                     </form>
-                    <button type="button" id='deleteBtn' onclick='updateDB()'> Delete Profil</button>
+                     <input type="button" class="btn btn-success btn-lg " value="submit" onclick='editUser()'> 
+                    <button type="button" class="btn btn-danger"  id='deleteBtn' onclick='updateDB()'> Delete Profil</button>
                 </div>
             </div>
         </div>
