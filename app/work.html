@@ -77,21 +77,21 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                      <li>
-                        <button id='getUniqueLink' onclick='getUniqueLink()' type='button' class='btn btn-test'>share link</button>
-                      </li>
-                      <li>
-                        <textarea readonly id="uniqueLink"></textarea>
-                      </li>
-                      <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                              <li><a href="javascript:toProfil()">Profil</a></li>
-                              <li><a title="click to edit profile" href="javascript:toProfilEdit()">profile-edit</a></li>
-                              <li><a title="click to get information about Gaia" href="javascript:toImpressum()">About</a></li>
-                              <li><a title="logout" onclick='toLogout()'>Logout</a></li>
-                          </ul>
-                      </li>
+                        <li>
+                            <button id='getUniqueLink' onclick='getUniqueLink()' type='button' class='btn btn-test'>share link</button>
+                        </li>
+                        <li>
+                            <textarea readonly id="uniqueLink"></textarea>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:toProfil()">Profil</a></li>
+                                <li><a title="click to edit profile" href="javascript:toProfilEdit()">profile-edit</a></li>
+                                <li><a title="click to get information about Gaia" href="javascript:toImpressum()">About</a></li>
+                                <li><a title="logout" onclick='toLogout()'>Logout</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -139,30 +139,9 @@
                                 <br>
                                 <br>
                                 <br>
-                                <button class="btn btn-lg upload-btn" type="button">Upload File</button>
-                                <button id="downloadBtn" onclick="download()" type="download">download</button>
-
-
-                                <script>
-
-                                    function download () {
-                                    app.get('../app/projects/raoul', function (req, res) {
-                                        console.log("inside req");
-                                        var data = "<html><body><h1>Inside new Html</h1></body></html>";
-                                        var zip2 = new easyzip.EasyZip();
-                                        var jsFolder = zip2.folder('data');
-                                        jsFolder.file('server.js', 'alert("hello world")');
-                                        jsFolder.file('index.html', data);
-                                        zip2.writeToResponse(res, 'folder.zip');
-                                    });
-
-                                    }
-                                </script>
-
-
+                                <button class="btn btn-lg upload-btn" type="download">Upload File</button>
                                 <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
                                 <br>
-
                             </div>
                         </div>
                     </div>
@@ -171,27 +150,18 @@
 
             </div>
             <div class="col-md-1">
-
                 <div class="myPanel">
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel panel-heading">
-                                functionsMap
+                                <p>Functions </p>
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                                <button id='test02' onclick='executeScript()' type='button' class='btn btn-test'>execute Script</button>
-                                <br>
-                                <button id='test05' onclick='createiframe()' type='button' class='btn btn-test'>Load_From_Result</button>
-                                <button id='test03' onclick='getMap()' type='button' class='btn btn-test'>getMap</button>
+                                <button id="test02" onclick="executeScript()" type="download">RUN selected Script!</button>
                                 <br>
                                 <br>
-                                <button id='testLoading' onclick='loadToTextarea()' type='button' class='btn btn-test'>LOAD_SCRIPT</button>
-
-                                <button id="downloadZip" onclick="downloadZip()" type='button' class='btn btn-test'>downloadZip</button>
-
-                                <button id='loadTMS' onclick='loadTMS()' type='button' class='btn btn-test'>Load TMS</button  >
-
-                            </div>
+                                <button id='loadTMS' onclick='loadTMS()' type='download'>Load TMS from Path</button>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -238,110 +208,10 @@
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel panel-heading">
-                                functionsR
+                                Project
                             </div>
                             <div id="functionsR" class="panel panel-body">
-                                <a href="/p/MustermannMax/export/txt" id='download'>download</a>
-                                <!--download symbol animation-->
-                                <svg viewBox="0 0 64 64">
-                                    <path id="circle-bg" d="M 32,  8
-                                      C 45,  8  56, 19  56, 32
-                                      C 56, 45  45, 56  32, 56
-                                      C 19, 56   8, 45   8, 32
-                                      C  8, 19  19,  8  32,  8
-                                      Z">
-                                    </path>
-                                    <path id="circle-hover" d="M 32,  8
-                                      C 45,  8  56, 19  56, 32
-                                      C 56, 45  45, 56  32, 56
-                                      C 19, 56   8, 45   8, 32
-                                      C  8, 19  19,  8  32,  8
-                                      Z">
-                                    </path>
-                                    <path id="line" d="M 28, 41
-                                    L 22, 34
-                                    C 11, 21  19,  8  32,  8
-                                    C 45,  8  56, 19  56, 32
-                                    C 56, 45  45, 56  32, 56
-                                    C 19, 56  28, 44  31, 47
-                                    C 32, 48  32, 48  33, 47
-                                    L 41, 38
-                                    C 42, 37  42, 36  41, 36
-                                    L 35, 36
-                                    L 35, 16
-                                    L 29, 16
-                                    L 29, 36
-                                    L 23, 36
-                                    C 22, 36  22, 37  23, 38
-                                    L 31, 47
-                                    C 32, 48  32, 48  33, 47
-                                    C 35, 45  45, 56  32, 56
-                                    C 19, 56   8, 45   8, 32
-                                    C  8, 19  19,  8  32,  8
-                                    C 45,  8  51, 17  44, 24
-                                    Z">
-                                    </path>
-                                </svg>
-                                <!--download symbol animation javaScript-->
-                                <script>
-                                    (function () {
-                                        var $svg, check, circleEmpty, circleFull, i, reset, shrink, t, to;
-                                        $svg = $('svg');
-                                        to = null;
-                                        t = function (ms, cb, fn) {
-                                            return to = setTimeout(function () {
-                                                fn();
-                                                return cb();
-                                            }, ms);
-                                        };
-
-                                        shrink = function (cb) {
-                                            return t(0, cb, function () {
-                                                return $svg.attr("class", "shrink");
-                                            });
-                                        };
-
-                                        circleEmpty = function (cb) {
-                                            return t(300, cb, function () {
-                                                return $svg.attr("class", "circle-empty");
-                                            });
-                                        };
-
-                                        circleFull = function (cb) {
-                                            return t(700, cb, function () {
-                                                return $svg.attr("class", "circle-full");
-                                            });
-                                        };
-
-                                        check = function (cb) {
-                                            return t(2000, cb, function () {
-                                                return $svg.attr("class", "check");
-                                            });
-                                        };
-
-                                        reset = function (cb) {
-                                            return t(3000, cb, function () {
-                                                return $svg.attr("class", null);
-                                            });
-                                        };
-                                        $svg.click(function () {
-                                            clearInterval(i);
-                                            if ($svg.attr("class") != null) {
-                                                $svg.attr('class', null).clearQueue();
-                                                return clearTimeout(to);
-                                            } else {
-                                                return $svg.queue(shrink).queue(circleEmpty).queue(circleFull).queue(check).queue(reset);
-                                            }
-                                        });
-                                        $svg.on('mouseenter mouseover', function () {
-                                            return clearInterval(i);
-                                        });
-                                        i = setInterval(function () {
-                                            return $svg.click();
-                                        }, 15000);
-                                    }).call(this);
-                                </script>
-                                <a href='#' onclick='loadIframe()'>loadIframe()</a>
+                                    <button id="downloadZip" onclick="downloadZip()" type='download'>Download as Zip</button>
                             </div>
                         </div>
                     </div>

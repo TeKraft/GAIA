@@ -112,7 +112,7 @@ var createImageNames = function(projectname){
 
 
 var createScriptNames = function(projectname){
-    
+
     readProjectFolderbyName(projectname + "/Scripts");  //projectname + "Scripts"
     var ScriptArray = array_unique(temp);
 
@@ -134,7 +134,7 @@ var rToInput = function(scriptname){
     var projectname = tempCookie[3];
     console.log(projectname);
     var path = projectname + "/Scripts/" + scriptname;
-    
+
     //hier erst gucken ob .R Datei ist.
     if(scriptname.includes('.R')){
         readScriptbyName(path);
@@ -143,7 +143,7 @@ var rToInput = function(scriptname){
     }else{
         return;
     }
-    
+
 }
 
 
@@ -157,7 +157,7 @@ var readScriptbyName = function(path){
   }  else {
 
       var path = "" + path;
-      
+
     //var folderRead = name;
     //console.log("readProjectFolder("+folderRead+")");
 
@@ -183,7 +183,7 @@ var readScriptbyName = function(path){
 
 var aktScript;
 function createTree() {
-    
+
     $(function () {
         // 6 create an instance when the DOM is ready
         $('#jstree').jstree();
@@ -312,9 +312,4 @@ var toLogout = function(){
     }else{
         logout();
     }
-}
-
-
-var download = function(){
-
 }
