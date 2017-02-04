@@ -57,9 +57,9 @@
                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>workplace
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">symbol? <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="profil.html">Profil</a></li>
@@ -67,9 +67,12 @@
                                 <li><a title="click to get information about Gaia" href="impressum.html">About</a></li>
                                 <li><a title="logout" onclick='logout()'>Logout</a></li>
                             </ul>
+                        </li> -->
+                        <li class="helpButton">
+                          <a class="helpMe" href="help.html" title="Need Help --> click me" id="helpMeHTML"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
                         </li>
                     </ul>
-                </div> -->
+                </div>
             </div>
         </nav>
     </div>
@@ -124,22 +127,18 @@
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel panel-heading">
-                                functionsMap
+                                <p>Functions </p>
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                                <button id='test02' onclick='executeScript()' type='button' class='btn btn-test'>execute Script</button>
-                                <br>
-                                <button id='test04' onclick='importHTML()' type='button' class='btn btn-test'>import HTML</button>
-                                <button id='test05' onclick='createiframe()' type='button' class='btn btn-test'>create iframe</button>
-                                <button id='test03' onclick='getMap()' type='button' class='btn btn-test'>getMap</button>
+                                <button id="test02" onclick="executeScript()" type="download">RUN selected Script!</button>
                                 <br>
                                 <br>
-                                <button id='testLoading' onclick='loadToTextarea()' type='button' class='btn btn-test'>LOAD_SCRIPT</button>
-                                <button id="downloadZipAsReader" onclick="downloadZipAsReader()" type='button' class='btn btn-test'>downloadZipAsReader</button>
-                            </div>
+                                <button id='loadTMS' onclick='loadTMS()' type='download'>Load TMS from Path</button>
+                          </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="col-md-8">
 
@@ -180,13 +179,10 @@
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel panel-heading">
-                                functionsR
+                                Project
                             </div>
                             <div id="functionsR" class="panel panel-body">
-                                <a href="/p/MustermannMax/export/txt" id='download'>download</a>
-                                <!--download symbol animation-->
-
-                                <a href='#' onclick='loadIframe()'>loadIframe()</a>
+                                    <button id="downloadZip" onclick="downloadZip()" type='download'>Download as Zip</button>
                             </div>
                         </div>
                     </div>
