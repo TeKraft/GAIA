@@ -1,13 +1,17 @@
-function prependHeader() {
-
+/**
+  * @desc Function for executing a selected Script
+  *       The content of the script gets saved in a tmp file and the header is preapended to that tmp file.
+  *       An AJAX.POST request executes the script via nodes childProcesses. A callback approves the execution.
+  *       The tmp-file is deleted afterwards.
+  * @return AJAX success or error
+*/
+function executeScript() {
     var scriptName = aktScript;
     var projectName = document.cookie.split("=")[3];
     var path = projectName + "/Scripts/" + scriptName;
     console.log(scriptName + "\n" + projectName);
-
     readScriptbyName(path);
     console.log(tempScript);
-
     var content = {scriptName: scriptName, project: projectName, scriptData: tempScript};
     // var url = localhost + '/prependMyFile';
     var url = localhost + '/callMeMaybe';
@@ -18,7 +22,6 @@ function prependHeader() {
       success: function(res){
         console.log(res);
         alert("Script has been executed! \n -->"+res);
-
         try {
           deleteTempScript();
         }
@@ -26,7 +29,6 @@ function prependHeader() {
           alert("Error occured when processing the script!")
           return;
         }
-
       },
       error: function (xhr, textStatus, errorThrown) {
         window.alert(res);
@@ -34,14 +36,16 @@ function prependHeader() {
     });
   };
 
-
+  /**
+    * @desc Function for deleting the temp files created for executing the script with the standart script header.
+    * @return AJAX success or error
+  */
   var deleteTempScript = function(){
       var url = localhost + '/deleteTempFile';
       var namevomScript = "temp"+aktScript;
       var data = {
           "scriptName"  : "" + namevomScript + "",
       }
-
       $.ajax({
           type: 'POST',
           url: url,
