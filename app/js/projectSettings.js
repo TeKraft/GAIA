@@ -20,7 +20,7 @@ function changeProjectName() {
 
     if (content != undefined) {
 
-        var url = 'http://localhost:3000' + '/updateFeature?name=' + toChangeProject;
+        var url = localhost + '/updateFeature?name=' + toChangeProject;
 
         // perform post ajax
         $.ajax({
@@ -59,7 +59,7 @@ function addCollaborator() {
 
 
 
-     var url = 'http://localhost:3000' + '/getFeatures';
+     var url = localhost + '/getFeatures';
 
     $.ajax({
         type: 'GET',
@@ -106,9 +106,10 @@ function addCollaborator() {
 
 function updateFeatureData(featureName, newData){
     console.log(newData);
+    var url = localhost + '/updateFeature?name=' + featureName;
      // ajax Post
 	$.ajax({
-		url: '/updateFeature?name=' + featureName,
+		url: url,
 		//async: false,
 		type: "POST",
 		data: newData,
@@ -133,7 +134,7 @@ function updateFeatureData(featureName, newData){
 
 
 function getProjectByName(name){
-var url = 'http://localhost:3000' + '/getFeatures';
+var url = localhost + '/getFeatures';
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -141,7 +142,6 @@ var url = 'http://localhost:3000' + '/getFeatures';
         timeout: 5000,
         async:false,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
             for(var i=0; i<= content.length;i++){
 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined && content[i].name == name){
@@ -152,7 +152,6 @@ var url = 'http://localhost:3000' + '/getFeatures';
                 }
             }
             return temp;
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
@@ -169,10 +168,10 @@ function updateProject(jsonString) {
 	var content = JSON.parse(decodedcontentString);
 
 	dataTitle = content.features[0].properties.name;
-
+  var url = localhost + '/updateFeature?name=' + dataTitle;
 	// ajax Post
 	$.ajax({
-		url: '/updateFeature?name=' + dataTitle,
+		url: url,
 		//async: false,
 		type: "POST",
 		data: content,

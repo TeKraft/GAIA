@@ -17,7 +17,6 @@ $('#buttonTree').on('click', function () {
   $.jstree.reference('#jstree').select_node('child_node_1');
 });
 
-
 // hier muss der baum richtig erstellt werden
 function makeTreeComponents(name) {
     var tempCookie = document.cookie.split("=");
@@ -34,7 +33,7 @@ function makeTreeComponents(name) {
     var scripts = createScriptNames(name);
 
     var images = createImageNames(name);
-    
+
     var results = createResultNames(name);
 
     //console.log(document.getElementById("jstree"));
@@ -83,7 +82,7 @@ var createResultNames = function(name){
     var resultArray = array_unique(temp);
     console.log(resultArray);
     var div = "";
-    
+
     for (var i in resultArray){
         var ending = resultArray[i];
         if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt')){
@@ -93,24 +92,24 @@ var createResultNames = function(name){
                 // mit jeden ending subordner erstellen;
                 //console.log(name);
                 var subFolders = createSubFolders(name + "/Results/" +  ending);
-                
+
                 if(subFolders != undefined && subFolders != ""){
                     console.log(subFolders);
                 }else{
                     console.log(ending + " keine subfolder");
                     div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
                 }
-                
-                
-                
+
+
+
                // console.log(ending);
                 //readProjectFolderbyName(name + "/Results/" + ending);
                 //console.log(array_unique(temp));
-                
-               // 
-                
-                
-                
+
+               //
+
+
+
             }
         }
     }
@@ -133,17 +132,17 @@ var createSubFolders = function(path){
 /*
 if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt')){
             div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
-            
+
         }else{
             if(!ending.includes('.')){
                 console.log(ending);
                 readProjectFolderbyName(name + "/Results/" + ending);
                 console.log(array_unique(temp));
-                
+
                 div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
-                
-                
-                
+
+
+
             }
         }
 */
@@ -215,7 +214,7 @@ var readScriptbyName = function(path){
     //var folderRead = name;
     //console.log("readProjectFolder("+folderRead+")");
 
-    var url = 'http://localhost:3000' + '/readFile?name=' + path;
+    var url = localhost + '/readFile?name=' + path;
     // perform post ajax
     $.ajax({
         type: 'GET',
