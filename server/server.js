@@ -180,45 +180,46 @@ app.post('/execScriptCallback', function (req, res) {
   * prepend file ################################################################
   * #############################################################################
   */
-/**
-  * @desc AJAX.POST on server for executing Scripts.
-  *       Execution of R-Scripts is achieved by using nodes "childProcess".
-  * @return the result of the executed R-Script will be added to the project/Results folder
-  */
-app.post('/callMeMaybe', function (req, res) {
-  var data = req.body;
-  var thisScript = 'temp' + data.scriptName; //temporary script created for analysis
-  var thisProject = data.project; // projecttitle
-  var thisScriptData = data.scriptData; // data of script
-  var filePath = '../app/scriptsR/tempData/' + thisScript; // path of tempScript
+  /**
+    * @desc AJAX.POST on server for executing Scripts.
+    *       Execution of R-Scripts is achieved by using nodes "childProcess".
+    * @return the result of the executed R-Script will be added to the project/Results folder
+    */
+  app.post('/callMeMaybe', function (req, res) {
+    var data = req.body;
+    var thisScript = 'temp' + data.scriptName; //temporary script created for analysis
+    var thisProject = data.project; // projecttitle
+    var thisScriptData = data.scriptData; // data of script
+    var filePath = '../app/scriptsR/tempData/' + thisScript; // path of tempScript
+    var newfilePath = '../../../scriptsR/tempData/' + thisScript; // path for working directory
 
-  console.log(thisScript + "\n" + thisProject + "\n" + filePath + "\n" + thisScriptData);
+    console.log(thisScript + "\n" + thisProject + "\n" + filePath + "\n" + thisScriptData);
 
-  fs.writeFile(filePath, thisScriptData, function (err) {
-  if (err) {throw err}
-  else {
+    fs.writeFile(filePath, thisScriptData, function (err) {
+    if (err) {throw err}
+    else {
 
-    //instantiate a childProcess
-    var childProcess = require('child_process');
-    var project = thisProject;
-    var script = thisScript;
-    //EXEC-function: Basically the same as executing a local Rscript via commandlines.
-    //cwd changes the current working directory so the results dont spawn where the serverjs is
-    //but rather where the results should be stored.
-    childProcess.exec('Rscript ' + filePath + '',{cwd: '../app/projects/' + project + '/Results/'}, function (error, stdout, stderr) {
-      if (error) {
-        res.send(filePath);
-        // res.send(stderr);
-        return console.error(error);
-      }else {
-        res.send(filePath);
-      }
+      //instantiate a childProcess
+      var childProcess = require('child_process');
+      var project = thisProject;
+      var script = thisScript;
+      //EXEC-function: Basically the same as executing a local Rscript via commandlines.
+      //cwd changes the current working directory so the results dont spawn where the serverjs is
+      //but rather where the results should be stored.
+      childProcess.exec('Rscript ' + newfilePath + '',{cwd: '../app/projects/' + project + '/Results/'}, function (error, stdout, stderr) {
+        if (error) {
+          res.send(error);
+        }else {
+          console.log(stdout);
+          res.send(""+stdout);
+        }
+      });
+    }
+    // res.send("file updated: " + script);
     });
-  }
-  res.send("file updated: " + script);
+
   });
 
-});
 
 /**
   * @desc Function to prepend data to a file

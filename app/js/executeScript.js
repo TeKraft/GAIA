@@ -1,26 +1,59 @@
-/**
-  * @desc Function for sending the current projectname & choosen scriptname
-  *       via AJAX.POST request and initiate the execution of the script.
-  * @return AJAX success or error
-*/
-function executeScriptCallback(){
-  var script = aktScript;
-  var url = localhost + '/execScriptCallback';
-  //name of the project, that is the current Project. Information cut out from cookie.
-  var currentProject = document.cookie.split("=")[3];
-  //AJAX:POST request with the current project and selected script.
-  $.ajax({
-      type: 'POST',
-      data: {project: ""+currentProject+"", script: ""+script+""},
+function prependHeader() {
+
+    var scriptName = aktScript;
+    var projectName = document.cookie.split("=")[3];
+    var path = projectName + "/Scripts/" + scriptName;
+    console.log(scriptName + "\n" + projectName);
+
+    readScriptbyName(path);
+    console.log(tempScript);
+
+    var content = {scriptName: scriptName, project: projectName, scriptData: tempScript};
+    // var url = localhost + '/prependMyFile';
+    var url = localhost + '/callMeMaybe';
+    $.ajax({
       url: url,
-      success: function (res) {
+      type: 'POST',
+      data: content,
+      success: function(res){
         console.log(res);
-        alert(res);
+        alert("Script has been executed! \n -->"+res);
+
+        try {
+          deleteTempScript();
+        }
+        catch(err) {
+          alert("Error occured when processing the script!")
+          return;
+        }
+
       },
       error: function (xhr, textStatus, errorThrown) {
-          console.log("no success");
+        window.alert(res);
+    }
+    });
+  };
+
+
+  var deleteTempScript = function(){
+      var url = localhost + '/deleteTempFile';
+      var namevomScript = "temp"+aktScript;
+      var data = {
+          "scriptName"  : "" + namevomScript + "",
       }
-  });
+
+      $.ajax({
+          type: 'POST',
+          url: url,
+          data:data,
+          //inhalt:data,
+          timeout: 5000,
+          success: function (data, textStatus) {
+          },
+          error: function (xhr, textStatus, errorThrown) {
+              res.send("Could not delete temp files");
+          }
+      });
   };
 
   /**
