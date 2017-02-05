@@ -148,6 +148,11 @@
                                     <button class="btn btn-primary upload-btn" type="download">Upload File</button>
                                     <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
                                     <br>
+
+                                    <br>
+                                    <button id="downloadZip" class=" btn btn-primary" onclick="downloadZip()" type='download'>Download as Zip</button>
+                                    <button onclick="prependMyShit()">click</button>
+
                                 </div>
 
                             </div>
@@ -202,8 +207,15 @@
                                 <p id="CreatorInfo"></p>
                                 <p id="CollaboratorInfo"></p>
                                 <button type="button" class="btn btn-toSettings">Settings</button>
+
+                                
+
+
+
                                 <button type="button" class="btn btn-info btn-writeCSV" onclick="getCSV()">sciDB data</button>
                                 <button type="button" class="btn btn-info btn-readCSV" onclick="readCSV()">read CSV</button>
+                                
+
                             </div>
                         </div>
                     </div>
@@ -214,7 +226,7 @@
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel panel-heading">
-                                Project
+                                Scripts
                             </div>
                             <div id="functionsR" class="panel panel-body">
 
@@ -232,7 +244,6 @@
                                 <br>
                                 <br>
 
-                                <button id="downloadZip" class=" btn-primary" onclick="downloadZip()" type='download'>Download as Zip</button>
 
                                 <br>
                                 <br>

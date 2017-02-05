@@ -50,7 +50,7 @@ function makeTreeComponents(name) {
                     "</ul>" +
                 "</li>" +
 
-                "<li id='images_node_1'>Images" +
+                "<li id='images_node_1'>Uploads" +
                     "<ul id='childList'>" +
                         images+ //images +
                     "</ul>" +
@@ -170,7 +170,7 @@ if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt'))
 
 
 var createImageNames = function(projectname){
-    readProjectFolderbyName(projectname + "/Images");
+    readProjectFolderbyName(projectname + "/Uploads");
     var ImageArray = array_unique(temp);
     var div = "";
     for (var i in ImageArray){

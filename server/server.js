@@ -306,7 +306,7 @@ app.post('/addFolder*', function (req, res) {
   */
 function folderStructure(foldertitle) {
     var folderStructure = new Array();
-    folderStructure = ["Scripts", "Images", "Results"];
+    folderStructure = ["Scripts", "Uploads", "Results"];
 
     for (var i = 0; i < folderStructure.length; i++) {
         fs.mkdir('../app/projects/' + foldertitle + '/' + folderStructure[i], function (err) {
@@ -450,15 +450,24 @@ app.post('/deleteFile', function (req, res) {
   * @return message with success or error
   */
 app.post('/upload*', function (req, res) {
-    var currentFolder = req.url.substring(15, 22); // extract foldertitle from url
-    var currentProject = req.url.substring(31, req.url.length); // extract projecttitle from url
+    // from url
+    var currentProject = req.url.substring(13, req.url.length); // extract projecttitle from url
+    
+    var currentFolder = req.url.substring(13-currentProject.length, req.url.length); // extract foldertitle
+    console.log(currentFolder);
+    console.log(currentProject);
+    
     // create an incoming form object
     var form = new formidable.IncomingForm();
+    
+   
+    var uploadPath = '../app/projects/'+ currentProject ;
 
     // specify that we want to allow the user to upload multiple files in a single request
     form.multiples = true;
     // store all uploads in the /uploads directory
-    form.uploadDir = path.join(__dirname, '../app/projects/' + currentProject + '/' + currentFolder);
+    // form.uploadDir = path.join(__dirname, uploadPath);
+    form.uploadDir = uploadPath;
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
     form.on('file', function (field, file) {
@@ -474,6 +483,8 @@ app.post('/upload*', function (req, res) {
     });
     // parse the incoming request containing the form data
     form.parse(req);
+    
+    
 });
 
 /*
