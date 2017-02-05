@@ -48,6 +48,7 @@ var editFile = function(newContent){
     "projectName"  : "" + projectName + "",
   }
 
+      console.log(namevomScript);
   var url = localhost + '/updateFile?name' + projectName +"/Scripts/" + namevomScript;
   //AJAX.POST request with new file content
   $.ajax({

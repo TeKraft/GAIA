@@ -280,29 +280,20 @@ function createTree() {
 	"conditionalselect"
   ]});
         
-        
-             
-        
-        
-        
- 
-        
 
-
-        
-        
         $('#jstree').on("changed.jstree", function (e, data) {
         if(saved == false){
             if (confirm("did you save your Project?") == true) {
                 console.log(data.selected[0]);
-                aktScript = data.selected[0];
-                rToInput(aktScript.replace(",",""));
+                var select = data.selected[0];
+                aktScript = select.slice(0,select.length-1);
+                console.log(aktScript);
+                rToInput(aktScript);
             } else {
                 return;
             }
             }else{
-                console.log(data.selected[0]);
-            aktScript = data.selected[0];
+            aktScript = data.selected[0].replace(",","");
             console.log(aktScript);
             document.getElementById("scriptIn").style.display =  'inline-block';
             rToInput(aktScript.replace(",",""));
