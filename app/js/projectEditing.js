@@ -34,9 +34,9 @@ function makeTreeComponents(name) {
 
     var images = createImageNames(name);
 
-    var resultsFirst = createResultNames(name);
+    var results = createResultNames(name);
 
-    var results = resultsFirst.replace("," , "");
+    //var results = resultsFirst.replace("," , "");
     
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" +
@@ -254,8 +254,10 @@ var aktScript;
 function createTree() {
 
     $(function () {
+        
         // 6 create an instance when the DOM is ready
-        $('#jstree').jstree(  {
+        $('#jstree').jstree(
+    {
     "types" : {
       "default" : {
         "icon" : "glyphicon glyphicon-folder-open"
@@ -279,7 +281,7 @@ function createTree() {
   ]});
         
         
-                
+             
         
         
         
@@ -301,8 +303,9 @@ function createTree() {
             }else{
                 console.log(data.selected[0]);
             aktScript = data.selected[0];
+            console.log(aktScript);
             document.getElementById("scriptIn").style.display =  'inline-block';
-            rToInput(aktScript);
+            rToInput(aktScript.replace(",",""));
     }
 
         });
