@@ -144,6 +144,7 @@
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar"></div>
                                     </div>
+                                    
 
                                     <button class="btn btn-primary upload-btn" type="download">Upload File</button>
                                     <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
@@ -151,7 +152,7 @@
 
                                     <br>
                                     <button id="downloadZip" class=" btn btn-primary" onclick="downloadZip()" type='download'>Download as Zip</button>
-                                    <button onclick="prependMyShit()">click</button>
+                                  
 
                                 </div>
 
@@ -170,10 +171,13 @@
                                 <p>Functions </p>
                             </div>
                             <div id="functionsMap" class="panel panel-body">
+                               
+                                
+                                <button id='loadTMS' onclick='loadTMS()' class="btn-info" type='download'>Load TMS from Path</button>
+                                <br>
+                                <br>
                                 <button id="executeScript" onclick="executeScript()" class="btn-success" type="download">RUN selected Script!</button>
-                                <br>
-                                <br>
-                                <button id='loadTMS' onclick='loadTMS()' class="btn-primary" type='download'>Load TMS from Path</button>
+                               
                             </div>
                         </div>
                     </div>
@@ -230,23 +234,18 @@
                             </div>
                             <div id="functionsR" class="panel panel-body">
 
-                                <button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-info btn-savePrj'>+ new</button>
+                                <button id='newScripttBtn' onclick='newScript()' type='button-tree' class='  btn-info btn-savePrj'>+ new</button>
                                 <br>
                                 <br>
-                                <button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-success btn-savePrj'>save Script</button>
-                                <br>
-                                <br>
-
-
-
-                                <button id='deleteScripttBtn' onclick='deleteScript()' type='button-tree' class='btn btn-danger btn-deleteScript'>delete</button>
-
+                                <button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class=' btn-success btn-savePrj'>save Script</button>
                                 <br>
                                 <br>
 
 
-                                <br>
-                                <br>
+
+                                <button id='deleteScripttBtn' onclick='deleteScript()' type='button-tree' class=' btn-danger btn-deleteScript'>delete</button>
+
+                                
 
                             </div>
                         </div>
