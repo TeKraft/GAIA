@@ -180,16 +180,56 @@ app.post('/execScriptCallback', function (req, res) {
   * prepend file ################################################################
   * #############################################################################
   */
+/**
+  * @desc AJAX.POST on server for executing Scripts.
+  *       Execution of R-Scripts is achieved by using nodes "childProcess".
+  * @return the result of the executed R-Script will be added to the project/Results folder
+  */
+app.post('/callMeMaybe', function (req, res) {
+  var data = req.body;
+  var thisScript = 'temp' + data.scriptName; //temporary script created for analysis
+  var thisProject = data.project; // projecttitle
+  var thisScriptData = data.scriptData; // data of script
+  var filePath = '../app/scriptsR/tempData/' + thisScript; // path of tempScript
+
+  console.log(thisScript + "\n" + thisProject + "\n" + filePath + "\n" + thisScriptData);
+
+  fs.writeFile(filePath, thisScriptData, function (err) {
+  if (err) {throw err}
+  else {
+
+    //instantiate a childProcess
+    var childProcess = require('child_process');
+    var project = thisProject;
+    var script = thisScript;
+    //EXEC-function: Basically the same as executing a local Rscript via commandlines.
+    //cwd changes the current working directory so the results dont spawn where the serverjs is
+    //but rather where the results should be stored.
+    childProcess.exec('Rscript ' + filePath + '',{cwd: '../app/projects/' + project + '/Results/'}, function (error, stdout, stderr) {
+      if (error) {
+        res.send(filePath);
+        // res.send(stderr);
+        return console.error(error);
+      }else {
+        res.send(filePath);
+      }
+    });
+  }
+  res.send("file updated: " + script);
+  });
+
+});
 
 /**
   * @desc Function to prepend data to a file
   * @return
   */
 var prependFile = require('prepend-file');
-function prependData(filename) {
+function prependData(path) {
+  var path = '../app/scriptsR/writeCSV.R';
   app.post('/prependMyFile', function(req, res) {
     var dataToPrepend = 'options(repos=c("CRAN" ="http://cran.uni-muenster.de"))\n\n# install.packages("curl")\n# install.packages("raster")\n# install.packages("intervals")\n\ninstall.packages("devtools")\ndevtools::install_github("Paradigm4/SciDBR")\ndevtools::install_github("appelmar/scidbst", ref="dev")\ninstall.packages("gdalUtils") # requires GDAL with SciDB driver (see https://github.com/appelmar/scidb4gdal/tree/dev) on the system:\n\nSCIDB_HOST = "128.176.148.9"\nSCIDB_PORT = 30011 # TODO\nSCIDB_USER = "gaia" # TODO\nSCIDB_PW   =  "sNcquwM42RsQBtZqkpeB4HqK" # TODO\n\n# We do not want to pass connection details information in every single gdal_translate call und thus set it as environment variables\nSys.setenv(SCIDB4GDAL_HOST=paste("https://",SCIDB_HOST, sep=""),\nSCIDB4GDAL_PORT=SCIDB_PORT,\nSCIDB4GDAL_USER=SCIDB_USER,\nSCIDB4GDAL_PASSWD=SCIDB_PW)\n\nlibrary(scidbst)\nscidbconnect(host=SCIDB_HOST,port = SCIDB_PORT,\nusername = SCIDB_USER,\npassword = SCIDB_PW,\nauth_type = "digest",\nprotocol = "https")\n\nscidbst.ls(extent=TRUE) # query available datasets\n\n# Insert your code here\n\n';
-    prependFile('../app/scriptsR/writeCSV.R', dataToPrepend, function (err) {
+    prependFile(path, dataToPrepend, function (err) {
         if (err) {
             console.log("error");
         }
@@ -198,6 +238,7 @@ function prependData(filename) {
     });
   })
 };
+
 
 /*
  * #############################################################################

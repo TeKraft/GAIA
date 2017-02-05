@@ -14,15 +14,32 @@ var sliceString = 36; // http://localhost:3000/uniqueLink?id= --> 36 Zeichen
 
 function prependMyShit() {
 
-  var url = localhost + '/prependMyFile';
+  var scriptName = aktScript;
+  var projectName = document.cookie.split("=")[3];
+  var path = projectName + "/Scripts/" + scriptName;
+  console.log(scriptName + "\n" + projectName);
+
+  readScriptbyName(path);
+  console.log(tempScript);
+
+  var content = {scriptName: scriptName, project: projectName, scriptData: tempScript};
+  // var url = localhost + '/prependMyFile';
+  var url = localhost + '/callMeMaybe';
   $.ajax({
     url: url,
     type: 'POST',
-    success: function(data){
+    data: content,
+    success: function(res){
         console.log('upload successful!');
+        // delete file
+        console.log(res);
+        window.alert("everything is fine");
     },
   error: function (xhr, textStatus, errorThrown) {
       console.log("no success");
+      // delete file
+      console.log(res);
+      window.alert("something went wrong");
   }
   });
-}
+};
