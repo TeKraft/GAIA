@@ -1,5 +1,7 @@
 
 function readCSV() {
+  document.getElementById("wrap").innerHTML = "";
+
   $.get('../scriptsR/datasets.csv', function(data) {
   	var build = '<table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">\n';
   	var rows = data.split("\n");
@@ -12,4 +14,6 @@ function readCSV() {
   	build += "</table>";
   	$('#wrap').append(build);
    });
+
+
 }

@@ -21,7 +21,6 @@ function executeScriptCallback(){
           console.log("no success");
       }
   });
-
   };
 
   /**
