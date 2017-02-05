@@ -13,6 +13,7 @@ function readCSV() {
   	})
   	build += "</table>";
   	$('#wrap').append(build);
+    window.location.href = "#wrap";
    });
 
 
