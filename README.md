@@ -30,7 +30,6 @@ And of course GAIA itself is open source with a [public repository][Git] on GitH
 
 
 
-
 ### Installation
 
 To run GAIA, you have to download this repository. You also need the node pack manager (npm).
@@ -46,6 +45,17 @@ Server and db should be running now and you should be able to visit the URL give
 
 
 **Free Software, Hell Yeah!**
+
+
+
+
+##### Disclaimer
+
+Before you install GAIA be sure to understand that it is possible to execute shell commands via R. 
+That could mean bad news for your server since users can mess with it!
+
+GAIA is not responsible for any safety matters and any possible damage :) 
+
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
