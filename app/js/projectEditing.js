@@ -64,7 +64,6 @@ function makeTreeComponents(name) {
             "</ul>" +
          "</li>" +
      "</ul>"
-    console.log(document.getElementById("jstree").innerHTML);
 }
 
 function array_unique(arrayName) {
@@ -206,13 +205,11 @@ var createScriptNames = function(projectname){
 var rToInput = function(scriptname){
     var tempCookie = document.cookie.split("=");
     var projectname = tempCookie[3];
-    console.log(projectname);
     var path = projectname + "/Scripts/" + scriptname;
 
     //hier erst gucken ob .R Datei ist.
     if(scriptname.includes('.R')){
         readScriptbyName(path);
-        console.log(tempScript);
         document.getElementById("scriptIn").value = tempScript;
     }else{
         return;
