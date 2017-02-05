@@ -52,6 +52,7 @@ Server and db should be running now and you should be able to visit the URL give
 ##### Disclaimer
 
 Before you install GAIA be sure to understand that it is possible to execute shell commands via R. 
+
 That could mean bad news for your server since users can mess with it!
 
 GAIA is not responsible for any safety matters and any possible damage :) 
