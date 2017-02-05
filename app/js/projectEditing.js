@@ -296,7 +296,7 @@ function createTree() {
             if (confirm("did you save your Project?") == true) {
                 console.log(data.selected[0]);
                 aktScript = data.selected[0];
-                rToInput(aktScript);
+                rToInput(aktScript.replace(",",""));
             } else {
                 return;
             }
