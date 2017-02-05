@@ -6,25 +6,35 @@
 }
 
 #functionsMap {
-	height: 400px;
+	height: 390px;
 }
 
 #leafletmap {
 	height: 450px;
 }
 
+
 #scriptIn{
     display:none;
 }
 
+.btn-primary {
+    border-radius: 10px ;
+
+}
+
+
+.btn-success {
+    border-radius: 10px ;
+}
 
 /* style second row */
 #information {
-	height: 200px;
+	height: 368px;
 }
 
 #functionsR {
-	height: 200px;
+	height: 368px;
 }
 
 #Rscript {
@@ -34,6 +44,14 @@
 .myPanel {
 	padding: 0px;
 	margin: -12px;
+}
+
+#uniqueLink {
+    display: none;
+}
+
+textarea {
+   resize: none;
 }
 
 /*.panel {

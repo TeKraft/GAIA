@@ -80,10 +80,11 @@
                             <button id='getUniqueLink' onclick='getUniqueLink()' type='button' class='btn btn-test'>share link</button>
                         </li>
                         <li>
-                            <textarea readonly id="uniqueLink" rows="2" cols="35" ></textarea>
+                            <textarea onclick="this.focus();this.select()" readonly="readonly" readonly id="uniqueLink" rows="1" cols="60"></textarea>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb"> <!--symbol? --><span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="workProfilSymb">
+                                <!--symbol? --><span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:toProfil()">Profil</a></li>
                                 <li><a title="click to edit profile" href="javascript:toProfilEdit()">Profile-edit</a></li>
@@ -92,7 +93,7 @@
                             </ul>
                         </li>
                         <li class="helpButton">
-                          <a class="helpMe" target="_blank" href="help.html" title="Need Help --> click me" id="helpMeHTML"><span class="glyphicon glyphicon-question-sign" aria-hidden="true">Help</span></a>
+                            <a class="helpMe" target="_blank" href="help.html" title="Need Help --> click me" id="helpMeHTML"><span class="glyphicon glyphicon-question-sign" aria-hidden="true">Help</span></a>
                         </li>
                     </ul>
                 </div>
@@ -131,20 +132,25 @@
 
                                 </div>
 
+                                <div class="container-fluid">
 
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar"></div>
+
+
+                                    <input type="text" size="40" id=htmlPath value="your_project/path/to/TMS/TMS_Name" onfocus="if(this.value=='your_project/path/to/TMS/TMS_Name'){this.value='';}" onblur="if(this.value==''){this.value='your_project/path/to/TMS/TMS_Name';}">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar"></div>
+                                    </div>
+
+                                    <button class="btn btn-primary upload-btn" type="download">Upload File</button>
+                                    <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
+                                    <br>
+                                    <button onclick="prependMyShit()">click</button>
                                 </div>
-                                <br>
-                                <input type="text" size="40" id=htmlPath value="your_project/path/to/TMS/TMS_Name" onfocus="if(this.value=='your_project/path/to/TMS/TMS_Name'){this.value='';}" onblur="if(this.value==''){this.value='your_project/path/to/TMS/TMS_Name';}">
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <button class="btn btn-lg upload-btn" type="download">Upload File</button>
-                                <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
-                                <br>
-                                <button onclick="prependMyShit()">click</button>
+
                             </div>
                         </div>
                     </div>
@@ -160,11 +166,11 @@
                                 <p>Functions </p>
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                                <button id="executeScript" onclick="executeScriptCallback()" type="download">RUN selected Script!</button>
+                                <button id="executeScript" onclick="executeScriptCallback()" class="btn-success" type="download">RUN selected Script!</button>
                                 <br>
                                 <br>
-                                <button id='loadTMS' onclick='loadTMS()' type='download'>Load TMS from Path</button>
-                          </div>
+                                <button id='loadTMS' onclick='loadTMS()' class="btn-primary" type='download'>Load TMS from Path</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -198,8 +204,14 @@
                                 <p id="CollaboratorInfo"></p>
                                 <button type="button" class="btn btn-toSettings">Settings</button>
 
+<<<<<<< Updated upstream
                                 <button type="button" class="btn btn-writeCSV" onclick="getCSV()">sciDB data</button>
                                 <button type="button" class="btn btn-readCSV" onclick="readCSV()">read CSV</button>
+=======
+                                <button type="button" class="btn btn-info btn-writeCSV" onclick="getCSV()">sciDB data</button>
+                                <button type="button" class="btn btn-info btn-readCSV" onclick="readCSV()">read CSV</button>
+                                <div id="wrap" width="100%"></div>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>
@@ -213,7 +225,26 @@
                                 Project
                             </div>
                             <div id="functionsR" class="panel panel-body">
-                                    <button id="downloadZip" onclick="downloadZip()" type='download'>Download as Zip</button>
+
+                                <button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-info btn-savePrj'>+ new</button>
+                                <br>
+                                <br>
+                                <button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-success btn-savePrj'>save Script</button>
+                                <br>
+                                <br>
+
+                                
+
+                                <button id='deleteScripttBtn' onclick='deleteScript()' type='button-tree' class='btn btn-danger btn-deleteScript'>delete</button>
+                                
+                                <br>
+                                <br>
+                                
+                                <button id="downloadZip" class=" btn-primary" onclick="downloadZip()" type='download'>Download as Zip</button>
+
+                                <br>
+                                <br>
+
                             </div>
                         </div>
                     </div>
@@ -225,21 +256,21 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#home">Script</a></li>
                             <li><a data-toggle="tab" href="#menu1">BBox</a></li>
-                            <li>
-                                <button id='saveProjectBtn' onclick='saveScript()' type='button-tree' class='btn btn-savePrj'>save Script</button>
-                            </li>
-                            <li>
-                                <button id='newScripttBtn' onclick='newScript()' type='button-tree' class='btn btn-savePrj'>+ new</button>
-                            </li>
-                            <li>
-                                <button id='deleteScripttBtn' onclick='deleteScript()' type='button-tree' class='btn btn-deleteScript'>delete</button>
-                            </li>
+
                         </ul>
 
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
                                 <div class="input-script">
-                                    <textarea id="scriptIn" class="form-control" rows="10" onchange="changedScript()"></textarea>
+                                    <textarea id="scriptIn" class="form-control" rows="18" onchange="changedScript()"></textarea>
+
+
+
+
+
+
+
+
                                 </div>
                             </div>
                             <div id="menu1" class="tab-pane fade">

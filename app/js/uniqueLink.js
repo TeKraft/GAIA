@@ -23,3 +23,11 @@ function shareLink(id) {
   var linkURL = localhost + '/uniqueLink?id=' + id;
   document.getElementById("uniqueLink").value = linkURL;
 }
+
+$(document).ready(function(){
+    $("#getUniqueLink").click(function(){
+        $("#uniqueLink").hide();
+    
+        $("#uniqueLink").show();
+    });
+});
