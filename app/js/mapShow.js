@@ -3,6 +3,7 @@
 	*				draw feature.
 */
 function showMap() {
+	console.log("showMap() start");
   $("leafletmap").fadeIn(3000);
 	leaflet();
 	drawMap();
@@ -13,6 +14,7 @@ function showMap() {
 	*				No draw feature because it is read only.
 */
 function showMapToRead() {
+	console.log("showMapToRead() start");
   $("leafletmap").fadeIn(3000);
 	leaflet();
 }
