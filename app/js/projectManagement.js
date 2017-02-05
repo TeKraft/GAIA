@@ -2,12 +2,9 @@
 
 var creator;
 var projectName;
-var collaborators = {
-
-};
-
+var collaborators = new Array();
 var newProject;
-var userProjects= new Array;
+var userProjects= new Array();
 var projectTable ="";
 
 // handles the button "Create Project"
@@ -23,14 +20,14 @@ $(document).ready(function(){
 function saveProject() {
     projectName=document.getElementById('PrjName').value;
     loadProject();
-    
+
     if (document.getElementById("PrjName").value == "") {
         console.log("value empty");
     }else{
-        
+
         var projectTitle = document.getElementById("PrjName").value;
-        // hier Fragen ob es das Projekt schon gibt    
-        getProjectByName(projectTitle);  
+        // hier Fragen ob es das Projekt schon gibt
+        getProjectByName(projectTitle);
         var existingProject = tempProject;
 
 
@@ -40,7 +37,7 @@ function saveProject() {
             return;
         }else{
             // addFolder(projectTitle);
-            var url = 'http://localhost:3000' + '/addFolder?name=' + projectTitle;
+            var url = localhost + '/addFolder?name=' + projectTitle;
             // perform post ajax
             $.ajax({
                 type: 'POST',
@@ -59,7 +56,7 @@ function saveProject() {
             var content = JSON.parse(newProject);
             console.log(newProject);
             if (projectName != undefined && content != null) {
-                var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
+                var url = localhost + '/addFeature?name=' + projectName;
                 // perform post ajax
                 $.ajax({
                     type: 'POST',
@@ -81,7 +78,7 @@ function saveProject() {
 
         }
     }
-    
+
 };
 
 function loadProject(){
@@ -99,7 +96,7 @@ function loadProject(){
 }
 
 function loadAllProjects(){
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -148,8 +145,10 @@ function createProjectTable(){
             var testname=userProjects[i].name;
             console.log(testname);
             cell1.innerHTML = userProjects[i].name;
+
             cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='editProject(this.id)' type='button' class='btn btn-info'>work</button>";
             cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>" + 
+
                               "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-danger' onclick='deleteProject(this.id)'>delete</button>";
              projectsOfUser[j]=userProjects[i].name;
             j++;
@@ -212,9 +211,9 @@ function deleteProject(id) {
     if (id == "") {
         console.log("value empty");
     }else {
-        
-        
-        getProjectByName(id);  
+
+
+        getProjectByName(id);
         var existingProject = tempProject;
         var user = JSON.parse(tempCookie[1]);
 
@@ -234,7 +233,7 @@ function deleteProject(id) {
         var folderTitle = id;
         console.log("deleteProjectFolder("+id+")");
 
-        var url = 'http://localhost:3000' + '/deleteProjectFolder?name=' + id;
+        var url = localhost + '/deleteProjectFolder?name=' + id;
         // perform post ajax
         $.ajax({
             type: 'POST',
@@ -252,7 +251,7 @@ function deleteProject(id) {
         });
         // ajax Post
         $.ajax({
-            url: '/deleteFeature?name=' + id,
+            url: localhost + '/deleteFeature?name=' + id,
             //async: false,
             type: "POST",
             //data: content,
@@ -279,7 +278,4 @@ function deleteProject(id) {
         }
     }
 
-}; 
-
-
-
+};

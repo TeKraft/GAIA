@@ -17,7 +17,6 @@ $('#buttonTree').on('click', function () {
   $.jstree.reference('#jstree').select_node('child_node_1');
 });
 
-
 // hier muss der baum richtig erstellt werden
 function makeTreeComponents(name) {
     var tempCookie = document.cookie.split("=");
@@ -34,6 +33,8 @@ function makeTreeComponents(name) {
     var scripts = createScriptNames(name);
 
     var images = createImageNames(name);
+
+    var results = createResultNames(name);
 
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" +
@@ -55,7 +56,7 @@ function makeTreeComponents(name) {
 
                 "<li id='results'>Results" +
                     "<ul id='childList'>" +
-                        images+ //images +
+                        results+ //images +
                     "</ul>" +
                 "</li>" +
             "</ul>" +
@@ -74,6 +75,77 @@ function array_unique(arrayName) {
 	}
 	return newArray;
 }
+
+
+var createResultNames = function(name){
+    readProjectFolderbyName(name + "/Results");
+    var resultArray = array_unique(temp);
+    console.log(resultArray);
+    var div = "";
+
+    for (var i in resultArray){
+        var ending = resultArray[i];
+        if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt')){
+            div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
+        }else{
+            if(!ending.includes('.')){
+                // mit jeden ending subordner erstellen;
+                //console.log(name);
+                var subFolders = createSubFolders(name + "/Results/" +  ending);
+
+                if(subFolders != undefined && subFolders != ""){
+                    console.log(subFolders);
+                }else{
+                    console.log(ending + " keine subfolder");
+                    div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
+                }
+
+
+
+               // console.log(ending);
+                //readProjectFolderbyName(name + "/Results/" + ending);
+                //console.log(array_unique(temp));
+
+               //
+
+
+
+            }
+        }
+    }
+    return div;
+}
+
+var createSubFolders = function(path){
+    console.log(path);
+    readProjectFolderbyName(name + path);
+    var resultArray = array_unique(temp);
+    var div = "";
+    var subContent = [];
+    for (var i in resultArray){
+        //var ending = resultArray[i];
+        subContent.push(resultArray[i]);
+    }
+    return subContent;
+}
+
+/*
+if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt')){
+            div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
+
+        }else{
+            if(!ending.includes('.')){
+                console.log(ending);
+                readProjectFolderbyName(name + "/Results/" + ending);
+                console.log(array_unique(temp));
+
+                div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
+
+
+
+            }
+        }
+*/
 
 
 var createImageNames = function(projectname){
@@ -142,7 +214,7 @@ var readScriptbyName = function(path){
     //var folderRead = name;
     //console.log("readProjectFolder("+folderRead+")");
 
-    var url = 'http://localhost:3000' + '/readFile?name=' + path;
+    var url = localhost + '/readFile?name=' + path;
     // perform post ajax
     $.ajax({
         type: 'GET',
