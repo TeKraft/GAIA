@@ -98,7 +98,7 @@ var createResultNames = function(name){
                     div = div +  
                         "<li id="+ending+">" +
                             ending +
-                                    subFolders[0] +                                
+                            subFolders[0] +                                
                         "</li>";
                 }else{
                     div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");

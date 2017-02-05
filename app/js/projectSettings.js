@@ -87,10 +87,11 @@ function addCollaborator() {
             // hier den neuen einfuegen
     console.log(contentadd);
     var newCollab = document.getElementById('NewCollabName').value;
-    var editedCollabe = newCollab.replace("@","at");
+    var editedCollabe = newCollab.replace("@","atzeichen");
     editedCollab = editedCollabe.replace(".","punkt");
     editedCollab1 = editedCollab.replace('-','minus');
-    editedCollab2 = editedCollab1.replace('_','unter');
+    editedCollab3 = editedCollab1.replace('_','unter');
+    editedCollab2 = editedCollab1.replace('.','punkt');
 
     var neuesProjekt ="{" + '"Creator"' + ":" + JSON.stringify(contentadd.data.Creator) + ",";
     var neuesProjekt ="{" + '"Creator"' + ":" + JSON.stringify(contentadd.data.Creator) + ",";

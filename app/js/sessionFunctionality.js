@@ -368,9 +368,10 @@ function displayButtons(input) {
             if(temp[i] == ""){
               //  console.log("ein falscher");
             }else{
-                var neu = temp[i].replace("at","@");
+                var neu = temp[i].replace("atzeichen","@");
                 var neu1 = neu.replace("punkt",".");
                 var neu2 = neu1.replace("minus","-");
+                var neu4 = neu2.replace("punkt",".");
                 var neu3 = neu2.replace("unter","_");
                 tempString = tempString +
                 //"<div class='dropdown'>" +
