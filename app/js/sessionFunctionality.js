@@ -281,9 +281,23 @@ function displayCollaboratorsForInformation() {
 
                         tempProject = content[i].Colaborators;
                         var CollabArray = content[i].data.Colaborators.split(",");
+                        
                         var editedCollab = "<br>";
                         for (var i = 0; i < CollabArray.length; i++) {
-                            editedCollab = editedCollab + CollabArray[i] + "<br>";
+
+                            var neu = CollabArray[i].replace("atzeichen","@");
+                            var neu1 = neu.replace("punkt",".");
+                            var neu2 = neu1.replace("minus","-");
+                            var neu3 = neu2.replace("punkt",".");
+                            var thisCollaborators = neu3.replace("unter","_"); 
+
+                            
+                            
+                            
+                            
+                            
+                            editedCollab = editedCollab + thisCollaborators + "<br>";
+                            
                         }
                         document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + editedCollab;
                         break;

@@ -19,7 +19,18 @@ function getUniqueFeature(id) {
       success: function (content, textStatus) {
         var thisProject = content[0].name;
         var thisCreator = content[0].data.Creator;
-        var thisCollaborators = content[0].data.Collaborators;
+        var thisCollaborators = content[0].data.Colaborators;
+          
+          
+          
+          var neu = content[0].data.Colaborators.replace("atzeichen","@");
+                var neu1 = neu.replace("punkt",".");
+                var neu2 = neu1.replace("minus","-");
+                var neu3 = neu2.replace("punkt",".");
+                var thisCollaborators = neu3.replace("unter","_"); 
+          
+          
+          
         document.getElementById('CreatorInfo').innerHTML = "Creator: " + thisCreator;
         document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + thisCollaborators;
 
