@@ -86,9 +86,25 @@ function loadProject(){
     collaborators[0] = document.getElementById('collabs').value;
     var collab=document.getElementsByClassName('addInput');
     console.log(collab);
+    
+    
+    collaborators[0]
+    
+    var editedCollabe = collaborators[0].replace("@","atzeichen");
+    var editedCollabe1 = editedCollabe.replace(".","punkt");
+    editedCollabe1 = editedCollabe.replace('-','minus');
+    var editedCollab3 = editedCollabe1.replace('_','unter');
+    var editedCollab2 = editedCollab3.replace('.','punkt');
+    
+    
+    
+    
+    
+    
+    
     newProject = '{'
        +'"Creator":' +'"' + creator + '"' +', '
-       +'"Colaborators":' +'"' +collaborators[0] + '"' +', '
+       +'"Colaborators":' +'"' +editedCollab2 + '"' +', '
        +'"Scripts":' +'"'  + '"'+', '
        +'"Dateien":' +'"'  + '"'+', '
        +'"Ergebnis":' +'"'  + '"'
@@ -103,14 +119,28 @@ function loadAllProjects(){
         url: url,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
             var projectNumber=0;
             for(var i=0; i<= content.length;i++){
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined && content[i].data.Creator != "null"){
                     var userArray = document.cookie.split("=");
                     var userJSON = JSON.parse(userArray[1]);
                     //die ueberpruefung auf mitarbeiter stimmt noch nicht ganz
-                    var allCollabs=content[i].data.Colaborators.includes(userJSON.name);
+                    
+                    
+                        var editedCollabe = userJSON.name.replace("@","atzeichen");
+                        var editedCollabe1 = editedCollabe.replace(".","punkt");
+                        editedCollabe1 = editedCollabe.replace('-','minus');
+                        var editedCollab3 = editedCollabe1.replace('_','unter');
+                        var editedCollab2 = editedCollab3.replace('.','punkt');
+                    
+                    
+                    
+                    console.log(editedCollab2);
+                    
+                    
+                    
+                    
+                    var allCollabs=content[i].data.Colaborators.includes(editedCollab2);    //userJSON.name
                     if(content[i].data.Creator == creator || allCollabs){
                         userProjects[projectNumber] = content[i];
                         projectNumber++;

@@ -198,7 +198,7 @@ app.post('/execScriptCallback', function (req, res) {
     fs.writeFile(filePath, thisScriptData, function (err) {
     if (err) {throw err}
     else {
-
+	prependData(filePath); //prepent data to temp-file
       //instantiate a childProcess
       var childProcess = require('child_process');
       var project = thisProject;
@@ -227,17 +227,17 @@ app.post('/execScriptCallback', function (req, res) {
   */
 var prependFile = require('prepend-file');
 function prependData(path) {
-  var path = '../app/scriptsR/writeCSV.R';
-  app.post('/prependMyFile', function(req, res) {
-    var dataToPrepend = 'options(repos=c("CRAN" ="http://cran.uni-muenster.de"))\n\n# install.packages("curl")\n# install.packages("raster")\n# install.packages("intervals")\n\ninstall.packages("devtools")\ndevtools::install_github("Paradigm4/SciDBR")\ndevtools::install_github("appelmar/scidbst", ref="dev")\ninstall.packages("gdalUtils") # requires GDAL with SciDB driver (see https://github.com/appelmar/scidb4gdal/tree/dev) on the system:\n\nSCIDB_HOST = "128.176.148.9"\nSCIDB_PORT = 30011 # TODO\nSCIDB_USER = "gaia" # TODO\nSCIDB_PW   =  "sNcquwM42RsQBtZqkpeB4HqK" # TODO\n\n# We do not want to pass connection details information in every single gdal_translate call und thus set it as environment variables\nSys.setenv(SCIDB4GDAL_HOST=paste("https://",SCIDB_HOST, sep=""),\nSCIDB4GDAL_PORT=SCIDB_PORT,\nSCIDB4GDAL_USER=SCIDB_USER,\nSCIDB4GDAL_PASSWD=SCIDB_PW)\n\nlibrary(scidbst)\nscidbconnect(host=SCIDB_HOST,port = SCIDB_PORT,\nusername = SCIDB_USER,\npassword = SCIDB_PW,\nauth_type = "digest",\nprotocol = "https")\n\nscidbst.ls(extent=TRUE) # query available datasets\n\n# Insert your code here\n\n';
+//  var path = '../app/scriptsR/writeCSV.R';
+//  app.post('/prependMyFile', function(req, res) {
+    var dataToPrepend = 'options(repos=c("CRAN" ="http://cran.uni-muenster.de"))\n\n install.packages("curl")\n install.packages("raster")\n install.packages("intervals")\n\ninstall.packages("devtools")\ndevtools::install_github("Paradigm4/SciDBR")\ndevtools::install_github("appelmar/scidbst", ref="dev")\ninstall.packages("gdalUtils") # requires GDAL with SciDB driver (see https://github.com/appelmar/scidb4gdal/tree/dev) on the system:\n\nSCIDB_HOST = "128.176.148.9"\nSCIDB_PORT = 30011 # TODO\nSCIDB_USER = "gaia" # TODO\nSCIDB_PW   =  "sNcquwM42RsQBtZqkpeB4HqK" # TODO\n\n# We do not want to pass connection details information in every single gdal_translate call und thus set it as environment variables\nSys.setenv(SCIDB4GDAL_HOST=paste("https://",SCIDB_HOST, sep=""),\nSCIDB4GDAL_PORT=SCIDB_PORT,\nSCIDB4GDAL_USER=SCIDB_USER,\nSCIDB4GDAL_PASSWD=SCIDB_PW)\n\nlibrary(scidbst)\nscidbconnect(host=SCIDB_HOST,port = SCIDB_PORT,\nusername = SCIDB_USER,\npassword = SCIDB_PW,\nauth_type = "digest",\nprotocol = "https")\n\nscidbst.ls(extent=TRUE) # query available datasets\n\n# Insert your code here\n\n';
     prependFile(path, dataToPrepend, function (err) {
         if (err) {
-            console.log("error");
+            return console.error(err);
         }
         // Success
-        console.log('The "data to prepend" was prepended to file!');
+  //      console.log('The "data to prepend" was prepended to file!');
     });
-  })
+ // })
 };
 
 

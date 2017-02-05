@@ -83,7 +83,7 @@ var addScript = function(project,name){
   var tempErgebnisse = project.data.Ergebnis;
   var tempScripts = project.data.Scripts;
 
-  tempScripts.concat("," + name);
+//  tempScripts.concat("," + name);
 
   //generating new Project from temp variables
   var neuesProject = {
