@@ -159,8 +159,9 @@
                                 <p>Functions </p>
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                                <button id="test02" onclick="executeScript()" type="download">RUN selected Script!</button>
-                                <br>
+                                <button id="executeScript" onclick="executeScript()" type="download">RUN selected Script!</button>
+                                <button id="executeScriptCallback" onclick="executeScriptCallback()" type="download">Callback Script!</button>
+                                <<br>
                                 <br>
                                 <button id='loadTMS' onclick='loadTMS()' type='download'>Load TMS from Path</button>
                           </div>
@@ -256,7 +257,8 @@
         </div>
     </div>
 
-
+    <!-- import config js for url configuration -->
+    <script type="text/javascript" src="js/config.js"></script>
     <!-- library imports -->
     <script type="text/javascript" src="lib/js/jsnlog.min.js"></script>
     <script type="text/javascript" src="lib/js/jquery.js"></script>

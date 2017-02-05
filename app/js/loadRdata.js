@@ -1,5 +1,3 @@
-var iframeName = "iframeMap";
-var url = "temp.html";
 
 function readCSV() {
   $.get('../scriptsR/datasets.csv', function(data) {

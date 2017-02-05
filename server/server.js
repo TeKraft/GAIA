@@ -178,6 +178,28 @@ app.post('/execScript', function (req, res) {
   });
 });
 
+/**
+  * @desc AJAX.POST on server for executing Scripts.
+  *       Execution of R-Scripts is achieved by using nodes "childProcess".
+  * @return the result of the executed R-Script will be added to the project/Results folder
+  */
+app.post('/execScriptCallback', function (req, res) {
+  //instantiate a childProcess
+  var childProcess = require('child_process');
+  var project = req.body.project;
+  var script = req.body.script;
+  //EXEC-function: Basically the same as executing a local Rscript via commandlines.
+  //cwd changes the current working directory so the results dont spawn where the serverjs is
+  //but rather where the results should be stored.
+  childProcess.exec('Rscript ../Scripts/'+script+'',{cwd: '../app/projects/' + project + '/Results/'}, function (error, stdout, stderr) {
+    console.log("stdout == " + stdout);
+    console.log("stderr == " + stderr);
+    if (error) {
+      return console.error(error);
+    }
+  });
+});
+
 /*
  * #############################################################################
  * create sciDBdata ############################################################

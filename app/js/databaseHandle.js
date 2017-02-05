@@ -1,7 +1,7 @@
 "use strict;"
 
 var getProjectbyName = function(name, creator) {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -9,7 +9,6 @@ var getProjectbyName = function(name, creator) {
         async:false,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
             var project;
             for (var i = 0; i <= content.length; i++) {
 
@@ -20,7 +19,6 @@ var getProjectbyName = function(name, creator) {
                     return project;
                 }
             }
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
@@ -39,12 +37,11 @@ var getProject = function(string){
 
 var saveData = function(name,data){
 
-
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/updateFeature?name=' + name;
 
   // ajax Post
     $.ajax({
-	   url: '/updateFeature?name=' + name,
+	   url: url,
        //async: false,
        type: "POST",
 	   data: data,
@@ -60,9 +57,11 @@ var saveData = function(name,data){
 }
 
 var updateProject = function(name,creator,data){
+
+  var url = localhost + '/updateFeature?name=' + name
     // ajax Post
     $.ajax({
-        url: '/updateFeature?name=' + name,
+        url: url,
         //async: false,
         type: "POST",
         data: data,
@@ -81,12 +80,13 @@ var updateDB = function(){
     var user = JSON.parse(temp[1]);
     if (confirm("Are you sure?") == true) {
 
-        } else {
-            return;
-        }
+    } else {
+        return;
+    }
 
+    var url = localhost + '/deleteFeature?name=' + user.name;
     $.ajax({
-        url: '/deleteFeature?name=' + user.name,
+        url: url,
         //async: false,
         type: "POST",
         data: user,

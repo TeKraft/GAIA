@@ -9,7 +9,7 @@ function createFolder() {
   }  else {
     var projectTitle = document.getElementById("projectName").value;
     console.log("createFolder("+projectTitle+")")
-    var url = 'http://localhost:3000' + '/addFolder?name=' + projectTitle;
+    var url = localhost + '/addFolder?name=' + projectTitle;
     //AJAX.POST request
     $.ajax({
         type: 'POST',
@@ -36,7 +36,7 @@ function deleteProjectFolder() {
   }  else {
     var folderTitle = document.getElementById("deleteProjectFolder").value;
     console.log("deleteProjectFolder("+folderTitle+")");
-    var url = 'http://localhost:3000' + '/deleteProjectFolder?name=' + folderTitle;
+    var url = localhost + '/deleteProjectFolder?name=' + folderTitle;
     //AJAX.POST request.
     $.ajax({
         type: 'POST',
@@ -60,7 +60,7 @@ function readProjectFolder() {
     var folderRead = "wurstbrot";
     console.log("readProjectFolder("+folderRead+")");
 
-    var url = 'http://localhost:3000' + '/readFolder?name=' + folderRead;
+    var url = localhost + '/readFolder?name=' + folderRead;
     // perform post ajax
     $.ajax({
         type: 'GET',
@@ -84,7 +84,7 @@ function readProject(name) {
     var folderRead = name;
     console.log("readProjectFolder("+folderRead+")");
 
-    var url = 'http://localhost:3000' + '/readFolder?name=' + folderRead;
+    var url = localhost + '/readFolder?name=' + folderRead;
     // perform post ajax
     $.ajax({
         type: 'GET',

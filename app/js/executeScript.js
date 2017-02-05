@@ -1,4 +1,3 @@
-var localhost = 'http://localhost:3000';
 
 /**
   * @desc Function for sending the current projectname & choosen scriptname
@@ -6,22 +5,46 @@ var localhost = 'http://localhost:3000';
   * @return AJAX success or error
 */
 function executeScript(){
-    var script = aktScript;
-    var url = 'http://localhost:3000' + '/execScript';
-    //name of the project, that is the current Project. Information cut out from cookie.
-    var currentProject = document.cookie.split("=")[3];
-    //AJAX:POST request with the current project and selected script.
-    $.ajax({
-        type: 'POST',
-        data: {project: ""+currentProject+"", script: ""+script+""},
-        url: url,
-        success: function (content, textStatus) {
-          console.log("success");
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log("no success");
-        }
-    });
+  var script = aktScript;
+  var url = localhost + '/execScript';
+  //name of the project, that is the current Project. Information cut out from cookie.
+  var currentProject = document.cookie.split("=")[3];
+  //AJAX:POST request with the current project and selected script.
+  $.ajax({
+      type: 'POST',
+      data: {project: ""+currentProject+"", script: ""+script+""},
+      url: url,
+      success: function (content, textStatus) {
+        console.log("success");
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success");
+      }
+  });
+};
+
+/**
+  * @desc Function for sending the current projectname & choosen scriptname
+  *       via AJAX.POST request and initiate the execution of the script.
+  * @return AJAX success or error
+*/
+function executeScriptCallback(){
+  var script = aktScript;
+  var url = localhost + '/execScriptCallback';
+  //name of the project, that is the current Project. Information cut out from cookie.
+  var currentProject = document.cookie.split("=")[3];
+  //AJAX:POST request with the current project and selected script.
+  $.ajax({
+      type: 'POST',
+      data: {project: ""+currentProject+"", script: ""+script+""},
+      url: url,
+      success: function (content, textStatus) {
+        console.log("success");
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success");
+      }
+  });
   };
 
   /**
@@ -29,7 +52,6 @@ function executeScript(){
     * @return AJAX success or error
   */
 function getCSV() {
-  console.log("getCSV()");
   var url = localhost + '/getsciDBdata';
   //AJAX.GET request to server.
   $.ajax({
@@ -59,7 +81,7 @@ function downloadZip() {
       console.log("zipProject()");
       var myZipProjectName;
       var currentProject = document.cookie.split("=")[3];
-      var url = localhost + '/zipMyShit';    //'/zipMyShit?name=' + currentProject;      //TODO : KANN DAS WEG?  :
+      var url = localhost + '/zipMyShit';
       //AJAX:POST Request with the name of the current project.
       $.ajax({
         type: 'POST',
