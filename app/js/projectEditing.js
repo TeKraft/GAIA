@@ -41,7 +41,7 @@ function makeTreeComponents(name) {
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" +
     "<ul id='treeList'>" +
-        "<li id='rootList'>" + name +
+        "<li id='rootList' >" + name +
             "<ul id='childList'>" +
                 "<li id='scripts_node_1'>Scripts" +
 
@@ -64,6 +64,7 @@ function makeTreeComponents(name) {
             "</ul>" +
          "</li>" +
      "</ul>"
+    console.log(document.getElementById("jstree").innerHTML);
 }
 
 function array_unique(arrayName) {
@@ -87,7 +88,7 @@ var createResultNames = function(name){
     for (var i in resultArray){
         var ending = resultArray[i];
         if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt')){
-            div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
+            div = div + ("<li id='" + resultArray[i] + ",' data-jstree='{"+'"type"'+":"+'"leaf"'+"}'> "+ resultArray[i] + "</li>");
         }else{
             if(!ending.includes('.')){
                 // mit jeden ending subordner erstellen;
@@ -143,7 +144,7 @@ var createSubFolders = function(path){;
         }else{
             subContent.push(
             "<ul id = 'childList'>" + 
-                    "<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>" +
+                    "<li id='" + resultArray[i] + "' "+ ",' data-jstree='{"+'"type"'+":"+'"leaf"'+"}'> "+ resultArray[i] + "</li>" +
                 "</ul>");
         }
     }
@@ -194,7 +195,7 @@ var createScriptNames = function(projectname){
     for (var i in ScriptArray){
         var ending = ScriptArray[i].substr(ScriptArray[i].length-2, ScriptArray[i].length);
         if(ending === '.R'){
-            div = div + ("<li" + " id='" + ScriptArray[i] + "' " + "" + ">"  + ScriptArray[i] + "</li>");
+            div = div + ("<li" + " id='" + ScriptArray[i] + ",' data-jstree='{"+'"type"'+":"+'"leaf"'+"}'>"  + ScriptArray[i] + "</li>");
         }else{
 
         }
@@ -262,9 +263,9 @@ function createTree() {
       "default" : {
         "icon" : "glyphicon glyphicon-folder-open"
       },
-      "root" : {
-        "childList" : "glyphicon glyphicon-ok"
-      }
+      "leaf" : {
+        "icon" : "glyphicon glyphicon-paperclip"
+      },
     },
             
             
