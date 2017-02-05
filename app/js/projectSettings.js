@@ -20,7 +20,7 @@ function changeProjectName() {
 
     if (content != undefined) {
 
-        var url = localhost + '/updateFeature?name=' + toChangeProject;
+        var url = 'http://localhost:3000' + '/updateFeature?name=' + toChangeProject;
 
         // perform post ajax
         $.ajax({
@@ -59,7 +59,7 @@ function addCollaborator() {
 
 
 
-     var url = localhost + '/getFeatures';
+     var url = 'http://localhost:3000' + '/getFeatures';
 
     $.ajax({
         type: 'GET',
@@ -107,10 +107,9 @@ function addCollaborator() {
 
 function updateFeatureData(featureName, newData){
     console.log(newData);
-    var url = localhost + '/updateFeature?name=' + featureName;
      // ajax Post
 	$.ajax({
-		url: url,
+		url: '/updateFeature?name=' + featureName,
 		//async: false,
 		type: "POST",
 		data: newData,
@@ -135,7 +134,7 @@ function updateFeatureData(featureName, newData){
 
 
 function getProjectByName(name){
-var url = localhost + '/getFeatures';
+var url = 'http://localhost:3000' + '/getFeatures';
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -143,6 +142,7 @@ var url = localhost + '/getFeatures';
         timeout: 5000,
         async:false,
         success: function (content, textStatus) {
+            $('#tableDBContents').empty();
             for(var i=0; i<= content.length;i++){
 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined && content[i].name == name){
@@ -153,6 +153,7 @@ var url = localhost + '/getFeatures';
                 }
             }
             return temp;
+            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
@@ -169,10 +170,10 @@ function updateProject(jsonString) {
 	var content = JSON.parse(decodedcontentString);
 
 	dataTitle = content.features[0].properties.name;
-  var url = localhost + '/updateFeature?name=' + dataTitle;
+
 	// ajax Post
 	$.ajax({
-		url: url,
+		url: '/updateFeature?name=' + dataTitle,
 		//async: false,
 		type: "POST",
 		data: content,
