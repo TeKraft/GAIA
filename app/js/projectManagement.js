@@ -2,12 +2,9 @@
 
 var creator;
 var projectName;
-var collaborators = {
-
-};
-
+var collaborators = new Array();
 var newProject;
-var userProjects= new Array;
+var userProjects= new Array();
 var projectTable ="";
 
 // handles the button "Create Project"
@@ -40,7 +37,7 @@ function saveProject() {
             return;
         }else{
             // addFolder(projectTitle);
-            var url = 'http://localhost:3000' + '/addFolder?name=' + projectTitle;
+            var url = localhost + '/addFolder?name=' + projectTitle;
             // perform post ajax
             $.ajax({
                 type: 'POST',
@@ -59,7 +56,7 @@ function saveProject() {
             var content = JSON.parse(newProject);
             console.log(newProject);
             if (projectName != undefined && content != null) {
-                var url = 'http://localhost:3000' + '/addFeature?name=' + projectName;
+                var url = localhost + '/addFeature?name=' + projectName;
                 // perform post ajax
                 $.ajax({
                     type: 'POST',
@@ -99,7 +96,7 @@ function loadProject(){
 }
 
 function loadAllProjects(){
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -230,11 +227,10 @@ function deleteProject(id) {
             return;
         }
 
-
         var folderTitle = id;
         console.log("deleteProjectFolder("+id+")");
 
-        var url = 'http://localhost:3000' + '/deleteProjectFolder?name=' + id;
+        var url = localhost + '/deleteProjectFolder?name=' + id;
         // perform post ajax
         $.ajax({
             type: 'POST',
@@ -244,7 +240,6 @@ function deleteProject(id) {
             success: function (data, textStatus) {
                 // console.log(data);
                 console.log("delete Folder success");
-
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("error by deleting folder");
@@ -252,7 +247,7 @@ function deleteProject(id) {
         });
         // ajax Post
         $.ajax({
-            url: '/deleteFeature?name=' + id,
+            url: localhost + '/deleteFeature?name=' + id,
             //async: false,
             type: "POST",
             //data: content,
@@ -275,11 +270,7 @@ function deleteProject(id) {
                 console.log(errorThrown);
             }
         });
-
         }
     }
-
 }; 
-
-
 

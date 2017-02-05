@@ -106,7 +106,6 @@ var createResultNames = function(name){
                     //console.log(ending + " keine subfolder");
                     div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
                 }
-
             }
         }
     }
@@ -136,18 +135,12 @@ var createSubFolders = function(path){
                 if(resultArray[i].includes(".")){
                     return;
                 }
-
-            
                 subContent.push(
                 "<ul id = 'childList'>" + 
                     "<li id='" + resultArray[i] + "'> "+ resultArray[i] + 
                         createSubFolders(path + "/" + resultArray[0]) + 
                     "</li>" +
                 "</ul>");
-            
-            //}
-            
-
         }else{
             subContent.push(
             "<ul id = 'childList'>" + 
@@ -206,7 +199,6 @@ var createScriptNames = function(projectname){
         }else{
 
         }
-
     }
     return div;
 }
@@ -227,8 +219,6 @@ var rToInput = function(scriptname){
     }
 
 }
-
-
 
 
 

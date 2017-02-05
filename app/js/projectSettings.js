@@ -20,7 +20,7 @@ function changeProjectName() {
 
     if (content != undefined) {
 
-        var url = 'http://localhost:3000' + '/updateFeature?name=' + toChangeProject;
+        var url = localhost + '/updateFeature?name=' + toChangeProject;
 
         // perform post ajax
         $.ajax({
@@ -59,7 +59,7 @@ function addCollaborator() {
 
 
 
-     var url = 'http://localhost:3000' + '/getFeatures';
+     var url = localhost + '/getFeatures';
 
     $.ajax({
         type: 'GET',
@@ -108,10 +108,10 @@ function addCollaborator() {
 };
 
 function updateFeatureData(featureName, newData){
-    console.log(newData);
+    var url = localhost + '/updateFeature?name=' + featureName;
      // ajax Post
 	$.ajax({
-		url: '/updateFeature?name=' + featureName,
+		url: url,
 		//async: false,
 		type: "POST",
 		data: newData,
@@ -136,7 +136,7 @@ function updateFeatureData(featureName, newData){
 
 
 function getProjectByName(name){
-var url = 'http://localhost:3000' + '/getFeatures';
+var url = localhost + '/getFeatures';
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -170,12 +170,12 @@ function updateProject(jsonString) {
 	var contentString = JSON.stringify(jsonString);
 	var decodedcontentString = decodeURI(contentString);
 	var content = JSON.parse(decodedcontentString);
-
+    var url = localhost + '/updateFeature?name=' + dataTitle;
 	dataTitle = content.features[0].properties.name;
 
 	// ajax Post
 	$.ajax({
-		url: '/updateFeature?name=' + dataTitle,
+		url: url,
 		//async: false,
 		type: "POST",
 		data: content,

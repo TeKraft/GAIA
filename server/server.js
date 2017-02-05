@@ -35,15 +35,7 @@ var featureSchema = mongoose.Schema({
     data: {}
 });
 
-// // script schema
-// var scriptSchema = mongoose.Schema({
-//     name: String,
-//     dateInserted: Date,
-//     data: {}
-// });
-
 var Feature = mongoose.model('Feature', featureSchema);
-// var Script = mongoose.model('Script', scriptSchema)
 
 /*
  * #############################################################################
@@ -163,26 +155,6 @@ app.post('/deleteFeature*', function (req, res) {
   *       Execution of R-Scripts is achieved by using nodes "childProcess".
   * @return the result of the executed R-Script will be added to the project/Results folder
   */
-app.post('/execScript', function (req, res) {
-  //instantiate a childProcess
-  var childProcess = require('child_process');
-  var project = req.body.project;
-  var script = req.body.script;
-  //EXEC-function: Basically the same as executing a local Rscript via commandlines.
-  //cwd changes the current working directory so the results dont spawn where the serverjs is
-  //but rather where the results should be stored.
-  childProcess.exec('Rscript ../Scripts/'+script+'',{cwd: '../app/projects/' + project + '/Results/'}, (err) => {
-    if (err) {
-      return console.error(err);
-    }
-  });
-});
-
-/**
-  * @desc AJAX.POST on server for executing Scripts.
-  *       Execution of R-Scripts is achieved by using nodes "childProcess".
-  * @return the result of the executed R-Script will be added to the project/Results folder
-  */
 app.post('/execScriptCallback', function (req, res) {
   //instantiate a childProcess
   var childProcess = require('child_process');
@@ -195,10 +167,37 @@ app.post('/execScriptCallback', function (req, res) {
     console.log("stdout == " + stdout);
     console.log("stderr == " + stderr);
     if (error) {
+      res.send(stderr);
       return console.error(error);
+    }else {
+      res.send("Script is done");
     }
   });
 });
+
+/**
+  * #############################################################################
+  * prepend file ################################################################
+  * #############################################################################
+  */
+
+/**
+  * @desc Function to prepend data to a file
+  * @return
+  */
+var prependFile = require('prepend-file');
+function prependData(filename) {
+  app.post('/prependMyFile', function(req, res) {
+    var dataToPrepend = 'options(repos=c("CRAN" ="http://cran.uni-muenster.de"))\n\n# install.packages("curl")\n# install.packages("raster")\n# install.packages("intervals")\n\ninstall.packages("devtools")\ndevtools::install_github("Paradigm4/SciDBR")\ndevtools::install_github("appelmar/scidbst", ref="dev")\ninstall.packages("gdalUtils") # requires GDAL with SciDB driver (see https://github.com/appelmar/scidb4gdal/tree/dev) on the system:\n\nSCIDB_HOST = "128.176.148.9"\nSCIDB_PORT = 30011 # TODO\nSCIDB_USER = "gaia" # TODO\nSCIDB_PW   =  "sNcquwM42RsQBtZqkpeB4HqK" # TODO\n\n# We do not want to pass connection details information in every single gdal_translate call und thus set it as environment variables\nSys.setenv(SCIDB4GDAL_HOST=paste("https://",SCIDB_HOST, sep=""),\nSCIDB4GDAL_PORT=SCIDB_PORT,\nSCIDB4GDAL_USER=SCIDB_USER,\nSCIDB4GDAL_PASSWD=SCIDB_PW)\n\nlibrary(scidbst)\nscidbconnect(host=SCIDB_HOST,port = SCIDB_PORT,\nusername = SCIDB_USER,\npassword = SCIDB_PW,\nauth_type = "digest",\nprotocol = "https")\n\nscidbst.ls(extent=TRUE) # query available datasets\n\n# Insert your code here\n\n';
+    prependFile('../app/scriptsR/writeCSV.R', dataToPrepend, function (err) {
+        if (err) {
+            console.log("error");
+        }
+        // Success
+        console.log('The "data to prepend" was prepended to file!');
+    });
+  })
+};
 
 /*
  * #############################################################################
@@ -382,7 +381,7 @@ app.post('/updateFile*', function (req, res) {
   *       url format: /deleteFile?name=
   * @return send filedata or message error
   */
-app.post('/deleteFile*', function (req, res) {
+app.post('/deleteFile', function (req, res) {
     var projecttitle = req.url.substring(16, req.url.length); // extract projecttitle from url
     var scriptName = req.body.scriptName;
     var projectName = req.body.projectName;

@@ -1,9 +1,8 @@
 
-
 /* style first row */
 #treeView {
 	height: 400px;
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 #functionsMap {

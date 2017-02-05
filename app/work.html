@@ -144,6 +144,7 @@
                                 <button class="btn btn-lg upload-btn" type="download">Upload File</button>
                                 <input id="upload-input" type="file" name="uploads[]" multiple="multiple">
                                 <br>
+                                <button onclick="prependMyShit()">click</button>
                             </div>
                         </div>
                     </div>
@@ -159,9 +160,8 @@
                                 <p>Functions </p>
                             </div>
                             <div id="functionsMap" class="panel panel-body">
-                                <button id="executeScript" onclick="executeScript()" type="download">RUN selected Script!</button>
-                                <button id="executeScriptCallback" onclick="executeScriptCallback()" type="download">Callback Script!</button>
-                                <<br>
+                                <button id="executeScript" onclick="executeScriptCallback()" type="download">RUN selected Script!</button>
+                                <br>
                                 <br>
                                 <button id='loadTMS' onclick='loadTMS()' type='download'>Load TMS from Path</button>
                           </div>
@@ -248,61 +248,10 @@
                                 <p id="bbox">Bbox</p>
                             </div>
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
         </div>
-        
-        
-        
-        
-<ul id="treeList">
-	<li id="rootList">Test1
-        <ul id="childList">
-
-            <li id="scripts_node_1">Scripts
-                <ul id="childList">
-                    <li id="test.R" >test.R</li>
-                </ul>
-            </li>
-
-            <li id="images_node_1">Images
-                <ul id="childList"></ul>
-            </li>
-
-            <li id="results">Results
-                <ul id="childList">
-                    <li id="neu"> neu</li>
-                    
-                    <li id="test">test
-                        <ul id="childList">
-                            <li id="resultArray[i]"> resultArray[i]
-                            </li>
-                        </ul>
-                        <ul id="resultArray[i]"> resultArray[i]
-                        </ul>
-                    </li>
-
-
-                    <li id="TMS">TMS
-                        <ul id="resultArray[i]"> resultArray[i]
-                        </ul>
-                    </li>
-
-
-
-                    <li id="working.txt"> working.txt</li>
-                </ul>
-            </li>
-        </ul>
-	</li>
-</ul>
-        
-        
-        
     </div>
 
     <!-- import config js for url configuration -->

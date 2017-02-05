@@ -195,7 +195,7 @@ window.onload = function () {
 
 
 function displayCreatorForInformation() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var creator;
 
     $.ajax({
@@ -229,7 +229,7 @@ function displayCreatorForInformation() {
 
 // ich glaube er wuerde wenn zwei projekte gleich heissen aber verschiedene creators haben immer nur das erste auswaehlen
 function displayCreator() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var creator;
 
     $.ajax({
@@ -262,7 +262,7 @@ function displayCreator() {
 
 
 function displayCollaboratorsForInformation() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var colabs;
 
     $.ajax({
@@ -302,7 +302,7 @@ function displayCollaboratorsForInformation() {
 
 
 function displayCollaborators() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var colabs;
 
     $.ajax({
@@ -410,7 +410,7 @@ function deleteCollaborator(name) {
 
 
 
-     var url = 'http://localhost:3000' + '/getFeatures';
+     var url = localhost + '/getFeatures';
 
     $.ajax({
         type: 'GET',
@@ -433,9 +433,9 @@ function deleteCollaborator(name) {
                         newProject.data.Colaborators = newCollabs.replace(',,',',');
                         console.log(newProject);
 
-                        // ajax Post
-	                   $.ajax({
-		              url: '/updateFeature?name=' + curProjectName,
+                    // ajax Post
+	                  $.ajax({
+		              url: localhost + '/updateFeature?name=' + curProjectName,
 		              //async: false,
 		              type: "POST",
 		              data: newProject.data,

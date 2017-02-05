@@ -3,6 +3,7 @@
 var input;
 var currentScript;
 var currentProject = document.cookie.split("=");
+var temp;
 
 /**
   * @desc Function for creating a new .R file.
@@ -41,9 +42,8 @@ var editFile = function(newContent){
     "scriptName"  : "" + namevomScript + "",
     "projectName"  : "" + projectName + "",
   }
-  console.log(document.cookie.split("=")[3]);
-  console.log(projectName + "   "  + namevomScript);
-  var url = '/updateFile?name' + projectName +"/Scripts/" + namevomScript;
+
+  var url = localhost + '/updateFile?name' + projectName +"/Scripts/" + namevomScript;
   //AJAX.POST request with new file content
   $.ajax({
     type: 'POST',
@@ -51,14 +51,13 @@ var editFile = function(newContent){
     data:data,
     timeout: 5000,
     success: function (data, textStatus) {
-      console.log(data);
       console.log("success");
     },
     error: function (xhr, textStatus, errorThrown) {
       console.log("error by creating folder");
     }
   });
-}
+};
 
 /**
   * @desc Function for adding scripts to the project
@@ -69,16 +68,16 @@ var addScript = function(project,name){
   if(project === undefined){
     return;
   }
-  console.log(project);
+
   //temp variables for storing information
   var tempCreator = project.data.Creator;
   var tempCollaborators = project.data.Colaborators;
   var tempDateien = project.data.Dateien;
   var tempErgebnisse = project.data.Ergebnis;
   var tempScripts = project.data.Scripts;
-  console.log(tempScripts);
+
   tempScripts.concat("," + name);
-  console.log(tempScripts);
+
   //generating new Project from temp variables
   var neuesProject = {
     Creator: "" + tempCreator,
@@ -91,6 +90,7 @@ var addScript = function(project,name){
 
 
 var newScript = function(){
+  
         var scriptName = prompt("Please enter a name");
         var file = new File([""], "");
         var formData = new FormData();
@@ -101,8 +101,9 @@ var newScript = function(){
         var currProjName = document.cookie.split("=")[3];
         var currProjFolder = "Scripts"; // oder Images1 oder Results
 
+        var url = localhost + '/upload?folder=' + currProjFolder + '?project=' + currProjName;
         $.ajax({
-          url: '/upload?folder=' + currProjFolder + '?project=' + currProjName,
+          url: url,
           type: 'POST',
           data: formData,
           processData: false,
@@ -118,14 +119,6 @@ var newScript = function(){
     createScript(scriptName);
 }
 
-
-
-
-
-
-
-
-var temp;
 function readProjectFolderbyName(name) {    //name
   if (name == "") {
     console.log("value empty");
@@ -135,7 +128,7 @@ function readProjectFolderbyName(name) {    //name
     //var folderRead = name;
     //console.log("readProjectFolder("+folderRead+")");
 
-    var url = 'http://localhost:3000' + '/readFolder?name=' + path;
+    var url = localhost + '/readFolder?name=' + path;
     // perform post ajax
     $.ajax({
         type: 'GET',
@@ -163,16 +156,13 @@ function cb(p){
 
 
 var deleteScript = function(){
-    var url = '/deleteFile?name' + "einProjekt" +"/Scripts/" + "dritteRDatei.R";  //'http://localhost:3000'
-
-
+    var url = localhost + '/deleteFile';
     var namevomScript = aktScript;
     var projectName = document.cookie.split("=")[3];
     var data = {
         "scriptName"  : "" + namevomScript + "",
         "projectName"  : "" + projectName + "",
     }
-
 
     $.ajax({
         type: 'POST',
@@ -181,13 +171,11 @@ var deleteScript = function(){
         //inhalt:data,
         timeout: 5000,
         success: function (data, textStatus) {
-            console.log(data);
             console.log("success");
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("error by creating folder");
         }
     });
-
     document.location.href = "work.html";
-}
+};
