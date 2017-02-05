@@ -2,18 +2,10 @@
 window.onload = function() {
   showMapToRead();
 
-  console.log("hi");
-  console.log(window.location.href);
-
   var thisURL = window.location.href;
-  var thisID = thisURL.substring(36, thisURL.length);
-  console.log(thisID);
+  var thisID = thisURL.substring(sliceString, thisURL.length);
 
   getUniqueFeature(thisID);
-
-// http://localhost:3000/uniqueLink?id=58935a428faeef640e46eb60 --> 36 Zeichen
-// TODO: giv-project1.uni-muenster.de/uniqueLink?id=  --> 44 Zeichen
-
 }
 
 // if unique link --> get Feature
