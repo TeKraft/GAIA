@@ -37,10 +37,9 @@ function saveRegister() {
         return hash;
     };
 
-    console.log(newUser);
     //hier statt name email denke ich
     if (name != undefined && content != null &&  password==confirmPassword) {
-        var url = 'http://localhost:3000' + '/addFeature?name=' + email;
+        var url = localhost + '/addFeature?name=' + email;
         // perform post ajax
         $.ajax({
             type: 'POST',
@@ -48,7 +47,6 @@ function saveRegister() {
             url: url,
             timeout: 5000,
             success: function (data, textStatus) {
-                console.log(data);
                 console.log("success");
                 window.location.href = "/index.html";
             },
@@ -68,7 +66,7 @@ function saveRegister() {
  * if the user entered the correct email and password the home.html is loaded.
  */
 function loadFromDB() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     $.ajax({
         type: 'GET',
         dataType: 'JSON',
@@ -112,13 +110,13 @@ function loadFromDB() {
 
 function deleteUser() {
     var userArr = document.cookie.split("=");
-    
+
     if (confirm("Are you sure?") == true) {
 
         } else {
             return;
         }
-    
+
   	// ajax Post
 	  $.ajax({
 		url: '/deleteFeature?name=' + JSON.parse(userArr[1]).name,
@@ -148,14 +146,8 @@ function editUser(){
     var email = document.getElementById("email").value;
     var newPassword = document.getElementById("newPassword").value;
     var country = document.getElementById("country").value;
-    
-    
-    
-    
-
-    
     var hashPassword = newPassword.hashCode();
-    
+
      curUser = '{'
         +'"Firstname":' +'"' + firstname + '"' +', '
         +'"LastName":' +'"' + lastname + '"' +', '
@@ -168,17 +160,12 @@ function editUser(){
         +'"Password":' +'"' + hashPassword + '"' +', '
         +'"Country":' +'"' + country + '"'
     +'}';
-    console.log(JSON.parse(curUser));
-    
+
     var temp = document.cookie.split ("=");
     var oldUser = JSON.parse(temp[1]);
-    console.log(oldUser.name);
-    
+
     updateFeatureData(oldUser.name,JSON.parse(curUser));
-    
+
     document.cookie = "";
     document.location.href  = "index.html";
-
-    
-}
-
+};

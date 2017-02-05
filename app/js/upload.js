@@ -20,9 +20,9 @@ $('#upload-input').on('change', function(){
       // add the files to formData object for the data payload
       formData.append('uploads[]', file, file.name);
     }
-
+    var url = localhost + '/upload';
     $.ajax({
-      url: '/upload',
+      url: url,
       type: 'POST',
       data: formData,
       processData: false,
@@ -61,4 +61,3 @@ $('#upload-input').on('change', function(){
 
   }
 });
-

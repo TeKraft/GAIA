@@ -12,7 +12,7 @@ window.onload = function() {
   getUniqueFeature(thisID);
 
 // http://localhost:3000/uniqueLink?id=58935a428faeef640e46eb60 --> 36 Zeichen
-// TODO: giv-project1.uni-muenster.de  --> 28 Zeichen
+// TODO: giv-project1.uni-muenster.de/uniqueLink?id=  --> 44 Zeichen
 
 }
 
@@ -27,13 +27,6 @@ function getUniqueFeature(id) {
       // async: false,
       timeout: 5000,
       success: function (content, textStatus) {
-        console.log(content);
-
-        console.log("getUniqueFeature - content");
-        console.log(content);
-        console.log(content[0]._id);
-        console.log(content[0].name);
-
         var thisProject = content[0].name;
         var thisCreator = content[0].data.Creator;
         var thisCollaborators = content[0].data.Collaborators;
@@ -76,7 +69,7 @@ function downloadZipAsReader() {
     var myZipProjectName;
     var currentProject = thisProject;
 
-    var url = localhost + '/zipMyShit'; //'/zipMyShit?name=' + currentProject;
+    var url = localhost + '/zipMyShit';
     $.ajax({
       type: 'POST',
       url: url,

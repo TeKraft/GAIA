@@ -119,8 +119,8 @@ window.onload = function () {
             }
         }
     };
-    
-    
+
+
 
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
@@ -151,11 +151,11 @@ window.onload = function () {
             document.getElementById("email").value = res;
 
               break;
-           
+
         }
     }
-    
-    
+
+
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
 
@@ -175,7 +175,7 @@ window.onload = function () {
             document.getElementById("city").value = userJSON.data.City;
             document.getElementById("institution").value = userJSON.data.Institution;
             document.getElementById("email").value = userJSON.data.Email;
-            
+
             document.getElementById("country").value = userJSON.data.Country;
 
 
@@ -185,7 +185,7 @@ window.onload = function () {
             document.getElementById("email").value = res;
 
               break;
-           
+
         }
     }
 }
@@ -195,7 +195,7 @@ window.onload = function () {
 
 
 function displayCreatorForInformation() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var creator;
 
     $.ajax({
@@ -229,7 +229,7 @@ function displayCreatorForInformation() {
 
 // ich glaube er wuerde wenn zwei projekte gleich heissen aber verschiedene creators haben immer nur das erste auswaehlen
 function displayCreator() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var creator;
 
     $.ajax({
@@ -262,7 +262,7 @@ function displayCreator() {
 
 
 function displayCollaboratorsForInformation() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var colabs;
 
     $.ajax({
@@ -302,7 +302,7 @@ function displayCollaboratorsForInformation() {
 
 
 function displayCollaborators() {
-    var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
     var colabs;
 
     $.ajax({
@@ -358,7 +358,6 @@ WENN AM ANFAN NOCH KEINER ERSTELLT WURDE ERSTELLT ER BEIM NEUEN COLLAB EINEN LEE
 function displayButtons(input) {
     var temp = input.split(",");
     var tempString = "";
-    console.log(temp);
 
     if (temp != ""){
         //console.log(temp[1] +  " das ist einer");
@@ -380,8 +379,6 @@ function displayButtons(input) {
                 //"</div>" +
                 //"</div>" +
                 " ";
-                console.log(temp[i]);
-                console.log(tempString);
                 //tempString = null;
             }
         }
@@ -401,12 +398,7 @@ function displayButtons(input) {
 function deleteCollaborator(name) {
 
     var deleteCollab = name[0].id;
-
-    console.log(curProjectName + curCreator);
-
-
-
-     var url = 'http://localhost:3000' + '/getFeatures';
+    var url = localhost + '/getFeatures';
 
     $.ajax({
         type: 'GET',
@@ -414,12 +406,8 @@ function deleteCollaborator(name) {
         url: url,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
-
             for(var i=0; i<= content.length;i++){
-
                 if(content[i] != undefined && content[i].data != undefined && content[i].name == curProjectName && content[i].data.Creator == curCreator){
-
                     editProject = content[i];
                     var newCollabs = content[i].data.Colaborators;
                     if(newCollabs.includes(deleteCollab)){
@@ -427,50 +415,33 @@ function deleteCollaborator(name) {
                         newCollabs = newCollabs.replace(deleteCollab,'');
                         var newProject = content[i];
                         newProject.data.Colaborators = newCollabs.replace(',,',',');
-                        console.log(newProject);
 
                         // ajax Post
 	                   $.ajax({
-		              url: '/updateFeature?name=' + curProjectName,
+		              url: localhost + '/updateFeature?name=' + curProjectName,
 		              //async: false,
 		              type: "POST",
 		              data: newProject.data,
-
 		              success: function(xhr, textStatus, data){
 			             // do function loadFromDB() to refresh list, when save feature
                             console.log("success");
-
 		              },
 		              error: function(textStatus, errorThrown){
 			             console.log(errorThrown);
 		              }
 	                   });
-
                         window.location.href = "projectedit.html";
-
                     }
-
                 }else{
                     console.log("gibts nicht")
                 }
             }
-
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
     });
-
-
-
-
-}
-
-
-
-
-
+};
 
 /*
  * sets the cookie to the logged in user
@@ -489,30 +460,6 @@ function logout() {
     window.location.href = "index.html";
     console.log(document.cookie);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //kann glaub ich weg
 window.onclick = function (event) {
