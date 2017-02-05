@@ -91,7 +91,6 @@ var createResultNames = function(name){
         }else{
             if(!ending.includes('.')){
                 // mit jeden ending subordner erstellen;
-                //console.log(name);
                 var subFolders = createSubFolders(name + "/Results/" +  ending);
                 if(subFolders != undefined && subFolders != ""){
                     // hier muss jetzt alles erstellt werden alle unter ordner und unter unter ordner und dateien
@@ -259,7 +258,14 @@ function createTree() {
     $(function () {
         // 6 create an instance when the DOM is ready
         $('#jstree').jstree(  {
-
+    "types" : {
+      "default" : {
+        "icon" : "glyphicon glyphicon-folder-open"
+      },
+      "root" : {
+        "childList" : "glyphicon glyphicon-ok"
+      }
+    },
             
             
             "plugins" : [

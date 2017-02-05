@@ -96,8 +96,25 @@ var addScript = function(project,name){
 
 
 var newScript = function(){
+    
+        var tempCookie = document.cookie.split("=")[3];
+        readProjectFolderbyName(tempCookie + "/Scripts")
+        
+        
   
         var scriptName = prompt("Please enter a name");
+
+        for(var i in temp){
+            if(temp[i] === scriptName +".R"){
+            alert("already exists!");
+            return;
+            }
+        }
+        
+    
+    
+    
+    
         var file = new File([""], "");
         var formData = new FormData();
         if(scriptName == "" || scriptName == undefined){
