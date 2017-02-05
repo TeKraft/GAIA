@@ -87,15 +87,17 @@ function addCollaborator() {
             // hier den neuen einfuegen
     console.log(contentadd);
     var newCollab = document.getElementById('NewCollabName').value;
-    var editedCollabe = newCollab.replace('@','diesisteinatzeichen');
-    editedCollab = editedCollabe.replace('.','diesisteinpunktzeichen');
+    var editedCollabe = newCollab.replace("@","at");
+    editedCollab = editedCollabe.replace(".","punkt");
+    editedCollab1 = editedCollab.replace('-','minus');
+    editedCollab2 = editedCollab1.replace('_','unter');
 
     var neuesProjekt ="{" + '"Creator"' + ":" + JSON.stringify(contentadd.data.Creator) + ",";
     var neuesProjekt ="{" + '"Creator"' + ":" + JSON.stringify(contentadd.data.Creator) + ",";
 
     var str = JSON.stringify(contentadd.data.Colaborators).substring(0, JSON.stringify(contentadd.data.Colaborators).length - 1);
 
-    var alleCollabs = '"Colaborators"' +  ":" + str + "," + editedCollab + '"' + ",";
+    var alleCollabs = '"Colaborators"' +  ":" + str + "," + editedCollab2 + '"' + ",";
     neuesProjekt = neuesProjekt + alleCollabs + '"Scripts"' + ":" +  '"' + contentadd.data.Scripts + '"' + "}"; //hier noch alles andere was gespeichert wird anhaengen
 
     console.log(neuesProjekt);

@@ -98,7 +98,7 @@ window.onload = function () {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("profilEditProfilSymb").textContent = userJSON.data.Firstname;
-                console.log(userArray);
+                //console.log(userArray);
                 document.getElementById("projectNameEdit").textContent = document.getElementById("projectNameEdit").textContent + " " + userArray[3];
                 curProjectName = userArray[3];
                 displayCollaborators();
@@ -249,7 +249,7 @@ function displayCreator() {
                         curCreator = content[i].data.Creator;
                         break;
                     } else {
-                        console.log("not this one");
+                        //console.log("not this one");
                     }
                 }
             }
@@ -332,7 +332,7 @@ function displayCollaborators() {
 
                         break;
                     } else {
-                        console.log("not this one");
+                        //console.log("not this one");
                     }
 
                 }
@@ -364,24 +364,28 @@ function displayButtons(input) {
         //console.log(temp[1] +  " das ist einer");
         for (var i = 0; i < temp.length; i++) {
             if(temp[i] == ""){
-                console.log("ein falscher");
+              //  console.log("ein falscher");
             }else{
-                var neu = temp[i].replace('diesisteinatzeichen','@');
-                var neuneu = neu.replace('diesisteinpunktzeichen','.');
+                var neu = temp[i].replace("at","@");
+                var neu1 = neu.replace("punkt",".");
+                var neu2 = neu1.replace("minus","-");
+                var neu3 = neu2.replace("unter","_");
                 tempString = tempString +
                 //"<div class='dropdown'>" +
                 "<br>" +
-                "<button id= '" + temp[i] + "' type='button' class='' onclick=''>" + temp[i] + "</button>" +
-                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")'>" + "delete" + "</button>" +
+                "<button id= '" + temp[i] + "' type='button' class='btn btn-info disabled' onclick=''>" + neu3 + "</button>" +
+                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")' class= 'btn btn-danger'>" + "delete" + "</button>" 
 
                 //"<div id='myDropdown' class='dropdown-content'>" +
                 //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>" + "sendMessage " + "</button>" +
                 //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' onclick='deleteCollaborator(this.id)'>" + "delete " + "</button>" +
                 //"</div>" +
                 //"</div>" +
-                " ";
+                ;
                 console.log(temp[i]);
-                console.log(tempString);
+                console.log(neu)
+                console.log(neu3)
+                //console.log(tempString);
                 //tempString = null;
             }
         }
