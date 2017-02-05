@@ -34,8 +34,11 @@ function makeTreeComponents(name) {
 
     var images = createImageNames(name);
 
-    var results = createResultNames(name);
+    var resultsFirst = createResultNames(name);
 
+    var results = resultsFirst.replace("," , "");
+    console.log(results);
+    
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" +
     "<ul id='treeList'>" +
