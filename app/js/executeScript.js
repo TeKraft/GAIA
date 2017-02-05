@@ -35,10 +35,11 @@ function getCSV() {
     type: 'GET',
     url: url,
     success: function (content, textStatus) {
-      console.log("success getCSV()");
+      alert(res);
     },
     error: function (xhr, textStatus, errorThrown) {
-        console.log("no success");
+        console.log(res);
+        alert(res);
     }
   });
 };

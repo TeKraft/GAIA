@@ -5,7 +5,7 @@ function readCSV() {
   	var rows = data.split("\n");
   	rows.forEach( function getvalues(thisRow) {
     	build += "<tr>\n";
-    	var columns = thisRow.split(";");
+    	var columns = thisRow.split(",");
     	for(var i=0;i<columns.length;i++){ build += "<td>" + columns[i] + "</td>\n"; }
     	build += "</tr>\n";
   	})

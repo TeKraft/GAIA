@@ -170,7 +170,7 @@ app.post('/execScriptCallback', function (req, res) {
       res.send(stderr);
       return console.error(error);
     }else {
-      res.send("Script is done");
+      res.send("Script is done!  " + stdout );
     }
   });
 });
@@ -214,9 +214,12 @@ function prependData(filename) {
 // get sciDB data as csv
 app.get('/getsciDBdata', function (req, res) {
     var childProcess = require('child_process');
-    childProcess.exec('Rscript ../scriptsR/writeCSV.R', function (err, stdout, stderr) {
-      if (err) {
-        return console.error(err);
+    childProcess.exec('Rscript ../scriptsR/writeCSV.R',{cwd: '../app/scriptsR/'}, function (error, stdout, stderr) {
+      if (error) {
+        res.send(stderr);
+        return console.error(error);
+      }else {
+        res.send("worked1");
       }
     })
 });
