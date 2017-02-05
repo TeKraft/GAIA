@@ -99,7 +99,7 @@ var createResultNames = function(name){
                         "<li id="+ending+">" +
                             ending +
                                     subFolders[0] +
-
+                                    //console.log(subFolders[0]);
                                 
                         "</li>";
                 }else{
@@ -126,43 +126,34 @@ var createSubFolders = function(path){
     var resultArray = array_unique(temp);
     var div = "";
     var subContent = [];
-    console.log(resultArray);
+
     for (var i in resultArray){
         //var ending = resultArray[i];
         
         if(!resultArray[i].includes('.')){
-            for(var j in resultArray){
+            //for(var j in resultArray){
+                
+                if(resultArray[i].includes(".")){
+                    return;
+                }
+
+            
                 subContent.push(
                 "<ul id = 'childList'>" + 
                     "<li id='" + resultArray[i] + "'> "+ resultArray[i] + 
-                    
-                        
-                        createSubFolders(path + "/" + resultArray[j])[0] + 
-
+                        createSubFolders(path + "/" + resultArray[0]) + 
                     "</li>" +
                 "</ul>");
-            }
             
+            //}
             
-            /*
-            subContent.push(
-                "<ul id = 'childList'>" + 
-                    "<li id='" + resultArray[i] + "'> "+ resultArray[i] + 
-                    
-                        
-                        createSubFolders(path + "/" + resultArray[i])[i] + 
 
-                    "</li>" +
-                "</ul>");/
-                */
-            // hier noch nach unterordnern checken
-            //subContent.push(createSubFolders(path + "/" + resultArray[i]));
-            //console.log(createSubFolders(path + "/" + resultArray[i]));
-        }
-        subContent.push(
+        }else{
+            subContent.push(
             "<ul id = 'childList'>" + 
                     "<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>" +
                 "</ul>");
+        }
     }
     return subContent;
 }

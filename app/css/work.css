@@ -3,6 +3,7 @@
 /* style first row */
 #treeView {
 	height: 400px;
+    overflow-y: auto;
 }
 
 #functionsMap {
