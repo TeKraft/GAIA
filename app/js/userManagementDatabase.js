@@ -111,13 +111,13 @@ function loadFromDB() {
 function deleteUser() {
     var userArr = document.cookie.split("=");
     var url = localhost + '/deleteFeature?name=' + JSON.parse(userArr[1]).name;
-    
+
     if (confirm("Are you sure?") == true) {
 
         } else {
             return;
         }
-    
+
   	// ajax Post
 	  $.ajax({
 		url: url,
@@ -134,22 +134,31 @@ function deleteUser() {
 	});
 };
 
-
-
 function editUser(){
-    var firstname = document.getElementById("firstName").value;
-    var lastname = document.getElementById("lastName").value;
-    var streetname = document.getElementById("streetName").value;
-    var housenumber = document.getElementById("houseNumber").value;
-    var postcode = document.getElementById("postcode").value;
-    var city = document.getElementById("city").value;
-    var institution = document.getElementById("institution").value;
-    var email = document.getElementById("email").value;
-    var newPassword = document.getElementById("newPassword").value;
-    var country = document.getElementById("country").value;
-    
-    var hashPassword = newPassword.hashCode();
-    
+  var firstname = document.getElementById("firstName").value;
+  var lastname = document.getElementById("lastName").value;
+  var streetname = document.getElementById("streetName").value;
+  var housenumber = document.getElementById("houseNumber").value;
+  var postcode = document.getElementById("postcode").value;
+  var city = document.getElementById("city").value;
+  var institution = document.getElementById("institution").value;
+  var email = document.getElementById("email").value;
+  var newPassword = document.getElementById("newPassword").value;
+  var confirmNewPassword = document.getElementById("confirmNewPassword").value;
+  var country = document.getElementById("country").value;
+  var hashPassword = newPassword.hashCode();
+  var array = [firstname,lastname,streetname,housenumber,postcode,city,institution,email,newPassword,country, confirmNewPassword];
+
+  var check=true;
+  for (var i = 0; i < array.length; i++){
+    if(array[i] == null ||array[i] == undefined ||array[i] == "")  {
+      check = false;
+    }
+  }
+  if(check == false){
+    alert("Please fill out all the input fields.")
+    return;
+  }else {
      curUser = '{'
         +'"Firstname":' +'"' + firstname + '"' +', '
         +'"LastName":' +'"' + lastname + '"' +', '
@@ -161,14 +170,15 @@ function editUser(){
         +'"Email":' +'"' + email + '"' +', '
         +'"Password":' +'"' + hashPassword + '"' +', '
         +'"Country":' +'"' + country + '"'
+
     +'}';
-    
+
     var temp = document.cookie.split ("=");
     var oldUser = JSON.parse(temp[1]);
-    
+
     updateFeatureData(oldUser.name,JSON.parse(curUser));
-    
+
     document.cookie = "";
     document.location.href  = "index.html";
+    };
 };
-

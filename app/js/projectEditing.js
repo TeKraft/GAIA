@@ -29,16 +29,11 @@ function makeTreeComponents(name) {
 
     var curProject;
     curProject = getProjectbyName(name);
-
     var scripts = createScriptNames(name);
-
     var uploads = createUploadNames(name);
-
     var results = createResultNames(name);
-
     //var results = resultsFirst.replace("," , "");
-    
-    //console.log(document.getElementById("jstree"));
+
     document.getElementById("jstree").innerHTML = "" +
     "<ul id='treeList'>" +
         "<li id='rootList' >" + name +
@@ -95,10 +90,10 @@ var createResultNames = function(name){
                 if(subFolders != undefined && subFolders != ""){
                     // hier muss jetzt alles erstellt werden alle unter ordner und unter unter ordner und dateien
 
-                    div = div +  
+                    div = div +
                         "<li id="+ending+">" +
                             ending +
-                            subFolders[0] +                                
+                            subFolders[0] +
                         "</li>";
                 }else{
                     div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
@@ -114,8 +109,8 @@ var createResultNames = function(name){
 
 var getNumberOFSub = function(path){
     var number = 0;
-    
-    
+
+
     return number;
 }
 
@@ -127,22 +122,22 @@ var createSubFolders = function(path){;
 
     for (var i in resultArray){
         //var ending = resultArray[i];
-        
+
         if(!resultArray[i].includes('.')){
             //for(var j in resultArray){
-                
+
                 if(resultArray[i].includes(".")){
                     return;
                 }
                 subContent.push(
-                "<ul id = 'childList'>" + 
-                    "<li id='" + resultArray[i] + "'> "+ resultArray[i] + 
-                        createSubFolders(path + "/" + resultArray[0]) + 
+                "<ul id = 'childList'>" +
+                    "<li id='" + resultArray[i] + "'> "+ resultArray[i] +
+                        createSubFolders(path + "/" + resultArray[0]) +
                     "</li>" +
                 "</ul>");
         }else{
             subContent.push(
-            "<ul id = 'childList'>" + 
+            "<ul id = 'childList'>" +
                     "<li id='" + resultArray[i] + "' "+ ",' data-jstree='{"+'"type"'+":"+'"leaf"'+"}'> "+ resultArray[i] + "</li>" +
                 "</ul>");
         }
@@ -254,7 +249,7 @@ var aktScript;
 function createTree() {
 
     $(function () {
-        
+
         // 6 create an instance when the DOM is ready
         $('#jstree').jstree(
     {
@@ -266,8 +261,8 @@ function createTree() {
         "icon" : "glyphicon glyphicon-paperclip"
       },
     },
-            
-            
+
+
             "plugins" : [
 	"contextmenu",
 	"dnd",
@@ -279,7 +274,7 @@ function createTree() {
 	"changed",
 	"conditionalselect"
   ]});
-        
+
 
         $('#jstree').on("changed.jstree", function (e, data) {
         if(saved == false){

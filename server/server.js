@@ -446,23 +446,15 @@ app.post('/deleteFile', function (req, res) {
 /**
   * @desc AJAX.POST on server for uploading data into projectfolder.
   *       upload of script, image, result
-  *       url format: /upload?folder=
+  *       url format: /uploadUploads?name=
   * @return message with success or error
   */
-app.post('/upload*', function (req, res) {
+app.post('/uploadUploads*', function (req, res) {
     // from url
-    var currentProject = req.url.substring(13, req.url.length); // extract projecttitle from url
-    
-    var currentFolder = req.url.substring(13-currentProject.length, req.url.length); // extract foldertitle
-    console.log(currentFolder);
-    console.log(currentProject);
-    
+    var currentProject = req.url.substring(20, req.url.length); // extract projecttitle from url
     // create an incoming form object
     var form = new formidable.IncomingForm();
-    
-   
     var uploadPath = '../app/projects/'+ currentProject ;
-
     // specify that we want to allow the user to upload multiple files in a single request
     form.multiples = true;
     // store all uploads in the /uploads directory
@@ -483,9 +475,44 @@ app.post('/upload*', function (req, res) {
     });
     // parse the incoming request containing the form data
     form.parse(req);
-    
-    
 });
+
+/**
+  * @desc AJAX.POST on server for uploading data into projectfolder.
+  *       upload of script, image, result
+  *       url format: /upload?folder=
+  * @return message with success or error
+  */
+app.post('/upload*', function (req, res) {
+    // from url
+    var currentProject = req.url.substring(15, 22); // extract projecttitle from url
+    var currentFolder = req.url.substring(31, req.url.length); // extract foldertitle
+
+    // create an incoming form object
+    var form = new formidable.IncomingForm();
+    var uploadPath = '../app/projects/' + currentFolder + '/' + currentProject;
+
+    // specify that we want to allow the user to upload multiple files in a single request
+    form.multiples = true;
+    // store all uploads in the /uploads directory
+    form.uploadDir = path.join(__dirname, uploadPath);
+    // every time a file has been uploaded successfully,
+    // rename it to it's orignal name
+    form.on('file', function (field, file) {
+        fs.rename(file.path, path.join(form.uploadDir, file.name));
+    });
+    // log any errors that occur
+    form.on('error', function (err) {
+        return console.error(err);
+    });
+    // once all the files have been uploaded, send a response to the client
+    form.on('end', function () {
+        res.end('success');
+    });
+    // parse the incoming request containing the form data
+    form.parse(req);
+});
+
 
 /*
  * #############################################################################

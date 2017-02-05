@@ -16,7 +16,7 @@ var createScript = function(name){
   getProjectbyName(currentProject[3]);
   addScript(loadedProject,name);
   currentScript = name;
-  document.location.href = "work.html";
+  document.location.href = "work.html";  //TODO:
 }
 
 /**
@@ -27,7 +27,7 @@ var saveScript = function(){
       alert("kein Script ausgewaehlt!");
       return;
   }
-  
+
   saved = true;
   //Content of textarea
   var content = document.getElementById("scriptIn").value;
@@ -97,12 +97,12 @@ var addScript = function(project,name){
 
 
 var newScript = function(){
-    
+
         var tempCookie = document.cookie.split("=")[3];
         readProjectFolderbyName(tempCookie + "/Scripts")
-        
-        
-  
+
+
+
         var scriptName = prompt("Please enter a name");
 
         for(var i in temp){
@@ -111,11 +111,11 @@ var newScript = function(){
             return;
             }
         }
-        
-    
-    
-    
-    
+
+
+
+
+
         var file = new File([""], "");
         var formData = new FormData();
         if(scriptName == "" || scriptName == undefined){

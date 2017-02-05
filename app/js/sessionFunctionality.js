@@ -121,8 +121,8 @@ window.onload = function () {
             }
         }
     };
-    
-    
+
+
 
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
@@ -143,9 +143,7 @@ window.onload = function () {
             document.getElementById("city").value = userJSON.data.City;
             document.getElementById("institution").value = userJSON.data.Institution;
             document.getElementById("email").value = userJSON.data.Email;
-            document.getElementById("newPassword").value = userJSON.data.Password;
             document.getElementById("country").value = userJSON.data.Country;
-
 
             /** change '/' into '.' **/
             var str = document.getElementById("email").value;
@@ -153,11 +151,10 @@ window.onload = function () {
             document.getElementById("email").value = res;
 
               break;
-           
         }
     }
-    
-    
+
+
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
 
@@ -177,7 +174,7 @@ window.onload = function () {
             document.getElementById("city").value = userJSON.data.City;
             document.getElementById("institution").value = userJSON.data.Institution;
             document.getElementById("email").value = userJSON.data.Email;
-            
+
             document.getElementById("country").value = userJSON.data.Country;
 
 
@@ -187,7 +184,7 @@ window.onload = function () {
             document.getElementById("email").value = res;
 
               break;
-           
+
         }
     }
 }
@@ -377,7 +374,7 @@ function displayButtons(input) {
                 //"<div class='dropdown'>" +
                 "<br>" +
                 "<button id= '" + temp[i] + "' type='button' class='btn btn-info disabled' onclick=''>" + neu3 + "</button>" +
-                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")' class= 'btn btn-danger'>" + "delete" + "</button>" 
+                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")' class= 'btn btn-danger'>" + "delete" + "</button>"
 
                 //"<div id='myDropdown' class='dropdown-content'>" +
                 //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>" + "sendMessage " + "</button>" +

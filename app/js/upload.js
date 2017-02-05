@@ -26,7 +26,7 @@ $('#upload-input').on('change', function () {
 
         var aktuellesProject = temp[3];
 
-        var url = localhost + '/upload?name=' + aktuellesProject + "/Uploads";
+        var url = localhost + '/uploadUploads?name=' + aktuellesProject + "/Uploads";
         $.ajax({
             url: url,
             type: 'POST',
@@ -65,5 +65,5 @@ $('#upload-input').on('change', function () {
         });
 
     }
-                            
+
 });
