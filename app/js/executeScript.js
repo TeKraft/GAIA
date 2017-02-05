@@ -1,28 +1,3 @@
-
-/**
-  * @desc Function for sending the current projectname & choosen scriptname
-  *       via AJAX.POST request and initiate the execution of the script.
-  * @return AJAX success or error
-*/
-function executeScript(){
-  var script = aktScript;
-  var url = localhost + '/execScript';
-  //name of the project, that is the current Project. Information cut out from cookie.
-  var currentProject = document.cookie.split("=")[3];
-  //AJAX:POST request with the current project and selected script.
-  $.ajax({
-      type: 'POST',
-      data: {project: ""+currentProject+"", script: ""+script+""},
-      url: url,
-      success: function (content, textStatus) {
-        console.log("success");
-      },
-      error: function (xhr, textStatus, errorThrown) {
-          console.log("no success");
-      }
-  });
-};
-
 /**
   * @desc Function for sending the current projectname & choosen scriptname
   *       via AJAX.POST request and initiate the execution of the script.
@@ -38,8 +13,9 @@ function executeScriptCallback(){
       type: 'POST',
       data: {project: ""+currentProject+"", script: ""+script+""},
       url: url,
-      success: function (content, textStatus) {
-        console.log("success");
+      success: function (res) {
+        console.log(res);
+        alert(res);
       },
       error: function (xhr, textStatus, errorThrown) {
           console.log("no success");
