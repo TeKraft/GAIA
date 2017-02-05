@@ -275,6 +275,7 @@ function createTree() {
             }else{
                 console.log(data.selected[0]);
             aktScript = data.selected[0];
+            document.getElementById("scriptIn").style.display =  'inline-block';
             rToInput(aktScript);
     }
 

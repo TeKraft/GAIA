@@ -23,6 +23,11 @@ var createScript = function(name){
   * @desc Function for saving the contents of the textarea .R file
 */
 var saveScript = function(){
+  if(aktScript == undefined){
+      alert("kein Script ausgewaehlt!");
+      return;
+  }
+  
   saved = true;
   //Content of textarea
   var content = document.getElementById("scriptIn").value;
@@ -52,6 +57,7 @@ var editFile = function(newContent){
     timeout: 5000,
     success: function (data, textStatus) {
       console.log("success");
+      alert("Script saved");
     },
     error: function (xhr, textStatus, errorThrown) {
       console.log("error by creating folder");
@@ -156,6 +162,11 @@ function cb(p){
 
 
 var deleteScript = function(){
+    if (confirm("Are you sure?") == true) {
+
+        } else {
+            return;
+        }
     var url = localhost + '/deleteFile';
     var namevomScript = aktScript;
     var projectName = document.cookie.split("=")[3];

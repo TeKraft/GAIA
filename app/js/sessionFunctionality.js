@@ -51,6 +51,9 @@ window.onload = function () {
 
                 makeTreeComponents(currentProject[3]);
                 createTree();
+                if(aktScript == undefined){
+                    document.getElementById("scriptIn").style.display = "none";
+                }
                 break;
             }
         case "/profiledit.html":

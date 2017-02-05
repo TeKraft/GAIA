@@ -13,6 +13,9 @@
 	height: 450px;
 }
 
+#scriptIn{
+    display:none;
+}
 
 
 /* style second row */
