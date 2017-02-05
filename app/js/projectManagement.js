@@ -148,7 +148,7 @@ function createProjectTable(){
             var testname=userProjects[i].name;
             console.log(testname);
             cell1.innerHTML = userProjects[i].name;
-            cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='editProject(this.id)' type='button' class='btn btn-editPrj'>work</button>";
+            cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='editProject(this.id)' type='button' class='btn btn-info'>work</button>";
             cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>" + 
                               "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-danger' onclick='deleteProject(this.id)'>delete</button>";
              projectsOfUser[j]=userProjects[i].name;

@@ -91,6 +91,7 @@ function addCollaborator() {
     editedCollab = editedCollabe.replace('.','diesisteinpunktzeichen');
 
     var neuesProjekt ="{" + '"Creator"' + ":" + JSON.stringify(contentadd.data.Creator) + ",";
+    var neuesProjekt ="{" + '"Creator"' + ":" + JSON.stringify(contentadd.data.Creator) + ",";
 
     var str = JSON.stringify(contentadd.data.Colaborators).substring(0, JSON.stringify(contentadd.data.Colaborators).length - 1);
 
