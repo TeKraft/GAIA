@@ -24,7 +24,7 @@ function makeTreeComponents(name) {
 
     getProjectbyName(name);
 
-    var images = createImageNames(name);
+    var uploads = createUploadNames(name);
     //readProjectFolderbyName(project + "/Scripts");  "wurstbrot/Scripts"
 
     var curProject;
@@ -32,7 +32,7 @@ function makeTreeComponents(name) {
 
     var scripts = createScriptNames(name);
 
-    var images = createImageNames(name);
+    var uploads = createUploadNames(name);
 
     var results = createResultNames(name);
 
@@ -50,9 +50,9 @@ function makeTreeComponents(name) {
                     "</ul>" +
                 "</li>" +
 
-                "<li id='images_node_1'>Uploads" +
+                "<li id='uploads_node_1'>Uploads" +
                     "<ul id='childList'>" +
-                        images+ //images +
+                        uploads+ //images +
                     "</ul>" +
                 "</li>" +
 
@@ -169,17 +169,17 @@ if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt'))
 */
 
 
-var createImageNames = function(projectname){
+var createUploadNames = function(projectname){
     readProjectFolderbyName(projectname + "/Uploads");
-    var ImageArray = array_unique(temp);
+    var UploadArray = array_unique(temp);
     var div = "";
-    for (var i in ImageArray){
-        var ending = ImageArray[i];
-        if(ending.includes('.png') || ending.includes('.jpg')){
-            div = div + ("<li id='" + ImageArray[i] + "'> "+ ImageArray[i] + "</li>");
-        }else{
+    for (var i in UploadArray){
+        var ending = UploadArray[i];
+        //if(ending.includes('.png') || ending.includes('.jpg')){
+            div = div + ("<li id='" + UploadArray[i] + ",' data-jstree='{"+'"type"'+":"+'"leaf"'+"}'> "+ UploadArray[i] + "</li>");
+        //}else{
 
-        }
+        //}
     }
     return div;
 }

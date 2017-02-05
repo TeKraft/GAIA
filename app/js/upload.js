@@ -47,7 +47,6 @@ $('#upload-input').on('change', function () {
                         // calculate the percentage of upload completed
                         var percentComplete = evt.loaded / evt.total;
                         percentComplete = parseInt(percentComplete * 100);
-
                         // update the Bootstrap progress bar with the new percentage
                         $('.progress-bar').text(percentComplete + '%');
                         $('.progress-bar').width(percentComplete + '%');
@@ -66,4 +65,5 @@ $('#upload-input').on('change', function () {
         });
 
     }
+                            
 });
