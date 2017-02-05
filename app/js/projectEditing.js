@@ -61,7 +61,7 @@ function makeTreeComponents(name) {
                 "</li>" +
             "</ul>" +
          "</li>" +
-     "</ul>;"
+     "</ul>"
 }
 
 function array_unique(arrayName) {
@@ -92,23 +92,20 @@ var createResultNames = function(name){
                 // mit jeden ending subordner erstellen;
                 //console.log(name);
                 var subFolders = createSubFolders(name + "/Results/" +  ending);
-
                 if(subFolders != undefined && subFolders != ""){
-                    console.log(subFolders);
+                    // hier muss jetzt alles erstellt werden alle unter ordner und unter unter ordner und dateien
+
+                    div = div +  
+                        "<li id="+ending+">" +
+                            ending +
+                                    subFolders[0] +
+
+                                
+                        "</li>";
                 }else{
-                    console.log(ending + " keine subfolder");
+                    //console.log(ending + " keine subfolder");
                     div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
                 }
-
-
-
-               // console.log(ending);
-                //readProjectFolderbyName(name + "/Results/" + ending);
-                //console.log(array_unique(temp));
-
-               //
-
-
 
             }
         }
@@ -116,15 +113,56 @@ var createResultNames = function(name){
     return div;
 }
 
+var getNumberOFSub = function(path){
+    var number = 0;
+    
+    
+    return number;
+}
+
 var createSubFolders = function(path){
-    console.log(path);
+    //console.log(path);
     readProjectFolderbyName(name + path);
     var resultArray = array_unique(temp);
     var div = "";
     var subContent = [];
+    console.log(resultArray);
     for (var i in resultArray){
         //var ending = resultArray[i];
-        subContent.push(resultArray[i]);
+        
+        if(!resultArray[i].includes('.')){
+            for(var j in resultArray){
+                subContent.push(
+                "<ul id = 'childList'>" + 
+                    "<li id='" + resultArray[i] + "'> "+ resultArray[i] + 
+                    
+                        
+                        createSubFolders(path + "/" + resultArray[j])[0] + 
+
+                    "</li>" +
+                "</ul>");
+            }
+            
+            
+            /*
+            subContent.push(
+                "<ul id = 'childList'>" + 
+                    "<li id='" + resultArray[i] + "'> "+ resultArray[i] + 
+                    
+                        
+                        createSubFolders(path + "/" + resultArray[i])[i] + 
+
+                    "</li>" +
+                "</ul>");/
+                */
+            // hier noch nach unterordnern checken
+            //subContent.push(createSubFolders(path + "/" + resultArray[i]));
+            //console.log(createSubFolders(path + "/" + resultArray[i]));
+        }
+        subContent.push(
+            "<ul id = 'childList'>" + 
+                    "<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>" +
+                "</ul>");
     }
     return subContent;
 }
@@ -173,7 +211,7 @@ var createScriptNames = function(projectname){
     for (var i in ScriptArray){
         var ending = ScriptArray[i].substr(ScriptArray[i].length-2, ScriptArray[i].length);
         if(ending === '.R'){
-            div = div + ("<li" + " id='" + ScriptArray[i] + "' " + " data-jstree='" + "{'icon':" + "//jstree.com/tree.png" + "}'" + ">"  + ScriptArray[i] + "</li>");
+            div = div + ("<li" + " id='" + ScriptArray[i] + "' " + "" + ">"  + ScriptArray[i] + "</li>");
         }else{
 
         }
