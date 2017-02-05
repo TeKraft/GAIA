@@ -36,7 +36,6 @@ window.onload = function () {
 
         case "/work.html":
             showMap();
-            console.log(document.cookie);
             if(document.cookie.includes(";")){
                 alert("nicht angemeldet");
                 window.location.href = "index.html";

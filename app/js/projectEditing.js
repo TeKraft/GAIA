@@ -37,7 +37,6 @@ function makeTreeComponents(name) {
     var resultsFirst = createResultNames(name);
 
     var results = resultsFirst.replace("," , "");
-    console.log(results);
     
     //console.log(document.getElementById("jstree"));
     document.getElementById("jstree").innerHTML = "" +
@@ -83,7 +82,6 @@ function array_unique(arrayName) {
 var createResultNames = function(name){
     readProjectFolderbyName(name + "/Results");
     var resultArray = array_unique(temp);
-    console.log(resultArray);
     var div = "";
 
     for (var i in resultArray){
@@ -101,12 +99,9 @@ var createResultNames = function(name){
                     div = div +  
                         "<li id="+ending+">" +
                             ending +
-                                    subFolders[0] +
-                                    //console.log(subFolders[0]);
-                                
+                                    subFolders[0] +                                
                         "</li>";
                 }else{
-                    //console.log(ending + " keine subfolder");
                     div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
                 }
             }
@@ -115,6 +110,9 @@ var createResultNames = function(name){
     return div;
 }
 
+
+
+
 var getNumberOFSub = function(path){
     var number = 0;
     
@@ -122,8 +120,7 @@ var getNumberOFSub = function(path){
     return number;
 }
 
-var createSubFolders = function(path){
-    //console.log(path);
+var createSubFolders = function(path){;
     readProjectFolderbyName(name + path);
     var resultArray = array_unique(temp);
     var div = "";
@@ -261,8 +258,33 @@ function createTree() {
 
     $(function () {
         // 6 create an instance when the DOM is ready
-        $('#jstree').jstree();
-        // 7 bind to events triggered on the tree
+        $('#jstree').jstree(  {
+
+            
+            
+            "plugins" : [
+	"contextmenu",
+	"dnd",
+	"massload",
+	"search",
+	"types",
+	"unique",
+	"wholerow",
+	"changed",
+	"conditionalselect"
+  ]});
+        
+        
+                
+        
+        
+        
+ 
+        
+
+
+        
+        
         $('#jstree').on("changed.jstree", function (e, data) {
         if(saved == false){
             if (confirm("did you save your Project?") == true) {
