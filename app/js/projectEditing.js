@@ -61,6 +61,10 @@ function makeTreeComponents(name) {
      "</ul>"
 }
 
+
+/**
+  * @desc returns the given array without dublicates
+*/
 function array_unique(arrayName) {
 	var newArray = new Array();
 	label:for(var i=0; i<arrayName.length;i++ ) {
@@ -73,7 +77,9 @@ function array_unique(arrayName) {
 	return newArray;
 }
 
-
+/**
+  * @desc Creates the treeview childList for the Results
+*/
 var createResultNames = function(name){
     readProjectFolderbyName(name + "/Results");
     var resultArray = array_unique(temp);
@@ -114,6 +120,10 @@ var getNumberOFSub = function(path){
     return number;
 }
 
+
+/**
+  * @desc creates all subfolders of a given folder
+*/
 var createSubFolders = function(path){;
     readProjectFolderbyName(name + path);
     var resultArray = array_unique(temp);
@@ -145,25 +155,10 @@ var createSubFolders = function(path){;
     return subContent;
 }
 
-/*
-if(ending.includes('.png') || ending.includes('.jpg')|| ending.includes('.txt')){
-            div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
 
-        }else{
-            if(!ending.includes('.')){
-                console.log(ending);
-                readProjectFolderbyName(name + "/Results/" + ending);
-                console.log(array_unique(temp));
-
-                div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
-
-
-
-            }
-        }
+/**
+  * @desc Creates the treeview childList for the Uploads
 */
-
-
 var createUploadNames = function(projectname){
     readProjectFolderbyName(projectname + "/Uploads");
     var UploadArray = array_unique(temp);
@@ -179,7 +174,9 @@ var createUploadNames = function(projectname){
     return div;
 }
 
-
+/**
+  * @desc Creates the treeview childList for the Scripts
+*/
 var createScriptNames = function(projectname){
 
     readProjectFolderbyName(projectname + "/Scripts");  //projectname + "Scripts"
@@ -197,6 +194,9 @@ var createScriptNames = function(projectname){
     return div;
 }
 
+/**
+  * @desc Sets the value of the input field to the content of the given script
+*/
 var rToInput = function(scriptname){
     var tempCookie = document.cookie.split("=");
     var projectname = tempCookie[3];
@@ -215,16 +215,18 @@ var rToInput = function(scriptname){
 
 
 var tempScript;
+
+/**
+  * @desc Returns the content of a given script
+  * @return AJAX success or error
+*/
 var readScriptbyName = function(path){
   if (path == "") {
     console.log("value empty");
   }  else {
 
       var path = "" + path;
-
-    //var folderRead = name;
-    //console.log("readProjectFolder("+folderRead+")");
-
+      
     var url = localhost + '/readFile?name=' + path;
     // perform post ajax
     $.ajax({
@@ -233,12 +235,11 @@ var readScriptbyName = function(path){
         async:false,
         timeout: 5000,
         success: function (content, textStatus) {
-            console.log(content);
             tempScript = content;
-            //cb(content);
             return content;
         },
         error: function (xhr, textStatus, errorThrown) {
+            alert("failed to read sriptbyname");
             console.log("no success");
         }
     });
@@ -246,6 +247,10 @@ var readScriptbyName = function(path){
 };
 
 var aktScript;
+
+/**
+  * @desc Creates the treeview
+*/
 function createTree() {
 
     $(function () {
@@ -279,28 +284,19 @@ function createTree() {
         $('#jstree').on("changed.jstree", function (e, data) {
         if(saved == false){
             if (confirm("did you save your Project?") == true) {
-                console.log(data.selected[0]);
                 var select = data.selected[0];
                 aktScript = select.slice(0,select.length-1);
-                console.log(aktScript);
                 rToInput(aktScript);
             } else {
                 return;
             }
             }else{
             aktScript = data.selected[0].replace(",","");
-            console.log(aktScript);
             document.getElementById("scriptIn").style.display =  'inline-block';
             rToInput(aktScript.replace(",",""));
     }
 
         });
-        // 8 interact with the tree - either way is OK
-        //$('button').on('click', function () {
-        //    $('#jstree').jstree(true).select_node('scripts_node_1');
-        //    $('#jstree').jstree('select_node', 'images_node_1');
-        //    $.jstree.reference('#jstree').select_node('results_node_1');
-        //});
     });
 }
 
@@ -310,7 +306,6 @@ var changedScript = function(){
     saved = false;
     console.log("saved set to false");
 }
-
 
 
 

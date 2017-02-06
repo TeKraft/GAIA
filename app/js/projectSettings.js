@@ -10,53 +10,19 @@ $(document).ready(function(){
     $('.btn-addCollab').on('click',addCollaborator);
 });
 
-
-
-// im internet steht nur wie man zb "creator" umbenennt.
-function changeProjectName() {
-    var content = '"' + document.getElementById('NewPrjName').value + '"';
-    var toChangeProject = "sdff";
-    console.log(content);
-
-    if (content != undefined) {
-
-        var url = localhost + '/updateFeature?name=' + toChangeProject;
-
-        // perform post ajax
-        $.ajax({
-            type: 'POST',
-            data: content,
-            url: url,
-            timeout: 5000,
-            success: function (data, textStatus) {
-                console.log(data);
-                console.log("success");
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.log("failed to save to db");
-            }
-        });
-
-        //loadFromDB();
-
-    } else {
-        console.log("fehler save to sb undefined oder null");
-    }
-};
-
-
-// noch gucken ob schon wer mitarbeitet und wenn ja das komma weglassen
-
 var contentadd;
 
+
+/**
+  * @desc Adds a collaborator to the project
+  * @return AJAX success or error
+*/
 function addCollaborator() {
 
     contentadd=null;
     var temp=document.cookie.split("=");
 
     var aktuellesProject = temp[3];
-
-
 
 
      var url = localhost + '/getFeatures';
@@ -78,14 +44,12 @@ function addCollaborator() {
                     break;
             }
             }
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
     });
-            // hier den neuen einfuegen
-    console.log(contentadd);
+
     var newCollab = document.getElementById('NewCollabName').value;
     var editedCollabe = newCollab.replace("@","atzeichen");
     editedCollab = editedCollabe.replace(".","punkt");
@@ -101,13 +65,15 @@ function addCollaborator() {
     var alleCollabs = '"Colaborators"' +  ":" + str + "," + editedCollab2 + '"' + ",";
     neuesProjekt = neuesProjekt + alleCollabs + '"Scripts"' + ":" +  '"' + contentadd.data.Scripts + '"' + "}"; //hier noch alles andere was gespeichert wird anhaengen
 
-    console.log(neuesProjekt);
-
 	updateFeatureData(aktuellesProject, JSON.parse(neuesProjekt));
     window.location.href = "/projectedit.html";
 
 };
 
+/**
+  * @desc updates the data content of a Feature
+  * @return AJAX success or error
+*/
 function updateFeatureData(featureName, newData){
     var url = localhost + '/updateFeature?name=' + featureName;
      // ajax Post
@@ -135,7 +101,11 @@ function updateFeatureData(featureName, newData){
 
 
 
-
+/**
+  * @desc Returns the content of a Project 
+  * @param name (projectname)
+  * @return AJAX success or error
+*/
 function getProjectByName(name){
 var url = localhost + '/getFeatures';
     $.ajax({
@@ -150,13 +120,11 @@ var url = localhost + '/getFeatures';
 
                 if(content[i] != undefined && content[i].data != undefined && content[i].data.Creator != undefined && content[i].name == name){
                     var temp = content[i];
-                    console.log(temp);
                     tempProject = temp;
                     return temp;
                 }
             }
             return temp;
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
@@ -165,29 +133,3 @@ var url = localhost + '/getFeatures';
 };
 
 
-function updateProject(jsonString) {
-
-	var dataTitle;
-	var contentString = JSON.stringify(jsonString);
-	var decodedcontentString = decodeURI(contentString);
-	var content = JSON.parse(decodedcontentString);
-    var url = localhost + '/updateFeature?name=' + dataTitle;
-	dataTitle = content.features[0].properties.name;
-
-	// ajax Post
-	$.ajax({
-		url: url,
-		//async: false,
-		type: "POST",
-		data: content,
-
-		success: function(xhr, textStatus, data){
-			// do function loadFromDB() to refresh list, when save feature
-			loadToEdit();
-		},
-		error: function(textStatus, errorThrown){
-			JL("error").info("updateFeature ajax");
-			console.log(errorThrown);
-		}
-	});
-};
