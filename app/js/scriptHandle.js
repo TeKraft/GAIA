@@ -122,7 +122,7 @@ var newScript = function () {
         processData: false,
         contentType: false,
         success: function (data) {
-            console.log('upload successful!\n' + data);
+            console.log('upload successful!');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
@@ -190,7 +190,7 @@ var deleteScript = function () {
             data: data,
             timeout: 5000,
             success: function (data, textStatus) {
-                console.log("success");
+                alert(data);
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("error by creating folder");

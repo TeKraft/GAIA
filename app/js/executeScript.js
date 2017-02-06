@@ -71,7 +71,7 @@ function getCSV() {
         type: 'GET',
         url: url,
         success: function (content, textStatus) {
-            alert(res);
+            alert(content);
         },
         error: function (xhr, textStatus, errorThrown) {
             alert(res);

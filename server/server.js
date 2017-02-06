@@ -298,6 +298,9 @@ function folderStructure(foldertitle) {
     for (var i = 0; i < folderStructure.length; i++) {
         fs.mkdir('../app/projects/' + foldertitle + '/' + folderStructure[i], function (err) {
             // path exists unless there was an error
+            if (err) {
+              return console.error(err);
+            }
         })
     }
 };
@@ -411,6 +414,20 @@ app.post('/updateFile*', function (req, res) {
   * @return send filedata or message error
   */
 app.post('/deleteFile', function (req, res) {
+    var scriptName = req.body.scriptName;
+
+    fs.unlink("../app/scriptsR/tempData/" + scriptName , function (err) {
+    if (err) throw err;
+    });
+});
+
+/**
+  * @desc AJAX.POST on server for deleting temp file.
+  *       delete temp file
+  *       url format: /deleteFile?name=
+  * @return send response or message error
+  */
+app.post('/deleteTempFile', function (req, res) {
     var projecttitle = req.url.substring(16, req.url.length); // extract projecttitle from url
     var scriptName = req.body.scriptName;
     var projectName = req.body.projectName;
