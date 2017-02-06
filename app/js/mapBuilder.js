@@ -13,8 +13,6 @@ var myLayerControl;
  *
  */
 var leaflet = function () {
-  console.log("leaflet() starting");
-
 	// Settings for map
 	leafmap = L.map('leafletmap').setView([51.96, 7.61], 13);	//münster
 
@@ -28,14 +26,12 @@ var leaflet = function () {
 	var osmLayer2 = new L.tileLayer ('http://a.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	});
-
 	// creating variable to store base maps in as object array
 	var baseMaps = {
 		"osm_color" : osmLayer,
 		"osm_grey" : osmLayer2
 	};
 	var overlayMaps = {};
-
 	// layer control function
 	myLayerControl = L.control.layers(baseMaps, overlayMaps).setPosition('topright').addTo(leafmap);
 }; //leaflet() end
@@ -71,7 +67,6 @@ function drawMap() {
 			marker: false
 		}
 	});
-
 	// add control with draw abled
 	leafmap.addControl(drawControlFull);
 
@@ -98,10 +93,7 @@ function drawMap() {
     var xmax = layer._latlngs[2].lat;
     var ymin = layer._latlngs[0].lng;
     var ymax = layer._latlngs[2].lng;
-
     var bounds = L.latLngBounds(layer._latlngs[2], layer._latlngs[0]);
-
-    console.log(bounds);
 
     var bbox = "bbox1 = extent("+xmin+","+xmax+","+ymin+","+ymax+")\ndata.subarea = crop(x = ..., bbox1) # please add the dataset here";
     document.getElementById("bbox").innerHTML = bbox;;
