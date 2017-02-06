@@ -9,18 +9,16 @@ function executeScript() {
     var scriptName = aktScript;
     var projectName = document.cookie.split("=")[3];
     var path = projectName + "/Scripts/" + scriptName;
-    console.log(scriptName + "\n" + projectName);
     readScriptbyName(path);
-    console.log(tempScript);
     var content = {scriptName: scriptName, project: projectName, scriptData: tempScript};
     // var url = localhost + '/prependMyFile';
     var url = localhost + '/callMeMaybe';
+    alert("Script is processing.\nPlease be patient");
     $.ajax({
       url: url,
       type: 'POST',
       data: content,
       success: function(res){
-        console.log(res);
         alert("Script has been executed! \n -->"+res);
         try {
           deleteTempScript();

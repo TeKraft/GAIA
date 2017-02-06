@@ -8,7 +8,7 @@ var temp;
 /**
   * @desc Function for creating a new .R file.
   *       Empty or with the content of the textarea from work.html
-  * @param name : name of the script
+  * @param name {String} name of the script
 */
 var createScript = function(name){
   //Content of textarea
@@ -27,7 +27,6 @@ var saveScript = function(){
       alert("kein Script ausgewaehlt!");
       return;
   }
-
   saved = true;
   //Content of textarea
   var content = document.getElementById("scriptIn").value;
@@ -48,7 +47,6 @@ var editFile = function(newContent){
     "projectName"  : "" + projectName + "",
   }
 
-      console.log(namevomScript);
   var url = localhost + '/updateFile?name' + projectName +"/Scripts/" + namevomScript;
   //AJAX.POST request with new file content
   $.ajax({
@@ -57,7 +55,6 @@ var editFile = function(newContent){
     data:data,
     timeout: 5000,
     success: function (data, textStatus) {
-      console.log("success");
       alert("Script saved");
     },
     error: function (xhr, textStatus, errorThrown) {
@@ -83,8 +80,6 @@ var addScript = function(project,name){
   var tempErgebnisse = project.data.Ergebnis;
   var tempScripts = project.data.Scripts;
 
-//  tempScripts.concat("," + name);
-
   //generating new Project from temp variables
   var neuesProject = {
     Creator: "" + tempCreator,
@@ -95,14 +90,12 @@ var addScript = function(project,name){
   }
 }
 
-
+/**
+  * @desc Function for creating a new .R file.
+  */
 var newScript = function(){
-
         var tempCookie = document.cookie.split("=")[3];
         readProjectFolderbyName(tempCookie + "/Scripts")
-
-
-
         var scriptName = prompt("Please enter a name");
 
         for(var i in temp){
@@ -111,10 +104,6 @@ var newScript = function(){
             return;
             }
         }
-
-
-
-
 
         var file = new File([""], "");
         var formData = new FormData();
@@ -139,18 +128,17 @@ var newScript = function(){
             console.log("no success");
         }
         });
-
     createScript(scriptName);
-}
+};
 
+/**
+  * @desc Function for reading project folder.
+  */
 function readProjectFolderbyName(name) {    //name
   if (name == "") {
     console.log("value empty");
   }  else {
-
-      var path = "" + name;
-    //var folderRead = name;
-    //console.log("readProjectFolder("+folderRead+")");
+    var path = "" + name;
 
     var url = localhost + '/readFolder?name=' + path;
     // perform post ajax
@@ -160,9 +148,7 @@ function readProjectFolderbyName(name) {    //name
         async:false,
         timeout: 5000,
         success: function (content, textStatus) {
-            //console.log(content);
             temp = content;
-            //cb(content);
             return content;
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -172,39 +158,45 @@ function readProjectFolderbyName(name) {    //name
   }
 };
 
+/**
+  * @desc Function that returns inputparameter
+  */
 function cb(p){
     return p;
-}
+};
 
-
-
-
+/**
+  * @desc Function for deleting a new .R file.
+  */
 var deleteScript = function(){
     if (confirm("Are you sure?") == true) {
-
-        } else {
-            return;
-        }
+    } else {
+        return;
+    }
     var url = localhost + '/deleteFile';
     var namevomScript = aktScript;
-    var projectName = document.cookie.split("=")[3];
-    var data = {
-        "scriptName"  : "" + namevomScript + "",
-        "projectName"  : "" + projectName + "",
-    }
+    if (namevomScript.substring(namevomScript.length-2,namevomScript.length) != ".R") {
+      alert("delete not possible");
+      return;
+    } else {
+      var projectName = document.cookie.split("=")[3];
+      var data = {
+          "scriptName"  : "" + namevomScript + "",
+          "projectName"  : "" + projectName + "",
+      }
 
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data:data,
-        //inhalt:data,
-        timeout: 5000,
-        success: function (data, textStatus) {
-            console.log("success");
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log("error by creating folder");
-        }
-    });
-    document.location.href = "work.html";
+      $.ajax({
+          type: 'POST',
+          url: url,
+          data:data,
+          timeout: 5000,
+          success: function (data, textStatus) {
+              console.log("success");
+          },
+          error: function (xhr, textStatus, errorThrown) {
+              console.log("error by creating folder");
+          }
+      });
+      document.location.href = "work.html";
+    }
 };

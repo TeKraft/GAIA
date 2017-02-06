@@ -1,17 +1,11 @@
 "use strict;"
 
-// handles the button "ChangeName of a Project"
-$(document).ready(function(){
-    $('.btn-changeProjectName').on('click',changeProjectName);
-});
-
 // handles the button "add Collaborator"
 $(document).ready(function(){
     $('.btn-addCollab').on('click',addCollaborator);
 });
 
 var contentadd;
-
 
 /**
   * @desc Adds a collaborator to the project
@@ -102,7 +96,7 @@ function updateFeatureData(featureName, newData){
 
 
 /**
-  * @desc Returns the content of a Project 
+  * @desc Returns the content of a Project
   * @param name (projectname)
   * @return AJAX success or error
 */
@@ -131,5 +125,3 @@ var url = localhost + '/getFeatures';
         }
     });
 };
-
-

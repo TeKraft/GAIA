@@ -71,11 +71,11 @@ function array_unique(arrayName) {
 		for(var j=0; j<newArray.length;j++ ) {
 		        if(newArray[j] == arrayName[i])
 				continue label;
-			}
-		        newArray[newArray.length] = arrayName[i];
+		}
+    newArray[newArray.length] = arrayName[i];
 	}
 	return newArray;
-}
+};
 
 /**
   * @desc Creates the treeview childList for the Results
@@ -95,11 +95,10 @@ var createResultNames = function(name){
                 var subFolders = createSubFolders(name + "/Results/" +  ending);
                 if(subFolders != undefined && subFolders != ""){
                     // hier muss jetzt alles erstellt werden alle unter ordner und unter unter ordner und dateien
-
                     div = div +
                         "<li id="+ending+">" +
                             ending +
-                            subFolders[0] +
+                            getSubFolder(subFolders) +
                         "</li>";
                 }else{
                     div = div + ("<li id='" + resultArray[i] + "'> "+ resultArray[i] + "</li>");
@@ -108,18 +107,23 @@ var createResultNames = function(name){
         }
     }
     return div;
+};
+
+/**
+  * @desc function to create sub folders for tree view
+  */
+function getSubFolder(structure) {
+  var subDiv = "";
+  for (var j=0; j<structure.length; j++) {
+    subDiv = subDiv + structure[j]; //structure[j]
+  }
+  return subDiv;
 }
-
-
-
 
 var getNumberOFSub = function(path){
     var number = 0;
-
-
     return number;
-}
-
+};
 
 /**
   * @desc creates all subfolders of a given folder
@@ -226,7 +230,7 @@ var readScriptbyName = function(path){
   }  else {
 
       var path = "" + path;
-      
+
     var url = localhost + '/readFile?name=' + path;
     // perform post ajax
     $.ajax({

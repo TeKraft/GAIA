@@ -10,10 +10,10 @@ var curProject;
 
 
 /**
- * @desc Function for saving a JSON object to the Database. 
+ * @desc Function for saving a JSON object to the Database.
  *      The Object is a new User.
  *      The password is getting hashed.
- *      equal control password with config password 
+ *      equal control password with config password
  * @return a hash password; success or error
  */
 function saveRegister() {
@@ -42,7 +42,7 @@ function saveRegister() {
         return hash;
     };
 
-    
+
     if (name != undefined && content != null &&  password==confirmPassword) {
         var url = localhost + '/addFeature?name=' + email;
         // perform post ajax
@@ -52,11 +52,11 @@ function saveRegister() {
             url: url,
             timeout: 5000,
             success: function (data, textStatus) {
-                alert(res);
+                console.log("success addFeature");
                 window.location.href = "/index.html";
             },
             error: function (xhr, textStatus, errorThrown) {
-                alert(res);
+                console.log("error addFeature");
             }
         });
         //loadFromDB();
@@ -100,18 +100,18 @@ function loadFromDB() {
                           setUserCookie();                          // from sessionFunctionality
                           window.location.href = "/home.html";
                       }else{
-                          alert(res);
+                          console.log("error");
                       }
                 }else{
-                    alert(res);
+                    console.log("error");
                 }
             }
             }
-            
+
           }
         },
         error: function (xhr, textStatus, errorThrown) {
-            alert(res);
+            console.log("error");
         }
     });
 };
@@ -148,7 +148,7 @@ function deleteUser() {
 };
 
 /**
- * @desc Function to save user data in json 
+ * @desc Function to save user data in json
  * @return Ajax Please fill out all the input fields.
  */
 function editUser(){
