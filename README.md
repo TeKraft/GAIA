@@ -37,6 +37,11 @@ To run GAIA you have to clone or download this repository. Feel free to do so, i
 Make sure that you have [npm][npm] installed.
 GAIA works with [mongodb][MongoDB] so be sure to have it installed as well.
 
+#### Important facts!
+Before you start, make sure to check the "config.js" in the /app/ - folder. <br />
+It's possible to choose between "localhost" and "server" settings.
+
+
 We recommend 2 terminals.
 
 Lets start mongoDB!
