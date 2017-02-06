@@ -1,9 +1,17 @@
+/**
+ * @desc Function for progress-bar
+ */
+
+
 $('.upload-btn').on('click', function () {
     $('#upload-input').click();
     $('.progress-bar').text('0%');
     $('.progress-bar').width('0%');
 });
-
+/**
+ * @desc Function for uploud input
+ * @return AJAX success or error
+ */
 $('#upload-input').on('change', function () {
 
     var files = $(this).get(0).files;
