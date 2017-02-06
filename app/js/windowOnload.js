@@ -61,7 +61,6 @@ function downloadZipAsReader() {
         type: 'GET',
         url: url,
         async: false,
-        timeout: 5000,
         success: function (content, textStatus) {
             thisProject = content[0].name; //project name of current project
         },
