@@ -8,8 +8,13 @@ var noUsers;
 var loginUser;
 var curProject;
 
+
 /**
- * saves a JSON object to the Database. The Object is a new User.
+ * @desc Function for saving a JSON object to the Database. 
+ *      The Object is a new User.
+ *      The password is getting hashed.
+ *      equal control password with config password 
+ * @return a hash password; success or error
  */
 function saveRegister() {
   // creates a new User from the input fields (userManagementfunctionality)
@@ -37,7 +42,7 @@ function saveRegister() {
         return hash;
     };
 
-    //hier statt name email denke ich
+    
     if (name != undefined && content != null &&  password==confirmPassword) {
         var url = localhost + '/addFeature?name=' + email;
         // perform post ajax
@@ -47,11 +52,11 @@ function saveRegister() {
             url: url,
             timeout: 5000,
             success: function (data, textStatus) {
-                console.log("success");
+                alert(res);
                 window.location.href = "/index.html";
             },
             error: function (xhr, textStatus, errorThrown) {
-                console.log("failed to save to db");
+                alert(res);
             }
         });
         //loadFromDB();
@@ -61,9 +66,12 @@ function saveRegister() {
   }
 };
 
+
+
 /**
- * checks if the user that wants to login is is saved in the database and if the password is correct.
- * if the user entered the correct email and password the home.html is loaded.
+ * @desc Function to checks if the user that wants to login is is saved in the database and if the password is correct.
+ *      if the user entered the correct email and password the home.html is loaded.
+ * @return Ajax success or error
  */
 function loadFromDB() {
     var url = localhost + '/getFeatures';
@@ -89,25 +97,30 @@ function loadFromDB() {
                           console.log("access");
                           loginUser = JSON.stringify(content[i]);
                           console.log(loginUser);
-                          setUserCookie();                          // aus sessionFunctionality
+                          setUserCookie();                          // from sessionFunctionality
                           window.location.href = "/home.html";
                       }else{
-                          console.log("Wrong password!");
+                          alert(res);
                       }
                 }else{
-                    console.log("user not register");
+                    alert(res);
                 }
             }
             }
-            //zum schluss soll der user auf die home seite geschickt werden.
+            
           }
         },
         error: function (xhr, textStatus, errorThrown) {
-            console.log("no success");
+            alert(res);
         }
     });
 };
 
+
+/**
+ * @desc Function to delete user
+ * @return success or error
+ */
 function deleteUser() {
     var userArr = document.cookie.split("=");
     var url = localhost + '/deleteFeature?name=' + JSON.parse(userArr[1]).name;
@@ -134,6 +147,10 @@ function deleteUser() {
 	});
 };
 
+/**
+ * @desc Function to save user data in json 
+ * @return Ajax Please fill out all the input fields.
+ */
 function editUser(){
   var firstname = document.getElementById("firstName").value;
   var lastname = document.getElementById("lastName").value;
