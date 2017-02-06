@@ -33,13 +33,13 @@ And of course GAIA itself is open source with a [public repository][Git] on GitH
 
 ### Installation
 
-To run GAIA you have to clone or download this repository. Feels free to do so, it's free!! 
+To run GAIA you have to clone or download this repository. Feel free to do so, it's free!! 
 Make sure that you have [npm][npm] installed.
 GAIA works with [mongodb][MongoDB]. So be sure to have it installed as well.
 
 We recommend 2 terminals.
 
-Start mongodb like this:
+Lets start mongoDB!
 First terminal:
 ```sh
 $ mongod --dbpath /*PATH*/ #*PATH* is where you want to save all the contents
