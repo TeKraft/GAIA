@@ -2,13 +2,14 @@
 var tempProject;
 var curCreator;
 var curProjectName;
-
 var editProject;
-
 var creatorOfProject;
-/*
- * every time a window is loaded this checks what to do.
- */
+
+
+/**
+  * @desc Function for executing a selected Script
+  *       Every window that is loaded loads content from the cookie and some from the MongoDB
+*/
 window.onload = function () {
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
@@ -100,7 +101,6 @@ window.onload = function () {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("profilEditProfilSymb").textContent = userJSON.data.Firstname;
-                //console.log(userArray);
                 document.getElementById("projectNameEdit").textContent = document.getElementById("projectNameEdit").textContent + " " + userArray[3];
                 curProjectName = userArray[3];
                 displayCollaborators();
@@ -121,8 +121,6 @@ window.onload = function () {
             }
         }
     };
-
-
 
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
@@ -193,6 +191,9 @@ window.onload = function () {
 
 
 
+/**
+  * @desc Displays the Creator in the Information part of the work.html
+*/
 function displayCreatorForInformation() {
     var url = localhost + '/getFeatures';
     var creator;
@@ -214,7 +215,6 @@ function displayCreatorForInformation() {
                         creatorOfProject=content[i].data.Creator;
                         break;
                     } else {
-                        //console.log("not this one");
                     }
                 }
             }
@@ -226,7 +226,6 @@ function displayCreatorForInformation() {
 };
 
 
-// ich glaube er wuerde wenn zwei projekte gleich heissen aber verschiedene creators haben immer nur das erste auswaehlen
 function displayCreator() {
     var url = localhost + '/getFeatures';
     var creator;
@@ -248,7 +247,6 @@ function displayCreator() {
                         curCreator = content[i].data.Creator;
                         break;
                     } else {
-                        //console.log("not this one");
                     }
                 }
             }
@@ -260,6 +258,9 @@ function displayCreator() {
 };
 
 
+/**
+  * @desc Displays all Collaborators of the project in the Information part of the work.html
+*/
 function displayCollaboratorsForInformation() {
     var url = localhost + '/getFeatures';
     var colabs;
@@ -291,18 +292,12 @@ function displayCollaboratorsForInformation() {
                             var neu3 = neu2.replace("punkt",".");
                             var thisCollaborators = neu3.replace("unter","_"); 
 
-                            
-                            
-                            
-                            
-                            
                             editedCollab = editedCollab + thisCollaborators + "<br>";
                             
                         }
                         document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + editedCollab;
                         break;
                     } else {
-                        //console.log("not this one");
                     }
                 }
             }
@@ -345,7 +340,6 @@ function displayCollaborators() {
 
                         break;
                     } else {
-                        //console.log("not this one");
                     }
 
                 }
@@ -362,22 +356,16 @@ function displayCollaborators() {
 };
 
 
-/*
-*   erstellt die Buttons fuer die Collaborators
-
-
-WENN AM ANFAN NOCH KEINER ERSTELLT WURDE ERSTELLT ER BEIM NEUEN COLLAB EINEN LEEREN KNOPF
+/**
+  * @desc Displays buttons for the Collaborators in the settings.html
 */
 function displayButtons(input) {
     var temp = input.split(",");
     var tempString = "";
-    console.log(temp);
 
     if (temp != ""){
-        //console.log(temp[1] +  " das ist einer");
         for (var i = 0; i < temp.length; i++) {
             if(temp[i] == ""){
-              //  console.log("ein falscher");
             }else{
                 var neu = temp[i].replace("atzeichen","@");
                 var neu1 = neu.replace("punkt",".");
@@ -385,22 +373,9 @@ function displayButtons(input) {
                 var neu4 = neu2.replace("punkt",".");
                 var neu3 = neu2.replace("unter","_");
                 tempString = tempString +
-                //"<div class='dropdown'>" +
                 "<br>" +
                 "<button id= '" + temp[i] + "' type='button' class='btn btn-info disabled' onclick=''>" + neu3 + "</button>" +
-                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")' class= 'btn btn-danger'>" + "delete" + "</button>"
-
-                //"<div id='myDropdown' class='dropdown-content'>" +
-                //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' href='mailto:t.kraf03@gmail.com' onclick=''>" + "sendMessage " + "</button>" +
-                //"<button id= '" + temp[i] + "' type='button' class='btn btn-CollaboratorButton' onclick='deleteCollaborator(this.id)'>" + "delete " + "</button>" +
-                //"</div>" +
-                //"</div>" +
-                ;
-                console.log(temp[i]);
-                console.log(neu)
-                console.log(neu3)
-                //console.log(tempString);
-                //tempString = null;
+                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")' class= 'btn btn-danger'>" + "delete" + "</button>";
             }
         }
     }
@@ -415,14 +390,12 @@ function displayButtons(input) {
 
 
 
-// funktioniert nicht bei emailadressen sondern nur bei buchstaben
+/**
+  * @desc deletes the Collaborator
+*/
 function deleteCollaborator(name) {
 
     var deleteCollab = name[0].id;
-
-    console.log(curProjectName + curCreator);
-
-
 
      var url = localhost + '/getFeatures';
 
@@ -441,12 +414,10 @@ function deleteCollaborator(name) {
                     editProject = content[i];
                     var newCollabs = content[i].data.Colaborators;
                     if(newCollabs.includes(deleteCollab)){
-                        console.log(deleteCollab);
                         newCollabs = newCollabs.replace(deleteCollab,'');
                         var newProject = content[i];
                         newProject.data.Colaborators = newCollabs.replace(',,',',');
-                        console.log(newProject);
-
+                        
                     // ajax Post
 	                  $.ajax({
 		              url: localhost + '/updateFeature?name=' + curProjectName,
@@ -460,6 +431,7 @@ function deleteCollaborator(name) {
 
 		              },
 		              error: function(textStatus, errorThrown){
+                          allert(errorThrown);
 			             console.log(errorThrown);
 		              }
 	                   });
@@ -469,7 +441,6 @@ function deleteCollaborator(name) {
                     }
 
                 }else{
-                    console.log("gibts nicht")
                 }
             }
 
@@ -480,74 +451,21 @@ function deleteCollaborator(name) {
         }
     });
 
-
-
-
 }
 
 
-
-
-
-
-/*
- * sets the cookie to the logged in user
- */
+/**
+  * @desc Sets the Cookie to the User that logged in
+*/
 function setUserCookie() {
     var userLogin = loginUser;
-    console.log(userLogin);
     document.cookie = "User=" + userLogin;
 }
 
-/*
- * sets the cookie to "" and loads the login&regitry.html
- */
+/**
+  * @desc Deletes the Cookie
+*/
 function logout() {
     document.cookie = "";
     window.location.href = "index.html";
-    console.log(document.cookie);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//kann glaub ich weg
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
-//kann glaub ich weg
-function openDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
 }

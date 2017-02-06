@@ -16,13 +16,16 @@ $(document).ready(function(){
 
 
 
-// speichert projekt in der datenbank
+/**
+  * @desc Saves a Project into the MongoDB and creates a new Folder in the projects Folder
+  * @return AJAX success or error
+*/
 function saveProject() {
     projectName=document.getElementById('PrjName').value;
     loadProject();
     
     if (document.getElementById("PrjName").value == "") {
-        console.log("value empty");
+        alert("enter name");
     }else{
         
         var projectTitle = document.getElementById("PrjName").value;
@@ -33,7 +36,6 @@ function saveProject() {
 
         if(existingProject != undefined &&existingProject.name === projectTitle){
             alert("Projekt already exists");
-            console.log(existingProject);
             return;
         }else{
             // addFolder(projectTitle);
@@ -45,7 +47,6 @@ function saveProject() {
                 url: url,
                 timeout: 5000,
                 success: function (data, textStatus) {
-                    // console.log(data);
                     console.log("success");
                     // window.location.href = "/home.html";
                 },
@@ -54,7 +55,6 @@ function saveProject() {
                 }
             });
             var content = JSON.parse(newProject);
-            console.log(newProject);
             if (projectName != undefined && content != null) {
                 var url = localhost + '/addFeature?name=' + projectName;
                 // perform post ajax
@@ -64,7 +64,6 @@ function saveProject() {
                     url: url,
                     timeout: 5000,
                     success: function (data, textStatus) {
-                        console.log(data);
                         console.log("success");
                         window.location.href = "/home.html";
                     },
@@ -73,7 +72,7 @@ function saveProject() {
                     }
                 });
             } else {
-                console.log("fehler save to sb undefined oder null");
+                console.log("undefined or null");
             }
 
         }
@@ -81,12 +80,15 @@ function saveProject() {
     
 };
 
+
+/**
+  * @desc Creates a new Project JSON for the MongoDB
+*/
 function loadProject(){
     name = document.getElementById(PrjName);
     collaborators[0] = document.getElementById('collabs').value;
     var collab=document.getElementsByClassName('addInput');
-    console.log(collab);
-    
+
     
     collaborators[0]
     
@@ -95,12 +97,7 @@ function loadProject(){
     editedCollabe1 = editedCollabe.replace('-','minus');
     var editedCollab3 = editedCollabe1.replace('_','unter');
     var editedCollab2 = editedCollab3.replace('.','punkt');
-    
-    
-    
-    
-    
-    
+
     
     newProject = '{'
        +'"Creator":' +'"' + creator + '"' +', '
@@ -110,6 +107,7 @@ function loadProject(){
        +'"Ergebnis":' +'"'  + '"'
        +'}';
 }
+
 
 function loadAllProjects(){
     var url = localhost + '/getFeatures';
@@ -134,12 +132,6 @@ function loadAllProjects(){
                         var editedCollab2 = editedCollab3.replace('.','punkt');
                     
                     
-                    
-                    console.log(editedCollab2);
-                    
-                    
-                    
-                    
                     var allCollabs=content[i].data.Colaborators.includes(editedCollab2);    //userJSON.name
                     if(content[i].data.Creator == creator || allCollabs){
                         userProjects[projectNumber] = content[i];
@@ -150,7 +142,6 @@ function loadAllProjects(){
             }
              if(userProjects.length > 0){
                  createProjectTable();
-                 //document.getElementById("usersProjects").textContent = projectTable;
             }else{
                  return "no Projects";
              }
@@ -162,6 +153,10 @@ function loadAllProjects(){
     });
 }
 
+
+/**
+  * @desc creates a table with all projects the User has access to
+*/
 function createProjectTable(){
     var table = document.getElementById("myTable");
     var projectsOfUser= new Array;
@@ -173,22 +168,23 @@ function createProjectTable(){
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
             var testname=userProjects[i].name;
-            console.log(testname);
             cell1.innerHTML = userProjects[i].name;
             cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='editProject(this.id)' type='button' class='btn btn-info'>work</button>";
             cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>" + 
                               "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-danger' onclick='deleteProject(this.id)'>delete</button>";
              projectsOfUser[j]=userProjects[i].name;
             j++;
-             console.log(projectsOfUser);
         }
     }
 }
 
+
+/**
+  * @desc Allows the User to edit the Project settings
+*/
 function loadProjectEdit(id){
     var aktuellesProject;
     aktuellesProject=id;
-    console.log(id);
     if(!isEditing()){
         document.cookie = document.cookie + "=CurrentProject=" + aktuellesProject+ "=";
         window.location.href = "projectedit.html";
@@ -197,12 +193,13 @@ function loadProjectEdit(id){
         temp[3] = aktuellesProject;
         var tempCookie = "" + temp[0]+ "=" + temp[1] + "=" + temp[2] + "=" + temp[3];
         document.cookie = tempCookie;
-        console.log(document.cookie);
         window.location.href = "projectedit.html";
     }
 }
 
-// leasst den user das projekt in der work.html bearbeiten
+/**
+  * @desc Allows the user to work with the project
+*/
 function editProject(id ){
     //work cookie
     var aktuellesProject;
@@ -210,7 +207,6 @@ function editProject(id ){
     // mit dem benutzer der eingeloggt ist und dem projektnamen wird das projekt identifiziert
     // ein benutzer kann also nicht mehrere projekte mit selben namen haben.
     aktuellesProject=id;
-    console.log(aktuellesProject);
     // erst checken ob schon ein projekt ausgewaehlt ist
     if(!isEditing()){
         document.cookie = document.cookie + "=CurrentProject=" + aktuellesProject+ "=";
@@ -220,11 +216,13 @@ function editProject(id ){
         temp[3] = aktuellesProject;
         var tempCookie = "" + temp[0]+ "=" + temp[1] + "=" + temp[2] + "=" + temp[3];
         document.cookie = tempCookie;
-        console.log(document.cookie);
         window.location.href = "work.html";
     }
 }
 
+/**
+  * @desc checks if the User is currently editing a project
+*/
 function isEditing(){
     var cookieString=document.cookie.split("=");
     if(cookieString.length>=4){
@@ -234,6 +232,11 @@ function isEditing(){
     }
 }
 
+
+/**
+  * @desc Deletes the chosen project
+  * @return AJAX success or error
+*/
 function deleteProject(id) {
     var tempCookie=document.cookie.split("=");
     if (id == "") {
@@ -249,8 +252,6 @@ function deleteProject(id) {
             alert("you must be the creator");
             return;
         }else{
-
-        // asks the user if he is sure he wants to delete the project
         if (confirm("Are you sure?") == true) {
 
         } else {
@@ -258,7 +259,6 @@ function deleteProject(id) {
         }
 
         var folderTitle = id;
-        console.log("deleteProjectFolder("+id+")");
 
         var url = localhost + '/deleteProjectFolder?name=' + id;
         // perform post ajax
@@ -268,7 +268,6 @@ function deleteProject(id) {
             url: url,
             timeout: 5000,
             success: function (data, textStatus) {
-                // console.log(data);
                 console.log("delete Folder success");
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -286,13 +285,11 @@ function deleteProject(id) {
                 var aktuellesProject;
                 aktuellesProject=id;
                 if(!isEditing()){
-                    console.log("notediting");
                     }else{
                         var temp=document.cookie.split("=");
                         temp[3] = aktuellesProject;
                         var tempCookie = "" + temp[0]+ "=" + temp[1];
                             document.cookie = tempCookie;
-                            console.log(document.cookie);
                         }
                 window.location.href = "/home.html";
             },

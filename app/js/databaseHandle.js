@@ -1,5 +1,13 @@
 "use strict;"
 
+
+
+
+
+/**
+  * @desc Returns the content of a project with a given name and creator
+  * @return AJAX success or error
+*/
 var getProjectbyName = function(name, creator) {
     var url = localhost + '/getFeatures';
     $.ajax({
@@ -29,12 +37,15 @@ var getProjectbyName = function(name, creator) {
 
 var loadedProject;
 var getProject = function(string){
-    //console.log(string);
     loadedProject = string;
 }
 
 
 
+/**
+  * @desc Saves a Feature to the MongoDB
+  * @return AJAX success or error
+*/
 var saveData = function(name,data){
 
     var url = localhost + '/updateFeature?name=' + name;
@@ -75,6 +86,11 @@ var updateProject = function(name,creator,data){
 }
 
 
+
+/**
+  * @desc Updates a Feature in the MongoDB
+  * @return AJAX success or error
+*/
 var updateDB = function(){
     var temp = document.cookie.split("=");
     var user = JSON.parse(temp[1]);
