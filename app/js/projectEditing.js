@@ -87,7 +87,7 @@ var createResultNames = function (name) {
 
     for (var i in resultArray) {
         var ending = resultArray[i];
-        if (ending.includes('.png') || ending.includes('.jpg') || ending.includes('.txt')) {
+        if (ending.includes('.png') || ending.includes('.jpg') || ending.includes('.txt') || ending.includes('.tif') || ending.includes('.csv')) {
             div = div + ("<li id='" + resultArray[i] + ",' data-jstree='{" + '"type"' + ":" + '"leaf"' + "}'> " + resultArray[i] + "</li>");
         } else {
             if (!ending.includes('.')) {
