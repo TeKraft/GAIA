@@ -19,6 +19,7 @@ GAIA was developed and works purely on open source software and projects :
 * [MongoDB] - Easy to use database
 * [jQuery] - duh!
 * [Atom] - Hackable texteditor
++ [npm] - Package manager for javascript
 
 
 And of course GAIA itself is open source with a [public repository][Git] on GitHub.
@@ -32,17 +33,30 @@ And of course GAIA itself is open source with a [public repository][Git] on GitH
 
 ### Installation
 
-To run GAIA, you have to download this repository. You also need the node pack manager (npm).
-Navigat to the server folder and install the dependencies via npm. Before starting the server make sure that mongoDB is running
+To run GAIA you have to clone or download this repository. Feels free to do so, it's free!! 
+Make sure that you have [npm][npm] installed.
+GAIA works with [mongodb][MongoDB]. So be sure to have it installed as well.
 
+We recommend 2 terminals.
+
+Start mongodb like this:
+First terminal:
 ```sh
-$ mongod --dbpath /.../ #Path where you want to save everything
-$ cd /.../GAIA/server/
-$ npm install 
+$ mongod --dbpath /*PATH*/ #*PATH* is where you want to save all the contents
+```
+You just started mongodb with a path where it dumps all your data.
+
+Now we need to install the packages needed to run GAIA. For that we need [npm][npm]!
+Second terminal:
+```sh
+$ cd /../../GAIA/server/
+$ npm install
+```
+Congratz! You are almost done. All you need to do is to start the server.js via npm and you are good to go!
+```sh
 $ npm start
 ```
-Server and db should be running now and you should be able to visit the URL given in the server.js file .
-
+You can visit http://localhost:3000 and see the beautiful login screen of GAIA!
 
 **Free Software, Hell Yeah!**
 
@@ -66,3 +80,4 @@ GAIA is not responsible for any safety matters and any possible damage :)
    [jQuery]: <http://jquery.com>
    [Atom]:  <https://atom.io>
    [git]: <https://github.com/vgorte/GAIA>
+   [npm]: <https://www.npmjs.com>
