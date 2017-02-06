@@ -12,10 +12,6 @@ $(document).ready(function(){
     $('.btn-create').on('click',saveProject);
 });
 
-
-
-
-
 /**
   * @desc Saves a Project into the MongoDB and creates a new Folder in the projects Folder
   * @return AJAX success or error
@@ -23,14 +19,14 @@ $(document).ready(function(){
 function saveProject() {
     projectName=document.getElementById('PrjName').value;
     loadProject();
-    
+
     if (document.getElementById("PrjName").value == "") {
         alert("enter name");
     }else{
-        
+
         var projectTitle = document.getElementById("PrjName").value;
-        // hier Fragen ob es das Projekt schon gibt    
-        getProjectByName(projectTitle);  
+        // hier Fragen ob es das Projekt schon gibt
+        getProjectByName(projectTitle);
         var existingProject = tempProject;
 
 
@@ -77,7 +73,7 @@ function saveProject() {
 
         }
     }
-    
+
 };
 
 
@@ -89,16 +85,16 @@ function loadProject(){
     collaborators[0] = document.getElementById('collabs').value;
     var collab=document.getElementsByClassName('addInput');
 
-    
+
     collaborators[0]
-    
+
     var editedCollabe = collaborators[0].replace("@","atzeichen");
     var editedCollabe1 = editedCollabe.replace(".","punkt");
     editedCollabe1 = editedCollabe.replace('-','minus');
     var editedCollab3 = editedCollabe1.replace('_','unter');
     var editedCollab2 = editedCollab3.replace('.','punkt');
 
-    
+
     newProject = '{'
        +'"Creator":' +'"' + creator + '"' +', '
        +'"Colaborators":' +'"' +editedCollab2 + '"' +', '
@@ -123,15 +119,11 @@ function loadAllProjects(){
                     var userArray = document.cookie.split("=");
                     var userJSON = JSON.parse(userArray[1]);
                     //die ueberpruefung auf mitarbeiter stimmt noch nicht ganz
-                    
-                    
                         var editedCollabe = userJSON.name.replace("@","atzeichen");
                         var editedCollabe1 = editedCollabe.replace(".","punkt");
                         editedCollabe1 = editedCollabe.replace('-','minus');
                         var editedCollab3 = editedCollabe1.replace('_','unter');
                         var editedCollab2 = editedCollab3.replace('.','punkt');
-                    
-                    
                     var allCollabs=content[i].data.Colaborators.includes(editedCollab2);    //userJSON.name
                     if(content[i].data.Creator == creator || allCollabs){
                         userProjects[projectNumber] = content[i];
@@ -170,7 +162,7 @@ function createProjectTable(){
             var testname=userProjects[i].name;
             cell1.innerHTML = userProjects[i].name;
             cell2.innerHTML = "<button id= '" + userProjects[i].name  +"' onclick='editProject(this.id)' type='button' class='btn btn-info'>work</button>";
-            cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>" + 
+            cell3.innerHTML = "<button id= '" + userProjects[i].name +"' onclick='loadProjectEdit(this.id)' type='button' class='btn btn-editPrj'>settings</button>" +
                               "<button id= '" + userProjects[i].name + "' type='button' class='btn btn-danger' onclick='deleteProject(this.id)'>delete</button>";
              projectsOfUser[j]=userProjects[i].name;
             j++;
@@ -242,9 +234,9 @@ function deleteProject(id) {
     if (id == "") {
         console.log("value empty");
     }else {
-        
-        
-        getProjectByName(id);  
+
+
+        getProjectByName(id);
         var existingProject = tempProject;
         var user = JSON.parse(tempCookie[1]);
 
@@ -299,5 +291,4 @@ function deleteProject(id) {
         });
         }
     }
-}; 
-
+};
