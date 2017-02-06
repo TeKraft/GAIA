@@ -6,7 +6,7 @@
 window.onload = function () {
     showMapToRead();
     var thisURL = window.location.href;
-    var thisID = thisURL.substring(36, thisURL.length);
+    var thisID = thisURL.substring(sliceStringUnique, thisURL.length); //TODO: if localhost: var thisID = thisURL.substring(36, thisURL.length);
     getUniqueFeature(thisID);
 };
 
@@ -22,7 +22,7 @@ function getUniqueFeature(id) {
     $.ajax({
         type: 'GET',
         url: url,
-        timeout: 5000,
+        async: false,
         success: function (content, textStatus) {
             var thisProject = content[0].name;
             var thisCreator = content[0].data.Creator;
@@ -36,7 +36,7 @@ function getUniqueFeature(id) {
             document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + thisCollaborators;
 
             // create tree view
-            makeTreeComponents(thisProject);
+            makeTreeComponentsRead(thisProject);
             createTree();
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -53,7 +53,7 @@ function getUniqueFeature(id) {
  */
 function downloadZipAsReader() {
     var thisURL = window.location.href;
-    var thisID = thisURL.substring(36, thisURL.length);
+    var thisID = thisURL.substring(sliceStringUnique, thisURL.length);
     var thisProject;
     var url = localhost + '/getFeatureById?id=' + thisID;
     // ajax.GET to get project name by id

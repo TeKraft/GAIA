@@ -59,7 +59,83 @@ function makeTreeComponents(name) {
         "</ul>" +
         "</li>" +
         "</ul>"
-}
+};
+
+// hier muss der baum richtig erstellt werden
+function makeTreeComponentsRead(name) {
+    var tempCookie = document.cookie.split("=");
+    var project = tempCookie[5];
+
+    getProjectbyName(name);
+
+    var uploads = createUploadNames(name);
+    //readProjectFolderbyName(project + "/Scripts");  "wurstbrot/Scripts"
+
+    var curProject;
+    curProject = getProjectbyName(name);
+    var scripts = createScriptNames(name);
+    var uploads = createUploadNames(name);
+    var results = createResultNamesRead(name);
+    //var results = resultsFirst.replace("," , "");
+
+    document.getElementById("jstree").innerHTML = "" +
+        "<ul id='treeList'>" +
+        "<li id='rootList' >" + name +
+        "<ul id='childList'>" +
+        "<li id='scripts_node_1'>Scripts" +
+
+        "<ul id='childList'>" +
+        scripts +
+        "</ul>" +
+        "</li>" +
+
+        "<li id='uploads_node_1'>Uploads" +
+        "<ul id='childList'>" +
+        uploads + //images +
+        "</ul>" +
+        "</li>" +
+
+        "<li id='results'>Results" +
+        "<ul id='childList'>" +
+        results + //images +
+        "</ul>" +
+        "</li>" +
+        "</ul>" +
+        "</li>" +
+        "</ul>"
+};
+
+/**
+ * @desc Creates the treeview childList for the Results
+ */
+var createResultNamesRead = function (name) {
+    readProjectFolderbyName(name + "/Results");
+    var resultArray = array_unique(temp);
+    var div = "";
+
+    for (var i in resultArray) {
+        var ending = resultArray[i];
+        if (ending.includes('.png') || ending.includes('.jpg') || ending.includes('.txt') || ending.includes('.tif') || ending.includes('.csv')) {
+            div = div + ("<li id='" + resultArray[i] + ",' data-jstree='{" + '"type"' + ":" + '"leaf"' + "}'> " + resultArray[i] + "</li>");
+        } else {
+            if (!ending.includes('.')) {
+                // mit jeden ending subordner erstellen;
+                var subFolders = createSubFolders(name + "/Results/" + ending);
+                if (subFolders != undefined && subFolders != "") {
+                    // hier muss jetzt alles erstellt werden alle unter ordner und unter unter ordner und dateien
+                    div = div +
+                        "<li id=" + ending + ">" +
+                        ending +
+                        subFolders[0] +
+                        "</li>";
+                } else {
+                    div = div + ("<li id='" + resultArray[i] + "'> " + resultArray[i] + "</li>");
+                }
+            }
+        }
+    }
+    return div;
+};
 
 
 /**

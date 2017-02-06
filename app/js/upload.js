@@ -15,7 +15,6 @@ $('.upload-btn').on('click', function () {
 $('#upload-input').on('change', function () {
 
     var files = $(this).get(0).files;
-
     if (files.length > 0) {
         // create a FormData object which will be sent as the data payload in the
         // AJAX request
@@ -28,10 +27,8 @@ $('#upload-input').on('change', function () {
             // add the files to formData object for the data payload
             formData.append('uploads[]', file, file.name);
         }
-
         contentadd = null;
         var temp = document.cookie.split("=");
-
         var aktuellesProject = temp[3];
 
         var url = localhost + '/uploadUploads?name=' + aktuellesProject + "/Uploads";
@@ -63,15 +60,10 @@ $('#upload-input').on('change', function () {
                         if (percentComplete === 100) {
                             $('.progress-bar').html('Done');
                         }
-
                     }
-
                 }, false);
-
                 return xhr;
             }
         });
-
     }
-
 });

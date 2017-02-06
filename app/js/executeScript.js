@@ -51,7 +51,6 @@ var deleteTempScript = function () {
         type: 'POST',
         url: url,
         data: data,
-        //inhalt:data,
         timeout: 5000,
         success: function (data, textStatus) {},
         error: function (xhr, textStatus, errorThrown) {
