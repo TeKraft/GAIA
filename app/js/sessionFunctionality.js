@@ -7,9 +7,9 @@ var creatorOfProject;
 
 
 /**
-  * @desc Function for executing a selected Script
-  *       Every window that is loaded loads content from the cookie and some from the MongoDB
-*/
+ * @desc Function for executing a selected Script
+ *       Every window that is loaded loads content from the cookie and some from the MongoDB
+ */
 window.onload = function () {
     var currentProject = document.cookie.split("=");
     if (document.cookie.length != 0) {
@@ -18,11 +18,11 @@ window.onload = function () {
         switch (path) {
 
         case "/home.html":
-            if(document.cookie.includes(";")){
+            if (document.cookie.includes(";")) {
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
-            }else{
+            } else {
 
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
@@ -37,11 +37,11 @@ window.onload = function () {
 
         case "/work.html":
             showMap();
-            if(document.cookie.includes(";")){
+            if (document.cookie.includes(";")) {
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
-            }else{
+            } else {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("workProfilSymb").textContent = userJSON.data.Firstname;
@@ -51,28 +51,28 @@ window.onload = function () {
 
                 makeTreeComponents(currentProject[3]);
                 createTree();
-                if(aktScript == undefined){
+                if (aktScript == undefined) {
                     document.getElementById("scriptIn").style.display = "none";
                 }
                 break;
             }
         case "/profiledit.html":
-            if(document.cookie.includes(";")){
+            if (document.cookie.includes(";")) {
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
-            }else{
+            } else {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("editProfilSymb").textContent = userJSON.data.Firstname;
                 break;
             }
         case "/impressum.html":
-            if(document.cookie.includes(";")){
+            if (document.cookie.includes(";")) {
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
-            }else{
+            } else {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("imprProfilSymb").textContent = userJSON.data.Firstname;
@@ -80,11 +80,11 @@ window.onload = function () {
             }
 
         case "/profil.html":
-            if(document.cookie.includes(";")){
+            if (document.cookie.includes(";")) {
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
-            }else{
+            } else {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("profilProfilSymb").textContent = userJSON.data.Firstname;
@@ -93,11 +93,11 @@ window.onload = function () {
 
 
         case "/projectedit.html":
-            if(document.cookie.includes(";")){
+            if (document.cookie.includes(";")) {
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
-            }else{
+            } else {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("profilEditProfilSymb").textContent = userJSON.data.Firstname;
@@ -109,11 +109,11 @@ window.onload = function () {
             }
 
         case "/gaia.html":
-            if(document.cookie.includes(";")){
+            if (document.cookie.includes(";")) {
                 alert("nicht angemeldet");
                 window.location.href = "index.html";
                 break;
-            }else{
+            } else {
                 var userArray = document.cookie.split("=");
                 var userJSON = JSON.parse(userArray[1]);
                 document.getElementById("gaiaProfilSymb").textContent = userJSON.data.Firstname;
@@ -148,7 +148,7 @@ window.onload = function () {
             var res = str.replace("/", ".");
             document.getElementById("email").value = res;
 
-              break;
+            break;
         }
     }
 
@@ -181,7 +181,7 @@ window.onload = function () {
             var res = str.replace("/", ".");
             document.getElementById("email").value = res;
 
-              break;
+            break;
 
         }
     }
@@ -192,8 +192,8 @@ window.onload = function () {
 
 
 /**
-  * @desc Displays the Creator in the Information part of the work.html
-*/
+ * @desc Displays the Creator in the Information part of the work.html
+ */
 function displayCreatorForInformation() {
     var url = localhost + '/getFeatures';
     var creator;
@@ -212,10 +212,9 @@ function displayCreatorForInformation() {
                     if (content[i] != undefined && project == content[i].name) {
                         tempProject = content[i];
                         document.getElementById('CreatorInfo').innerHTML = "Creator: " + content[i].data.Creator;
-                        creatorOfProject=content[i].data.Creator;
+                        creatorOfProject = content[i].data.Creator;
                         break;
-                    } else {
-                    }
+                    } else {}
                 }
             }
         },
@@ -246,8 +245,7 @@ function displayCreator() {
                         document.getElementById('CreatorEdit').innerHTML = "Creator: " + content[i].data.Creator;
                         curCreator = content[i].data.Creator;
                         break;
-                    } else {
-                    }
+                    } else {}
                 }
             }
         },
@@ -259,8 +257,8 @@ function displayCreator() {
 
 
 /**
-  * @desc Displays all Collaborators of the project in the Information part of the work.html
-*/
+ * @desc Displays all Collaborators of the project in the Information part of the work.html
+ */
 function displayCollaboratorsForInformation() {
     var url = localhost + '/getFeatures';
     var colabs;
@@ -282,23 +280,22 @@ function displayCollaboratorsForInformation() {
 
                         tempProject = content[i].Colaborators;
                         var CollabArray = content[i].data.Colaborators.split(",");
-                        
+
                         var editedCollab = "<br>";
                         for (var i = 0; i < CollabArray.length; i++) {
 
-                            var neu = CollabArray[i].replace("atzeichen","@");
-                            var neu1 = neu.replace("punkt",".");
-                            var neu2 = neu1.replace("minus","-");
-                            var neu3 = neu2.replace("punkt",".");
-                            var thisCollaborators = neu3.replace("unter","_"); 
+                            var neu = CollabArray[i].replace("atzeichen", "@");
+                            var neu1 = neu.replace("punkt", ".");
+                            var neu2 = neu1.replace("minus", "-");
+                            var neu3 = neu2.replace("punkt", ".");
+                            var thisCollaborators = neu3.replace("unter", "_");
 
                             editedCollab = editedCollab + thisCollaborators + "<br>";
-                            
+
                         }
                         document.getElementById('CollaboratorInfo').innerHTML = "Collaborators: " + editedCollab;
                         break;
-                    } else {
-                    }
+                    } else {}
                 }
             }
         },
@@ -339,8 +336,7 @@ function displayCollaborators() {
                         //document.getElementById('projectCollabEdit').innerHTML = "Collaborators: " + displayButtons()content[i].data.Colaborators;
 
                         break;
-                    } else {
-                    }
+                    } else {}
 
                 }
             }
@@ -357,25 +353,24 @@ function displayCollaborators() {
 
 
 /**
-  * @desc Displays buttons for the Collaborators in the settings.html
-*/
+ * @desc Displays buttons for the Collaborators in the settings.html
+ */
 function displayButtons(input) {
     var temp = input.split(",");
     var tempString = "";
 
-    if (temp != ""){
+    if (temp != "") {
         for (var i = 0; i < temp.length; i++) {
-            if(temp[i] == ""){
-            }else{
-                var neu = temp[i].replace("atzeichen","@");
-                var neu1 = neu.replace("punkt",".");
-                var neu2 = neu1.replace("minus","-");
-                var neu4 = neu2.replace("punkt",".");
-                var neu3 = neu2.replace("unter","_");
+            if (temp[i] == "") {} else {
+                var neu = temp[i].replace("atzeichen", "@");
+                var neu1 = neu.replace("punkt", ".");
+                var neu2 = neu1.replace("minus", "-");
+                var neu4 = neu2.replace("punkt", ".");
+                var neu3 = neu2.replace("unter", "_");
                 tempString = tempString +
-                "<br>" +
-                "<button id= '" + temp[i] + "' type='button' class='btn btn-info disabled' onclick=''>" + neu3 + "</button>" +
-                "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator("+ temp[i] + ")' class= 'btn btn-danger'>" + "delete" + "</button>";
+                    "<br>" +
+                    "<button id= '" + temp[i] + "' type='button' class='btn btn-info disabled' onclick=''>" + neu3 + "</button>" +
+                    "<button id= '" + temp[i] + "' type='button'  onclick='deleteCollaborator(" + temp[i] + ")' class= 'btn btn-danger'>" + "delete" + "</button>";
             }
         }
     }
@@ -391,13 +386,13 @@ function displayButtons(input) {
 
 
 /**
-  * @desc deletes the Collaborator
-*/
+ * @desc deletes the Collaborator
+ */
 function deleteCollaborator(name) {
 
     var deleteCollab = name[0].id;
 
-     var url = localhost + '/getFeatures';
+    var url = localhost + '/getFeatures';
 
     $.ajax({
         type: 'GET',
@@ -407,41 +402,40 @@ function deleteCollaborator(name) {
         success: function (content, textStatus) {
             $('#tableDBContents').empty();
 
-            for(var i=0; i<= content.length;i++){
+            for (var i = 0; i <= content.length; i++) {
 
-                if(content[i] != undefined && content[i].data != undefined && content[i].name == curProjectName && content[i].data.Creator == curCreator){
+                if (content[i] != undefined && content[i].data != undefined && content[i].name == curProjectName && content[i].data.Creator == curCreator) {
 
                     editProject = content[i];
                     var newCollabs = content[i].data.Colaborators;
-                    if(newCollabs.includes(deleteCollab)){
-                        newCollabs = newCollabs.replace(deleteCollab,'');
+                    if (newCollabs.includes(deleteCollab)) {
+                        newCollabs = newCollabs.replace(deleteCollab, '');
                         var newProject = content[i];
-                        newProject.data.Colaborators = newCollabs.replace(',,',',');
-                        
-                    // ajax Post
-	                  $.ajax({
-		              url: localhost + '/updateFeature?name=' + curProjectName,
-		              //async: false,
-		              type: "POST",
-		              data: newProject.data,
+                        newProject.data.Colaborators = newCollabs.replace(',,', ',');
 
-		              success: function(xhr, textStatus, data){
-			             // do function loadFromDB() to refresh list, when save feature
-                            console.log("success");
+                        // ajax Post
+                        $.ajax({
+                            url: localhost + '/updateFeature?name=' + curProjectName,
+                            //async: false,
+                            type: "POST",
+                            data: newProject.data,
 
-		              },
-		              error: function(textStatus, errorThrown){
-                          allert(errorThrown);
-			             console.log(errorThrown);
-		              }
-	                   });
+                            success: function (xhr, textStatus, data) {
+                                // do function loadFromDB() to refresh list, when save feature
+                                console.log("success");
+
+                            },
+                            error: function (textStatus, errorThrown) {
+                                allert(errorThrown);
+                                console.log(errorThrown);
+                            }
+                        });
 
                         window.location.href = "projectedit.html";
 
                     }
 
-                }else{
-                }
+                } else {}
             }
 
             $('#tableDB').removeClass('hidden');
@@ -455,16 +449,16 @@ function deleteCollaborator(name) {
 
 
 /**
-  * @desc Sets the Cookie to the User that logged in
-*/
+ * @desc Sets the Cookie to the User that logged in
+ */
 function setUserCookie() {
     var userLogin = loginUser;
     document.cookie = "User=" + userLogin;
 }
 
 /**
-  * @desc Deletes the Cookie
-*/
+ * @desc Deletes the Cookie
+ */
 function logout() {
     document.cookie = "";
     window.location.href = "index.html";

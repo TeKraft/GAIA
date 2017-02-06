@@ -1,7 +1,7 @@
 /**
-  * @desc Function for making the backgroundimage in the index.html move to the side
-  *
-*/
+ * @desc Function for making the backgroundimage in the index.html move to the side
+ *
+ */
 (function ($) {
     var x = 0;
     var y = 0;
@@ -19,9 +19,8 @@
         } else if (y > -280) {
             body.css("backgroundPosition", x + 'px' + ' ' + y + 'px');
             y--;
-        }
-        else {
-          clearInterval(timer);
+        } else {
+            clearInterval(timer);
         }
     }, 50);
 })(jQuery);

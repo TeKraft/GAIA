@@ -1,41 +1,40 @@
-
 /* style first row */
+
 #treeView {
-	height: 400px;
-  overflow-y: auto;
+    height: 400px;
+    overflow-y: auto;
 }
 
 #functionsMap {
-	height: 390px;
+    height: 390px;
 }
 
 #leafletmap {
-	height: 450px;
+    height: 450px;
 }
 
-
-#scriptIn{
-    display:none;
+#scriptIn {
+    display: none;
 }
-
 
 
 /* style second row */
+
 #information {
-	height: 368px;
+    height: 368px;
 }
 
 #functionsR {
-	height: 368px;
+    height: 368px;
 }
 
 #Rscript {
-	height: 200px;
+    height: 200px;
 }
 
 .myPanel {
-	padding: 0px;
-	margin: -12px;
+    padding: 0px;
+    margin: -12px;
 }
 
 #uniqueLink {
@@ -43,56 +42,50 @@
 }
 
 textarea {
-   resize: none;
+    resize: none;
 }
-
-
 
 #deleteScripttBtn {
     height: 20%;
     width: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
 }
 
 #newScripttBtn {
     height: 20%;
     width: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
 }
 
 #saveProjectBtn {
     height: 20%;
     width: 100%;
-    border-radius: 10px ;
-  
+    border-radius: 10px;
 }
 
 #loadTMS {
     height: 20%;
     width: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
 }
 
 #executeScript {
     height: 20%;
     width: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
 }
 
-#uniqueLink{
-    top:14px;
+#uniqueLink {
+    top: 14px;
     right: 50px;
     position: relative;
 }
 
-
-#getUniqueLink{
-    top:10px;
+#getUniqueLink {
+    top: 10px;
     right: 50px;
     position: absolute;
 }
-
-
 
 
 /*.panel {
@@ -102,6 +95,8 @@ textarea {
     border-radius:10px;
     padding: 3px;
 }*/
+
+
 /*svg {
   cursor: pointer;
   position: absolute;
@@ -117,4 +112,3 @@ svg path {
   stroke-linecap: round;
   stroke-linejoin: round;
 }*/
-
