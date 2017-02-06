@@ -112,7 +112,7 @@ function downloadZip() {
       var myZipProjectName;
       var currentProject = document.cookie.split("=")[3];
       var url = localhost + '/zipMyShit';
-      //AJAX:POST Request with the name of the current project.
+      //ajax.POST to call the zip function on server
       $.ajax({
         type: 'POST',
         url: url,
