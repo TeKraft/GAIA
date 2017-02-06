@@ -74,7 +74,6 @@ function getCSV() {
       alert(res);
     },
     error: function (xhr, textStatus, errorThrown) {
-        console.log(res);
         alert(res);
     }
   });
@@ -89,10 +88,27 @@ function getCSV() {
   * @return AJAX success or error
 */
 function downloadZip() {
+  var thisProject;
+  var thisID = JSON.parse(document.cookie.split("=")[1])._id;
+
+  var url = localhost + '/getFeatureById?id=' + thisID;
+  $.ajax({
+      type: 'GET',
+      url: url,
+      async: false,
+      timeout: 5000,
+      success: function (content, textStatus) {
+        thisProject = content[0].name;
+      },
+      error: function (xhr, textStatus, errorThrown) {
+          console.log("no success");
+          return;
+      }
+  });
+
     //Confirmation of the download intent
     var r = confirm("Do you really want to download this project?");
     if (r == true) {
-      console.log("zipProject()");
       var myZipProjectName;
       var currentProject = document.cookie.split("=")[3];
       var url = localhost + '/zipMyShit';

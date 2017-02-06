@@ -164,8 +164,6 @@ app.post('/execScriptCallback', function (req, res) {
   //cwd changes the current working directory so the results dont spawn where the serverjs is
   //but rather where the results should be stored.
   childProcess.exec('Rscript ../Scripts/'+script+'',{cwd: '../app/projects/' + project + '/Results/'}, function (error, stdout, stderr) {
-    console.log("stdout == " + stdout);
-    console.log("stderr == " + stderr);
     if (error) {
       res.send(stderr);
       return console.error(error);
@@ -193,8 +191,6 @@ app.post('/execScriptCallback', function (req, res) {
     var filePath = '../app/scriptsR/tempData/' + thisScript; // path of tempScript
     var newfilePath = '../../../scriptsR/tempData/' + thisScript; // path for working directory
 
-    console.log(thisScript + "\n" + thisProject + "\n" + filePath + "\n" + thisScriptData);
-
     fs.writeFile(filePath, thisScriptData, function (err) {
     if (err) {throw err}
     else {
@@ -210,7 +206,6 @@ app.post('/execScriptCallback', function (req, res) {
         if (error) {
           res.send(error);
         }else {
-          console.log(stdout);
           res.send(""+stdout);
         }
       });
@@ -220,26 +215,20 @@ app.post('/execScriptCallback', function (req, res) {
 
   });
 
-
 /**
   * @desc Function to prepend data to a file
+  * @param path {String} path of the file to which is prepended
   * @return
   */
 var prependFile = require('prepend-file');
 function prependData(path) {
-//  var path = '../app/scriptsR/writeCSV.R';
-//  app.post('/prependMyFile', function(req, res) {
     var dataToPrepend = 'options(repos=c("CRAN" ="http://cran.uni-muenster.de"))\n\n install.packages("curl")\n install.packages("raster")\n install.packages("intervals")\n\ninstall.packages("devtools")\ndevtools::install_github("Paradigm4/SciDBR")\ndevtools::install_github("appelmar/scidbst", ref="dev")\ninstall.packages("gdalUtils") # requires GDAL with SciDB driver (see https://github.com/appelmar/scidb4gdal/tree/dev) on the system:\n\nSCIDB_HOST = "128.176.148.9"\nSCIDB_PORT = 30011 # TODO\nSCIDB_USER = "gaia" # TODO\nSCIDB_PW   =  "sNcquwM42RsQBtZqkpeB4HqK" # TODO\n\n# We do not want to pass connection details information in every single gdal_translate call und thus set it as environment variables\nSys.setenv(SCIDB4GDAL_HOST=paste("https://",SCIDB_HOST, sep=""),\nSCIDB4GDAL_PORT=SCIDB_PORT,\nSCIDB4GDAL_USER=SCIDB_USER,\nSCIDB4GDAL_PASSWD=SCIDB_PW)\n\n#correction of server proxy error!!!\nSys.setenv(http_proxy="")\nSys.setenv(https_proxy="")\nSys.setenv(HTTP_PROXY="")\nSys.setenv(HTTPS_PROXY="") \n\nlibrary(scidbst)\nscidbconnect(host=SCIDB_HOST,port = SCIDB_PORT,\nusername = SCIDB_USER,\npassword = SCIDB_PW,\nauth_type = "digest",\nprotocol = "https")\n\nscidbst.ls(extent=TRUE) # query available datasets\n\n# Insert your code here\n\n';
     prependFile(path, dataToPrepend, function (err) {
         if (err) {
             return console.error(err);
         }
-        // Success
-  //      console.log('The "data to prepend" was prepended to file!');
     });
- // })
 };
-
 
 /*
  * #############################################################################
@@ -261,7 +250,7 @@ app.get('/getsciDBdata', function (req, res) {
         res.send(stderr);
         return console.error(error);
       }else {
-        res.send("worked1");
+        res.send("Script is executed!");
       }
     })
 });
@@ -283,16 +272,14 @@ app.post('/addFolder*', function (req, res) {
     var dir = '../app/projects/' + projecttitle;
 
     if (fs.existsSync(dir)) {
-        console.log("Directory exists already. Please choose a different name!");
-        // TODO: what if error?
+        res.send("Directory exists already. Please choose a different name!");
     } else {
         fs.mkdir(dir, function (error) {
             if (error) {
                 return console.error(error);
-                // res.send(error);
             } else {
                 folderStructure(projecttitle);  // create also deeper folder structure for new created project
-                res.send('folder added: ' + projecttitle);
+                res.send('project added: ' + projecttitle);
             }
         })
     }
@@ -311,8 +298,6 @@ function folderStructure(foldertitle) {
     for (var i = 0; i < folderStructure.length; i++) {
         fs.mkdir('../app/projects/' + foldertitle + '/' + folderStructure[i], function (err) {
             // path exists unless there was an error
-            console.log("added folder: " + foldertitle + '/' + folderStructure[i]);
-            // TODO: if (err) {console.error(err)}
         })
     }
 };
@@ -352,7 +337,6 @@ app.post('/deleteProjectFolder*', function (req, res) {
     var dir = '../app/projects/' + projecttitle;
     deleteFolderRecursive(dir); //delete folder
     res.send("folder deleted: " + projecttitle);
-    // TODO: error??
 });
 
 /**
@@ -394,7 +378,7 @@ app.get('/readFile*', function(req, res) {
 
   fs.readFile(dir, 'utf8', function (err,data) {
     if (err) {
-      return console.log(err);
+      return console.error(err);
     }
       res.send(data);
   });
@@ -572,7 +556,6 @@ app.get('/uniqueLink*', function(req, res) {
  * zip folder ##################################################################
  * #############################################################################
  */
-
 /**
   * @desc AJAX.POST on server for creating zip
   *       zip projectfolder for download

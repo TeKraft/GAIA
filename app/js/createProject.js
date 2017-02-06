@@ -16,10 +16,10 @@ function createFolder() {
         url: url,
         timeout: 5000,
         success: function (data, textStatus) {
-            console.log("success");
+            alert(res);
         },
         error: function (xhr, textStatus, errorThrown) {
-            console.log("error by creating folder");
+            alert(res);
         }
     });
   }
