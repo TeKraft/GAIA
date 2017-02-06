@@ -255,7 +255,6 @@ function displayCreator() {
     });
 };
 
-
 /**
  * @desc Displays all Collaborators of the project in the Information part of the work.html
  */
@@ -316,39 +315,25 @@ function displayCollaborators() {
         url: url,
         timeout: 5000,
         success: function (content, textStatus) {
-            $('#tableDBContents').empty();
-
             for (var i = 0; i <= content.length; i++) {
 
                 if (content[i] != undefined && content[i].data != undefined && content[i].data.Colaborators != undefined) {
-
-
-
                     var tempCookie = document.cookie.split("=");
                     var project = tempCookie[3];
 
                     if (content[i] != undefined && project == content[i].name) {
                         // alle mitarbeiter werden als knopf dargestellt bei druecken kann man loeschen oder nachricht senden
-
-
                         tempProject = content[i];
                         displayButtons(content[i].data.Colaborators);
-                        //document.getElementById('projectCollabEdit').innerHTML = "Collaborators: " + displayButtons()content[i].data.Colaborators;
-
                         break;
                     } else {}
-
                 }
             }
-
-            $('#tableDB').removeClass('hidden');
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log("no success");
         }
-
     });
-
 };
 
 
