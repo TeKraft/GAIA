@@ -6,7 +6,7 @@
 GAIA is a free to use service for analyzing phenomenons using big images and/or data sets using R-Script.
 
   - Once registered, create projects and manage them
-  - Input raw R-Script code or upload .r files
+  - Input raw R-Code and execute it
   - Share projects and scripts in a collaborative manner
   - This service is and will always be free of charge! :+1:
 
